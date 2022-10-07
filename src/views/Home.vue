@@ -10,6 +10,7 @@
 import HelloWorld from '@/components/HelloWorld.vue'
 
 export default {
+  // eslint-disable-next-line
   name: 'Home',
   components: {
     HelloWorld
