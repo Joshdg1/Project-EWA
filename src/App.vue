@@ -1,21 +1,19 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/aboutMe">About</router-link>
+    <AsideMenu/>
+    <div class="wrapper d-flex flex-column flex-row-fluid" id="kt_wrapper">
+      <HeaderMenu/>
+
+      <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+        <router-view/>
+      </div>
+
+      <FooterMenu/>
     </div>
-    <router-view/>
   </div>
 </template>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
 
 #nav {
   padding: 30px;
@@ -30,3 +28,12 @@
   color: #42b983;
 }
 </style>
+<script>
+  import HeaderMenu from "./components/HeaderMenu";
+  import FooterMenu from "./components/FooterMenu";
+  import AsideMenu from "./components/AsideMenu";
+
+  export default {
+    components: {AsideMenu, FooterMenu, HeaderMenu}
+  }
+</script>
