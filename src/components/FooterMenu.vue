@@ -29,7 +29,7 @@
 
 <script>
     export default {
-        name: "FooterMenu"
+        name: 'FooterMenu'
     }
 </script>
 

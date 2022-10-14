@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
+import ProgrammerProfilePage from "@/views/ProgrammerProfilePage";
 
 Vue.use(VueRouter)
 
@@ -9,11 +10,13 @@ Vue.use(VueRouter)
     path: '/',
     name: 'Home',
     component: Home
-  }
+  },
+    {path: '/programmerProfile' , name:  'ProgrammerProfilePage', component: ProgrammerProfilePage}
 ]
 
 const router = new VueRouter({
   mode: 'history',
+  // eslint-disable-next-line no-undef
   base: process.env.BASE_URL,
   routes
 })
