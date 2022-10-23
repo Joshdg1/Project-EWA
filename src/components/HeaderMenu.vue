@@ -55,7 +55,7 @@
         <!--begin::Create app-->
         <div class="d-flex ms-3">
           <a href="#" class="btn background-florijn btn-active-info" tooltip="New App" data-bs-toggle="modal"
-             data-bs-target="#kt_modal_create_app" id="kt_toolbar_primary_button">New Goal</a>
+             data-bs-target="#kt_modal_create_app" id="kt_toolbar_primary_button">New Project</a>
         </div>
         <!--end::Create app-->
       </div>

@@ -1,5 +1,5 @@
 <template>
-    <div id="kt_aside" class="aside aside-extended bg-white" data-kt-drawer="true" data-kt-drawer-name="aside" data-kt-drawer-activate="{default: true, lg: false}" data-kt-drawer-overlay="true" data-kt-drawer-width="auto" data-kt-drawer-direction="start" data-kt-drawer-toggle="#kt_aside_toggle">
+    <div id="kt_aside" class="aside aside-extended" data-kt-drawer="true" data-kt-drawer-name="aside" data-kt-drawer-activate="{default: true, lg: false}" data-kt-drawer-overlay="true" data-kt-drawer-width="70px" data-kt-drawer-direction="start" data-kt-drawer-toggle="#kt_aside_toggle">
         <!--begin::Primary-->
         <div class="aside-primary d-flex flex-column align-items-lg-center flex-row-auto">
             <!--begin::Logo-->
@@ -836,4 +836,5 @@
 #hideButtonMin{
   visibility: hidden;
 }
+
 </style>
