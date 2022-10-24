@@ -1,12 +1,14 @@
 <template>
   <div class="wrapper">
+
     <div class="initialInfo">
       <img class="profilePic" src="../assets/dummy-avatar-2772343867.png">
       <div class="TextProgrammerInitialInfo">
-        <h5> {{sampleProgrammer.Firstname}} {{sampleProgrammer.lastname}}</h5>
+        <h5> {{ sampleProgrammer.Firstname }} {{ sampleProgrammer.lastname }}</h5>
         <p>Programmer</p>
       </div>
     </div>
+
     <div>
       <div class="uploadBox">
         <div class="parent-div">
@@ -14,11 +16,10 @@
           <input type="file" name="upfile">
         </div>
       </div>
-
     </div>
+
     <div>
       <div class="inputBoxesProgrammerProfile">
-
         <div class="topInputBoxes">
           <div class="leftInputBoxes">
             <div class="editProfileText">
@@ -51,8 +52,8 @@
             <div style="opacity: 0">----</div>
             <div class="inputProgrammer">
               <label class="InputLabel">Work Preference:
-                <button class="workPreferencebutton">Work from home</button>
-                <button class="workPreferencebutton">Work on location</button>
+                <button class="workPreferencebutton" @click="workPreferenceHome()" >Work from home</button>
+                <button class="workPreferencebutton" @click="workPreferenceLoc()"> Work on location</button>
               </label>
               <input v-model="sampleProgrammer.WorkPreference" class="ProgrammerProfileInputBox">
             </div>
@@ -61,7 +62,7 @@
       </div>
     </div>
     <div class="submitBox">
-      <button class="submitChanges">Submit changes</button>
+      <button class="submitChanges" @click="submit()">Submit changes</button>
     </div>
 
   </div>
@@ -74,20 +75,45 @@ import {Programmer} from "@/models/programmer";
 export default {
   name: "ProgrammerProfilePage",
 
-  created(){
-    this.sampleProgrammer = new Programmer("John","Doe","wiboutStraat", 12,40,"EWA",20,"On location")
+  created() {
+    this.sampleProgrammer = new Programmer("John", "Doe", "wiboutStraat", 12, 40, "EWA", 20, "On location")
 
   },
-  data(){
+  data() {
     return {
       sampleProgrammer: null
     }
+  },
+  methods: {
+    submit(){
+      console.log("twekrt")
+      alert(
+        "Firstname: "+   this.sampleProgrammer.Firstname + "\n"+
+          "lastname: "+    this.sampleProgrammer.lastname + "\n"+
+          "Address: "+   this.sampleProgrammer.Address + "\n"+
+          "Experience: "+    this.sampleProgrammer.Experience + "\n"+
+          "Availability: "+    this.sampleProgrammer.Availability + "\n"+
+          "CurrentProject: "+    this.sampleProgrammer.CurrentProject + "\n"+
+          "TotalHours: "+    this.sampleProgrammer.TotalHours + "\n"+
+          "WorkPreference: "+    this.sampleProgrammer.WorkPreference + "\n"
+      )
+    },
+    workPreferenceHome(){
+      this.sampleProgrammer.WorkPreference = "From home"
+
+    },
+    workPreferenceLoc(){
+      this.sampleProgrammer.WorkPreference = "On location"
+    },
   }
 }
 
 </script>
 
 <style scoped>
+.wrapper {
+  margin-bottom: 5vh; 
+}
 .initialInfo {
   display: flex;
   justify-content: center;
@@ -118,6 +144,7 @@ export default {
   position: relative;
   overflow: hidden;
 }
+
 .parent-div input[type=file] {
   left: 0;
   top: 0;
@@ -125,6 +152,7 @@ export default {
   position: absolute;
   font-size: 90px;
 }
+
 .btn-upload {
   background-color: #EF5722;
   color: #000;
