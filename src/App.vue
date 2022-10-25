@@ -4,8 +4,11 @@
     <div class="wrapper d-flex flex-column flex-row-fluid" id="kt_wrapper">
       <HeaderMenu/>
 
+
       <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+        <div class="container-xxl" id="kt_content_container">
         <router-view/>
+        </div>
       </div>
 
       <FooterMenu/>
