@@ -70,8 +70,7 @@
 </template>
 
 <script>
-import {Programmer} from "@/models/programmer";
-
+import Programmer from "../models/programmer";
 export default {
   name: "ProgrammerProfilePage",
 
@@ -93,7 +92,7 @@ export default {
           "Address: "+   this.sampleProgrammer.address + "\n"+
           "Experience: "+    this.sampleProgrammer.experience + "\n"+
           "Availability: "+    this.sampleProgrammer.availability + "\n"+
-          "CurrentProject: "+    this.sampleProgrammer.projectTypes + "\n"+
+          "CurrentProject: "+    this.sampleProgrammer.hours + "\n"+
           "TotalHours: "+    this.sampleProgrammer.hours + "\n"+
           "WorkPreference: "+    this.sampleProgrammer.workPreference + "\n"
       )
