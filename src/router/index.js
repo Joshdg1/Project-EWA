@@ -6,11 +6,11 @@ import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 
 // Programmer
-import ProgrammerEdit from "../views/programmer/Edit";
-import ProgrammerHome from "../views/programmer/Home";
+import ProgrammerEdit from "../views/programmer/Edit.vue";
+import ProgrammerHome from "../views/programmer/Home.vue";
 
 // Client
-import ClientHomePage from "../views/client/Home"
+import ClientHomePage from "../views/client/Home.vue"
 
 // Admin
 import AdminProgrammerView from "../views/admin/programmer/View.vue";
