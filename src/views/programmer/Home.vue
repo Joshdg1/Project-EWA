@@ -14,7 +14,7 @@
 
 import {project} from '@/models/project.js';
 export default {
-  name: "ProgrammerHomePage",
+  name: "ProgrammerHome",
   created() {
     this.fake();
     this.fake();

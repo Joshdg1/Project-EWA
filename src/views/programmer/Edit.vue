@@ -2,7 +2,7 @@
   <div class="wrapper">
 
     <div class="initialInfo">
-      <img class="profilePic" src="../assets/dummy-avatar-2772343867.png">
+      <img class="profilePic" src="../../assets/dummy-avatar-2772343867.png">
       <div class="TextProgrammerInitialInfo">
         <h5> {{ sampleProgrammer.firstname }} {{ sampleProgrammer.lastname }}</h5>
         <p>Programmer</p>
@@ -70,9 +70,9 @@
 </template>
 
 <script>
-import Programmer from "../models/programmer";
+import Programmer from "../../models/programmer";
 export default {
-  name: "ProgrammerProfilePage",
+  name: "ProgrammerEdit",
 
   created() {
     this.sampleProgrammer = new Programmer("John", "Doe", "wiboutStraat","Amsterdam", "js Cobol", 40, 12,20, "On location", "EWA")

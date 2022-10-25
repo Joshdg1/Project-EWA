@@ -50251,15 +50251,13 @@ canvas {
 }
 
 body {
-    background-image: linear-gradient(to left,  #001449, #3f3f75);
+    background-color: #f5f8fa;
 }
 
 .text-page-bg {
     color: #F5F8FA;
 }
-#kt_header{
-    background-image: linear-gradient(to top,  #001449, #3f3f75);
-}
+
 @media (min-width: 992px) {
     .container,
     .container-xxl,
@@ -50425,7 +50423,7 @@ body {
 
 .aside .aside-primary {
     flex-shrink: 0;
-    background-image: linear-gradient(to right, #001449, #3f3f75);
+    background-color: #192440;
 }
 
 .aside-secondary-enabled .aside .aside-primary {
