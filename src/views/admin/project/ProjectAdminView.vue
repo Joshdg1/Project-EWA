@@ -5,10 +5,10 @@
         <!--begin::Header-->
         <div class="card-header border-0 pt-5">
           <h3 class="card-title align-items-start flex-column">
-            <span class="card-label fw-bolder fs-3 mb-1">Programmers</span>
+            <span class="card-label fw-bolder fs-3 mb-1">Projects</span>
           </h3>
           <div class="card-toolbar" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-trigger="hover"
-               title="Click to add a programmer">
+               title="Click to add a project">
             <a href="#" class="btn btn-sm btn-light-primary" data-bs-toggle="modal"
                data-bs-target="#kt_modal_invite_friends">
               <!--begin::Svg Icon | path: icons/duotune/arrows/arr075.svg-->
@@ -20,7 +20,7 @@
 														<rect x="4.36396" y="11.364" width="16" height="2" rx="1" fill="black"/>
 													</svg>
 												</span>
-              <!--end::Svg Icon-->New Programmer</a>
+              <!--end::Svg Icon-->New Project</a>
           </div>
         </div>
         <!--end::Header-->
@@ -39,39 +39,29 @@
                            data-kt-check-target=".widget-9-check"/>
                   </div>
                 </th>
-                <th>Firstname</th>
-                <th>Lastname</th>
-                <th>Address</th>
-                <th>City</th>
-                <th>Postcode</th>
-                <th>Knowledge</th>
-                <th>Experience</th>
-                <th>Availability</th>
-                <th>Weekly work hours</th>
-                <th>Work space</th>
-                <th>Project types</th>
+                <th>Id</th>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Company</th>
+                <th>Hours worked</th>
+                <th>Programmer(s)</th>
                 <th>Actions</th>
               </tr>
               </thead>
               <!--end::Table head-->
               <!--begin::Table body-->
               <tbody>
-              <tr v-for="programmer in programmers" v-bind:key="programmer">
+              <tr v-for="project in projects" v-bind:key="project">
                 <div class="form-check form-check-sm form-check-custom form-check-solid">
                   <input class="form-check-input" type="checkbox" value="1" data-kt-check="true"
                          data-kt-check-target=".widget-9-check"/>
                 </div>
-                <td>{{ programmer.firstname }}</td>
-                <td>{{ programmer.lastname }}</td>
-                <td>{{ programmer.address }}</td>
-                <td>{{ programmer.city }}</td>
-                <td>{{ programmer.postcode }}</td>
-                <td>{{ programmer.knowledge }}</td>
-                <td>{{ programmer.experience }}</td>
-                <td>{{ programmer.availability }}</td>
-                <td>{{ programmer.hours }}</td>
-                <td>{{ programmer.workPreference }}</td>
-                <td>{{ programmer.projectType }}</td>
+                <td>{{ project.id }}</td>
+                <td>{{ project.title }}</td>
+                <td>{{ project.description }}</td>
+                <td>{{ project.company }}</td>
+                <td>{{ project.hoursWorked }}</td>
+                <td>Programmer1</td>
 
 
                 <div class="d-flex justify-content-end flex-shrink-0">
@@ -124,21 +114,22 @@
   </div>
 </template>
 
+
 <script>
-import Programmer from '../../../models/programmer.js'
+import {project} from '../../../models/project.js'
 
 export default {
-  name: "AdminProgrammerView",
+  name: "ProjectAdminView",
 
   created() {
     for (let i = 0; i < 8; i++) {
-      this.programmers.push(Programmer.createProgrammer());
+      this.projects.push(project.fakeData());
     }
   },
 
   data() {
     return {
-      programmers: []
+      projects: []
     }
   },
 

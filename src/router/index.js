@@ -14,29 +14,38 @@ import ClientHomePage from "../views/client/Home"
 
 // Admin
 import AdminProgrammerView from "../views/admin/programmer/View.vue";
+import AdminProjectView from "../views/admin/project/ProjectAdminView.vue";
+import AdminClientView from "../views/admin/client/ClientAdminView.vue";
 
 Vue.use(VueRouter)
 
-
-
-
 const routes = [
+    {
+        path: '/adminClient',
+        name: 'ProjectAdminView',
+        component: AdminClientView
+    },
+    {
+        path: '/adminProject',
+        name: 'ProjectAdminView',
+        component: AdminProjectView
+    },
     {
         path: '/',
         name: 'Home',
         component: Home
     },
     {
-        path: '/admin',
+        path: '/adminProgrammer',
         name: 'AdminHome',
         component: AdminProgrammerView,
         children: [
             {
-                path: '/programmer',
+                path: 'programmer',
                 name: 'AdminProgrammerHome',
                 children: [
                     {
-                        path: '/view',
+                        path: 'view',
                         name: 'AdminProgrammerView',
                         component: AdminProgrammerView,
                     }
