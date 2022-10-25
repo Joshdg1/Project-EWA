@@ -13,7 +13,7 @@ import ProgrammerHome from "../views/programmer/Home";
 import ClientHomePage from "../views/client/Home"
 
 // Admin
-import AdminProgrammerView from "../views/programmer/Edit";
+import AdminProgrammerView from "../views/admin/programmer/View.vue";
 
 Vue.use(VueRouter)
 
@@ -29,6 +29,7 @@ const routes = [
     {
         path: '/admin',
         name: 'AdminHome',
+        component: AdminProgrammerView,
         children: [
             {
                 path: '/programmer',
