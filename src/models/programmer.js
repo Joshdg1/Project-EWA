@@ -1,4 +1,4 @@
-export class Programmer {
+class Programmer {
     firstname;
     lastname;
     address;
@@ -8,7 +8,7 @@ export class Programmer {
     availability;
     hours;
     workPreference;
-    projectTypes;
+    projectType;
 
     /**
      * Constructor
@@ -22,9 +22,9 @@ export class Programmer {
      * @param availability
      * @param hours
      * @param workspace
-     * @param projectTypes
+     * @param projectType
      */
-    constructor(firstname, lastname, address, city, knowledge, experience, availability, hours, workPreference, projectTypes) {
+    constructor(firstname, lastname, address, city, knowledge, experience, availability, hours, workPreference, projectType) {
         this.firstname = firstname;
         this.lastname = lastname;
         this.address = address;
@@ -34,29 +34,32 @@ export class Programmer {
         this.availability = availability;
         this.hours = hours;
         this.workPreference = workPreference;
-        this.projectTypes = projectTypes;
+        this.projectType = projectType;
     }
 
-    static createProgrammers() {
-        let randomNameNumber = Math.floor(Math.random() * 6);
-        let randomAddressNumber = Math.floor(Math.random() * 4);
+    static createProgrammer(){
+        let randomNameNumber = Math.floor(Math.random() * 5);
+        let randomAddressNumber = Math.floor(Math.random() * 3);
+        let randomExperience = Math.floor(Math.random() * 2);
 
-        return new Programmer(fakeFirstname[randomNameNumber], fakeLastname[randomNameNumber])
-        );
+        return new Programmer(fakeFirstname[randomNameNumber], fakeLastname[randomNameNumber], fakeAddress[randomAddressNumber],
+        fakeCity[randomNameNumber], fakeKnowledge[randomNameNumber], fakeExperience[randomExperience],
+            fakeAvailability[randomExperience], fakeHours[randomNameNumber], fakeWorkPreference[randomExperience],
+            fakeProjectType[randomAddressNumber]);
     }
 
 }
+
 
 const fakeFirstname = ["Henk", "Piet", "Esra", "Lars", "Mees"];
 const fakeLastname = ["Steen", "de Lange", "Pietersma", "Groot", "Schagen"];
 const fakeAddress = ["De bouwstraat 8", "Wibautstraat", "platstraat"];
 const fakeCity = ["Amsterdam", "Zaandam", "Hoorn", "Den Haag", "Volendam"];
-const fakeKnowledge = ["PHP", "C#", "HTML", "CSS", "JS", "JAVA"];
+const fakeKnowledge = ["PHP", "C#", "HTML", "CSS", "JAVA"];
 const fakeExperience = ["Ik heb nog geen ervaring.", "IK heb al bij 3 andere software bedrijven gewerkt als software engineer."];
 const fakeAvailability = ["7 dagen in de week", "5 dagen in de week."];
 const fakeHours = ["12", "20", "30", "36", "40"];
 const fakeWorkPreference = ["Thuis", "Op kantoor"];
-const fakeProjectTypes = ["Frontend", "Backend", "Fullstack"];
+const fakeProjectType = ["Frontend", "Backend", "Fullstack"];
 
-
-}
+export default Programmer;
