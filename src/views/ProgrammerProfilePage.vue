@@ -4,7 +4,7 @@
     <div class="initialInfo">
       <img class="profilePic" src="../assets/dummy-avatar-2772343867.png">
       <div class="TextProgrammerInitialInfo">
-        <h5> {{ sampleProgrammer.Firstname }} {{ sampleProgrammer.lastname }}</h5>
+        <h5> {{ sampleProgrammer.firstname }} {{ sampleProgrammer.lastname }}</h5>
         <p>Programmer</p>
       </div>
     </div>
@@ -28,23 +28,23 @@
 
             <div class="inputProgrammer">
               <label class="InputLabel"> Adres:</label>
-              <input v-model="sampleProgrammer.Address" class="ProgrammerProfileInputBox">
+              <input v-model="sampleProgrammer.address" class="ProgrammerProfileInputBox">
             </div>
             <div class="inputProgrammer">
               <label class="InputLabel">Experience:</label>
-              <input v-model="sampleProgrammer.Experience" class="ProgrammerProfileInputBox">
+              <input v-model="sampleProgrammer.experience" class="ProgrammerProfileInputBox">
             </div>
             <div class="inputProgrammer">
               <label class="InputLabel">Availability:</label>
-              <input v-model="sampleProgrammer.Availability" class="ProgrammerProfileInputBox">
+              <input v-model="sampleProgrammer.availability" class="ProgrammerProfileInputBox">
             </div>
             <div class="inputProgrammer">
               <label class="InputLabel">Current Project:</label>
-              <input v-model="sampleProgrammer.CurrentProject" class="ProgrammerProfileInputBox">
+              <input v-model="sampleProgrammer.projectTypes" class="ProgrammerProfileInputBox">
             </div>
             <div class="inputProgrammer">
               <label class="InputLabel">Total Hours</label>
-              <input v-model="sampleProgrammer.TotalHours" class="ProgrammerProfileInputBox">
+              <input v-model="sampleProgrammer.hours" class="ProgrammerProfileInputBox">
             </div>
           </div>
 
@@ -55,7 +55,7 @@
                 <button class="workPreferencebutton" @click="workPreferenceHome()" >Work from home</button>
                 <button class="workPreferencebutton" @click="workPreferenceLoc()"> Work on location</button>
               </label>
-              <input v-model="sampleProgrammer.WorkPreference" class="ProgrammerProfileInputBox">
+              <input v-model="sampleProgrammer.workPreference" class="ProgrammerProfileInputBox">
             </div>
           </div>
         </div>
@@ -76,7 +76,7 @@ export default {
   name: "ProgrammerProfilePage",
 
   created() {
-    this.sampleProgrammer = new Programmer("John", "Doe", "wiboutStraat", 12, 40, "EWA", 20, "On location")
+    this.sampleProgrammer = new Programmer("John", "Doe", "wiboutStraat","Amsterdam", "js Cobol", 40, 12,20, "On location", "EWA")
 
   },
   data() {
@@ -88,22 +88,22 @@ export default {
     submit(){
       console.log("twekrt")
       alert(
-        "Firstname: "+   this.sampleProgrammer.Firstname + "\n"+
+        "Firstname: "+   this.sampleProgrammer.firstname + "\n"+
           "lastname: "+    this.sampleProgrammer.lastname + "\n"+
-          "Address: "+   this.sampleProgrammer.Address + "\n"+
-          "Experience: "+    this.sampleProgrammer.Experience + "\n"+
-          "Availability: "+    this.sampleProgrammer.Availability + "\n"+
-          "CurrentProject: "+    this.sampleProgrammer.CurrentProject + "\n"+
-          "TotalHours: "+    this.sampleProgrammer.TotalHours + "\n"+
-          "WorkPreference: "+    this.sampleProgrammer.WorkPreference + "\n"
+          "Address: "+   this.sampleProgrammer.address + "\n"+
+          "Experience: "+    this.sampleProgrammer.experience + "\n"+
+          "Availability: "+    this.sampleProgrammer.availability + "\n"+
+          "CurrentProject: "+    this.sampleProgrammer.projectTypes + "\n"+
+          "TotalHours: "+    this.sampleProgrammer.hours + "\n"+
+          "WorkPreference: "+    this.sampleProgrammer.workPreference + "\n"
       )
     },
     workPreferenceHome(){
-      this.sampleProgrammer.WorkPreference = "From home"
+      this.sampleProgrammer.workPreference = "From home"
 
     },
     workPreferenceLoc(){
-      this.sampleProgrammer.WorkPreference = "On location"
+      this.sampleProgrammer.workPreference = "On location"
     },
   }
 }

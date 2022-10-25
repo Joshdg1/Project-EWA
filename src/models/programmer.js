@@ -1,22 +1,39 @@
 export class Programmer {
-    Firstname
-    lastname
-    Address
-    Experience
-    Availability
-    CurrentProject
-    TotalHours
-    WorkPreference
+    firstname;
+    lastname;
+    address;
+    city;
+    knowledge;
+    experience;
+    availability;
+    hours;
+    workPreference;
+    projectTypes;
 
-
-    constructor(Firstname, lastname, Address, Experience, Availability, CurrentProject, TotalHours, WorkPreference) {
-        this.Firstname = Firstname;
+    /**
+     * Constructor
+     *
+     * @param firstname
+     * @param lastname
+     * @param address
+     * @param city
+     * @param knowledge
+     * @param experience
+     * @param availability
+     * @param hours
+     * @param workspace
+     * @param projectTypes
+     */
+    constructor(firstname, lastname, address, city, knowledge, experience, availability, hours, workPreference, projectTypes) {
+        this.firstname = firstname;
         this.lastname = lastname;
-        this.Address = Address;
-        this.Experience = Experience;
-        this.Availability = Availability;
-        this.CurrentProject = CurrentProject;
-        this.TotalHours = TotalHours;
-        this.WorkPreference = WorkPreference;
+        this.address = address;
+        this.city = city;
+        this.knowledge = knowledge;
+        this.experience = experience;
+        this.availability = availability;
+        this.hours = hours;
+        this.workPreference = workPreference;
+        this.projectTypes = projectTypes;
     }
 }
