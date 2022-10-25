@@ -21,7 +21,7 @@ class Programmer {
      * @param experience
      * @param availability
      * @param hours
-     * @param workspace
+     * @param workPreference
      * @param projectType
      */
     constructor(firstname, lastname, address, city, knowledge, experience, availability, hours, workPreference, projectType) {

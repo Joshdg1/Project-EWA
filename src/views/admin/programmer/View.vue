@@ -123,10 +123,10 @@
 </template>
 
 <script>
-import Programmer from '../models/programmer.js'
+import Programmer from '../../../models/programmer.js'
 
 export default {
-  name: "ProgrammerManagement.vue",
+  name: "AdminProgrammerView",
 
   created() {
     for (let i = 0; i < 8; i++) {
