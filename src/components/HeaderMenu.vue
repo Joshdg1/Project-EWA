@@ -8,14 +8,14 @@
            data-kt-swapper="true" data-kt-swapper-mode="prepend"
            data-kt-swapper-parent="{default: '#kt_content_container', lg: '#kt_header_container'}">
         <!--begin::Heading-->
-        <h1 class="text-dark fw-bold my-0 fs-2">Dashboard</h1>
+        <h1 class="text-florijn fw-bold my-0 fs-2">Dashboard</h1>
         <!--end::Heading-->
         <!--begin::Breadcrumb-->
         <ul class="breadcrumb breadcrumb-line text-muted fw-bold fs-base my-1">
           <li class="breadcrumb-item text-muted">
             <a href="../dist/index.html" class="text-muted">Home</a>
           </li>
-          <li class="breadcrumb-item text-dark">Dashboard</li>
+          <li class="breadcrumb-item text-florijn">Dashboard</li>
         </ul>
         <!--end::Breadcrumb-->
       </div>
@@ -48,14 +48,14 @@
       <div class="d-flex flex-shrink-0">
         <!--begin::Invite user-->
         <div class="d-flex ms-3">
-          <a href="#" class="btn bg-body btn-color-gray-600 btn-active-info" tooltip="New Member" data-bs-toggle="modal"
+          <a href="#" class="btn background-florijn btn-active-info" tooltip="New Member" data-bs-toggle="modal"
              data-bs-target="#kt_modal_invite_friends">New User</a>
         </div>
         <!--end::Invite user-->
         <!--begin::Create app-->
         <div class="d-flex ms-3">
-          <a href="#" class="btn btn-info" tooltip="New App" data-bs-toggle="modal"
-             data-bs-target="#kt_modal_create_app" id="kt_toolbar_primary_button">New Goal</a>
+          <a href="#" class="btn background-florijn btn-active-info" tooltip="New App" data-bs-toggle="modal"
+             data-bs-target="#kt_modal_create_app" id="kt_toolbar_primary_button">New Project</a>
         </div>
         <!--end::Create app-->
       </div>
