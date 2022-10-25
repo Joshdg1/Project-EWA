@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import ProgrammerProfilePage from "@/views/ProgrammerProfilePage";
 import ProgrammerHomePage from "@/views/ProgrammerHomePage";
+import ClientHomePage from "@/views/ClientHomePage";
 import ProgrammerManagement from "@/views/ProgrammerManagement";
 
 Vue.use(VueRouter)
@@ -19,6 +20,11 @@ const routes = [
         path: '/ProgrammerHomePage',
         name: 'ProgrammerHomePage',
         component: ProgrammerHomePage
+    },
+    {
+        path: '/ClientHomePage',
+        name: 'ClientHomePage',
+        component: ClientHomePage
     },
 ]
 
