@@ -31,17 +31,18 @@
 export default {
   name: "ProgrammerManagement.vue",
 
+  created(){
+    for (let i = 0; i < 8; i++) {
+      this.programmers.push();
+    }
+  },
+
   data() {
     return {
       programmers: []
     }
   },
-  methods: {
-    fillProgrammerArray() {
-      this.programmers.push()
 
-    },
-  }
 }
 </script>
 
