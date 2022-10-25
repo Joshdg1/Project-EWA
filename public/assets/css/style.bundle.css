@@ -30693,6 +30693,7 @@ textarea.form-control-lg {
   --bs-lg:992px;
   --bs-xl:1200px;
   --bs-xxl:1400px;
+
 }
 
 .bg-white {
@@ -31928,15 +31929,15 @@ textarea.form-control-lg {
 }
 .text-hover-primary:hover {
   transition: color 0.2s ease, background-color 0.2s ease;
-  color: #7239EA !important;
+  color: #EF5722 !important;
 }
 .text-hover-primary:hover i {
   transition: color 0.2s ease, background-color 0.2s ease;
-  color: #7239EA !important;
+  color: #EF5722 !important;
 }
 .text-hover-primary:hover .svg-icon svg [fill]:not(.permanent):not(g) {
   transition: fill 0.3s ease;
-  fill: #7239EA;
+  fill: #EF5722;
 }
 .text-hover-primary:hover .svg-icon svg:hover [fill]:not(.permanent):not(g) {
   transition: fill 0.3s ease;
