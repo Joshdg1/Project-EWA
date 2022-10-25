@@ -27,7 +27,7 @@
               <a class="nav-link btn btn-custom btn-icon" data-bs-toggle="tab" href="#kt_aside_nav_tab_projects">
                 <!--begin::Svg Icon | path: icons/duotune/abstract/abs042.svg-->
                 <span class="svg-icon svg-icon-2x">
-												<svg version="1.0" xmlns="http://www.w3.org/2000/svg"
+												<svg @click="goToProjects" version="1.0" xmlns="http://www.w3.org/2000/svg"
                              width="1000.000000pt" height="1000.000000pt" viewBox="0 0 1000.000000 1000.000000"
                              preserveAspectRatio="xMidYMid meet">
                           <g transform="translate(0.000000,1000.000000) scale(0.100000,-0.100000)"
@@ -50,7 +50,7 @@
                 <!--end::Svg Icon-->
               </a>
               <!--end::Nav link-->
-            </li>
+           </li>
             <!--end::Nav item-->
             <!--begin::Nav item-->
             <li class="nav-item mb-2" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="right"
@@ -956,7 +956,13 @@
 
 <script>
 export default {
-  name: "AsideMenu"
+  name: "AsideMenu",
+  methods: {
+    goToProjects(){
+      this.$router.push("/");
+    }
+  }
+
 }
 </script>
 
