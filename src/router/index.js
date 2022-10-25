@@ -6,37 +6,46 @@ import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 
 // Programmer
-import ProgrammerEdit from "../views/programmer/Edit";
-import ProgrammerHome from "../views/programmer/Home";
+import ProgrammerEdit from "../views/programmer/Edit.vue";
+import ProgrammerHome from "../views/programmer/Home.vue";
 
 // Client
-import ClientHomePage from "../views/client/Home"
+import ClientHomePage from "../views/client/Home.vue"
 
 // Admin
 import AdminProgrammerView from "../views/admin/programmer/View.vue";
+import AdminProjectView from "../views/admin/project/ProjectAdminView.vue";
+import AdminClientView from "../views/admin/client/ClientAdminView.vue";
 
 Vue.use(VueRouter)
 
-
-
-
 const routes = [
+    {
+        path: '/adminClient',
+        name: 'ProjectAdminView',
+        component: AdminClientView
+    },
+    {
+        path: '/adminProject',
+        name: 'ProjectAdminView',
+        component: AdminProjectView
+    },
     {
         path: '/',
         name: 'Home',
         component: Home
     },
     {
-        path: '/admin',
+        path: '/adminProgrammer',
         name: 'AdminHome',
         component: AdminProgrammerView,
         children: [
             {
-                path: '/programmer',
+                path: 'programmer',
                 name: 'AdminProgrammerHome',
                 children: [
                     {
-                        path: '/view',
+                        path: 'view',
                         name: 'AdminProgrammerView',
                         component: AdminProgrammerView,
                     }

@@ -5,10 +5,10 @@
         <!--begin::Header-->
         <div class="card-header border-0 pt-5">
           <h3 class="card-title align-items-start flex-column">
-            <span class="card-label fw-bolder fs-3 mb-1">Programmers</span>
+            <span class="card-label fw-bolder fs-3 mb-1">Clients</span>
           </h3>
           <div class="card-toolbar" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-trigger="hover"
-               title="Click to add a programmer">
+               title="Click to add a client">
             <a href="#" class="btn btn-sm btn-light-primary" data-bs-toggle="modal"
                data-bs-target="#kt_modal_invite_friends">
               <!--begin::Svg Icon | path: icons/duotune/arrows/arr075.svg-->
@@ -20,7 +20,7 @@
 														<rect x="4.36396" y="11.364" width="16" height="2" rx="1" fill="black"/>
 													</svg>
 												</span>
-              <!--end::Svg Icon-->New Programmer</a>
+              <!--end::Svg Icon-->New Client</a>
           </div>
         </div>
         <!--end::Header-->
@@ -44,11 +44,6 @@
                 <th>Address</th>
                 <th>City</th>
                 <th>Postcode</th>
-                <th>Knowledge</th>
-                <th>Experience</th>
-                <th>Availability</th>
-                <th>Weekly work hours</th>
-                <th>Work space</th>
                 <th>Project types</th>
                 <th>Actions</th>
               </tr>
@@ -56,25 +51,20 @@
               <!--end::Table head-->
               <!--begin::Table body-->
               <tbody>
-              <tr v-for="programmer in programmers" v-bind:key="programmer">
+              <tr v-for="client in clients" v-bind:key="client">
                 <div class="form-check form-check-sm form-check-custom form-check-solid">
                   <input class="form-check-input" type="checkbox" value="1" data-kt-check="true"
                          data-kt-check-target=".widget-9-check"/>
                 </div>
-                <td>{{ programmer.firstname }}</td>
-                <td>{{ programmer.lastname }}</td>
-                <td>{{ programmer.address }}</td>
-                <td>{{ programmer.city }}</td>
-                <td>{{ programmer.postcode }}</td>
-                <td>{{ programmer.knowledge }}</td>
-                <td>{{ programmer.experience }}</td>
-                <td>{{ programmer.availability }}</td>
-                <td>{{ programmer.hours }}</td>
-                <td>{{ programmer.workPreference }}</td>
-                <td>{{ programmer.projectType }}</td>
+                <td>{{ client.firstname }}</td>
+                <td>{{ client.lastname }}</td>
+                <td>{{ client.address }}</td>
+                <td>{{ client.city }}</td>
+                <td>{{ client.postcode }}</td>
+                <td>{{ client.projectType }}</td>
 
 
-                <div class="d-flex justify-content-end flex-shrink-0">
+                <div class="d-flex  flex-shrink-0">
                   <a href="#" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1">
                     <!--begin::Svg Icon | path: icons/duotune/art/art005.svg-->
                     <span class="svg-icon svg-icon-3">
@@ -125,20 +115,20 @@
 </template>
 
 <script>
-import Programmer from '../../../models/programmer.js'
+import Client from '../../../models/client.js'
 
 export default {
-  name: "AdminProgrammerView",
+  name: "ClientAdminView",
 
   created() {
     for (let i = 0; i < 8; i++) {
-      this.programmers.push(Programmer.createProgrammer());
+      this.clients.push(Client.createClient());
     }
   },
 
   data() {
     return {
-      programmers: []
+      clients: []
     }
   },
 
