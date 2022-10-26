@@ -22,7 +22,12 @@ Vue.use(VueRouter)
 
 const routes = [
     {
-        path: '/homeAdmin',
+        path: '/programmerProfile',
+        name: 'ProgrammerProfile',
+        component: ProgrammerEdit
+    },
+    {
+        path: '/',
         name: 'HomeAdmin',
         component: HomeAdmin
     },
