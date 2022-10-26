@@ -3,8 +3,9 @@ import VueRouter from 'vue-router'
 
 // General
 import ProgrammerPage from '../views/programmer/Home.vue'
-
-import Home from '../views/Home.vue'
+import Login from "@/login/Login";
+import Register from "@/login/Register";
+import Home from "@/views/Home";
 
 // Programmer
 import ProgrammerEdit from "../views/programmer/Edit.vue";
@@ -17,9 +18,6 @@ import ClientHomePage from "../views/client/Home.vue"
 import AdminProgrammerView from "../views/admin/programmer/View.vue";
 import AdminProjectView from "../views/admin/project/ProjectAdminView.vue";
 import AdminClientView from "../views/admin/client/ClientAdminView.vue";
-import HomeAdmin from "@/views/admin/HomeAdmin";
-import Login from "@/login/Login";
-import Register from "@/login/Register";
 
 Vue.use(VueRouter)
 
@@ -46,8 +44,8 @@ const routes = [
     },
     {
         path: '/',
-        name: 'HomeAdmin',
-        component: HomeAdmin
+        name: 'Home',
+        component: Home
     },
     {
         path: '/adminClient',
@@ -58,11 +56,6 @@ const routes = [
         path: '/adminProject',
         name: 'ProjectAdminView',
         component: AdminProjectView
-    },
-    {
-        path: '/',
-        name: 'Home',
-        component: Home
     },
     {
         path: '/adminProgrammer',
