@@ -638,6 +638,10 @@
       </div>
       <!--end::Card body-->
     </div>
+    <div class="d-flex ms-3">
+      <a @click="homePage()" class="btn background-florijn btn-active-info buttonFloatRight" tooltip="New App" data-bs-toggle="modal"
+         data-bs-target="#kt_modal_create_app" id="kt_toolbar_primary_button">Homepage</a>
+    </div>
   <!--end::details View-->
   </div>
 </template>
@@ -683,6 +687,9 @@ export default {
 
 
     },
+    homePage(){
+        this.$router.push('/programmerHomepage');
+    }
   }
 }
 
