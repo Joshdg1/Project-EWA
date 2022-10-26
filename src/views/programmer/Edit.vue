@@ -431,7 +431,7 @@
         <!--end::Label-->
         <!--begin::Col-->
         <div class="col-lg-8">
-          <input type="text" class="form-control form-control-solid " name="search" v-model="sampleProgrammer.projectTypes" data-kt-search-element="input" />
+          <input type="text" class="form-control form-control-solid " name="search" v-model="sampleProgrammer.projectType" data-kt-search-element="input" />
         </div>
         <!--end::Col-->
       </div>
@@ -567,7 +567,7 @@
           <!--end::Label-->
           <!--begin::Col-->
           <div class="col-lg-8">
-            <a href="#" class="fw-bold fs-6 text-gray-800 text-hover-primary">{{ sampleProgrammer.projectTypes }}</a>
+            <a href="#" class="fw-bold fs-6 text-gray-800 text-hover-primary">{{ sampleProgrammer.projectType }}</a>
           </div>
           <!--end::Col-->
         </div>
