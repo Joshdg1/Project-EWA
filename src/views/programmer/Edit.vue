@@ -648,7 +648,7 @@ export default {
   name: "ProgrammerEdit",
 
   created() {
-    this.sampleProgrammer = new Programmer("John", "Doe", "wiboutStraat","Amsterdam", "Rust",
+    this.sampleProgrammer = new Programmer("John", "Doe", "wiboutStraat","Amsterdam","1234", "Rust",
         40 , 12,20, "On location", "Full stack")
 
   },
