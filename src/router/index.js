@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 
 // General
+import ProgrammerPage from '../views/programmer/Home.vue'
 
 import Home from '../views/Home.vue'
 
@@ -25,6 +26,11 @@ const routes = [
         path: '/programmerProfile',
         name: 'ProgrammerProfile',
         component: ProgrammerEdit
+    },
+    {
+        path: '/programmerHomePage',
+        name: 'programmerHomePage',
+        component: ProgrammerPage
     },
     {
         path: '/',
