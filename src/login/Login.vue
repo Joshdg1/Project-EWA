@@ -12,17 +12,28 @@
           <div class="d-flex flex-column ">
             <p class="text-muted mb-2">Continue with...</p>
             <div class="d-flex align-items-center">
-              <form>
+              <form id="app"
+                    @submit="checkForm">
+<!--                    action="/adminHome"-->
+<!--                    method="post">-->
+
+                <p v-if="errors.length">
+                  <b>Please correct the following error(s):</b>
+                  <ul>
+                    <li v-for="error in errors" v-bind:key="error">{{ error }}</li>
+                  </ul>
+                </p>
+
                 <!-- Email input -->
                 <div class="form-outline mb-4">
                   <label class="form-label" for="form2Example1">Email address</label>
-                  <input type="email" id="form2Example1" class="form-control" />
+                  <input type="email" id="form2Example1" class="form-control" name="email" v-model="email" />
                 </div>
 
                 <!-- Password input -->
                 <div class="form-outline mb-4">
                   <label class="form-label" for="form2Example2">Password</label>
-                  <input type="password" id="form2Example2" class="form-control" />
+                  <input type="password" id="form2Example2" class="form-control" name="password" v-model="password"/>
                 </div>
 
                 <!-- 2 column grid layout for inline styling -->
@@ -34,7 +45,7 @@
                 </div>
 
                 <!-- Submit button -->
-                <button type="button" class="btn btn-primary btn-block mb-4">Sign in</button>
+                <button type="submit" value="Submit" class="btn btn-primary btn-block mb-4">Sign in</button>
 
                 <!-- Register buttons -->
                 <div class="text-center">
@@ -58,7 +69,32 @@
 <script>
 export default {
   // eslint-disable-next-line
-name: "Login"
+  name: "Login",
+  data() {
+    return {
+      errors: [],
+      email: null,
+      password: null,
+    }
+  },
+  methods: {
+    checkForm: function (e) {
+      if (this.email && this.password) {
+        return true;
+      }
+
+      this.errors = [];
+
+      if (!this.email) {
+        this.errors.push('Email required.');
+      }
+      if (!this.password) {
+        this.errors.push('Password required.');
+      }
+
+      e.preventDefault();
+    }
+  }
 }
 </script>
 
