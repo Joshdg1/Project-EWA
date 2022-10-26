@@ -40,6 +40,7 @@ class Programmer {
         this.projectType = projectType;
     }
 
+
     static createProgrammer(){
         let randomNameNumber = Math.floor(Math.random() * 5);
         let randomAddressNumber = Math.floor(Math.random() * 3);
@@ -51,6 +52,12 @@ class Programmer {
             fakeProjectType[randomAddressNumber]);
     }
 
+    static copyConstructor(cabin) {
+        if (cabin === null) return null;
+        let copy = Object.assign(new Programmer(0), cabin)
+        copy.city = cabin.city
+        return copy
+    }
 }
 
 
@@ -67,3 +74,6 @@ const fakeWorkPreference = ["Thuis", "Op kantoor"];
 const fakeProjectType = ["Frontend", "Backend", "Fullstack"];
 
 export default Programmer;
+
+
+
