@@ -6,7 +6,7 @@
     <div class="aside-primary d-flex flex-column align-items-lg-center flex-row-auto">
       <!--begin::Logo-->
       <div class="aside-logo d-none d-lg-flex flex-column align-items-center flex-column-auto py-10" id="kt_aside_logo">
-          <img @click="goToHome()" alt="Logo" src="assets/media/logos/logo-default.svg" class="h-50px"/>
+          <img @click="goToHome()" alt="Logo" src="assets/media/logos/logo-default.svg" class="h-50px cursor-pointer"/>
       </div>
       <!--end::Logo-->
       <!--begin::Nav-->

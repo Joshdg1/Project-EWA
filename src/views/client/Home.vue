@@ -23,8 +23,7 @@
               <tr class="fw-bolder text-muted">
                 <th>Title</th>
                 <th>Description</th>
-                <th>Company</th>
-                <th>Hours Worked</th>
+                <th>Hours Worked By Programmer</th>
               </tr>
               </thead>
               <!--end::Table head-->
@@ -33,7 +32,6 @@
               <tr v-for="project in projects" v-bind:key="project">
                 <td>{{ project.title }}</td>
                 <td>{{ project.description }}</td>
-                <td>{{ project.company }}</td>
                 <td>{{ project.hoursWorked }}</td>
               </tr>
               </tbody>
