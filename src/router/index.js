@@ -18,10 +18,22 @@ import AdminProgrammerView from "../views/admin/programmer/View.vue";
 import AdminProjectView from "../views/admin/project/ProjectAdminView.vue";
 import AdminClientView from "../views/admin/client/ClientAdminView.vue";
 import HomeAdmin from "@/views/admin/HomeAdmin";
+import Login from "@/login/Login";
+import Register from "@/login/Register";
 
 Vue.use(VueRouter)
 
 const routes = [
+    {
+        path: '/login',
+        name: 'Login',
+        component: Login
+    },
+    {
+        path: '/register',
+        name: 'Register',
+        component: Register
+    },
     {
         path: '/programmerProfile',
         name: 'ProgrammerProfile',
