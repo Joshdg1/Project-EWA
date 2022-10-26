@@ -36,4 +36,10 @@ export class Programmer {
         this.workPreference = workPreference;
         this.projectTypes = projectTypes;
     }
+    static copyConstructor(cabin) {
+        if (cabin === null) return null;
+        let copy = Object.assign(new Programmer(0), cabin)
+        copy.city = cabin.city
+        return copy
+    }
 }

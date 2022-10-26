@@ -639,7 +639,8 @@ export default {
   name: "ProgrammerProfilePage",
 
   created() {
-    this.sampleProgrammer = new Programmer("John", "Doe", "wiboutStraat","Amsterdam", "js Cobol", 40, 12,20, "On location", "EWA")
+    this.sampleProgrammer = new Programmer("John", "Doe", "wiboutStraat","Amsterdam", "Rust",
+        40 , 12,20, "On location", "Full stack")
 
   },
   data() {
