@@ -13,7 +13,7 @@
         <!--begin::Breadcrumb-->
         <ul class="breadcrumb breadcrumb-line text-muted fw-bold fs-base my-1">
           <li class="breadcrumb-item text-muted">
-            <a href="../dist/index.html" class="text-muted">Home</a>
+            <a href="../dist/index.html" class="text-muted">{{ $route.name }}</a>
           </li>
           <li class="breadcrumb-item text-florijn">Dashboard</li>
         </ul>
@@ -48,14 +48,14 @@
       <div class="d-flex flex-shrink-0">
         <!--begin::Invite user-->
         <div class="d-flex ms-3">
-          <a href="#" class="btn background-florijn btn-active-info" tooltip="New Member" data-bs-toggle="modal"
-             data-bs-target="#kt_modal_invite_friends">New User</a>
+          <router-link to="/login" class="btn background-florijn btn-active-info" tooltip="New Member">
+            Login</router-link>
         </div>
         <!--end::Invite user-->
         <!--begin::Create app-->
         <div class="d-flex ms-3">
-          <a href="#" class="btn background-florijn btn-active-info" tooltip="New App" data-bs-toggle="modal"
-             data-bs-target="#kt_modal_create_app" id="kt_toolbar_primary_button">New Project</a>
+          <router-link to="/register" class="btn background-florijn btn-active-info" tooltip="New App">
+            Register</router-link>
         </div>
         <!--end::Create app-->
       </div>
