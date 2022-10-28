@@ -18,6 +18,8 @@ import ClientHomePage from "../views/client/Home.vue"
 import AdminProgrammerView from "../views/admin/programmer/View.vue";
 import AdminProjectView from "../views/admin/project/ProjectAdminView.vue";
 import AdminClientView from "../views/admin/client/ClientAdminView.vue";
+import ClientAdd from "../views/admin/client/ClientAdd";
+import ProgrammerAdd from "@/views/admin/programmer/ProgrammerAdd";
 
 Vue.use(VueRouter)
 
@@ -74,6 +76,16 @@ const routes = [
                 ]
             },
         ]
+    },
+    {
+        path: '/ClientAdd',
+        name: 'ClientAdd',
+        component: ClientAdd,
+    },
+    {
+        path: '/ProgrammerAdd',
+        name: 'ProgrammerAdd',
+        component: ProgrammerAdd,
     },
     {
         path: '/programmer',

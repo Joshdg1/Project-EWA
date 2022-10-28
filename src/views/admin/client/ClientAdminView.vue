@@ -9,7 +9,7 @@
           </h3>
           <div class="card-toolbar" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-trigger="hover"
                title="Click to add a client">
-            <a href="#" class="btn btn-sm btn-light-primary" data-bs-toggle="modal"
+            <a @click="ClientAdd" class="btn btn-sm btn-light-primary" data-bs-toggle="modal"
                data-bs-target="#kt_modal_invite_friends">
               <!--begin::Svg Icon | path: icons/duotune/arrows/arr075.svg-->
               <span class="svg-icon svg-icon-3">
@@ -131,6 +131,11 @@ export default {
       clients: []
     }
   },
+  methods: {
+    ClientAdd() {
+      this.$router.push('/ClientAdd');
+    }
+  }
 
 }
 </script>
