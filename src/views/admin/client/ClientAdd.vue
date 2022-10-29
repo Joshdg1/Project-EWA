@@ -21,7 +21,7 @@
 
                 <!-- Password input -->
                 <div class="form-outline mb-4">
-                  <label class="form-label" for="form2Example2">Full name</label>
+                  <label class="form-label" for="form2Example2">Company name</label>
                   <input type="password" id="form2Example2" class="form-control" />
                 </div>
 
