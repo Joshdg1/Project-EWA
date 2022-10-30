@@ -1,98 +1,29 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 
-// General
-import ProgrammerPage from '../views/programmer/Home.vue'
-import Login from "@/login/Login";
-import Register from "@/login/Register";
-import Home from "@/views/Home";
-
-// Programmer
-import ProgrammerEdit from "../views/programmer/Edit.vue";
-import ProgrammerHome from "../views/programmer/Home.vue";
-
-// Client
-import ClientHomePage from "../views/client/Home.vue"
-
-// Admin
-import AdminProgrammerView from "../views/admin/programmer/View.vue";
-import AdminProjectView from "../views/admin/project/ProjectAdminView.vue";
-import AdminClientView from "../views/admin/client/ClientAdminView.vue";
-
 Vue.use(VueRouter)
 
 const routes = [
     {
-        path: '/login',
-        name: 'Login',
-        component: Login
+        path: "/",
+        name: "home",
+        component: import('../views/Home'),
     },
     {
-        path: '/register',
-        name: 'Register',
-        component: Register
+        meta: {
+            isPublic: true,
+        },
+        path: "/register",
+        component: import('../auth/Register'),
     },
     {
-        path: '/programmerProfile',
-        name: 'ProgrammerProfile',
-        component: ProgrammerEdit
+        meta: {
+            isPublic: true,
+        },
+        path: "/login",
+        component: import('../auth/Login'),
     },
-    {
-        path: '/programmerHomePage',
-        name: 'programmerHomePage',
-        component: ProgrammerPage
-    },
-    {
-        path: '/',
-        name: 'Home',
-        component: Home
-    },
-    {
-        path: '/adminClient',
-        name: 'ProjectAdminView',
-        component: AdminClientView
-    },
-    {
-        path: '/adminProject',
-        name: 'ProjectAdminView',
-        component: AdminProjectView
-    },
-    {
-        path: '/adminProgrammer',
-        name: 'AdminHome',
-        component: AdminProgrammerView,
-        children: [
-            {
-                path: 'programmer',
-                name: 'AdminProgrammerHome',
-                children: [
-                    {
-                        path: 'view',
-                        name: 'AdminProgrammerView',
-                        component: AdminProgrammerView,
-                    }
-                ]
-            },
-        ]
-    },
-    {
-        path: '/programmer',
-        name: 'ProgrammerHome',
-        component: ProgrammerHome,
-        children: [
-            {
-                path: '/edit',
-                name: 'ProgrammerEdit',
-                component: ProgrammerEdit,
-            },
-        ]
-    },
-    {
-        path: '/ClientHomePage',
-        name: 'ClientHomePage',
-        component: ClientHomePage
-    },
-]
+];
 
 const router = new VueRouter({
     mode: 'history',
@@ -101,4 +32,16 @@ const router = new VueRouter({
     routes
 })
 
-export default router
+router.beforeEach((to, from, next) => {
+  const loggedIn = localStorage.getItem('user');
+
+  // trying to access a restricted page + not logged in
+  // redirect to auth page
+  if (!loggedIn && !to.meta.isPublic) {
+    next('/login');
+  } else {
+    next();
+  }
+});
+
+export default router;
