@@ -7,21 +7,21 @@ const routes = [
     {
         path: "/",
         name: "home",
-        component: import('../views/Home'),
+        component: () =>  import('../views/Home'),
     },
     {
         meta: {
             isPublic: true,
         },
         path: "/register",
-        component: import('../auth/Register'),
+        component: () =>  import('../auth/Register'),
     },
     {
         meta: {
             isPublic: true,
         },
         path: "/login",
-        component: import('../auth/Login'),
+        component: () => import('../auth/Login'),
     },
 ];
 
@@ -33,15 +33,17 @@ const router = new VueRouter({
 })
 
 router.beforeEach((to, from, next) => {
-  const loggedIn = localStorage.getItem('user');
+    const loggedIn = localStorage.getItem('user');
 
-  // trying to access a restricted page + not logged in
-  // redirect to auth page
-  if (!loggedIn && !to.meta.isPublic) {
-    next('/login');
-  } else {
-    next();
-  }
+    // trying to access a restricted page + not logged in
+    // redirect to auth page
+    if (!loggedIn && !to.meta.isPublic) {
+        next('/login');
+    } else if (loggedIn && to.meta.isPublic) {
+        next('/');
+    } else {
+        next();
+    }
 });
 
 export default router;

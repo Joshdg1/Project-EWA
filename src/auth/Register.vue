@@ -1,191 +1,72 @@
 <template>
- <div><div class="container">
-   <div class="body d-md-flex align-items-center justify-content-between">
-     <div class="box-1 mt-md-0 mt-5">
-       <img src="https://picsum.photos/600/800"
-            class="" alt="">
-     </div>
-     <div class=" box-2 d-flex flex-column h-100">
-       <div class="mt-5">
-         <p class="mb-1 h-1">Register</p>
-         <p class="text-muted mb-2">Share your skills with us.</p>
-         <div class="d-flex flex-column ">
-           <p class="text-muted mb-2">Continue with...</p>
-           <div class="d-flex align-items-center">
-             <form>
-               <!-- Email input -->
-               <div class="form-outline mb-4">
-                 <label class="form-label" for="form2Example1">Email address</label>
-                 <input type="email" id="form2Example1" class="form-control" />
-               </div>
+    <form class="form w-100" @submit="checkForm">
+        <div class="text-center mb-10">
+            <h1 class="text-dark mb-3">Register to Florijn</h1>
+            <div class="text-gray-400 fw-semibold fs-4">Already have an account?
+                <router-link to="/login" class="link-primary fw-bold">Login</router-link>
+            </div>
+        </div>
 
-               <!-- Password input -->
-               <div class="form-outline mb-4">
-                 <label class="form-label" for="form2Example2">Full name</label>
-                 <input type="password" id="form2Example2" class="form-control" />
-               </div>
+        <div v-if="errors.length">
+            <b>Please correct the following error(s):</b>
+            <ul>
+                <li v-for="error in errors" v-bind:key="error">{{ error }}</li>
+            </ul>
+        </div>
 
-               <!-- Password input -->
-               <div class="form-outline mb-4">
-                 <label class="form-label" for="form3Example3">Password</label>
-                 <input type="password" id="form3Example3" class="form-control" />
-               </div>
+        <div class="fv-row mb-10 fv-plugins-icon-container">
+            <label class="form-label fs-6 fw-bold text-dark">Email</label>
+            <input class="form-control form-control-lg form-control-solid" v-model="email" type="email" name="email"
+                   autocomplete="off">
+            <div class="fv-plugins-message-container invalid-feedback"></div>
+        </div>
+        <div class="fv-row mb-10 fv-plugins-icon-container">
+            <div class="d-flex flex-stack mb-2">
+                <label class="form-label fw-bold text-dark fs-6 mb-0">Password</label>
+            </div>
+            <input class="form-control form-control-lg form-control-solid" v-model="password" type="password" name="password">
+        </div>
+        <div class="text-center">
+            <button type="submit" id="kt_sign_in_submit" class="btn btn-lg btn-primary w-100 mb-5">
+                <span class="indicator-label">Register</span>
+                <span class="indicator-progress">Please wait...
+									<span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+            </button>
 
-               <!-- Submit button -->
-               <button type="button" class="btn btn-primary btn-block mb-4">Register</button>
-             </form>
-           </div>
-         </div>
-       </div>
-       <div class="mt-auto">
-         <p class="footer text-muted mb-0 mt-md-0 mt-4">By register you agree with our
-           <span class="p-color me-1">terms and conditions</span>and
-           <span class="p-color ms-1">privacy policy</span>
-         </p>
-       </div>
-     </div>
-   </div>
- </div></div>
+        </div>
+    </form>
 </template>
 
 <script>
-export default {
-  // eslint-disable-next-line
-  name: "Register"
-}
+    export default {
+        // eslint-disable-next-line
+        name: "Register",
+        data() {
+            return {
+                errors: [],
+                email: null,
+                password: null,
+            }
+        },
+        methods: {
+            checkForm: function (e) {
+                e.preventDefault();
+
+                if (this.email && this.password) {
+                  alert('Todo: register')
+                    return true;
+                }
+
+                this.errors = [];
+
+                if (!this.email) {
+                    this.errors.push('Email required.');
+                }
+                if (!this.password) {
+                    this.errors.push('Password required.');
+                }
+            }
+        }
+    }
 </script>
 
-<style scoped>
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: 'Poppins', sans-serif
-}
-
-form {
-  margin-top: 6%;
-}
-
-.container {
-  margin: 50px auto;
-}
-
-.body {
-  position: relative;
-  width: 720px;
-  height: 440px;
-  margin: 20px auto;
-  border: 1px solid #dddd;
-  border-radius: 18px;
-  overflow: hidden;
-  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.box-1 img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.box-2 {
-  padding: 10px;
-}
-
-.box-1,
-.box-2 {
-  width: 50%;
-}
-
-.h-1 {
-  font-size: 24px;
-  font-weight: 700;
-}
-
-.text-muted {
-  font-size: 14px;
-}
-
-.container .box {
-  width: 100px;
-  height: 100px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  border: 2px solid transparent;
-  text-decoration: none;
-  color: #615f5fdd;
-}
-
-.box:active,
-.box:visited {
-  border: 2px solid #ee82ee;
-}
-
-.box:hover {
-  border: 2px solid #ee82ee;
-}
-
-.btn.btn-primary {
-  background-color: transparent;
-  color: #ee82ee;
-  border: 0px;
-  padding: 0;
-  font-size: 14px;
-}
-
-.btn.btn-primary .fas.fa-chevron-right {
-  font-size: 12px;
-}
-
-.footer .p-color {
-  color: #ee82ee;
-}
-
-.footer.text-muted {
-  font-size: 10px;
-}
-
-.fas.fa-times {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  height: 20px;
-  width: 20px;
-  background-color: #f3cff379;
-  font-size: 18px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.fas.fa-times:hover {
-  color: #ff0000;
-}
-
-@media (max-width:767px) {
-  body {
-    padding: 10px;
-  }
-
-  .body {
-    width: 100%;
-    height: 100%;
-  }
-
-  .box-1 {
-    width: 100%;
-  }
-
-  .box-2 {
-    width: 100%;
-    height: 440px;
-  }
-}
-</style>
