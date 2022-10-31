@@ -24,7 +24,8 @@ export class Programmer {
      * @param workspace
      * @param projectTypes
      */
-    constructor(firstname, lastname, address, city, knowledge, experience, availability, hours, workPreference, projectTypes) {
+    constructor(id ,firstname, lastname, address, city, knowledge, experience, availability, hours, workPreference, projectTypes) {
+        this.id = id
         this.firstname = firstname;
         this.lastname = lastname;
         this.address = address;
@@ -36,10 +37,12 @@ export class Programmer {
         this.workPreference = workPreference;
         this.projectTypes = projectTypes;
     }
-    static copyConstructor(cabin) {
-        if (cabin === null) return null;
-        let copy = Object.assign(new Programmer(0), cabin)
-        copy.city = cabin.city
+    static copyConstructor(programmer) {
+        if (programmer === null) return null;
+        let copy =  Object.assign(new Programmer(0), programmer)
+        copy.city = programmer.city
         return copy
+
+
     }
 }

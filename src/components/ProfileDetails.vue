@@ -9,7 +9,7 @@
       <!--end::Card title-->
       <!--begin::Action-->
       <div class="d-flex ms-3">
-        <a @click="toEditProfile()" class="btn background-florijn btn-active-info" tooltip="New App" data-bs-toggle="modal"
+        <a @click="setEditProfile()" class="btn background-florijn btn-active-info" tooltip="New App" data-bs-toggle="modal"
            data-bs-target="#kt_modal_create_app" id="kt_toolbar_primary_button">Edit profile-page</a>
       </div>
       <!--end::Action-->
@@ -105,32 +105,6 @@
         <!--begin::Label-->
       </div>
       <!--end::Input group-->
-      <!--begin::Notice-->
-      <!--      <div class="notice d-flex bg-light-warning rounded border-warning border border-dashed p-6">-->
-      <!--        &lt;!&ndash;begin::Icon&ndash;&gt;-->
-      <!--        &lt;!&ndash;begin::Svg Icon | path: icons/duotune/general/gen044.svg&ndash;&gt;-->
-      <!--        <span class="svg-icon svg-icon-2tx svg-icon-warning me-4">-->
-      <!--											<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">-->
-      <!--												<rect opacity="0.3" x="2" y="2" width="20" height="20" rx="10" fill="black" />-->
-      <!--												<rect x="11" y="14" width="7" height="2" rx="1" transform="rotate(-90 11 14)" fill="black" />-->
-      <!--												<rect x="11" y="17" width="2" height="2" rx="1" transform="rotate(-90 11 17)" fill="black" />-->
-      <!--											</svg>-->
-      <!--										</span>-->
-      <!--        &lt;!&ndash;end::Svg Icon&ndash;&gt;-->
-      <!--        &lt;!&ndash;end::Icon&ndash;&gt;-->
-      <!--        &lt;!&ndash;begin::Wrapper&ndash;&gt;-->
-      <!--        <div class="d-flex flex-stack flex-grow-1">-->
-      <!--          &lt;!&ndash;begin::Content&ndash;&gt;-->
-      <!--          <div class="fw-bold">-->
-      <!--            <h4 class="text-gray-900 fw-bolder">We need your attention!</h4>-->
-      <!--            <div class="fs-6 text-gray-700">Your payment was declined. To start using tools, please-->
-      <!--              <a class="fw-bolder" href="#">Add Payment Method</a>.</div>-->
-      <!--          </div>-->
-      <!--          &lt;!&ndash;end::Content&ndash;&gt;-->
-      <!--        </div>-->
-      <!--        &lt;!&ndash;end::Wrapper&ndash;&gt;-->
-      <!--      </div>-->
-      <!--end::Notice-->
     </div>
     <!--end::Card body-->
   </div>
@@ -140,7 +114,18 @@
 export default {
   name: "ProfileDetails",
   props: ['sampleProgrammer'],
-  emits: ['saveProfile']
+  emits: ['edit-profile'],
+  data(){
+    return {
+      editingProfile: null
+    }
+  },
+  methods: {
+    setEditProfile(){
+      this.editingProfile = true
+      this.$emit('edit-profile' , this.editingProfile)
+    }
+  }
 }
 </script>
 
