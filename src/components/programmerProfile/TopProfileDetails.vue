@@ -210,7 +210,8 @@
 
           <!--begin::Nav item-->
           <li class="nav-item">
-            <a class="nav-link text-active-primary me-6 active" @click="setSelectedTabDetails">General Details</a>
+            <a class="nav-link text-active-primary me-6 " id="Details" @click="setSelectedTabDetails">General
+              Details</a>
           </li>
           <!--end::Nav item-->
           <!--begin::Nav item-->
@@ -220,7 +221,7 @@
           <!--end::Nav item-->
           <!--begin::Nav item-->
           <li class="nav-item">
-            <a class="nav-link text-active-primary me-6" @click="setSelectedTabSkills">Skills</a>
+            <a class="nav-link text-active-primary me-6" id="Skills" @click="setSelectedTabSkills">Skills</a>
           </li>
           <!--end::Nav item-->
         </ul>
@@ -238,18 +239,49 @@ export default {
   name: "TopProfileDetails",
   props: ['sampleProgrammer'],
   emits: ['selectedTab'],
-
+  data() {
+    return {
+      selectedTab: null
+    }
+  },
   methods: {
-    setSelectedTabAvailability(){
+    setSelectedTabAvailability() {
+      const oldSelectedTab = this.selectedTab;
       this.selectedTab = 2
+      const el = document.getElementById('availability');
+      if (oldSelectedTab === 1) {
+        el.classList.remove("active")
+      } else if (oldSelectedTab === 3) {
+        el.classList.remove("active")
+      }
+      el.classList.add("active")
+
       this.$emit('selectedTab', this.selectedTab)
     },
-    setSelectedTabDetails(){
+    setSelectedTabDetails() {
+      const oldSelectedTab = this.selectedTab;
       this.selectedTab = 1
+      const el = document.getElementById('Details');
+      if (oldSelectedTab === 2) {
+        el.classList.remove("active")
+      } else if (oldSelectedTab === 3) {
+        el.classList.remove("active")
+      }
+      el.classList.add("active")
+
       this.$emit('selectedTab', this.selectedTab)
     },
-    setSelectedTabSkills(){
+    setSelectedTabSkills() {
+      const oldSelectedTab = this.selectedTab;
       this.selectedTab = 3
+      const el = document.getElementById('Skills');
+      if (oldSelectedTab === 1) {
+        el.classList.remove("active")
+      } else if (oldSelectedTab === 2) {
+        el.classList.remove("active")
+      }
+      el.classList.add("active")
+
       this.$emit('selectedTab', this.selectedTab)
     }
   }

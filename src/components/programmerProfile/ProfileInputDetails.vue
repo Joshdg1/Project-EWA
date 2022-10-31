@@ -114,7 +114,7 @@
 </template>
 
 <script>
-import {Programmer} from "@/models/programmer";
+import {Programmer} from "@/models/programmer/programmer";
 
 export default {
   name: "ProfileInputDetails",

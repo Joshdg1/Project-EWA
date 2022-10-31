@@ -13,15 +13,17 @@ export class Programmer {
     /**
      * Constructor
      *
+     * @param id
      * @param firstname
      * @param lastname
+     * @param email
      * @param address
      * @param city
      * @param knowledge
      * @param experience
      * @param availability
      * @param hours
-     * @param workspace
+     * @param workPreference
      * @param projectTypes
      */
     constructor(id ,firstname, lastname, email, address, city, knowledge, experience, availability, hours, workPreference, projectTypes) {
@@ -43,7 +45,5 @@ export class Programmer {
         let copy =  Object.assign(new Programmer(0), programmer)
         copy.city = programmer.city
         return copy
-
-
     }
 }
