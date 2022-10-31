@@ -69,7 +69,7 @@
                                     fill="black"/>
 															</svg>
 														</span>
-                  <!--end::Svg Icon-->max@HvA.com</a>
+                  <!--end::Svg Icon-->{{ sampleProgrammer.email }}</a>
               </div>
               <!--end::Info-->
             </div>
@@ -210,17 +210,17 @@
 
           <!--begin::Nav item-->
           <li class="nav-item">
-            <a class="nav-link text-active-primary me-6 active" href="#">General Details</a>
+            <a class="nav-link text-active-primary me-6 active" @click="setSelectedTabDetails">General Details</a>
           </li>
           <!--end::Nav item-->
           <!--begin::Nav item-->
           <li class="nav-item">
-            <a class="nav-link text-active-primary me-6" href="#">Availability</a>
+            <a class="nav-link text-active-primary me-6" id="availability" @click="setSelectedTabAvailability">Availability</a>
           </li>
           <!--end::Nav item-->
           <!--begin::Nav item-->
           <li class="nav-item">
-            <a class="nav-link text-active-primary me-6" href="#">Skills</a>
+            <a class="nav-link text-active-primary me-6" @click="setSelectedTabSkills">Skills</a>
           </li>
           <!--end::Nav item-->
         </ul>
@@ -232,9 +232,27 @@
 </template>
 
 <script>
+
+
 export default {
   name: "TopProfileDetails",
   props: ['sampleProgrammer'],
+  emits: ['selectedTab'],
+
+  methods: {
+    setSelectedTabAvailability(){
+      this.selectedTab = 2
+      this.$emit('selectedTab', this.selectedTab)
+    },
+    setSelectedTabDetails(){
+      this.selectedTab = 1
+      this.$emit('selectedTab', this.selectedTab)
+    },
+    setSelectedTabSkills(){
+      this.selectedTab = 3
+      this.$emit('selectedTab', this.selectedTab)
+    }
+  }
 }
 </script>
 

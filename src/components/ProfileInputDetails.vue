@@ -36,11 +36,11 @@
       <!--begin::Input group-->
       <div class="row mb-7">
         <!--begin::Label-->
-        <label class="col-lg-4 fw-bold text-muted">Availability</label>
+        <label class="col-lg-4 fw-bold text-muted">E-mail address</label>
         <!--end::Label-->
         <!--begin::Col-->
         <div class="col-lg-8 fv-row">
-          <input type="text" class="form-control form-control-solid " name="search" v-model="editProfile.availability" data-kt-search-element="input" />
+          <input type="text" class="form-control form-control-solid " name="search" v-model="editProfile.email" data-kt-search-element="input" />
         </div>
         <!--end::Col-->
       </div>
@@ -87,11 +87,11 @@
       <!--begin::Input group-->
       <div class="row mb-7">
         <!--begin::Label-->
-        <label class="col-lg-4 fw-bold text-muted">Experience</label>
+        <label class="col-lg-4 fw-bold text-muted">City</label>
         <!--end::Label-->
         <!--begin::Col-->
         <div class="col-lg-8">
-          <input type="text" class="form-control form-control-solid " name="search" v-model="editProfile.experience" data-kt-search-element="input" />
+          <input type="text" class="form-control form-control-solid " name="search" v-model="editProfile.city" data-kt-search-element="input" />
         </div>
         <!--end::Col-->
       </div>

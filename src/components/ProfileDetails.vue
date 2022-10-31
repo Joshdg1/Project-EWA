@@ -32,11 +32,11 @@
       <!--begin::Input group-->
       <div class="row mb-7">
         <!--begin::Label-->
-        <label class="col-lg-4 fw-bold text-muted">Availability</label>
+        <label class="col-lg-4 fw-bold text-muted">E-mail address</label>
         <!--end::Label-->
         <!--begin::Col-->
         <div class="col-lg-8 fv-row">
-          <span class="fw-bold fs-6 text-gray-800">{{ sampleProgrammer.availability }}</span>
+          <span class="fw-bold fs-6 text-gray-800">{{ sampleProgrammer.email }}</span>
         </div>
         <!--end::Col-->
       </div>
@@ -84,11 +84,11 @@
       <!--begin::Input group-->
       <div class="row mb-7">
         <!--begin::Label-->
-        <label class="col-lg-4 fw-bold text-muted">Experience</label>
+        <label class="col-lg-4 fw-bold text-muted">City</label>
         <!--end::Label-->
         <!--begin::Col-->
         <div class="col-lg-8">
-          <span class="fw-bolder fs-6 text-gray-800">{{ sampleProgrammer.experience }}</span>
+          <span class="fw-bolder fs-6 text-gray-800">{{ sampleProgrammer.city }}</span>
         </div>
         <!--end::Col-->
       </div>

@@ -24,10 +24,11 @@ export class Programmer {
      * @param workspace
      * @param projectTypes
      */
-    constructor(id ,firstname, lastname, address, city, knowledge, experience, availability, hours, workPreference, projectTypes) {
+    constructor(id ,firstname, lastname, email, address, city, knowledge, experience, availability, hours, workPreference, projectTypes) {
         this.id = id
         this.firstname = firstname;
         this.lastname = lastname;
+        this.email = email
         this.address = address;
         this.city = city;
         this.knowledge = knowledge;
