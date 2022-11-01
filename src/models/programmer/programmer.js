@@ -13,9 +13,10 @@ class Programmer {
 
     /**
      * Constructor
-     * 
+     *
      * @param firstname
      * @param lastname
+     * @param email
      * @param address
      * @param city
      * @param postcode
@@ -23,12 +24,13 @@ class Programmer {
      * @param experience
      * @param availability
      * @param hours
-     * @param workPreference
-     * @param projectType
+     * @param workspace
+     * @param projectTypes
      */
-    constructor(firstname, lastname, address, city, postcode, knowledge, experience, availability, hours, workPreference, projectType) {
+    constructor(firstname, lastname, address, city, knowledge, experience, availability, hours, workPreference, projectTypes) {
         this.firstname = firstname;
         this.lastname = lastname;
+        this.email = email
         this.address = address;
         this.city = city;
         this.postcode = postcode;
@@ -40,14 +42,13 @@ class Programmer {
         this.projectType = projectType;
     }
 
-
     static createProgrammer(){
         let randomNameNumber = Math.floor(Math.random() * 5);
         let randomAddressNumber = Math.floor(Math.random() * 3);
         let randomExperience = Math.floor(Math.random() * 2);
 
         return new Programmer(fakeFirstname[randomNameNumber], fakeLastname[randomNameNumber], fakeAddress[randomAddressNumber],
-        fakeCity[randomNameNumber], fakePostCode[randomNameNumber], fakeKnowledge[randomNameNumber], fakeExperience[randomExperience],
+            fakeCity[randomNameNumber], fakePostCode[randomNameNumber], fakeKnowledge[randomNameNumber], fakeExperience[randomExperience],
             fakeAvailability[randomExperience], fakeHours[randomNameNumber], fakeWorkPreference[randomExperience],
             fakeProjectType[randomAddressNumber]);
     }
