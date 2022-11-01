@@ -10,26 +10,26 @@
       <div class="d-flex ms-3">
         <a @click="setEditProfile()" class="btn background-florijn btn-active-info" tooltip="New App"
            data-bs-toggle="modal"
-           data-bs-target="#kt_modal_create_app" id="kt_toolbar_primary_button">Edit skills</a>
+           data-bs-target="#kt_modal_create_app" id="kt_toolbar_primary_button">Save skills</a>
       </div>
       <!--end::Action-->
     </div>
     <div class="card-body p-9">
       <div class="card"
            v-for="skill in this.skills"
-          v-bind:key="skill.skillId"
+           v-bind:key="skill.skillId"
       >
         <div class="skillContainer">
 
-            <img src="https://cdn.onlinewebfonts.com/svg/img_133326.png" class="code-icon">
+          <img src="https://cdn.onlinewebfonts.com/svg/img_133326.png" class="code-icon">
           <div class="CardText">
-            <div>{{ skill.skillName }}  </div>
-            <div> {{skill.skillLevel}}<img src="https://cdn.onlinewebfonts.com/svg/img_561899.png" class="skillStar"> </div>
+            <input v-model="skill.skillName"  class="cardInput">
+            <input v-model="skill.skillLevel" class="cardInput"> <img src="https://cdn.onlinewebfonts.com/svg/img_561899.png" class="skillStar">
           </div>
 
         </div>
       </div>
-      
+
     </div>
   </div>
 </template>
@@ -38,7 +38,7 @@
 
 
 export default {
-  name: "programmerSkills",
+  name: "programmerInputSkills",
   props: ['skills'],
   emits: ['edit-profile'],
 
@@ -50,7 +50,7 @@ export default {
   },
   methods: {
     setEditProfile() {
-      this.editingProfile = true
+      this.editingProfile = false
       this.$emit('edit-profile', this.editingProfile)
     }
   }
@@ -84,10 +84,21 @@ export default {
 
 }
 .CardText {
+  display: flex;
+  flex-direction: column;
   border-top: 2px solid #EF5722!important;
-  text-align: center;
+  justify-content: center;
+  align-items: center;
 }
 .skillStar{
   height: 1em;
+}
+.cardInput{
+  background: none;
+  border-width:  0 0 1px 0;
+  border-style: solid;
+  border-color: lightblue;
+  width: 5vw;
+  text-align: center;
 }
 </style>

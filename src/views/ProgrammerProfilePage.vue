@@ -8,7 +8,11 @@
     <ProfileDetails v-if="!this.editProfile && currentTab === 1" :sample-programmer="sampleProgrammer"
                     @edit-profile="toEditProfile"></ProfileDetails>
     <AvailabilityProgrammer v-if="!this.editProfile && currentTab === 2 "></AvailabilityProgrammer>
-    <programmer-skills  v-if="!this.editProfile && currentTab === 3 " :skills="skills"></programmer-skills>
+    <programmer-skills v-if="!this.editProfile && currentTab === 3 " :skills="skills"
+                    @edit-profile="toEditSkills"></programmer-skills>
+
+<ProgrammerInputSkills  v-if="this.editProfile && currentTab === 3 " :skills="skills"
+                        @edit-profile="toEditSkills"></ProgrammerInputSkills>
   </div>
 </template>
 
@@ -20,20 +24,30 @@ import {ProgrammerSkill} from "@/models/programmer/programmerSkill"
 import TopProfileDetails from "@/components/programmerProfile/TopProfileDetails";
 import AvailabilityProgrammer from "@/components/programmerProfile/AvailabilityProgrammer";
 import ProgrammerSkills from "@/components/programmerProfile/programmerSkills";
+import ProgrammerInputSkills from "@/components/programmerProfile/ProgrammerInputSkills";
+
 
 export default {
   name: "ProgrammerProfilePage",
-  components: {ProgrammerSkills, AvailabilityProgrammer, TopProfileDetails, ProfileInputDetails, ProfileDetails},
+  components: {
+    ProgrammerInputSkills,
+    ProgrammerSkills, AvailabilityProgrammer, TopProfileDetails, ProfileInputDetails, ProfileDetails},
   created() {
     this.sampleProgrammer = new Programmer(0, "John", "Doe", "JohnDoe@HvA.nl", "wiboutStraat", "Amsterdam", "Rust",
         40, 12, 20, "On location", "Full stack")
-    let langues = ["PowerBI", "Flutter","Dart","PowerApps","C#"]
+
+
+    let languages = ["PowerBi" , "Flutter" ,"Dart", "C#" , "Rust"]
 
     for (let i = 0; i < 5; i++) {
-      this.skills.push(
-          [new ProgrammerSkill(1, langues[i], i)]
-      )
+      let si = i
+      const language = languages[i]
+      this.skills.push(  new ProgrammerSkill(1, si ,language, Math.round(Math.random() * 4 + 1)))
+      this.skills.skillName = language
     }
+
+
+
     this.currentTab = 1;
   },
   data() {
@@ -56,6 +70,9 @@ export default {
     },
     changeSelectedTab(selectedTab) {
       this.currentTab = selectedTab;
+    },
+    toEditSkills(profileEditStatus){
+      this.editProfile = profileEditStatus
     }
   }
 }
