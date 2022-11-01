@@ -80,7 +80,7 @@
 																		</span>
                     <!--end::Svg Icon-->
                   </a>
-                  <a href="#" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm">
+                  <a href="#" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm" @click="deleteProject(project)">
                     <!--begin::Svg Icon | path: icons/duotune/general/gen027.svg-->
                     <span class="svg-icon svg-icon-3">
 																			<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
@@ -132,6 +132,16 @@ export default {
       projects: []
     }
   },
+
+  methods:{
+    deleteProject(project) {
+      for (let i = 0; i < this.projects.length; i++) {
+        if (project === this.projects[i]) {
+          this.projects.splice(i, 1);
+        }
+      }
+    }
+  }
 
 }
 </script>
