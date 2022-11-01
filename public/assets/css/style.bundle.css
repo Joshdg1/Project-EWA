@@ -31298,33 +31298,37 @@ textarea.form-control-lg {
 }
 
 :root {
-    --bs-light-primary: #F8F5FF;
-    --bs-active-primary: #5014D0;
-    --bs-light-success: #E8FFF3;
-    --bs-active-success: #47BE7D;
-    --bs-light-info: #F1FAFF;
-    --bs-active-info: #0095E8;
-    --bs-light-warning: #FFF8DD;
-    --bs-active-warning: #F1BC00;
-    --bs-light-danger: #FFF5F8;
-    --bs-active-danger: #D9214E;
-    --bs-light-dark: #EFF2F5;
-    --bs-active-dark: #131628;
-    --bs-gray-100: #F5F8FA;
-    --bs-gray-200: #EFF2F5;
-    --bs-gray-300: #E4E6EF;
-    --bs-gray-400: #B5B5C3;
-    --bs-gray-500: #A1A5B7;
-    --bs-gray-600: #7E8299;
-    --bs-gray-700: #5E6278;
-    --bs-gray-800: #3F4254;
-    --bs-gray-900: #181C32;
-    --bs-xs: 0;
-    --bs-sm: 576px;
-    --bs-md: 768px;
-    --bs-lg: 992px;
-    --bs-xl: 1200px;
-    --bs-xxl: 1400px;
+
+
+  --bs-light-primary:#F8F5FF;
+  --bs-active-primary:#5014D0;
+  --bs-light-success:#E8FFF3;
+  --bs-active-success:#47BE7D;
+  --bs-light-info:#F1FAFF;
+  --bs-active-info:#0095E8;
+  --bs-light-warning:#FFF8DD;
+  --bs-active-warning:#F1BC00;
+  --bs-light-danger:#FFF5F8;
+  --bs-active-danger:#D9214E;
+  --bs-light-dark:#EFF2F5;
+  --bs-active-dark:#131628;
+  --bs-gray-100:#F5F8FA;
+  --bs-gray-200:#EFF2F5;
+  --bs-gray-300:#E4E6EF;
+  --bs-gray-400:#B5B5C3;
+  --bs-gray-500:#A1A5B7;
+  --bs-gray-600:#7E8299;
+  --bs-gray-700:#5E6278;
+  --bs-gray-800:#3F4254;
+  --bs-gray-900:#181C32;
+  --bs-xs:0;
+  --bs-sm:576px;
+  --bs-md:768px;
+  --bs-lg:992px;
+  --bs-xl:1200px;
+  --bs-xxl:1400px;
+
+
 }
 
 .bg-white {
@@ -32639,18 +32643,24 @@ textarea.form-control-lg {
 }
 
 .text-hover-primary:hover {
-    transition: color 0.2s ease, background-color 0.2s ease;
-    color: #7239EA !important;
+
+  transition: color 0.2s ease, background-color 0.2s ease;
+  color: #EF5722 !important;
+
 }
 
 .text-hover-primary:hover i {
-    transition: color 0.2s ease, background-color 0.2s ease;
-    color: #7239EA !important;
+
+  transition: color 0.2s ease, background-color 0.2s ease;
+  color: #EF5722 !important;
+
 }
 
 .text-hover-primary:hover .svg-icon svg [fill]:not(.permanent):not(g) {
-    transition: fill 0.3s ease;
-    fill: #7239EA;
+
+  transition: fill 0.3s ease;
+  fill: #EF5722;
+
 }
 
 .text-hover-primary:hover .svg-icon svg:hover [fill]:not(.permanent):not(g) {
