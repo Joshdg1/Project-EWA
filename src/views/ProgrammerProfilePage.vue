@@ -16,7 +16,7 @@
 import {Programmer} from "@/models/programmer/programmer";
 import ProfileDetails from "@/components/programmerProfile/ProfileDetails";
 import ProfileInputDetails from "@/components/programmerProfile/ProfileInputDetails";
-import {ProgrammerSkill} from "@/models/programmer/ProgrammerSkill"
+import {ProgrammerSkill} from "@/models/programmer/programmerSkill"
 import TopProfileDetails from "@/components/programmerProfile/TopProfileDetails";
 import AvailabilityProgrammer from "@/components/programmerProfile/AvailabilityProgrammer";
 import ProgrammerSkills from "@/components/programmerProfile/programmerSkills";
@@ -30,7 +30,9 @@ export default {
     let langues = ["PowerBI", "Flutter","Dart","PowerApps","C#"]
 
     for (let i = 0; i < 5; i++) {
-      this.skills[i] = [new ProgrammerSkill(1, langues[i], i)]
+      this.skills.push(
+          [new ProgrammerSkill(1, langues[i], i)]
+      )
     }
     this.currentTab = 1;
   },

@@ -15,15 +15,17 @@
       <!--end::Action-->
     </div>
     <div class="card-body p-9">
-      <div class="card"
-           v-for="skill in skills"
 
+      <div class="skillCard"
+           v-for="skill in skills"
+          v-bind:key="skill"
       >
         <div class="container">
           <h3>{{ skill.name }}</h3>
           <h3>{{ skill.level }}</h3>
         </div>
       </div>
+      
     </div>
   </div>
 </template>
@@ -33,6 +35,9 @@ export default {
   name: "programmerSkills",
   props: ['skills'],
   emits: ['edit-profile'],
+  created(){
+    alert(this.skills)
+  },
   data() {
     return {
       editingProfile: null

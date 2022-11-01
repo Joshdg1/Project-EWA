@@ -1,8 +1,8 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
-import ProgrammerProfilePage from "@/views/ProgrammerProfilePage";
-import ProgrammerHomePage from "@/views/ProgrammerHomePage";
+import ProgrammerProfilePage from "@/views/ProgrammerProfilePage.vue"
+import ProgrammerHomePage from "@/views/ProgrammerHomePage.vue";
 
 Vue.use(VueRouter)
 
