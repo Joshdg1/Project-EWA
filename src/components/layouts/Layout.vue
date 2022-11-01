@@ -17,6 +17,8 @@
 </template>
 
 <script>
+    // TODO: init aside menu
+
     import HeaderMenu from "../HeaderMenu";
     import FooterMenu from "../FooterMenu";
     import AsideMenu from "../AsideMenu";
