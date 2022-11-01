@@ -1,21 +1,19 @@
 <template>
-  <div id="kt_header" class="header" data-kt-sticky="true" data-kt-sticky-name="header"
-       data-kt-sticky-offset="{default: '200px', lg: '300px'}">
+<!--  TODO: Sticky header -->
+  <div id="kt_header" class="header">
     <!--begin::Container-->
     <div class="container-xxl d-flex align-items-center justify-content-between" id="kt_header_container">
       <!--begin::Page title-->
-      <div class="page-title d-flex flex-column align-items-start justify-content-center flex-wrap me-lg-2 pb-5 pb-lg-0"
-           data-kt-swapper="true" data-kt-swapper-mode="prepend"
-           data-kt-swapper-parent="{default: '#kt_content_container', lg: '#kt_header_container'}">
+      <div class="page-title d-flex flex-column align-items-start justify-content-center flex-wrap me-lg-2 pb-5 pb-lg-0">
         <!--begin::Heading-->
-        <h1 class="text-florijn fw-bold my-0 fs-2">Dashboard</h1>
+        <h1 class="text-florijn fw-bold my-0 fs-2">{{$route.name}}</h1>
         <!--end::Heading-->
         <!--begin::Breadcrumb-->
         <ul class="breadcrumb breadcrumb-line text-muted fw-bold fs-base my-1">
           <li class="breadcrumb-item text-muted">
-            <a href="../dist/index.html" class="text-muted">{{ $route.name }}</a>
+            <div class="text-muted">Admin</div>
           </li>
-          <li class="breadcrumb-item text-florijn">Dashboard</li>
+          <li class="breadcrumb-item text-florijn">{{$route.name}}</li>
         </ul>
         <!--end::Breadcrumb-->
       </div>

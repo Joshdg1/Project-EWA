@@ -4,16 +4,19 @@
     <div class="mb-18">
       <!--begin::Wrapper-->
       <div class="mb-10">
+
         <!--begin::Top-->
         <div class="text-center mb-15">
           <!--begin::Title-->
           <h3 class="fs-2hx text-dark mb-5">About Us</h3>
           <!--end::Title-->
+
           <!--begin::Text-->
           <div class="fs-5 text-muted fw-bold">Wil je de perfecte oplossingen? Dan ben je bij Florijn aan het juiste adres.
             Niet voor niets wordt onze hulp regelmatig ingeschakeld als het voor anderen te ingewikkeld wordt of als projecten mis dreigen te gaan.</div>
           <!--end::Text-->
         </div>
+
         <!--end::Top-->
         <!--begin::Overlay-->
         <div class="overlay">
@@ -29,6 +32,7 @@
         </div>
         <!--end::Container-->
       </div>
+
       <!--end::Wrapper-->
       <!--begin::Description-->
       <div class="fs-5 fw-bold text-gray-600">
@@ -51,14 +55,18 @@
       <!--end::Description-->
     </div>
     <!--end::About-->
+    <div @click="login" class="btn btn-secondary w-100px mb-4">Login</div>
+
     <!--begin::Statistics-->
     <div class="card bg-light mb-18">
       <!--begin::Body-->
+
       <div class="card-body py-15">
         <!--begin::Wrapper-->
         <div class="d-flex flex-center">
           <!--begin::Items-->
           <div class="d-flex justify-content-between mb-10 mx-auto w-xl-900px">
+
             <!--begin::Item-->
             <div class="octagon d-flex flex-center h-200px w-200px bg-body mx-2">
               <!--begin::Content-->
@@ -205,8 +213,15 @@
 <script>
 export default {
   // eslint-disable-next-line
-name: "Home"
+  name: "Home",
+  methods: {
+    login() {
+      this.$router.push("/login");
+    },
+  }
 }
+
+
 </script>
 
 <style scoped>
@@ -233,5 +248,14 @@ name: "Home"
   }
   div {
     display: block;
+  }
+
+
+</style>
+
+<style>
+  #auth_wrapper{
+    width: 80vw !important;
+    max-width: 80vw !important;
   }
 </style>

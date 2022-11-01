@@ -3,7 +3,7 @@
         <div class="mb-12">
             <img alt="Logo" src="/assets/media/logos/logo-default.svg" class="h-60px">
         </div>
-        <div class="w-500px mw-100 bg-body rounded shadow-sm p-10 p-lg-15 mx-auto">
+        <div id="auth_wrapper" class="w-500px mw-100 bg-body rounded shadow-sm p-10 p-lg-15 mx-auto">
             <router-view/>
         </div>
         <div class="mt-5 w-400px mw-100 text-center">

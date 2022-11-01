@@ -1,6 +1,5 @@
 <template>
   <section class="home-section">
-
     <div class="home-content">
       <div class="overview-boxes">
         <div class="box">

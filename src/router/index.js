@@ -6,8 +6,11 @@ Vue.use(VueRouter)
 
 const routes = [
     {
+        meta: {
+            wide: true,
+            isPublic: true,
+        },
         path: "/",
-        name: "home",
         component: () =>  import('../views/Home'),
     },
     {
@@ -27,14 +30,39 @@ const routes = [
 
     // === ADMIN PAGES ===
     {
+        path: "/home",
+        name: "Home",
+        component: () =>  import('../views/admin/AdminHome'),
+    },
+
+
+    // === PROGRAMMERS ===
+    {
+        name: "Programmers",
         path: '/programmers',
         component: () => import(`../views/programmer/Home`),
     },
 
     {
+        name: "Edit Programmer",
         path: '/programmers/view',
         component: () => import(`../views/programmer/Edit`),
-    }
+    },
+
+    // === CLIENTS ===
+    {
+        name: "Clients",
+        path: '/clients',
+        component: () => import(`../views/admin/client/ClientAdminView`),
+    },
+
+
+    // === PROJECTS ===
+    {
+        name: "Projects",
+        path: '/projects',
+        component: () => import(`../views/admin/project/ProjectAdminView`),
+    },
 
 ];
 
@@ -50,10 +78,10 @@ router.beforeEach((to, from, next) => {
 
     // trying to access a restricted page + not logged in
     // redirect to auth page
-    if (!loggedIn && !to.meta.isPublic) {
+    if (!loggedIn && !to.meta.isPublic && !from.meta.isPublic) {
         next('/login');
     } else if (loggedIn && to.meta.isPublic) {
-        next('/');
+        next('/home');
     } else {
         next();
     }

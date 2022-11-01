@@ -1,5 +1,5 @@
 <template>
-  <div class="container-xxl" id="kt_content_container">
+  <div>
     <TopProfileDetails :sample-programmer="sampleProgrammer" @selectedTab="changeSelectedTab"></TopProfileDetails>
     <!--begin::details View-->
     <ProfileInputDetails v-if="this.editProfile === true && currentTab === 1" :sample-programmer="sampleProgrammer"
