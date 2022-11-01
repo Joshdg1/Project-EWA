@@ -3,16 +3,17 @@
     <TopProfileDetails :sample-programmer="sampleProgrammer" @selectedTab="changeSelectedTab"></TopProfileDetails>
     <!--begin::details View-->
     <ProfileInputDetails v-if="this.editProfile === true && currentTab === 1" :sample-programmer="sampleProgrammer"
-                         @edit-profile="saveProfile" @save-profile="updateProfile"></ProfileInputDetails>
+                         @edit-profile="EditProfileStatus" @save-profile="updateProfile"></ProfileInputDetails>
 
     <ProfileDetails v-if="!this.editProfile && currentTab === 1" :sample-programmer="sampleProgrammer"
-                    @edit-profile="toEditProfile"></ProfileDetails>
+                    @edit-profile="EditProfileStatus"></ProfileDetails>
     <AvailabilityProgrammer v-if="!this.editProfile && currentTab === 2 "></AvailabilityProgrammer>
+
     <programmer-skills v-if="!this.editProfile && currentTab === 3 " :skills="skills"
-                    @edit-profile="toEditSkills"></programmer-skills>
+                    @edit-profile="EditProfileStatus"></programmer-skills>
 
 <ProgrammerInputSkills  v-if="this.editProfile && currentTab === 3 " :skills="skills"
-                        @edit-profile="toEditSkills"></ProgrammerInputSkills>
+                        @edit-profile="EditProfileStatus"></ProgrammerInputSkills>
   </div>
 </template>
 
@@ -26,7 +27,6 @@ import AvailabilityProgrammer from "@/components/programmerProfile/AvailabilityP
 import ProgrammerSkills from "@/components/programmerProfile/programmerSkills";
 import ProgrammerInputSkills from "@/components/programmerProfile/ProgrammerInputSkills";
 
-
 export default {
   name: "ProgrammerProfilePage",
   components: {
@@ -36,7 +36,6 @@ export default {
     this.sampleProgrammer = new Programmer(0, "John", "Doe", "JohnDoe@HvA.nl", "wiboutStraat", "Amsterdam", "Rust",
         40, 12, 20, "On location", "Full stack")
 
-
     let languages = ["PowerBi" , "Flutter" ,"Dart", "C#" , "Rust"]
 
     for (let i = 0; i < 5; i++) {
@@ -45,9 +44,6 @@ export default {
       this.skills.push(  new ProgrammerSkill(1, si ,language, Math.round(Math.random() * 4 + 1)))
       this.skills.skillName = language
     }
-
-
-
     this.currentTab = 1;
   },
   data() {
@@ -59,10 +55,7 @@ export default {
     }
   },
   methods: {
-    toEditProfile(profileEditStatus) {
-      this.editProfile = profileEditStatus
-    },
-    saveProfile(profileEditStatus) {
+    EditProfileStatus(profileEditStatus) {
       this.editProfile = profileEditStatus
     },
     updateProfile(newProfile) {
@@ -71,9 +64,7 @@ export default {
     changeSelectedTab(selectedTab) {
       this.currentTab = selectedTab;
     },
-    toEditSkills(profileEditStatus){
-      this.editProfile = profileEditStatus
-    }
+
   }
 }
 </script>
