@@ -6,7 +6,7 @@
     <div class="aside-primary d-flex flex-column align-items-lg-center flex-row-auto">
       <!--begin::Logo-->
       <div class="aside-logo d-none d-lg-flex flex-column align-items-center flex-column-auto py-10" id="kt_aside_logo">
-          <img @click="goToHome()" alt="Logo" src="assets/media/logos/logo-default.svg" class="h-50px cursor-pointer"/>
+          <img @click="goToHome()" alt="Logo" src="/assets/media/logos/logo-default.svg" class="h-50px cursor-pointer"/>
       </div>
       <!--end::Logo-->
       <!--begin::Nav-->
@@ -22,10 +22,10 @@
             <li class="nav-item mb-2" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="right"
                 data-bs-dismiss="click" title="Projects">
               <!--begin::Nav link-->
-              <a class="nav-link btn btn-custom btn-icon" data-bs-toggle="tab" href="#kt_aside_nav_tab_projects">
+              <div class="nav-link btn btn-custom btn-icon" data-bs-toggle="tab" @click="goToProjects()">
                 <!--begin::Svg Icon | path: icons/duotune/abstract/abs042.svg-->
                 <span class="svg-icon svg-icon-2x">
-												<svg @click="goToProjects()" version="1.0" xmlns="http://www.w3.org/2000/svg"
+												<svg  version="1.0" xmlns="http://www.w3.org/2000/svg"
                              width="920.000000pt" height="768.000000pt" viewBox="0 0 920.000000 768.000000"
                              preserveAspectRatio="xMidYMid meet">
 
@@ -70,7 +70,7 @@ m-3120 -960 c108 -33 161 -106 161 -226 0 -120 -48 -187 -158 -224 -63 -21
 </svg>
 											</span>
                 <!--end::Svg Icon-->
-              </a>
+              </div>
               <!--end::Nav link-->
             </li>
             <!--end::Nav item-->
@@ -78,10 +78,10 @@ m-3120 -960 c108 -33 161 -106 161 -226 0 -120 -48 -187 -158 -224 -63 -21
             <li class="nav-item mb-2" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="right"
                 data-bs-dismiss="click" title="Clients">
               <!--begin::Nav link-->
-              <a class="nav-link btn btn-custom btn-icon" data-bs-toggle="tab" href="#kt_aside_nav_tab_tasks">
+              <div class="nav-link btn btn-custom btn-icon" data-bs-toggle="tab" @click="goToClients()">
                 <!--begin::Svg Icon | path: icons/duotune/general/gen048.svg-->
                 <span class="svg-icon svg-icon-2x">
-											<svg @click="goToClients()" version="1.0" xmlns="http://www.w3.org/2000/svg"
+											<svg  version="1.0" xmlns="http://www.w3.org/2000/svg"
                            width="860.000000pt" height="581.000000pt" viewBox="0 0 860.000000 581.000000"
                            preserveAspectRatio="xMidYMid meet">
 
@@ -131,7 +131,7 @@ m-3120 -960 c108 -33 161 -106 161 -226 0 -120 -48 -187 -158 -224 -63 -21
                         </svg>
 											</span>
                 <!--end::Svg Icon-->
-              </a>
+              </div>
               <!--end::Nav link-->
             </li>
             <!--end::Nav item-->
@@ -142,10 +142,10 @@ m-3120 -960 c108 -33 161 -106 161 -226 0 -120 -48 -187 -158 -224 -63 -21
             <li class="nav-item mb-2" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="right"
                 data-bs-dismiss="click" title="Programmers">
               <!--begin::Nav link-->
-              <a class="nav-link btn btn-custom btn-icon" data-bs-toggle="tab" href="#kt_aside_nav_tab_authors">
+              <div @click="goToProgrammers()" class="nav-link btn btn-custom btn-icon" data-bs-toggle="tab" >
                 <!--begin::Svg Icon | path: icons/duotune/finance/fin006.svg-->
                 <span class="svg-icon svg-icon-2x">
-											<svg @click="goToProgrammers()" version="1.0" xmlns="http://www.w3.org/2000/svg"
+											<svg  version="1.0" xmlns="http://www.w3.org/2000/svg"
                            width="200.000000pt" height="200.000000pt" viewBox="0 0 200.000000 200.000000"
                            preserveAspectRatio="xMidYMid meet">
 
@@ -172,12 +172,11 @@ l47 37 -47 42 c-43 40 -55 62 -39 77 14 14 32 5 89 -44z"/>
 </svg>
 											</span>
                 <!--end::Svg Icon-->
-              </a>
+              </div>
               <!--end::Nav link-->
             </li>
             <!--end::Nav item-->
           </ul>
-          <!--end::Tabs-->
         </div>
         <!--end::Nav-->
       </div>
@@ -520,7 +519,7 @@ l47 37 -47 42 c-43 40 -55 62 -39 77 14 14 32 5 89 -44z"/>
                   <!--end::Section-->
                   <!--begin::Illustration-->
                   <div class="text-center px-4">
-                    <img class="mw-100 mh-200px" alt="metronic" src="assets/media/illustrations/sigma-1/6.png"/>
+                    <img class="mw-100 mh-200px" alt="metronic" src="/assets/media/illustrations/sigma-1/6.png"/>
                   </div>
                   <!--end::Illustration-->
                 </div>
@@ -772,7 +771,7 @@ l47 37 -47 42 c-43 40 -55 62 -39 77 14 14 32 5 89 -44z"/>
           <div class="cursor-pointer symbol symbol-40px" data-kt-menu-trigger="click" data-kt-menu-overflow="true"
                data-kt-menu-placement="top-start" data-bs-toggle="tooltip" data-bs-placement="right"
                data-bs-dismiss="click" title="User profile">
-            <img src="assets/media/avatars/150-26.jpg" alt="image"/>
+            <img src="/assets/media/avatars/150-26.jpg" alt="image"/>
           </div>
           <!--begin::Menu-->
           <div
@@ -783,7 +782,7 @@ l47 37 -47 42 c-43 40 -55 62 -39 77 14 14 32 5 89 -44z"/>
               <div class="menu-content d-flex align-items-center px-3">
                 <!--begin::Avatar-->
                 <div class="symbol symbol-50px me-5">
-                  <img alt="Logo" src="assets/media/avatars/150-26.jpg"/>
+                  <img alt="Logo" src="/assets/media/avatars/150-26.jpg"/>
                 </div>
                 <!--end::Avatar-->
                 <!--begin::Username-->
@@ -801,7 +800,7 @@ l47 37 -47 42 c-43 40 -55 62 -39 77 14 14 32 5 89 -44z"/>
             <!--end::Menu separator-->
             <!--begin::Menu item-->
             <div class="menu-item px-5">
-              <a href="../dist/account/overview.html" class="menu-link px-5">My Profile</a>
+              <div @click="goToProfile" class="menu-link px-5">My Profile</div>
             </div>
             <!--end::Menu item-->
             <!--begin::Menu separator-->
@@ -812,7 +811,7 @@ l47 37 -47 42 c-43 40 -55 62 -39 77 14 14 32 5 89 -44z"/>
               <a href="#" class="menu-link px-5">
 											<span class="menu-title position-relative">Language
 											<span class="fs-8 rounded bg-light px-3 py-2 position-absolute translate-middle-y top-50 end-0">English
-											<img class="w-15px h-15px rounded-1 ms-2" src="assets/media/flags/united-states.svg"
+											<img class="w-15px h-15px rounded-1 ms-2" src="/assets/media/flags/united-states.svg"
                            alt=""/></span></span>
               </a>
               <!--begin::Menu sub-->
@@ -821,7 +820,7 @@ l47 37 -47 42 c-43 40 -55 62 -39 77 14 14 32 5 89 -44z"/>
                 <div class="menu-item px-3">
                   <a href="#" class="menu-link d-flex px-5 active">
 												<span class="symbol symbol-20px me-4">
-													<img class="rounded-1" src="assets/media/flags/united-states.svg" alt=""/>
+													<img class="rounded-1" src="/assets/media/flags/united-states.svg" alt=""/>
 												</span>English</a>
                 </div>
                 <!--end::Menu item-->
@@ -890,15 +889,19 @@ export default {
     },
 
     goToProjects() {
-      this.$router.push("/adminProject");
+      this.$router.push("/projects");
     },
 
     goToProgrammers() {
-      this.$router.push("/adminProgrammer");
+      this.$router.push("/programmers");
+    },
+
+    goToProfile() {
+      this.$router.push("/programmers/view");
     },
 
     goToClients() {
-      this.$router.push("/adminClient");
+      this.$router.push("/clients");
     },
 
     goToHome() {

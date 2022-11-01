@@ -1,7 +1,7 @@
 <template>
     <div class="d-flex flex-center flex-column flex-column-fluid p-10">
         <div class="mb-12">
-            <img alt="Logo" src="assets/media/logos/logo-default.svg" class="h-60px">
+            <img alt="Logo" src="/assets/media/logos/logo-default.svg" class="h-60px">
         </div>
         <div class="w-500px mw-100 bg-body rounded shadow-sm p-10 p-lg-15 mx-auto">
             <router-view/>

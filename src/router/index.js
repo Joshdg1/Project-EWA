@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 
 Vue.use(VueRouter)
 
+
 const routes = [
     {
         path: "/",
@@ -14,15 +15,27 @@ const routes = [
             isPublic: true,
         },
         path: "/register",
-        component: () =>  import('../auth/Register'),
+        component: () =>  import('../views/auth/Register'),
     },
     {
         meta: {
             isPublic: true,
         },
         path: "/login",
-        component: () => import('../auth/Login'),
+        component: () => import('../views/auth/Login'),
     },
+
+    // === ADMIN PAGES ===
+    {
+        path: '/programmers',
+        component: () => import(`../views/programmer/Home`),
+    },
+
+    {
+        path: '/programmers/view',
+        component: () => import(`../views/programmer/Edit`),
+    }
+
 ];
 
 const router = new VueRouter({

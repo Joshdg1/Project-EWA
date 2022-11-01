@@ -82,7 +82,7 @@ export default {
 
     },
     profilePage(){
-      this.$router.push('/programmerProfile');
+      this.$router.push('/programmers/view');
     }
   }
 }

@@ -18,7 +18,7 @@
 </template>
 
 <script>
-import {Programmer} from "@/models/programmer/programmer";
+import Programmer from "@/models/programmer/programmer";
 import ProfileDetails from "@/components/programmerProfile/ProfileDetails";
 import ProfileInputDetails from "@/components/programmerProfile/ProfileInputDetails";
 import {ProgrammerSkill} from "@/models/programmer/programmerSkill"
