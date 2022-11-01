@@ -24,7 +24,11 @@
           <img src="https://cdn.onlinewebfonts.com/svg/img_133326.png" class="code-icon">
           <div class="CardText">
             <input v-model="skill.skillName"  class="cardInput">
-            <input v-model="skill.skillLevel" class="cardInput"> <img src="https://cdn.onlinewebfonts.com/svg/img_561899.png" class="skillStar">
+            <div class="SkillLevel">
+              <input v-model="skill.skillLevel" class="cardInput">
+              <img src="https://cdn.onlinewebfonts.com/svg/img_561899.png" class="skillStar">
+            </div>
+
           </div>
 
         </div>
@@ -82,6 +86,7 @@ export default {
   height: 2em;
   margin: 2em;
 
+
 }
 .CardText {
   display: flex;
@@ -100,5 +105,14 @@ export default {
   border-color: lightblue;
   width: 5vw;
   text-align: center;
+}
+.SkillLevel{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+input:focus{
+  outline: none;
 }
 </style>

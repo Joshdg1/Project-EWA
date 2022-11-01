@@ -239,6 +239,11 @@ export default {
   name: "TopProfileDetails",
   props: ['sampleProgrammer'],
   emits: ['selectedTab'],
+  created() {
+    this.selectedTab = 1;
+    const el = document.getElementById('Details');
+    el.classList.add("active")
+  },
   data() {
     return {
       selectedTab: null
@@ -250,9 +255,12 @@ export default {
       this.selectedTab = 2
       const el = document.getElementById('availability');
       if (oldSelectedTab === 1) {
-        el.classList.remove("active")
-      } else if (oldSelectedTab === 3) {
-        el.classList.remove("active")
+        const el2 = document.getElementById("Details")
+        el2.classList.remove("active")
+      }
+      if (oldSelectedTab === 3) {
+        const el3 = document.getElementById("Skills")
+        el3.classList.remove("active")
       }
       el.classList.add("active")
 
@@ -263,9 +271,12 @@ export default {
       this.selectedTab = 1
       const el = document.getElementById('Details');
       if (oldSelectedTab === 2) {
-        el.classList.remove("active")
-      } else if (oldSelectedTab === 3) {
-        el.classList.remove("active")
+        const el2 = document.getElementById("availability")
+        el2.classList.remove("active")
+      }
+      if (oldSelectedTab === 3) {
+        const el3 = document.getElementById("Skills")
+        el3.classList.remove("active")
       }
       el.classList.add("active")
 
@@ -276,9 +287,12 @@ export default {
       this.selectedTab = 3
       const el = document.getElementById('Skills');
       if (oldSelectedTab === 1) {
-        el.classList.remove("active")
-      } else if (oldSelectedTab === 2) {
-        el.classList.remove("active")
+        const el2 = document.getElementById("Details")
+        el2.classList.remove("active")
+      }
+      if (oldSelectedTab === 2) {
+        const el3 = document.getElementById("availability")
+        el3.classList.remove("active")
       }
       el.classList.add("active")
 
