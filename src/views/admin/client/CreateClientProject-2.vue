@@ -1,29 +1,13 @@
 <template>
+
   <div class="row">
     <div class="col-lg-12">
       <div class="card card-xl-stretch mb-5 mb-xl-8">
         <!--begin::Header-->
         <div class="card-header border-0 pt-5">
           <h3 class="card-title align-items-start flex-column">
-            <span class="card-label fw-bolder fs-3 mb-1">Clients</span>
+            <span class="card-label fw-bolder fs-3 mb-1">Add programmers to the project</span>
           </h3>
-          <div class="card-toolbar" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-trigger="hover"
-               title="Click to add a client">
-            <a href="#" class="btn btn-sm btn-light-primary" data-bs-toggle="modal"
-               data-bs-target="#kt_modal_invite_friends">
-              <!--begin::Svg Icon | path: icons/duotune/arrows/arr075.svg-->
-              <span class="svg-icon svg-icon-3">
-													<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                               fill="none">
-														<rect opacity="0.5" x="11.364" y="20.364" width="16" height="2" rx="1"
-                                  transform="rotate(-90 11.364 20.364)" fill="black"/>
-														<rect x="4.36396" y="11.364" width="16" height="2" rx="1" fill="black"/>
-													</svg>
-												</span>
-              <!--end::Svg Icon-->New Client</a>
-
-
-          </div>
         </div>
         <!--end::Header-->
         <!--begin::Body-->
@@ -46,6 +30,11 @@
                 <th>Address</th>
                 <th>City</th>
                 <th>Postcode</th>
+                <th>Knowledge</th>
+                <th>Experience</th>
+                <th>Availability</th>
+                <th>Weekly work hours</th>
+                <th>Work space</th>
                 <th>Project types</th>
                 <th>Actions</th>
               </tr>
@@ -53,20 +42,25 @@
               <!--end::Table head-->
               <!--begin::Table body-->
               <tbody>
-              <tr v-for="client in clients" v-bind:key="client">
+              <tr v-for="programmer in programmers" v-bind:key="programmer">
                 <div class="form-check form-check-sm form-check-custom form-check-solid">
                   <input class="form-check-input" type="checkbox" value="1" data-kt-check="true"
                          data-kt-check-target=".widget-9-check"/>
                 </div>
-                <td>{{ client.firstname }}</td>
-                <td>{{ client.lastname }}</td>
-                <td>{{ client.address }}</td>
-                <td>{{ client.city }}</td>
-                <td>{{ client.postcode }}</td>
-                <td>{{ client.projectType }}</td>
+                <td>{{ programmer.firstname }}</td>
+                <td>{{ programmer.lastname }}</td>
+                <td>{{ programmer.address }}</td>
+                <td>{{ programmer.city }}</td>
+                <td>{{ programmer.postcode }}</td>
+                <td>{{ programmer.knowledge }}</td>
+                <td>{{ programmer.experience }}</td>
+                <td>{{ programmer.availability }}</td>
+                <td>{{ programmer.hours }}</td>
+                <td>{{ programmer.workPreference }}</td>
+                <td>{{ programmer.projectType }}</td>
 
 
-                <div class="d-flex  flex-shrink-0">
+                <div class="d-flex justify-content-end flex-shrink-0">
                   <a href="#" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1">
                     <!--begin::Svg Icon | path: icons/duotune/art/art005.svg-->
                     <span class="svg-icon svg-icon-3">
@@ -82,7 +76,7 @@
 																		</span>
                     <!--end::Svg Icon-->
                   </a>
-                  <a href="#" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm" @click="deleteClient(client)">
+                  <a href="#" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm">
                     <!--begin::Svg Icon | path: icons/duotune/general/gen027.svg-->
                     <span class="svg-icon svg-icon-3">
 																			<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
@@ -113,37 +107,38 @@
       </div>
       <!--end::Tables Widget 3-->
     </div>
+    <div class="d-flex flex-shrink-0">
+      <div class="d-flex ms-3">
+        <router-link to="/createProject" class="btn background-florijn btn-active-info">
+          Back
+        </router-link>
+      </div>
+      <div class="d-flex ms-3">
+        <router-link to="/" class="btn background-florijn btn-active-info">
+          Submit
+        </router-link>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
-import Client from '../../../models/client.js'
+import Programmer from '../../../models/programmer.js'
 
 export default {
-  name: "ClientAdminView",
+  name: "CreateClientProject-2",
 
   created() {
     for (let i = 0; i < 8; i++) {
-      this.clients.push(Client.createClient());
+      this.programmers.push(Programmer.createProgrammer());
     }
   },
 
   data() {
     return {
-      clients: []
+      programmers: []
     }
   },
-  methods:{
-    deleteClient(client){
-      for (let i = 0; i < this.clients.length; i++) {
-        if (client === this.clients[i])
-        {
-          this.clients.splice(i, 1);
-        }
-      }
-    },
-  }
-
 }
 </script>
 
