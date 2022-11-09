@@ -1,13 +1,27 @@
 package com.flo4.server.models;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity
 public class Project {
 
+    @Id
     private int id;
     private String title;
     private String description;
     private String company;
     private String hoursWorked;
     //@Todo add Programmer
+
+
+    public Project(){
+
+    }
+
+    public Project(int id){
+        this.id = id;
+    }
 
     /**
      * Constructor
@@ -19,11 +33,11 @@ public class Project {
      * @param hoursWorked
      */
     public Project(int id, String title, String description, String company, String hoursWorked) {
-        this.id = id;
-        this.title = title;
-        this.description = description;
-        this.company = company;
-        this.hoursWorked = hoursWorked;
+        this(id);
+        this.setTitle(title);
+        this.setDescription(description);
+        this.setCompany(company);
+        this.setHoursWorked(hoursWorked);
     }
 
     public int getId() {
