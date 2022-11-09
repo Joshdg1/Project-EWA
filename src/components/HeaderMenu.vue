@@ -1,21 +1,19 @@
 <template>
-  <div id="kt_header" class="header" data-kt-sticky="true" data-kt-sticky-name="header"
-       data-kt-sticky-offset="{default: '200px', lg: '300px'}">
+<!--  TODO: Sticky header -->
+  <div id="kt_header" class="header">
     <!--begin::Container-->
     <div class="container-xxl d-flex align-items-center justify-content-between" id="kt_header_container">
       <!--begin::Page title-->
-      <div class="page-title d-flex flex-column align-items-start justify-content-center flex-wrap me-lg-2 pb-5 pb-lg-0"
-           data-kt-swapper="true" data-kt-swapper-mode="prepend"
-           data-kt-swapper-parent="{default: '#kt_content_container', lg: '#kt_header_container'}">
+      <div class="page-title d-flex flex-column align-items-start justify-content-center flex-wrap me-lg-2 pb-5 pb-lg-0">
         <!--begin::Heading-->
-        <h1 class="text-florijn fw-bold my-0 fs-2">Dashboard</h1>
+        <h1 class="text-florijn fw-bold my-0 fs-2">{{$route.name}}</h1>
         <!--end::Heading-->
         <!--begin::Breadcrumb-->
         <ul class="breadcrumb breadcrumb-line text-muted fw-bold fs-base my-1">
           <li class="breadcrumb-item text-muted">
-            <a href="../dist/index.html" class="text-muted">{{ $route.name }}</a>
+            <div class="text-muted">Admin</div>
           </li>
-          <li class="breadcrumb-item text-florijn">Dashboard</li>
+          <li class="breadcrumb-item text-florijn">{{$route.name}}</li>
         </ul>
         <!--end::Breadcrumb-->
       </div>
@@ -39,25 +37,18 @@
         <!--end::Aside mobile toggle-->
         <!--begin::Logo-->
         <a href="../dist/index.html" class="d-flex align-items-center">
-          <img alt="Logo" src="assets/media/logos/logo-default.svg" class="h-40px"/>
+          <img alt="Logo" src="/assets/media/logos/logo-default.svg" class="h-40px"/>
         </a>
         <!--end::Logo-->
       </div>
       <!--end::Wrapper-->
       <!--begin::Toolbar wrapper-->
       <div class="d-flex flex-shrink-0">
-        <!--begin::Invite user-->
-        <div class="d-flex ms-3">
-          <router-link to="/login" class="btn background-florijn btn-active-info" tooltip="New Member">
-            Login</router-link>
-        </div>
-        <!--end::Invite user-->
-        <!--begin::Create app-->
-        <div class="d-flex ms-3">
-          <router-link to="/register" class="btn background-florijn btn-active-info" tooltip="New App">
-            Register</router-link>
-        </div>
-        <!--end::Create app-->
+
+<!--        <div class="d-flex ms-3">-->
+<!--          <router-link to="/register" class="btn background-florijn btn-active-info" tooltip="New App">-->
+<!--            Register</router-link>-->
+<!--        </div>-->
       </div>
       <!--end::Toolbar wrapper-->
     </div>
