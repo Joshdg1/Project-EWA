@@ -10,7 +10,7 @@ import javax.transaction.Transactional;
 import java.util.List;
 
 @RestController
-@RequestMapping("/projects")
+@RequestMapping("projects")
 public class ProjectController {
 
     @Autowired
@@ -33,7 +33,7 @@ public class ProjectController {
     }
 
     @Transactional
-    @PostMapping(path = "/add", produces = "application/json")
+    @PostMapping(path = "add", produces = "application/json")
     public ResponseEntity<Project> addNewProject(@RequestBody Project newProject) {
 
         //Save the new project into the repository.
@@ -42,4 +42,34 @@ public class ProjectController {
         return ResponseEntity.ok().body(savedProject);
 
     }
+
+    @DeleteMapping(path = "{id}", produces = "application/json")
+    public ResponseEntity<Project> deleteProject(@PathVariable() int id){
+        Project project = this.projectRepository.findById(id);
+
+        if (project == null) {
+            throw new RuntimeException("Project was not found.");
+        }
+
+        this.projectRepository.deleteById(id);
+
+        return ResponseEntity.ok().body(project);
+    }
+
+    @PutMapping(path = "{id}", produces = "application/json")
+    public ResponseEntity<Project> updateProject(@PathVariable() int id){
+
+        Project project = this.projectRepository.findById(id);
+
+        if (project == null) {
+            throw new RuntimeException("Project was not found.");
+        }
+
+        this.projectRepository.update(project);
+
+        return ResponseEntity.ok().body(project);
+
+    }
+
+
 }

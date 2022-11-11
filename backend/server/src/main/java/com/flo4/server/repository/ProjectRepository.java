@@ -34,6 +34,12 @@ public class ProjectRepository implements EntityRepository<Project> {
     }
 
     @Override
+    public Project update(Project project) {
+        this.entityManager.merge(project);
+        return project;
+    }
+
+    @Override
     public Project deleteById(int id) {
         Project project = this.findById(id);
         this.entityManager.remove(project);

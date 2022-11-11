@@ -1,17 +1,20 @@
 package com.flo4.server.models;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
 public class Project {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String title;
     private String description;
     private String company;
-    private String hoursWorked;
+    private int hoursWorked;
     //@Todo add Programmer
 
 
@@ -32,7 +35,7 @@ public class Project {
      * @param company
      * @param hoursWorked
      */
-    public Project(int id, String title, String description, String company, String hoursWorked) {
+    public Project(int id, String title, String description, String company, int hoursWorked) {
         this(id);
         this.setTitle(title);
         this.setDescription(description);
@@ -72,11 +75,11 @@ public class Project {
         this.company = company;
     }
 
-    public String getHoursWorked() {
+    public int getHoursWorked() {
         return hoursWorked;
     }
 
-    public void setHoursWorked(String hoursWorked) {
+    public void setHoursWorked(int hoursWorked) {
         this.hoursWorked = hoursWorked;
     }
 }
