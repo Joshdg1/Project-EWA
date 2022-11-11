@@ -11,7 +11,7 @@ public interface EntityRepository<E> {
 
     E save(E entity);
 
-    E update(E entity);
+    E update(E entity, int id);
 
     E deleteById(int id);
 

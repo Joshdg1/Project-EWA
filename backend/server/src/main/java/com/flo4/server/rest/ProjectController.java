@@ -1,5 +1,6 @@
 package com.flo4.server.rest;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.flo4.server.models.Project;
 import com.flo4.server.repository.EntityRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,7 +45,7 @@ public class ProjectController {
     }
 
     @DeleteMapping(path = "{id}", produces = "application/json")
-    public ResponseEntity<Project> deleteProject(@PathVariable() int id){
+    public ResponseEntity<Project> deleteProject(@PathVariable() int id) {
         Project project = this.projectRepository.findById(id);
 
         if (project == null) {
@@ -57,17 +58,15 @@ public class ProjectController {
     }
 
     @PutMapping(path = "{id}", produces = "application/json")
-    public ResponseEntity<Project> updateProject(@PathVariable() int id){
+    public ResponseEntity<Project> updateProject(@PathVariable() int id, @RequestBody Project project) {
 
-        Project project = this.projectRepository.findById(id);
+        Project updatedProject = this.projectRepository.update(project, id);
 
-        if (project == null) {
+        if (updatedProject == null) {
             throw new RuntimeException("Project was not found.");
         }
 
-        this.projectRepository.update(project);
-
-        return ResponseEntity.ok().body(project);
+        return ResponseEntity.ok().body(updatedProject);
 
     }
 

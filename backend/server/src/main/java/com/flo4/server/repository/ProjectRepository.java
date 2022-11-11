@@ -34,9 +34,19 @@ public class ProjectRepository implements EntityRepository<Project> {
     }
 
     @Override
-    public Project update(Project project) {
-        this.entityManager.merge(project);
-        return project;
+    public Project update(Project project, int id) {
+        Project updatedProject = findById(id);
+
+        if (updatedProject == null){
+            return null;
+        }
+
+        updatedProject.setTitle(project.getTitle());
+        updatedProject.setDescription(project.getDescription());
+        updatedProject.setCompany(project.getCompany());
+        updatedProject.setHoursWorked(project.getHoursWorked());
+
+        return updatedProject;
     }
 
     @Override
