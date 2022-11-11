@@ -1,6 +1,6 @@
 package com.flo4.server.rest;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.flo4.server.Exceptions.NotFoundException;
 import com.flo4.server.models.Project;
 import com.flo4.server.repository.EntityRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +27,7 @@ public class ProjectController {
         Project project = this.projectRepository.findById(id);
 
         if (project == null) {
-            throw new RuntimeException("Project was not found.");
+            throw new NotFoundException(String.format("Project with id %d was not found!", id));
         }
 
         return ResponseEntity.ok().body(project);
@@ -49,7 +49,7 @@ public class ProjectController {
         Project project = this.projectRepository.findById(id);
 
         if (project == null) {
-            throw new RuntimeException("Project was not found.");
+            throw new NotFoundException(String.format("Project with id %d was not found!", id));
         }
 
         this.projectRepository.deleteById(id);
@@ -63,7 +63,7 @@ public class ProjectController {
         Project updatedProject = this.projectRepository.update(project, id);
 
         if (updatedProject == null) {
-            throw new RuntimeException("Project was not found.");
+            throw new NotFoundException(String.format("Project with id:%d was not found!", id));
         }
 
         return ResponseEntity.ok().body(updatedProject);
