@@ -39,12 +39,12 @@
 
     <div class="d-flex flex-shrink-0">
       <div class="d-flex ms-3">
-        <router-link to="/adminProject" class="btn background-florijn btn-active-info">
+        <router-link to="/projects" class="btn background-florijn btn-active-info">
           Cancel
         </router-link>
       </div>
       <div class="d-flex ms-3">
-        <router-link to="/createProject-2" class="btn background-florijn btn-active-info">
+        <router-link to="/createNewProject2" class="btn background-florijn btn-active-info">
           Next
         </router-link>
       </div>

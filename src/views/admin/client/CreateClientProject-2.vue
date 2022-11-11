@@ -109,7 +109,7 @@
     </div>
     <div class="d-flex flex-shrink-0">
       <div class="d-flex ms-3">
-        <router-link to="/createProject" class="btn background-florijn btn-active-info">
+        <router-link to="/createNewProject" class="btn background-florijn btn-active-info">
           Back
         </router-link>
       </div>
@@ -123,7 +123,7 @@
 </template>
 
 <script>
-import Programmer from '../../../models/programmer.js'
+import Programmer from '../../../models/programmer/programmer.js'
 
 export default {
   name: "CreateClientProject-2",
