@@ -19,30 +19,32 @@ public class ProgrammerController {
     EntityRepository<Programmer> programmerRepository;
 
     @GetMapping(path = "", produces = "application/json")
-    public List<Programmer> getAllProgrammers(){
+    public List<Programmer> getAllProgrammers() {
         return this.programmerRepository.findAll();
     }
 
     @GetMapping(path = "{id}", produces = "application/json")
-    public ResponseEntity<Programmer> findOneProgrammer(@PathVariable() int id){
+    public ResponseEntity<Programmer> findOneProgrammer(@PathVariable() int id) {
         Programmer programmer = this.programmerRepository.findById(id);
-        if (programmer == null){
+        if (programmer == null) {
             throw new NotFoundException(String.format("Project with id %d was not found!", id));
         }
 
         return ResponseEntity.ok().body(programmer);
     }
+
     @Transactional
     @PutMapping(path = "add", produces = "application/json")
-    public ResponseEntity<Programmer> addProgrammer( @RequestBody Programmer programmer){
+    public ResponseEntity<Programmer> addProgrammer(@RequestBody Programmer programmer) {
 
         Programmer newProgrammer = this.programmerRepository.save(programmer);
 
 
         return ResponseEntity.ok().body(newProgrammer);
     }
-    @DeleteMapping(path = "{id}",produces = "application/json")
-    public ResponseEntity<Programmer> deleteProgrammer(@PathVariable int id){
+
+    @DeleteMapping(path = "{id}", produces = "application/json")
+    public ResponseEntity<Programmer> deleteProgrammer(@PathVariable int id) {
         Programmer programmer = this.programmerRepository.findById(id);
 
         if (programmer == null) {
@@ -54,10 +56,10 @@ public class ProgrammerController {
     }
 
     @PutMapping(path = "{id}", produces = "application/json")
-    public ResponseEntity<Programmer> updateProgrammer(@PathVariable int id, @RequestBody Programmer programmer){
-        Programmer updateProgrammer = this.programmerRepository.update(programmer,id);
+    public ResponseEntity<Programmer> updateProgrammer(@PathVariable int id, @RequestBody Programmer programmer) {
+        Programmer updateProgrammer = this.programmerRepository.update(programmer, id);
 
-        if (updateProgrammer == null){
+        if (updateProgrammer == null) {
             throw new NotFoundException(String.format("Project with id %d was not found!", id));
         }
 

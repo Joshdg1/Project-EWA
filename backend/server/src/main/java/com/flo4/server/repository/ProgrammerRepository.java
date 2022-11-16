@@ -12,10 +12,11 @@ import java.util.List;
 
 @Repository("PROGRAMMER.JPA")
 @Transactional
-public class ProgrammerRepository implements EntityRepository<Programmer>{
+public class ProgrammerRepository implements EntityRepository<Programmer> {
 
     @PersistenceContext
     protected EntityManager entityManager;
+
     @Override
     public List<Programmer> findAll() {
         TypedQuery<Programmer> query = this.entityManager.createQuery("select p from Programmer p", Programmer.class);
@@ -37,7 +38,7 @@ public class ProgrammerRepository implements EntityRepository<Programmer>{
     public Programmer update(Programmer entity, int id) {
         Programmer updatedProgrammer = findById(id);
 
-        if (updatedProgrammer == null){
+        if (updatedProgrammer == null) {
             return null;
         }
 
@@ -56,7 +57,7 @@ public class ProgrammerRepository implements EntityRepository<Programmer>{
 
     @Override
     public Programmer deleteById(int id) {
-        Programmer programmer = entityManager.find(Programmer.class,id);
+        Programmer programmer = entityManager.find(Programmer.class, id);
         entityManager.remove(programmer);
         return programmer;
 

@@ -37,7 +37,7 @@ public class ProjectRepository implements EntityRepository<Project> {
     public Project update(Project project, int id) {
         Project updatedProject = findById(id);
 
-        if (updatedProject == null){
+        if (updatedProject == null) {
             return null;
         }
 

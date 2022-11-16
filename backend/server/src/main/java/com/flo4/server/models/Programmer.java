@@ -34,9 +34,12 @@ public class Programmer {
 
     private String projectType;
 
-    public Programmer(){}
+    public Programmer() {
+    }
 
-    public Programmer(int id){this.id = id;}
+    public Programmer(int id) {
+        this.id = id;
+    }
 
     public Programmer(int id, String firstName, String lastName, String email, String address,
                       String city, String postcode, int hours, String workPreference, String projectType) {
@@ -51,7 +54,6 @@ public class Programmer {
         this.workPreference = workPreference;
         this.projectType = projectType;
     }
-
 
 
     public String getFirstName() {
