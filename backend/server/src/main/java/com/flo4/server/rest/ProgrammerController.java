@@ -2,7 +2,6 @@ package com.flo4.server.rest;
 
 import com.flo4.server.Exceptions.NotFoundException;
 import com.flo4.server.models.Programmer;
-import com.flo4.server.models.Project;
 import com.flo4.server.repository.EntityRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -14,7 +13,7 @@ import java.util.List;
 @RestController
 @RequestMapping("programmers")
 public class ProgrammerController {
-
+    private static final String notFound = "Project with id %d was not found!";
     @Autowired
     EntityRepository<Programmer> programmerRepository;
 
@@ -27,7 +26,7 @@ public class ProgrammerController {
     public ResponseEntity<Programmer> findOneProgrammer(@PathVariable() int id) {
         Programmer programmer = this.programmerRepository.findById(id);
         if (programmer == null) {
-            throw new NotFoundException(String.format("Project with id %d was not found!", id));
+            throw new NotFoundException(String.format(notFound, id));
         }
 
         return ResponseEntity.ok().body(programmer);
@@ -48,8 +47,9 @@ public class ProgrammerController {
         Programmer programmer = this.programmerRepository.findById(id);
 
         if (programmer == null) {
-            throw new NotFoundException(String.format("Project with id %d was not found!", id));
+            throw new NotFoundException(String.format(notFound, id));
         }
+
         this.programmerRepository.deleteById(id);
 
         return ResponseEntity.ok().body(programmer);
@@ -60,7 +60,7 @@ public class ProgrammerController {
         Programmer updateProgrammer = this.programmerRepository.update(programmer, id);
 
         if (updateProgrammer == null) {
-            throw new NotFoundException(String.format("Project with id %d was not found!", id));
+            throw new NotFoundException(String.format(notFound, id));
         }
 
         return ResponseEntity.ok().body(updateProgrammer);

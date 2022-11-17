@@ -43,7 +43,7 @@ public class Programmer {
 
     public Programmer(int id, String firstName, String lastName, String email, String address,
                       String city, String postcode, int hours, String workPreference, String projectType) {
-        this.id = id;
+        this(id);
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
@@ -81,9 +81,6 @@ public class Programmer {
     }
 
 
-    public int getHours() {
-        return hours;
-    }
 
     public String getWorkPreference() {
         return workPreference;

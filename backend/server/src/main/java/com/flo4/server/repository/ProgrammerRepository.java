@@ -1,7 +1,6 @@
 package com.flo4.server.repository;
 
 import com.flo4.server.models.Programmer;
-import com.flo4.server.models.Project;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
