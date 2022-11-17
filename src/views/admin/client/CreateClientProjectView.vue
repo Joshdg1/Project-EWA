@@ -32,8 +32,7 @@
       </div>
       <div class="fv-row mb-10 fv-plugins-icon-container">
         <label class="form-label fs-6 fw-bold text-dark">Description</label>
-        <input class="form-control form-control-lg form-control-solid descriptionHeight" type="text" name="text"
-               autocomplete="off">
+        <textarea class="form-control resize-none" rows="4"></textarea>
       </div>
     </form>
 
