@@ -1,8 +1,7 @@
 package com.flo4.server.models;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
+
 
 @Entity
 public class Programmer {
@@ -23,13 +22,12 @@ public class Programmer {
 
     private String postcode;
 
-    // todo add skills
 
-    // todo add availability
-//    private String availability;
+//    @OneToMany
+//    private Skill skill;
 
-    private int hours;
-
+    @OneToOne
+    private Availability availability;
     private String workPreference;
 
     private String projectType;
@@ -42,7 +40,7 @@ public class Programmer {
     }
 
     public Programmer(int id, String firstName, String lastName, String email, String address,
-                      String city, String postcode, int hours, String workPreference, String projectType) {
+                      String city, String postcode, Availability availability, String workPreference, String projectType) {
         this(id);
         this.firstName = firstName;
         this.lastName = lastName;
@@ -50,7 +48,7 @@ public class Programmer {
         this.address = address;
         this.city = city;
         this.postcode = postcode;
-        this.hours = hours;
+        this.availability = availability;
         this.workPreference = workPreference;
         this.projectType = projectType;
     }
@@ -116,9 +114,6 @@ public class Programmer {
     }
 
 
-    public void setHours(int hours) {
-        this.hours = hours;
-    }
 
     public void setWorkPreference(String workPreference) {
         this.workPreference = workPreference;

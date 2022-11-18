@@ -33,7 +33,7 @@ public class ProgrammerController {
     }
 
     @Transactional
-    @PutMapping(path = "add", produces = "application/json")
+    @PostMapping(path = "add", produces = "application/json")
     public ResponseEntity<Programmer> addProgrammer(@RequestBody Programmer programmer) {
 
         Programmer newProgrammer = this.programmerRepository.save(programmer);
