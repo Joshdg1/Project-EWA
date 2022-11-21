@@ -7,6 +7,7 @@
           <h3 class="card-title align-items-start flex-column">
             <span class="card-label fw-bolder fs-3 mb-1">Projects</span>
           </h3>
+          <router-link to="/createNewProject">
           <div class="card-toolbar" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-trigger="hover"
                title="Click to add a project">
             <a href="#" class="btn btn-sm btn-light-primary" data-bs-toggle="modal"
@@ -22,6 +23,7 @@
 												</span>
               <!--end::Svg Icon-->New Project</a>
           </div>
+          </router-link>
         </div>
         <!--end::Header-->
         <!--begin::Body-->
