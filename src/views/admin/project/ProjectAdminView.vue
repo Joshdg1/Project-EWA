@@ -8,12 +8,12 @@
             <span class="card-label fw-bolder fs-3 mb-1">Projects</span>
           </h3>
           <router-link to="/createNewProject">
-          <div class="card-toolbar" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-trigger="hover"
-               title="Click to add a project">
-            <a href="#" class="btn btn-sm btn-light-primary" data-bs-toggle="modal"
-               data-bs-target="#kt_modal_invite_friends">
-              <!--begin::Svg Icon | path: icons/duotune/arrows/arr075.svg-->
-              <span class="svg-icon svg-icon-3">
+            <div class="card-toolbar" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-trigger="hover"
+                 title="Click to add a project">
+              <a href="#" class="btn btn-sm btn-light-primary" data-bs-toggle="modal"
+                 data-bs-target="#kt_modal_invite_friends">
+                <!--begin::Svg Icon | path: icons/duotune/arrows/arr075.svg-->
+                <span class="svg-icon svg-icon-3">
 													<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                fill="none">
 														<rect opacity="0.5" x="11.364" y="20.364" width="16" height="2" rx="1"
@@ -21,8 +21,8 @@
 														<rect x="4.36396" y="11.364" width="16" height="2" rx="1" fill="black"/>
 													</svg>
 												</span>
-              <!--end::Svg Icon-->New Project</a>
-          </div>
+                <!--end::Svg Icon-->New Project</a>
+            </div>
           </router-link>
         </div>
         <!--end::Header-->
@@ -82,7 +82,8 @@
 																		</span>
                     <!--end::Svg Icon-->
                   </a>
-                  <a href="#" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm" @click="deleteProject(project)">
+                  <a href="#" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm"
+                     @click="deleteProject(project)">
                     <!--begin::Svg Icon | path: icons/duotune/general/gen027.svg-->
                     <span class="svg-icon svg-icon-3">
 																			<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
@@ -142,19 +143,10 @@ export default {
   },
 
   methods: {
-    deleteProject(project) {
-      for (let i = 0; i < this.projects.length; i++) {
-        if (project === this.projects[i]) {
-          this.projects.splice(i, 1);
-        }
-      }
+    async deleteProject(project) {
+      await this.repository.deleteProjectById(project.id);
+      location.reload();
     },
-
-    async get() {
-      const data = await this.repository.createProject();
-
-      console.log(data)
-    }
   }
 
 }

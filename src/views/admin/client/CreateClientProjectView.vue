@@ -8,32 +8,26 @@
 
       <div class="fv-row mb-10 fv-plugins-icon-container">
         <label class="form-label fs-6 fw-bold text-dark">Project title</label>
-        <input class="form-control form-control-lg form-control-solid"  type="text" name="text"
-               autocomplete="off">
+        <input class="form-control form-control-lg form-control-solid" type="text" name="text"
+               autocomplete="off" v-model="title">
       </div>
       <div class="fv-row mb-10 fv-plugins-icon-container">
         <div class="d-flex flex-stack mb-2">
           <label class="form-label fw-bold text-dark fs-6 mb-0">Project description</label>
         </div>
-
         <input class="form-control form-control-lg form-control-solid" type="text"
-               name="Type of project" autocomplete="off">
+               name="Type of project" autocomplete="off" v-model="description">
       </div>
 
       <div class="fv-row mb-10 fv-plugins-icon-container">
         <label class="form-label fs-6 fw-bold text-dark">Company name</label>
         <input class="form-control form-control-lg form-control-solid" type="text" name="text"
-               autocomplete="off">
+               autocomplete="off" v-model="company">
       </div>
       <div class="fv-row mb-10 fv-plugins-icon-container">
         <label class="form-label fs-6 fw-bold text-dark">hours worked on project</label>
         <input class="form-control form-control-lg form-control-solid" type="number"
-               autocomplete="off">
-      </div>
-      <div class="fv-row mb-10 fv-plugins-icon-container">
-        <label class="form-label fs-6 fw-bold text-dark">programmers</label>
-        <input class="form-control form-control-lg form-control-solid descriptionHeight" type="text" name="text"
-               autocomplete="off">
+               autocomplete="off" v-model="hoursWorked">
       </div>
     </form>
 
@@ -44,9 +38,7 @@
         </router-link>
       </div>
       <div class="d-flex ms-3">
-        <router-link to="/createNewProject2" class="btn background-florijn btn-active-info">
-          Next
-        </router-link>
+        <button class="btn background-florijn btn-active-info" @click="setSession">Next</button>
       </div>
 
     </div>
@@ -56,14 +48,41 @@
 <script>
 export default {
   // eslint-disable-next-line
-  name: "CreateClientProjectView"
+  name: "CreateClientProjectView",
+
+  data() {
+    return {
+      title: "",
+      description: "",
+      company: "",
+      hoursWorked: ""
+    }
+  },
+
+  methods: {
+    setSession() {
+      //clear the session without clearing the user login details.
+      localStorage.title = "";
+      localStorage.description = "";
+      localStorage.company = "";
+      localStorage.hoursWorked = "";
+
+      localStorage.title = this.title;
+      localStorage.description = this.description;
+      localStorage.company = this.company;
+      localStorage.hoursWorked = this.hoursWorked;
+
+      this.$router.push("/createNewProject2")
+    }
+  }
 }
 </script>
 
 <style scoped>
-.descriptionHeight{
+.descriptionHeight {
   height: auto;
 }
+
 .form-control.form-control-solid {
   background-color: lightgray;
   border-color: #F5F8FA;

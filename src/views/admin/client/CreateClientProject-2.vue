@@ -114,9 +114,7 @@
         </router-link>
       </div>
       <div class="d-flex ms-3">
-        <router-link to="/" class="btn background-florijn btn-active-info">
-          Submit
-        </router-link>
+        <button class="btn background-florijn btn-active-info" @click="createProject">create</button>
       </div>
     </div>
   </div>
@@ -124,6 +122,7 @@
 
 <script>
 import Programmer from '../../../models/programmer/programmer.js'
+import ProjectRepository from '../../../repository/ProjectRepository'
 
 export default {
   name: "CreateClientProject-2",
@@ -132,13 +131,30 @@ export default {
     for (let i = 0; i < 8; i++) {
       this.programmers.push(Programmer.createProgrammer());
     }
+
   },
 
   data() {
     return {
-      programmers: []
+      programmers: [],
+      repository: new ProjectRepository()
     }
   },
+
+  methods: {
+    async createProject() {
+      const title = localStorage.getItem('title');
+      const description = localStorage.getItem('description');
+      const company = localStorage.getItem('company');
+      const hoursWorked = localStorage.getItem('hoursWorked');
+
+      //@todo add programmers
+
+      await this.repository.createProject(title, description, company, hoursWorked)
+
+      this.$router.push("/");
+    }
+  }
 }
 </script>
 

@@ -83,7 +83,6 @@ public class Programmer {
         return postcode;
     }
 
-
     public int getHours() {
         return hours;
     }

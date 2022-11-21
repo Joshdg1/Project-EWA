@@ -17,5 +17,23 @@ export default class ProjectRepository {
         return await response.json();
     }
 
+    async deleteProjectById(projectId){
+        const response = await fetch('http://localhost:8080/projects/' + projectId, {
+            method: 'DELETE',
+        });
+        return await response.json();
+    }
+
+    async updateProjectById(projectId, project) {
+        const response = await fetch('http://localhost:8080/projects/' + projectId, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({projectId, project}),
+        });
+        return await response.json();
+    }
+
 
 }
