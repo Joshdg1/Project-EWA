@@ -1,4 +1,5 @@
 <template>
+
   <div>
     <div class="row">
       <div class="col-lg-12">
@@ -8,9 +9,20 @@
             <h3 class="card-title align-items-start flex-column">
               <span class="card-label fw-bolder fs-3 mb-1">Add programmers to the project</span>
             </h3>
+
             <div class="d-flex flex-row">
               <input class="form-control m-2" v-model="skillNameFilter" v-on:keyup="FilterFn()" placeholder="Skill Filter">
             </div>
+            <!-- <multiselect
+                  v-model="skillNameFilter"
+                  :options="options"
+                  :multiple="true"
+                  :close-on-select="true"
+                  placeholder="Pick some"
+                  label="name"
+                  track-by="name"
+                  v-on:keyup="FilterFn()">
+              </multiselect>-->
           </div>
           <!--end::Header-->
           <!--begin::Body-->
@@ -127,8 +139,12 @@
 
 <script>
 import Programmer from '../../../models/programmer/programmer.js'
+import Multiselect from 'vue-multiselect'
+import Vue from "vue";
 
+Vue.component('multi-select', Multiselect)
 export default {
+  components: {Multiselect},
   name: "CreateClientProject-2",
 
   created() {
@@ -141,8 +157,14 @@ export default {
   data() {
     return {
       programmers: [],
-      skillWithoutFilter: []
-
+      skillWithoutFilter: [],
+      options: [
+        { name: 'JAVA', language: 'JavaScript' },
+        { name: 'HTML', language: 'JavaScript' },
+        { name: 'CSS', language: 'CSS' },
+        { name: 'C#', language: 'C#' },
+        { name: 'PHP', language: 'PHP' },
+      ]
     }
   },
   methods:{
@@ -151,7 +173,7 @@ export default {
 
       this.programmers = this.skillWithoutFilter.filter(
           function (el){
-            return el.postcode.toString().toLowerCase().includes(
+            return el.knowledge.toString().toLowerCase().includes(
                 skillNameFilter.toString().trim().toLowerCase()
             )
           }
@@ -161,10 +183,10 @@ export default {
 
   },
 
-  computed: {}
+  computed: {},
 }
 </script>
-
+<style src="vue-multiselect/dist/vue-multiselect.min.css"></style>
 <style scoped>
 
 </style>

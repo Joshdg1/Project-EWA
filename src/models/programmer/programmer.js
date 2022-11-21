@@ -27,10 +27,9 @@ class Programmer {
      * @param workPreference
      * @param projectType
      */
-    constructor(firstname, lastname, email, address, city, postcode, knowledge, experience, availability, hours, workPreference, projectType) {
+    constructor(firstname, lastname, address, city, postcode, knowledge, experience, availability, hours, workPreference, projectType) {
         this.firstname = firstname;
         this.lastname = lastname;
-        this.email = email
         this.address = address;
         this.city = city;
         this.postcode = postcode;
@@ -53,10 +52,10 @@ class Programmer {
             fakeProjectType[randomAddressNumber]);
     }
 
-    static copyConstructor(cabin) {
-        if (cabin === null) return null;
-        let copy = Object.assign(new Programmer(0), cabin)
-        copy.city = cabin.city
+    static copyConstructor(programmer) {
+        if (programmer === null) return null;
+        let copy = Object.assign(new Programmer(0), programmer)
+        copy.city = programmer.city
         return copy
     }
 }
