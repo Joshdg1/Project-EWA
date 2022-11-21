@@ -27,7 +27,6 @@ public class Programmer {
     @JoinColumn(name = "skill_programmerId")
     private Set<Skill> skills;
 
-    private Skill skill;
 
     @OneToOne
     private Availability availability;
@@ -43,7 +42,7 @@ public class Programmer {
     }
 
     public Programmer(int id, String firstName, String lastName, String email, String address,
-                      String city, String postcode, Skill skill, Availability availability, String workPreference, String projectType) {
+                      String city, String postcode, Set<Skill> skills, Availability availability, String workPreference, String projectType) {
         this(id);
         this.firstName = firstName;
         this.lastName = lastName;
@@ -51,7 +50,7 @@ public class Programmer {
         this.address = address;
         this.city = city;
         this.postcode = postcode;
-        this.skill = skill;
+        this.skills = skills;
         this.availability = availability;
         this.workPreference = workPreference;
         this.projectType = projectType;
