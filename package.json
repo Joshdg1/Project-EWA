@@ -11,6 +11,7 @@
     "@iconify/vue": "^4.0.0",
     "core-js": "^3.6.4",
     "vue": "^2.6.11",
+    "vue-multi-select": "^4.6.0",
     "vue-router": "^3.1.6",
     "yarn": "^1.22.19"
   },

@@ -1,5 +1,6 @@
 <template>
 
+
   <div class="row">
     <div class="col-lg-12">
       <div class="card card-xl-stretch mb-5 mb-xl-8">
@@ -20,10 +21,6 @@
               <thead>
               <tr class="fw-bolder text-muted">
                 <th class="w-25px">
-                  <div class="form-check form-check-sm form-check-custom form-check-solid">
-                    <input class="form-check-input" type="checkbox" value="1" data-kt-check="true"
-                           data-kt-check-target=".widget-9-check"/>
-                  </div>
                 </th>
                 <th>Firstname</th>
                 <th>Lastname</th>
@@ -118,15 +115,22 @@
           Submit
         </router-link>
       </div>
+
     </div>
+
   </div>
+
 </template>
 
 <script>
 import Programmer from '../../../models/programmer/programmer.js'
+import Multiselect from 'vue-multi-select'
 
 export default {
   name: "CreateClientProject-2",
+  components:{
+    Multiselect
+  },
 
   created() {
     for (let i = 0; i < 8; i++) {
@@ -136,9 +140,14 @@ export default {
 
   data() {
     return {
-      programmers: []
+      value:[],
+      programmers: [],
     }
   },
+
+  computed: {
+
+  }
 }
 </script>
 
