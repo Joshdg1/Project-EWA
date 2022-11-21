@@ -7,13 +7,13 @@
 
 
       <div class="fv-row mb-10 fv-plugins-icon-container">
-        <label class="form-label fs-6 fw-bold text-dark">Project name</label>
+        <label class="form-label fs-6 fw-bold text-dark">Project title</label>
         <input class="form-control form-control-lg form-control-solid"  type="text" name="text"
                autocomplete="off">
       </div>
       <div class="fv-row mb-10 fv-plugins-icon-container">
         <div class="d-flex flex-stack mb-2">
-          <label class="form-label fw-bold text-dark fs-6 mb-0">Type of project</label>
+          <label class="form-label fw-bold text-dark fs-6 mb-0">Project description</label>
         </div>
 
         <input class="form-control form-control-lg form-control-solid" type="text"
@@ -21,17 +21,17 @@
       </div>
 
       <div class="fv-row mb-10 fv-plugins-icon-container">
-        <label class="form-label fs-6 fw-bold text-dark">Client Name</label>
+        <label class="form-label fs-6 fw-bold text-dark">Company name</label>
         <input class="form-control form-control-lg form-control-solid" type="text" name="text"
                autocomplete="off">
       </div>
       <div class="fv-row mb-10 fv-plugins-icon-container">
-        <label class="form-label fs-6 fw-bold text-dark">Project Duration</label>
+        <label class="form-label fs-6 fw-bold text-dark">hours worked on project</label>
         <input class="form-control form-control-lg form-control-solid" type="number"
                autocomplete="off">
       </div>
       <div class="fv-row mb-10 fv-plugins-icon-container">
-        <label class="form-label fs-6 fw-bold text-dark">Description</label>
+        <label class="form-label fs-6 fw-bold text-dark">programmers</label>
         <input class="form-control form-control-lg form-control-solid descriptionHeight" type="text" name="text"
                autocomplete="off">
       </div>
