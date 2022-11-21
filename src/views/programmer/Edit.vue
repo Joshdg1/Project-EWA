@@ -18,7 +18,7 @@
 </template>
 
 <script>
-import Programmer from "@/models/programmer/programmer";
+
 import ProfileDetails from "@/components/programmerProfile/ProfileDetails";
 import ProfileInputDetails from "@/components/programmerProfile/ProfileInputDetails";
 import {ProgrammerSkill} from "@/models/programmer/programmerSkill"
@@ -27,6 +27,7 @@ import AvailabilityProgrammer from "@/components/programmerProfile/AvailabilityP
 import ProgrammerSkills from "@/components/programmerProfile/programmerSkills";
 import ProgrammerInputSkills from "@/components/programmerProfile/ProgrammerInputSkills";
 import ProgrammerRepository from "@/assets/Repositories/ProgrammerService";
+import Programmer from "@/models/programmer/programmer";
 
 export default {
   name: "ProgrammerProfilePage",
@@ -34,8 +35,8 @@ export default {
     ProgrammerInputSkills,
     ProgrammerSkills, AvailabilityProgrammer, TopProfileDetails, ProfileInputDetails, ProfileDetails},
   created() {
-    this.sampleProgrammer = new Programmer(0, "John", "Doe", "JohnDoe@HvA.nl", "wiboutStraat", "Amsterdam", "Rust",
-        40, 12, 20, "On location", "Full stack")
+    // this.sampleProgrammer = new Programmer(0, "John", "Doe", "JohnDoe@HvA.nl", "wiboutStraat", "Amsterdam", "Rust",
+    //     40, 12, 20, "On location", "Full stack")
 
     let languages = ["PowerBi" , "Flutter" ,"Dart", "C#" , "Rust"]
 
@@ -45,13 +46,16 @@ export default {
       this.skills.push(  new ProgrammerSkill(1, si ,language, Math.round(Math.random() * 4 + 1)))
       this.skills.skillName = language
     }
-      this.sampleProgrammer = this.repository.getProgrammerById()
+    // const allProgrammers = this.repository.getAllProgrammers()
+    // console.log(allProgrammers)
+    const data = this.repository.findProgrammerById(1)
+    console.log(data)
 
     this.currentTab = 1;
   },
   data() {
     return {
-      sampleProgrammer: null,
+      sampleProgrammer: new Programmer(),
       editProfile: null,
       currentTab: null,
       skills: [],
@@ -70,12 +74,12 @@ export default {
     },
   },
 
-  async get() {
-    const data = await this.repository.updateProgrammer();
-
-    console.log(data)
-
-  }
+  // async get() {
+  //   const data = await this.repository.updateProgrammer();
+  //
+  //   console.log(data)
+  //
+  // }
 }
 </script>
 
