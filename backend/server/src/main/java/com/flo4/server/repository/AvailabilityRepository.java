@@ -19,7 +19,7 @@ public class AvailabilityRepository implements EntityRepository<Availability> {
 
     @Override
     public List<Availability> findAll() {
-        TypedQuery<Availability> query = this.entityManager.createQuery("select p from Programmer p", Availability.class);
+        TypedQuery<Availability> query = this.entityManager.createQuery("select a from Availability a", Availability.class);
 
         return query.getResultList();
     }
@@ -36,18 +36,18 @@ public class AvailabilityRepository implements EntityRepository<Availability> {
 
     @Override
     public Availability update(Availability entity, int id) {
-        Availability updatedProgrammer = findById(id);
+        Availability updatedAvailability = findById(id);
 
-        if (updatedProgrammer == null) {
+        if (updatedAvailability == null) {
             return null;
         }
 
-        updatedProgrammer.setId(entity.getId());
-        updatedProgrammer.setStartDate(entity.getStartDate());
-        updatedProgrammer.setEndDate(entity.getEndDate());
+        updatedAvailability.setId(entity.getId());
+        updatedAvailability.setStartDate(entity.getStartDate());
+        updatedAvailability.setEndDate(entity.getEndDate());
 
 
-        return updatedProgrammer;
+        return updatedAvailability;
     }
 
 

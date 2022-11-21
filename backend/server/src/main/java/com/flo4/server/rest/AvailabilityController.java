@@ -11,8 +11,10 @@ import org.springframework.web.bind.annotation.*;
 import javax.transaction.Transactional;
 import java.util.List;
 
+@RestController
+@RequestMapping("availability")
 public class AvailabilityController {
-    private static final String notFound = "Project with id %d was not found!";
+    private static final String notFound = "Availability with id %d was not found!";
     @Autowired
     EntityRepository<Availability> availabilityRepository;
 

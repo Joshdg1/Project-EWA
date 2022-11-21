@@ -1,6 +1,7 @@
 package com.flo4.server.models;
 
 import javax.persistence.*;
+import java.util.Set;
 
 
 @Entity
@@ -22,7 +23,9 @@ public class Programmer {
 
     private String postcode;
 
-    @ManyToOne
+    @OneToMany()
+    private Set<Skill> ob;
+
     private Skill skill;
 
     @OneToOne

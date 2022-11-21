@@ -8,14 +8,24 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.List;
 
-@Repository("AVAILABILITY.JPA")
+@Repository("SKILL.JPA")
 @Transactional
 public class SkillRepository implements EntityRepository<Skill> {
 
+    private List<Skill> skills;
+
     @PersistenceContext
     protected EntityManager entityManager;
+    public SkillRepository(){
+
+
+        for (int i = 0; i < 5; i++) {
+           this.entityManager.merge(Skill.creatRandomSkill(i));
+        }
+    }
 
     @Override
     public List<Skill> findAll() {

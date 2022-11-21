@@ -1,14 +1,11 @@
 package com.flo4.server.models;
 
-import org.springframework.context.annotation.Primary;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import java.lang.reflect.Array;
 
 @Entity
-
 public class Skill {
     @Id
     int programmerId;
@@ -25,6 +22,13 @@ public class Skill {
         this(id);
         this.name = name;
         this.level = level;
+    }
+    public static Skill creatRandomSkill(int programmerId){
+        String [] names = {"Rust", "Dart", "Flutter", "C#", "Java"};
+        Skill skill = new Skill(programmerId);
+        skill.setName(names[(int) Math.round(Math.random()*5)]);
+        skill.setLevel(Math.round(Math.random()*5));
+        return skill;
     }
 
     public int getProgrammerId() {

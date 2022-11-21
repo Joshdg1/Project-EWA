@@ -13,7 +13,7 @@ import java.util.List;
 @RestController
 @RequestMapping("programmers")
 public class ProgrammerController {
-    private static final String notFound = "Project with id %d was not found!";
+    private static final String notFound = "Programmer with id %d was not found!";
     @Autowired
     EntityRepository<Programmer> programmerRepository;
 
