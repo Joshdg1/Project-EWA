@@ -17,24 +17,20 @@ public class Skill {
     double level;
 
     @ManyToOne
-    Programmer ob;
+    @JoinColumn(name = "programmer_id", nullable = false)
+    private Programmer programmer;
 
     public Skill(){};
 
     public Skill(int programmerId){this.programmerId = programmerId;}
 
-    public Skill(int id,String name, double level) {
+    public Skill(int id,String name, double level, Programmer programmer) {
         this(id);
         this.name = name;
         this.level = level;
+        this.programmer = programmer;
     }
-    public static Skill creatRandomSkill(int programmerId){
-        String [] names = {"Rust", "Dart", "Flutter", "C#", "Java"};
-        Skill skill = new Skill(programmerId);
-        skill.setName(names[(int) Math.round(Math.random()*5)]);
-        skill.setLevel(Math.round(Math.random()*5));
-        return skill;
-    }
+
 
     public int getProgrammerId() {
         return programmerId;

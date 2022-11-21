@@ -27,7 +27,6 @@ public class Programmer {
     @JoinColumn(name = "skill_programmerId")
     private Set<Skill> skills;
 
-
     @OneToOne
     private Availability availability;
     private String workPreference;
@@ -82,12 +81,12 @@ public class Programmer {
     }
 
 
-    public Skill getSkill() {
-        return skill;
+    public Set<Skill> getSkill() {
+        return skills;
     }
 
-    public void setSkill(Skill skill) {
-        this.skill = skill;
+    public void setSkill(Set<Skill> skill) {
+        this.skills = skill;
     }
 
     public Availability getAvailability() {

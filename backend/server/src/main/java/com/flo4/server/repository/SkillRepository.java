@@ -19,13 +19,7 @@ public class SkillRepository implements EntityRepository<Skill> {
 
     @PersistenceContext
     protected EntityManager entityManager;
-    public SkillRepository(){
 
-
-        for (int i = 0; i < 5; i++) {
-           this.entityManager.merge(Skill.creatRandomSkill(i));
-        }
-    }
 
     @Override
     public List<Skill> findAll() {
