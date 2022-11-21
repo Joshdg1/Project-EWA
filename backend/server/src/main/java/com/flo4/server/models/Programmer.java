@@ -24,7 +24,8 @@ public class Programmer {
     private String postcode;
 
     @OneToMany()
-    private Set<Skill> ob;
+    @JoinColumn(name = "skill_programmerId")
+    private Set<Skill> skills;
 
     private Skill skill;
 

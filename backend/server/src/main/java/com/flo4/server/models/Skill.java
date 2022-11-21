@@ -3,6 +3,8 @@ package com.flo4.server.models;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import java.lang.reflect.Array;
 
 @Entity
@@ -13,6 +15,9 @@ public class Skill {
     String name;
 
     double level;
+
+    @ManyToOne
+    Programmer ob;
 
     public Skill(){};
 
