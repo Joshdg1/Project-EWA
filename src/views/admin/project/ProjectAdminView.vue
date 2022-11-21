@@ -20,31 +20,27 @@ export default {
     edit
   },
 
-  created() {
-    for (let i = 0; i < 8; i++) {
-      this.projects.push(Project.fakeData());
+  async created() {
+    const data = await this.repository.getAllProjects();
+
+    for (let i = 0; i < data.length; i++) {
+      this.projects.push(data[i]);
     }
   },
 
   data() {
     return {
       projects: [],
-      projectStatus: null
+      repository: new ProjectRepository(),
+
     }
   },
 
   methods: {
-    deleteProject(project) {
-      for (let i = 0; i < this.projects.length; i++) {
-        if (project === this.projects[i]) {
-          this.projects.splice(i, 1);
-        }
-      }
+    async deleteProject(project) {
+      await this.repository.deleteProjectById(project.id);
+      location.reload();
     },
-
-    editProjectStatus(projectStatus) {
-      this.projectStatus = projectStatus;
-    }
   }
 }
 </script>
