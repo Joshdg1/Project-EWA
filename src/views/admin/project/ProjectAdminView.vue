@@ -63,7 +63,7 @@
                 <td>{{ project.description }}</td>
                 <td>{{ project.company }}</td>
                 <td>{{ project.hoursWorked }}</td>
-                <td>Programmer1</td>
+                <td>{{ project.programmers }}</td>
 
 
                 <div class="d-flex justify-content-end flex-shrink-0">
@@ -118,30 +118,42 @@
 
 
 <script>
-import {project} from '../../../models/project.js'
+//{project} import is for fake data.
+// import {project} from '../../../models/project.js'
+import ProjectRepository from '../../../repository/ProjectRepository'
 
 export default {
   name: "ProjectAdminView",
 
-  created() {
-    for (let i = 0; i < 8; i++) {
-      this.projects.push(project.fakeData());
+  async created() {
+    const data = await this.repository.getAllProjects();
+
+    for (let i = 0; i < data.length; i++) {
+      this.projects.push(data[i]);
     }
   },
 
   data() {
     return {
-      projects: []
+      projects: [],
+      repository: new ProjectRepository(),
+
     }
   },
 
-  methods:{
+  methods: {
     deleteProject(project) {
       for (let i = 0; i < this.projects.length; i++) {
         if (project === this.projects[i]) {
           this.projects.splice(i, 1);
         }
       }
+    },
+
+    async get() {
+      const data = await this.repository.createProject();
+
+      console.log(data)
     }
   }
 
