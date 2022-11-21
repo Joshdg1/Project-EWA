@@ -139,12 +139,12 @@
 
 <script>
 import Programmer from '../../../models/programmer/programmer.js'
-import Multiselect from 'vue-multiselect'
-import Vue from "vue";
+// import Multiselect from 'vue-multiselect'
+// import Vue from "vue";
 
-Vue.component('multi-select', Multiselect)
+// Vue.component('multi-select', Multiselect)
 export default {
-  components: {Multiselect},
+  // components: {Multiselect},
   name: "CreateClientProject-2",
 
   created() {
