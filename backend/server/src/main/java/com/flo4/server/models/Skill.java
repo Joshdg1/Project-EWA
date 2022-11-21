@@ -10,7 +10,7 @@ import java.lang.reflect.Array;
 @Entity
 public class Skill {
     @Id
-    int programmerId;
+    int Id;
 
     String name;
 
@@ -22,7 +22,7 @@ public class Skill {
 
     public Skill(){};
 
-    public Skill(int programmerId){this.programmerId = programmerId;}
+    public Skill(int programmerId){this.Id = programmerId;}
 
     public Skill(int id,String name, double level, Programmer programmer) {
         this(id);
@@ -32,12 +32,12 @@ public class Skill {
     }
 
 
-    public int getProgrammerId() {
-        return programmerId;
+    public int getId() {
+        return Id;
     }
 
-    public void setProgrammerId(int programmerId) {
-        this.programmerId = programmerId;
+    public void setId(int programmerId) {
+        this.Id = programmerId;
     }
 
     public String getName() {

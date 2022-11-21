@@ -8,7 +8,7 @@ import java.time.LocalDate;
 public class Availability {
 
     @Id
-    private Long programmerId;
+    private Long Id;
 
     private LocalDate startDate;
 
@@ -16,21 +16,21 @@ public class Availability {
 
     public Availability(){}
 
-    public Availability(long programmerId){this.programmerId = programmerId;}
+    public Availability(long Id){this.Id = Id;}
 
-    public Availability(Long programmerId, LocalDate startDate, LocalDate endDate) {
-        this.programmerId = programmerId;
+    public Availability(Long Id, LocalDate startDate, LocalDate endDate) {
+        this.Id = Id;
         this.startDate = startDate;
         this.endDate = endDate;
     }
 
-    public void setId(Long id) {
-        this.programmerId = programmerId;
+    public void setId(Long Id) {
+        this.Id = Id;
     }
 
 
     public Long getId() {
-        return programmerId;
+        return Id;
     }
 
     public LocalDate getStartDate() {

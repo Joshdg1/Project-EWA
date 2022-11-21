@@ -46,7 +46,7 @@ public class SkillRepository implements EntityRepository<Skill> {
             return null;
         }
 
-        updatedSKill.setProgrammerId(entity.getProgrammerId());
+        updatedSKill.setId(entity.getId());
         updatedSKill.setName(entity.getName());
         updatedSKill.setLevel(entity.getLevel());
 

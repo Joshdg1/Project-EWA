@@ -24,7 +24,7 @@ public class AvailabilityController {
     }
 
     @GetMapping(path = "{id}", produces = "application/json")
-    public ResponseEntity<Availability> findOneProgrammer(@PathVariable() int id) {
+    public ResponseEntity<Availability> findOneAvailability(@PathVariable() int id) {
         Availability availability = this.availabilityRepository.findById(id);
         if (availability == null) {
             throw new NotFoundException(String.format(notFound, id));
@@ -35,7 +35,7 @@ public class AvailabilityController {
 
     @Transactional
     @PostMapping(path = "add", produces = "application/json")
-    public ResponseEntity<Availability> addProgrammer(@RequestBody Availability availability) {
+    public ResponseEntity<Availability> addAvailability(@RequestBody Availability availability) {
 
         Availability newAvailability = this.availabilityRepository.save(availability);
 
@@ -44,7 +44,7 @@ public class AvailabilityController {
     }
 
     @DeleteMapping(path = "{id}", produces = "application/json")
-    public ResponseEntity<Availability> deleteProgrammer(@PathVariable int id) {
+    public ResponseEntity<Availability> deleteAvailability(@PathVariable int id) {
         Availability availability = this.availabilityRepository.findById(id);
 
         if (availability == null) {
@@ -57,7 +57,7 @@ public class AvailabilityController {
     }
 
     @PutMapping(path = "{id}", produces = "application/json")
-    public ResponseEntity<Availability> updateProgrammer(@PathVariable int id, @RequestBody Availability availability) {
+    public ResponseEntity<Availability> updateAvailability(@PathVariable int id, @RequestBody Availability availability) {
         Availability updatedAvailability = this.availabilityRepository.update(availability, id);
 
         if (updatedAvailability == null) {

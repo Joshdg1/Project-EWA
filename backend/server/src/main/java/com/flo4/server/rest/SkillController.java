@@ -22,7 +22,7 @@ public class SkillController {
     }
 
     @GetMapping(path = "{id}", produces = "application/json")
-    public ResponseEntity<Skill> findOneProgrammer(@PathVariable() int id) {
+    public ResponseEntity<Skill> findOneSkill(@PathVariable() int id) {
         Skill skill = this.availabilityRepository.findById(id);
         if (skill == null) {
             throw new NotFoundException(String.format(notFound, id));
@@ -33,7 +33,7 @@ public class SkillController {
 
     @Transactional
     @PostMapping(path = "add", produces = "application/json")
-    public ResponseEntity<Skill> addProgrammer(@RequestBody Skill skill) {
+    public ResponseEntity<Skill> addSkill(@RequestBody Skill skill) {
 
         Skill newSkill = this.availabilityRepository.save(skill);
 
@@ -42,7 +42,7 @@ public class SkillController {
     }
 
     @DeleteMapping(path = "{id}", produces = "application/json")
-    public ResponseEntity<Skill> deleteProgrammer(@PathVariable int id) {
+    public ResponseEntity<Skill> deleteSkill(@PathVariable int id) {
         Skill skill = this.availabilityRepository.findById(id);
 
         if (skill == null) {
@@ -55,7 +55,7 @@ public class SkillController {
     }
 
     @PutMapping(path = "{id}", produces = "application/json")
-    public ResponseEntity<Skill> updateProgrammer(@PathVariable int id, @RequestBody Skill skill) {
+    public ResponseEntity<Skill> updateSkill(@PathVariable int id, @RequestBody Skill skill) {
         Skill updatedSkill = this.availabilityRepository.update(skill, id);
 
         if (updatedSkill == null) {
