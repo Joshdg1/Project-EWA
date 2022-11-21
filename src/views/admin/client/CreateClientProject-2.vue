@@ -8,6 +8,9 @@
             <h3 class="card-title align-items-start flex-column">
               <span class="card-label fw-bolder fs-3 mb-1">Add programmers to the project</span>
             </h3>
+            <div class="d-flex flex-row">
+              <input class="form-control m-2" v-model="skillNameFilter" v-on:keyup="FilterFn()" placeholder="Skill Filter">
+            </div>
           </div>
           <!--end::Header-->
           <!--begin::Body-->
@@ -20,7 +23,7 @@
                 <thead>
                 <tr class="fw-bolder text-muted">
                   <th class="w-25px">
-                    
+
                   </th>
                   <th>Firstname</th>
                   <th>Lastname</th>
@@ -138,7 +141,6 @@ export default {
   data() {
     return {
       programmers: [],
-      programmerNameFilter:"",
       skillWithoutFilter: []
 
     }
