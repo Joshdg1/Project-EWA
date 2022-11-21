@@ -63,7 +63,7 @@
                 <td>{{ project.description }}</td>
                 <td>{{ project.company }}</td>
                 <td>{{ project.hoursWorked }}</td>
-                <td>Programmer1</td>
+                <td>{{ project.programmers }}</td>
 
 
                 <div class="d-flex justify-content-end flex-shrink-0">

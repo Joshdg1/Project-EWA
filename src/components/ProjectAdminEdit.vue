@@ -61,7 +61,7 @@
                 <td><input type="text" v-model="project.description"></td>
                 <td><input type="text" v-model="project.company"></td>
                 <td><input type="text" v-model="project.hoursWorked"></td>
-                <td>Programmer1</td>
+                <td>{{ project.programmers }}</td>
 
 
                 <div class="d-flex justify-content-end flex-shrink-0">
