@@ -23,8 +23,8 @@ public class Programmer {
 
     private String postcode;
 
-    @OneToMany()
-    @JoinColumn(name = "skill_programmerId")
+
+    @OneToMany(mappedBy = "programmer")
     private Set<Skill> skills;
 
     @OneToOne
