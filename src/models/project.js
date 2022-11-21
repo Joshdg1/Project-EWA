@@ -1,4 +1,4 @@
-export class project {
+export class Project {
     id;
     title;
     description;
@@ -24,7 +24,7 @@ export class project {
         this.company = companyOptions[Math.floor((Math.random() * 3))];
         this.hoursWorked = Math.floor((Math.random() * 3));
 
-        return new project(this.id, this.title, this.description, this.company, this.hoursWorked);
+        return new Project(this.id, this.title, this.description, this.company, this.hoursWorked);
 
     }
 }
