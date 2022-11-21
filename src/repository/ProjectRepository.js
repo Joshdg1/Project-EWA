@@ -23,14 +23,14 @@ export default class ProjectRepository {
         });
         return await response.json();
     }
-
-    async updateProjectById(projectId, project) {
+    
+    async updateProjectById(projectId, title, description, company, hoursWorked, programmers) {
         const response = await fetch('http://localhost:8080/projects/' + projectId, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({projectId, project}),
+            body: JSON.stringify({projectId, title, description, company, hoursWorked, programmers}),
         });
         return await response.json();
     }

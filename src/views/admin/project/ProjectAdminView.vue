@@ -9,7 +9,11 @@
 
 
 <script>
-import {Project} from '../../../models/project.js'
+
+
+//{project} import is for fake data.
+// import {project} from '../../../models/project.js'
+import ProjectRepository from '../../../repository/ProjectRepository'
 import projectsList from '../../../components/ProjectAdmin.vue'
 import edit from '../../../components/ProjectAdminEdit.vue'
 
@@ -31,6 +35,7 @@ export default {
   data() {
     return {
       projects: [],
+      projectStatus: null,
       repository: new ProjectRepository(),
 
     }
@@ -41,6 +46,10 @@ export default {
       await this.repository.deleteProjectById(project.id);
       location.reload();
     },
+
+    editProjectStatus(projectStatus) {
+      this.projectStatus = projectStatus;
+    }
   }
 }
 </script>

@@ -7,12 +7,13 @@
           <h3 class="card-title align-items-start flex-column">
             <span class="card-label fw-bolder fs-3 mb-1">Projects</span>
           </h3>
-          <div class="card-toolbar" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-trigger="hover"
-               title="Click to add a project">
-            <a href="#" class="btn btn-sm btn-light-primary" data-bs-toggle="modal"
-               data-bs-target="#kt_modal_invite_friends">
-              <!--begin::Svg Icon | path: icons/duotune/arrows/arr075.svg-->
-              <span class="svg-icon svg-icon-3">
+          <router-link to="/createNewProject">
+            <div class="card-toolbar" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-trigger="hover"
+                 title="Click to add a project">
+              <a href="#" class="btn btn-sm btn-light-primary" data-bs-toggle="modal"
+                 data-bs-target="#kt_modal_invite_friends">
+                <!--begin::Svg Icon | path: icons/duotune/arrows/arr075.svg-->
+                <span class="svg-icon svg-icon-3">
 													<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                fill="none">
 														<rect opacity="0.5" x="11.364" y="20.364" width="16" height="2" rx="1"
@@ -20,8 +21,9 @@
 														<rect x="4.36396" y="11.364" width="16" height="2" rx="1" fill="black"/>
 													</svg>
 												</span>
-              <!--end::Svg Icon-->New Project</a>
-          </div>
+                <!--end::Svg Icon-->New Project</a>
+            </div>
+          </router-link>
         </div>
         <!--end::Header-->
         <!--begin::Body-->
@@ -115,33 +117,29 @@
 </template>
 
 <script>
+import ProjectRepository from '../repository/ProjectRepository.js'
+
 export default {
 
   name: "ProjectAdmin.vue",
   props: ['projects'],
   emits: ['deleteProject', 'editProject'],
 
-  data(){
-    return{
-      editingProject: null
+  data() {
+    return {
+      editingProject: null,
+      repository: new ProjectRepository(),
     }
   },
 
   methods: {
-    // projectSelector(project) {
-    //   if (project === this.selectedProject) {
-    //     this.selectedProject = null;
-    //
-    //   } else {
-    //     this.selectedProject = project;
-    //   }
-    // },
 
-    deleteProject(project) {
-      this.$emit('deleteProject', project)
+    async deleteProject(project) {
+      await this.repository.deleteProjectById(project.id);
+      location.reload();
     },
 
-    editProject(){
+    editProject() {
       this.editingProject = true;
       this.$emit('editProject', this.editingProject)
     }

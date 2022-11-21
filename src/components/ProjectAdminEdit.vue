@@ -65,7 +65,8 @@
 
 
                 <div class="d-flex justify-content-end flex-shrink-0">
-                  <a class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" @click="editProject()">
+                  <a class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1"
+                     @click="editProject(project)">
                     <!--begin::Svg Icon | path: icons/duotune/art/art005.svg-->
                     <span class="svg-icon svg-icon-3">
 																			<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
@@ -116,29 +117,34 @@
 </template>
 
 <script>
+import ProjectRepository from '../repository/ProjectRepository.js'
+
 export default {
 
   name: "ProjectAdminEdit.vue",
   props: ['projects'],
   emits: ['deleteProject', 'editProject'],
 
-  methods: {
-    // projectSelector(project) {
-    //   if (project === this.selectedProject) {
-    //     this.selectedProject = null;
-    //
-    //   } else {
-    //     this.selectedProject = project;
-    //   }
-    // },
+  data() {
+    return {
+      repository: new ProjectRepository(),
+    }
+  },
 
-    deleteProject(project) {
-      this.$emit('deleteProject', project)
+  methods: {
+    async deleteProject(project) {
+      await this.repository.deleteProjectById(project.id);
+      location.reload();
     },
 
-    editProject(){
+    async editProject(project) {
       this.editingProject = false;
       this.$emit('editProject', this.editingProject)
+
+
+      await this.repository.updateProjectById(project.id, project.title, project.description,
+          project.company, project.hoursWorked)
+
     }
   }
 }
