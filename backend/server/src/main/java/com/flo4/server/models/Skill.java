@@ -1,10 +1,7 @@
 package com.flo4.server.models;
 
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 import java.lang.reflect.Array;
 
 @Entity

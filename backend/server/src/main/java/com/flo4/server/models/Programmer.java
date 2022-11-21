@@ -8,7 +8,7 @@ import java.util.Set;
 public class Programmer {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     private String firstName;
