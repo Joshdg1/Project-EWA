@@ -17,7 +17,7 @@ public class Skill {
     double level;
 
     @ManyToOne
-    @JoinColumn(name = "programmer_id", nullable = false)
+    @JoinColumn(name = "skill_programmer_id", nullable = false)
     private Programmer programmer;
 
     public Skill(){};
@@ -54,5 +54,13 @@ public class Skill {
 
     public void setLevel(double level) {
         this.level = level;
+    }
+
+    public Programmer getProgrammer() {
+        return programmer;
+    }
+
+    public void setProgrammer(Programmer programmer) {
+        this.programmer = programmer;
     }
 }

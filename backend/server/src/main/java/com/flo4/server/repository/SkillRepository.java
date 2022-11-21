@@ -49,7 +49,7 @@ public class SkillRepository implements EntityRepository<Skill> {
         updatedSKill.setId(entity.getId());
         updatedSKill.setName(entity.getName());
         updatedSKill.setLevel(entity.getLevel());
-
+        updatedSKill.setProgrammer(entity.getProgrammer());
 
         return updatedSKill;
     }
