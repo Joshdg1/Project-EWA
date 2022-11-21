@@ -7,8 +7,8 @@ import java.time.LocalDate;
 @Entity
 public class Availability {
 
-
-    private Long id;
+    @Id
+    private Long programmerId;
 
     private LocalDate startDate;
 
@@ -16,20 +16,36 @@ public class Availability {
 
     public Availability(){}
 
-    public Availability(long id){this.id = id;}
+    public Availability(long programmerId){this.programmerId = programmerId;}
 
-    public Availability(Long id, LocalDate startDate, LocalDate endDate) {
-        this.id = id;
+    public Availability(Long programmerId, LocalDate startDate, LocalDate endDate) {
+        this.programmerId = programmerId;
         this.startDate = startDate;
         this.endDate = endDate;
     }
 
     public void setId(Long id) {
-        this.id = id;
+        this.programmerId = programmerId;
     }
 
-    @Id
+
     public Long getId() {
-        return id;
+        return programmerId;
+    }
+
+    public LocalDate getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(LocalDate startDate) {
+        this.startDate = startDate;
+    }
+
+    public LocalDate getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(LocalDate endDate) {
+        this.endDate = endDate;
     }
 }

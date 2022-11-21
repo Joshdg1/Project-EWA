@@ -62,7 +62,6 @@ public class ProgrammerController {
         if (updateProgrammer == null) {
             throw new NotFoundException(String.format(notFound, id));
         }
-
         return ResponseEntity.ok().body(updateProgrammer);
     }
 }

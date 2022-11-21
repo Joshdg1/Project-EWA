@@ -2,11 +2,13 @@ package com.flo4.server.models;
 
 import org.springframework.context.annotation.Primary;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
 @Entity
+
 public class Skill {
     @Id
     int programmerId;
@@ -25,4 +27,27 @@ public class Skill {
         this.level = level;
     }
 
+    public int getProgrammerId() {
+        return programmerId;
+    }
+
+    public void setProgrammerId(int programmerId) {
+        this.programmerId = programmerId;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public double getLevel() {
+        return level;
+    }
+
+    public void setLevel(double level) {
+        this.level = level;
+    }
 }

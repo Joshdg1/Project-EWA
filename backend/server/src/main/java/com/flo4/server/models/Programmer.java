@@ -22,9 +22,8 @@ public class Programmer {
 
     private String postcode;
 
-
-//    @OneToMany
-//    private Skill skill;
+    @ManyToOne
+    private Skill skill;
 
     @OneToOne
     private Availability availability;
@@ -40,7 +39,7 @@ public class Programmer {
     }
 
     public Programmer(int id, String firstName, String lastName, String email, String address,
-                      String city, String postcode, Availability availability, String workPreference, String projectType) {
+                      String city, String postcode, Skill skill, Availability availability, String workPreference, String projectType) {
         this(id);
         this.firstName = firstName;
         this.lastName = lastName;
@@ -48,6 +47,7 @@ public class Programmer {
         this.address = address;
         this.city = city;
         this.postcode = postcode;
+        this.skill = skill;
         this.availability = availability;
         this.workPreference = workPreference;
         this.projectType = projectType;
@@ -79,6 +79,21 @@ public class Programmer {
     }
 
 
+    public Skill getSkill() {
+        return skill;
+    }
+
+    public void setSkill(Skill skill) {
+        this.skill = skill;
+    }
+
+    public Availability getAvailability() {
+        return availability;
+    }
+
+    public void setAvailability(Availability availability) {
+        this.availability = availability;
+    }
 
     public String getWorkPreference() {
         return workPreference;
@@ -112,7 +127,6 @@ public class Programmer {
     public void setPostcode(String postcode) {
         this.postcode = postcode;
     }
-
 
 
     public void setWorkPreference(String workPreference) {
