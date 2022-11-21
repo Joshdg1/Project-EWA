@@ -26,6 +26,7 @@ import TopProfileDetails from "@/components/programmerProfile/TopProfileDetails"
 import AvailabilityProgrammer from "@/components/programmerProfile/AvailabilityProgrammer";
 import ProgrammerSkills from "@/components/programmerProfile/programmerSkills";
 import ProgrammerInputSkills from "@/components/programmerProfile/ProgrammerInputSkills";
+import ProgrammerRepository from "@/assets/Repositories/ProgrammerService";
 
 export default {
   name: "ProgrammerProfilePage",
@@ -44,6 +45,8 @@ export default {
       this.skills.push(  new ProgrammerSkill(1, si ,language, Math.round(Math.random() * 4 + 1)))
       this.skills.skillName = language
     }
+      this.sampleProgrammer = this.repository.getProgrammerById()
+
     this.currentTab = 1;
   },
   data() {
@@ -51,7 +54,8 @@ export default {
       sampleProgrammer: null,
       editProfile: null,
       currentTab: null,
-      skills: []
+      skills: [],
+      repository: new ProgrammerRepository(),
     }
   },
   methods: {
@@ -64,6 +68,12 @@ export default {
     changeSelectedTab(selectedTab) {
       this.currentTab = selectedTab;
     },
+  },
+
+  async get() {
+    const data = await this.repository.updateProgrammer();
+
+    console.log(data)
 
   }
 }

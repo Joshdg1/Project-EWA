@@ -1,4 +1,5 @@
 class Programmer {
+    id
     firstname;
     lastname;
     address;
@@ -27,7 +28,8 @@ class Programmer {
      * @param workPreference
      * @param projectType
      */
-    constructor(firstname, lastname, email, address, city, postcode, knowledge, experience, availability, hours, workPreference, projectType) {
+    constructor(id,firstname, lastname, email, address, city, postcode, knowledge, experience, availability, hours, workPreference, projectType) {
+        this.id = id
         this.firstname = firstname;
         this.lastname = lastname;
         this.email = email
