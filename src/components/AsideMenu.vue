@@ -775,7 +775,7 @@ l47 37 -47 42 c-43 40 -55 62 -39 77 14 14 32 5 89 -44z"/>
           </div>
           <!--begin::Menu-->
           <div
-              class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-800 menu-state-bg menu-state-primary fw-bold py-4 fs-6 w-275px" style="display: block !important; left: 30px; bottom: 80px; position: absolute"
+              id="user_menu" class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-800 menu-state-bg menu-state-primary fw-bold py-4 fs-6 w-275px"
               data-kt-menu="true">
             <!--begin::Menu item-->
             <div class="menu-item px-3">
@@ -919,4 +919,10 @@ export default {
   visibility: hidden;
 }
 
+  #kt_header_user_menu_toggle:hover #user_menu{
+    display: block;
+    bottom: 30px;
+    position: absolute;
+    left: 30px;
+  }
 </style>
