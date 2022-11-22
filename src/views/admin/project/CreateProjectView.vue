@@ -71,7 +71,7 @@ export default {
       localStorage.company = this.company;
       localStorage.hoursWorked = this.hoursWorked;
 
-      this.$router.push("/createProject2")
+      this.$router.push("/createNewProject2")
     }
   }
 }

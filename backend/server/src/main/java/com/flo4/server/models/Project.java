@@ -17,8 +17,9 @@ public class Project {
     @OneToMany(mappedBy = "project")
     private Set<Programmer> programmers;
 
+    //@todo make it possible to have nullable on false and add client
     @ManyToOne
-    @JoinColumn(name = "client_id", nullable = false)
+    @JoinColumn(name = "client_id", nullable = true)
     private Client client;
 
     public Project() {
@@ -47,7 +48,7 @@ public class Project {
         this.setCompany(company);
         this.setHoursWorked(hoursWorked);
         this.setProgrammers(programmers);
-        this.client = client;
+        this.setClient(client);
     }
 
     public int getId() {
@@ -96,5 +97,13 @@ public class Project {
 
     public void setProgrammers(Set<Programmer> programmers) {
         this.programmers = programmers;
+    }
+
+    public Client getClient() {
+        return client;
+    }
+
+    public void setClient(Client client) {
+        this.client = client;
     }
 }

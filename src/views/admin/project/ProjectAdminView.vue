@@ -16,7 +16,7 @@
 import ProjectRepository from '../../../repository/ProjectRepository'
 import projectsList from '../../../components/ProjectAdmin.vue'
 import edit from '../../../components/ProjectAdminEdit.vue'
-import {Project} from "@/models/project";
+
 
 export default {
   name: "ProjectAdminView",
@@ -25,9 +25,11 @@ export default {
     edit
   },
 
-  created() {
-    for (let i = 0; i < 8; i++) {
-      this.projects.push(Project.createProject());
+  async created() {
+    const data = await this.repository.getAllProjects();
+
+    for (let i = 0; i < data.length; i++) {
+      this.projects.push(data[i]);
     }
   },
 

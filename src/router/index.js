@@ -56,7 +56,7 @@ const routes = [
         component: () => import(`../views/admin/client/ClientAdminView`),
     },
     {
-        name: "CreateProjectView",
+        name: "createNewClient",
         path: "/createNewClient",
         component: () => import('../views/admin/client/CreateClientView')
     },

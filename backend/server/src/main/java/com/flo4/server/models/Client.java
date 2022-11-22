@@ -111,4 +111,5 @@ public class Client {
     public void setProjects(Set<Project> projects) {
         this.projects = projects;
     }
+
 }

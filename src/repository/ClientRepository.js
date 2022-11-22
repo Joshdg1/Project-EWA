@@ -24,13 +24,13 @@ export default class ClientRepository {
         return await response.json();
     }
 
-    async updateClientById(clientId, name, email, address, city, postcode, projectType) {
+    async updateClientById(clientId, name, email, address, city, postcode, projectType, projects) {
         const response = await fetch('http://localhost:8081/clients/' + clientId, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({name, email, address, city, postcode, projectType}),
+            body: JSON.stringify({name, email, address, city, postcode, projectType, projects}),
         });
         return await response.json();
     }

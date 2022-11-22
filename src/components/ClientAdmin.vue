@@ -7,7 +7,7 @@
           <h3 class="card-title align-items-start flex-column">
             <span class="card-label fw-bolder fs-3 mb-1">Clients</span>
           </h3>
-          <router-link to="createNewClient">
+          <router-link to="/createNewClient">
             <div class="card-toolbar" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-trigger="hover"
                  title="Click to add a client">
               <a href="#" class="btn btn-sm btn-light-primary" data-bs-toggle="modal"
@@ -42,10 +42,12 @@
                   </div>
                 </th>
                 <th>Name</th>
+                <th>Email</th>
                 <th>Address</th>
                 <th>City</th>
                 <th>Postcode</th>
                 <th>Project types</th>
+                <th>Project</th>
                 <th>Actions</th>
               </tr>
               </thead>
@@ -58,10 +60,12 @@
                          data-kt-check-target=".widget-9-check"/>
                 </div>
                 <td>{{ client.name }}</td>
+                <td>{{ client.email }}</td>
                 <td>{{ client.address }}</td>
                 <td>{{ client.city }}</td>
                 <td>{{ client.postcode }}</td>
                 <td>{{ client.projectType }}</td>
+                <td>{{ client.projects }}</td>
 
 
                 <div class="d-flex  flex-shrink-0">
@@ -115,14 +119,25 @@
 </template>
 
 <script>
+
+import ClientRepository from '../repository/ClientRepository'
+
 export default {
   name: "ClientAdmin.vue",
   props: ['clients'],
   emits: ['deleteClient', 'editClient'],
 
+  data() {
+    return {
+      editingClient: null,
+      repository: new ClientRepository(),
+    }
+  },
+
   methods: {
-    deleteClient(client) {
-      this.$emit('deleteClient', client)
+    async deleteClient(client) {
+      await this.repository.deleteClientById(client.id);
+      location.reload();
     },
 
     editClient() {

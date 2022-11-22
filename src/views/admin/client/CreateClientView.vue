@@ -80,10 +80,10 @@ export default {
       localStorage.postcode = "";
       localStorage.projectType = "";
 
-      localStorage.name = this.title;
-      localStorage.email = this.description;
-      localStorage.address = this.company;
-      localStorage.city = this.hoursWorked;
+      localStorage.name = this.name;
+      localStorage.email = this.email;
+      localStorage.address = this.address;
+      localStorage.city = this.city;
       localStorage.postcode = this.postcode;
       localStorage.projectType = this.projectType;
 
