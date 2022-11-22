@@ -25,8 +25,8 @@
         <!--begin::Col-->
         <div class="col-lg-8">
           <div class="fullNameInput">
-            <input type="text" class="form-control form-control-solid " id="fullNameLeft" name="search" v-model="editProfile.firstname" data-kt-search-element="input" />
-            <input type="text" class="form-control form-control-solid " id="fullNameRight" name="search" v-model="editProfile.lastname" data-kt-search-element="input" />
+            <input type="text" class="form-control form-control-solid " id="fullNameLeft" name="search" v-model="editProfile.firstName" data-kt-search-element="input" />
+            <input type="text" class="form-control form-control-solid " id="fullNameRight" name="search" v-model="editProfile.lastName" data-kt-search-element="input" />
           </div>
 
         </div>
@@ -66,7 +66,7 @@
         <!--end::Label-->
         <!--begin::Col-->
         <div class="col-lg-8">
-          <input type="text" class="form-control form-control-solid " name="search" v-model="editProfile.projectTypes" data-kt-search-element="input" />
+          <input type="text" class="form-control form-control-solid " name="search" v-model="editProfile.projectType" data-kt-search-element="input" />
         </div>
         <!--end::Col-->
       </div>

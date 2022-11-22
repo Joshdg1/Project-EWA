@@ -24,7 +24,7 @@
         <!--end::Label-->
         <!--begin::Col-->
         <div class="col-lg-8">
-          <span class="fw-bolder fs-6 text-gray-800">{{sampleProgrammer.firstname}} {{sampleProgrammer.lastname}}</span>
+          <span class="fw-bolder fs-6 text-gray-800">{{sampleProgrammer.firstName}} {{sampleProgrammer.lastName}}</span>
         </div>
         <!--end::Col-->
       </div>
@@ -63,7 +63,7 @@
         <!--end::Label-->
         <!--begin::Col-->
         <div class="col-lg-8">
-          <a href="#" class="fw-bold fs-6 text-gray-800 text-hover-primary">{{ sampleProgrammer.projectTypes }}</a>
+          <a href="#" class="fw-bold fs-6 text-gray-800 text-hover-primary">{{ sampleProgrammer.projectType }}</a>
         </div>
         <!--end::Col-->
       </div>
