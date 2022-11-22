@@ -42,7 +42,7 @@ public class Programmer {
 
     public Programmer(int id, String firstName, String lastName, String email, String address,
                       String city, String postcode, Set<Skill> skills, Availability availability, String workPreference, String projectType) {
-        this(id);
+        this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
@@ -55,6 +55,13 @@ public class Programmer {
         this.projectType = projectType;
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getFirstName() {
         return firstName;
