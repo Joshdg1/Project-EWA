@@ -115,6 +115,7 @@
 
 <script>
 import Programmer from "@/models/programmer/programmer";
+import ProgrammerRepository from "@/assets/Repositories/ProgrammerService";
 
 
 export default {
@@ -128,15 +129,19 @@ export default {
     return{
       editProfile: new Programmer,
       editingProfile: null,
+      repository: new ProgrammerRepository()
     }
   },
   methods: {
   async  setEditProfile(){
       this.editingProfile = false
       this.$emit('edit-profile' , this.editingProfile)
+    this.$emit('save-profile', this.editProfile)
 
+    console.log(this.editProfile.lastName)
     console.log(this.editProfile.firstName)
-   await this.repository.updateProgrammerById(1,this.editProfile.firstName, this.editProfile.lastName,
+    const profileId = 1;
+   await this.repository.updateProgrammerById(profileId,this.editProfile.firstName, this.editProfile.lastName,
        this.editProfile.email, this.editProfile.address,
         this.editProfile.city, this.editProfile.postcode, this.editProfile.availability, this.editProfile.workPreference,
         this.editProfile.projectType,this.editProfile.skills)

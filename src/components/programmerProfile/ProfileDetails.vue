@@ -113,13 +113,18 @@
 </template>
 
 <script>
+import ProgrammerRepository from "@/assets/Repositories/ProgrammerService";
+
 export default {
   name: "ProfileDetails",
   props: ['sampleProgrammer'],
   emits: ['edit-profile'],
+
+
   data(){
     return {
-      editingProfile: null
+      editingProfile: null,
+      repository: new ProgrammerRepository()
     }
   },
   methods: {

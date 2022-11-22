@@ -6,7 +6,7 @@
                          @edit-profile="EditProfileStatus" @save-profile="updateProfile"></ProfileInputDetails>
 
     <ProfileDetails v-if="!this.editProfile && currentTab === 1" :sample-programmer="sampleProgrammer"
-                    @edit-profile="EditProfileStatus"></ProfileDetails>
+                    @edit-profile="EditProfileStatus" ></ProfileDetails>
     <AvailabilityProgrammer v-if="!this.editProfile && currentTab === 2 "></AvailabilityProgrammer>
 
     <programmer-skills v-if="!this.editProfile && currentTab === 3 " :skills="skills"
