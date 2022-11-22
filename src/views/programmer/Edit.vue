@@ -34,7 +34,7 @@ export default {
   components: {
     ProgrammerInputSkills,
     ProgrammerSkills, AvailabilityProgrammer, TopProfileDetails, ProfileInputDetails, ProfileDetails},
-  created() {
+ async created() {
     // this.sampleProgrammer = new Programmer(0, "John", "Doe", "JohnDoe@HvA.nl", "wiboutStraat", "Amsterdam", "Rust",
     //     40, 12, 20, "On location", "Full stack")
 
@@ -48,9 +48,15 @@ export default {
     }
     // const allProgrammers = this.repository.getAllProgrammers()
     // console.log(allProgrammers)
-    const data = this.repository.findProgrammerById(1)
-    console.log(data)
+    this.sampleProgrammer = await this.repository.findProgrammerById(1)
 
+    const programmer = await this.repository.getAllProgrammers()
+    console.log(programmer)
+
+    for (let j = 0; j < 3; j++) {
+      this.programmers.push(programmer[j])
+    }
+    console.log(this.programmers)
     this.currentTab = 1;
   },
   data() {
@@ -59,6 +65,7 @@ export default {
       editProfile: null,
       currentTab: null,
       skills: [],
+      programmers: [],
       repository: new ProgrammerRepository(),
     }
   },

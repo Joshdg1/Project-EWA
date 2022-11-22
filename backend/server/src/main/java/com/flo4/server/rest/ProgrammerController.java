@@ -12,6 +12,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("programmers")
+@CrossOrigin(origins = "http://localhost:8080")
 public class ProgrammerController {
     private static final String notFound = "Programmer with id %d was not found!";
     @Autowired

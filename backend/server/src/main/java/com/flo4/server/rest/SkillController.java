@@ -11,6 +11,7 @@ import javax.transaction.Transactional;
 import java.util.List;
 @RestController
 @RequestMapping("skills")
+@CrossOrigin(origins = "http://localhost:8080")
 public class SkillController {
     private static final String notFound = "Skill with id %d was not found!";
     @Autowired

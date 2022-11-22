@@ -18,7 +18,7 @@ public class ProgrammerRepository implements EntityRepository<Programmer> {
 
     @Override
     public List<Programmer> findAll() {
-        TypedQuery<Programmer> query = this.entityManager.createQuery("select p from Programmer p", Programmer.class);
+        TypedQuery<Programmer> query = this.entityManager.createQuery("select pr from Programmer pr", Programmer.class);
 
         return query.getResultList();
     }
