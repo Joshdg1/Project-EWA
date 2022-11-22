@@ -33,7 +33,7 @@ public class ClientController {
     }
 
     @Transactional
-    @PutMapping(path = "add", produces = "application/json")
+    @PostMapping(path = "add", produces = "application/json")
     public ResponseEntity<Client> addClient(@RequestBody Client client) {
 
         Client newClient = this.clientEntityRepository.save(client);
