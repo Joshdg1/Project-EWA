@@ -89,8 +89,6 @@
                   <td>
                       <button class="btn background-florijn btn-active-info">Add programmer</button>
                   </td>
-
-
                 </tr>
                 </tbody>
                 <!--end::Table body-->
