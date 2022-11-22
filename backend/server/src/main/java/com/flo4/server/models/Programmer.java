@@ -1,8 +1,6 @@
 package com.flo4.server.models;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Programmer {
@@ -34,6 +32,10 @@ public class Programmer {
 
     private String projectType;
 
+    @ManyToOne
+    @JoinColumn(name = "project_id", nullable = false)
+    private Project project;
+
     public Programmer() {
     }
 
@@ -42,7 +44,7 @@ public class Programmer {
     }
 
     public Programmer(int id, String firstName, String lastName, String email, String address,
-                      String city, String postcode, int hours, String workPreference, String projectType) {
+                      String city, String postcode, int hours, String workPreference, String projectType, Project project) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -53,6 +55,7 @@ public class Programmer {
         this.hours = hours;
         this.workPreference = workPreference;
         this.projectType = projectType;
+        this.project = project;
     }
 
 
@@ -79,7 +82,6 @@ public class Programmer {
     public String getPostcode() {
         return postcode;
     }
-
 
     public int getHours() {
         return hours;
@@ -129,5 +131,21 @@ public class Programmer {
 
     public void setProjectType(String projectType) {
         this.projectType = projectType;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public Project getProject() {
+        return project;
+    }
+
+    public void setProject(Project project) {
+        this.project = project;
     }
 }

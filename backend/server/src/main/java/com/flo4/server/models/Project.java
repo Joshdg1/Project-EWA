@@ -1,9 +1,7 @@
 package com.flo4.server.models;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 public class Project {
@@ -15,14 +13,15 @@ public class Project {
     private String description;
     private String company;
     private int hoursWorked;
-    //@Todo add Programmer
 
+    @OneToMany(mappedBy = "project")
+    private Set<Programmer> programmers;
 
-    public Project(){
+    public Project() {
 
     }
 
-    public Project(int id){
+    public Project(int id) {
         this.id = id;
     }
 
@@ -34,13 +33,15 @@ public class Project {
      * @param description
      * @param company
      * @param hoursWorked
+     * @param programmers
      */
-    public Project(int id, String title, String description, String company, int hoursWorked) {
+    public Project(int id, String title, String description, String company, int hoursWorked, Set<Programmer> programmers) {
         this(id);
         this.setTitle(title);
         this.setDescription(description);
         this.setCompany(company);
         this.setHoursWorked(hoursWorked);
+        this.setProgrammers(programmers);
     }
 
     public int getId() {
@@ -81,5 +82,13 @@ public class Project {
 
     public void setHoursWorked(int hoursWorked) {
         this.hoursWorked = hoursWorked;
+    }
+
+    public Set<Programmer> getProgrammers() {
+        return programmers;
+    }
+
+    public void setProgrammers(Set<Programmer> programmers) {
+        this.programmers = programmers;
     }
 }
