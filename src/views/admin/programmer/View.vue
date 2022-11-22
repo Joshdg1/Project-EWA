@@ -2,13 +2,13 @@
   <div>
   <programmersList v-if="!this.programmerStatus" :programmers="this.programmers" @deleteProgrammer="deleteProgrammer"
                    @editProgrammer="editProgrammerStatus"></programmersList>
-  <edit v-if="this.programmerStatus" :programmers="this.programmers" @deleteProject="deleteProgrammer"
+  <edit v-if="this.programmerStatus" :programmers="this.programmers" @deleteProgrammer="deleteProgrammer"
         @editProgrammer="editProgrammerStatus"></edit>
   </div>
 </template>
 
 <script>
-import Programmer from '../../../models/programmer.js'
+import Programmer from '../../../models/programmer/programmer'
 import programmersList from '../../../components/ProgrammerAdmin'
 import edit from '../../../components/ProgrammerAdminEdit'
 
