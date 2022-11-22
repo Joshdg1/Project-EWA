@@ -2,7 +2,7 @@
   <div>
     <form>
       <div class="text-center mb-10">
-        <h1 class="text-dark mb-3">Create a new project</h1>
+        <h1 class="text-dark mb-3">Create a new Project</h1>
       </div>
 
 
