@@ -21,11 +21,16 @@
               <!--begin::Table head-->
               <thead>
               <tr class="fw-bolder text-muted">
-
-                <th>Title</th>
-                <th>Description</th>
-                <th>Company</th>
-                <th>Hours Worked</th>
+                <th>FirstName</th>
+                <th>LastName</th>
+                <th>E-Mail</th>
+                <th>Address</th>
+                <th>City</th>
+                <th>Postcode</th>
+                <th>Availability</th>
+                <th>Work Preference</th>
+                <th>Project Type</th>
+                <th>Skills</th>
               </tr>
               </thead>
               <!--end::Table head-->
@@ -34,9 +39,16 @@
               <tr v-for="programmer in programmers" v-bind:key="programmer">
 
                 <td>{{ programmer.firstName }}</td>
+                <td>{{ programmer.lastName }}</td>
+                <td>{{ programmer.email }}</td>
                 <td>{{ programmer.address }}</td>
+                <td>{{ programmer.city }}</td>
+                <td>{{ programmer.postcode }}</td>
+                <td>{{ programmer.availability }}</td>
                 <td>{{ programmer.workPreference }}</td>
                 <td>{{ programmer.projectType }}</td>
+                <td>{{ programmer.skills }}</td>
+
               </tr>
               </tbody>
               <!--end::Table body-->

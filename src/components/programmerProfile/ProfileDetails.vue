@@ -44,10 +44,24 @@
       <!--begin::Input group-->
       <div class="row mb-7">
         <!--begin::Label-->
+        <label class="col-lg-4 fw-bold text-muted">City</label>
+        <!--end::Label-->
+        <!--begin::Col-->
+        <div class="col-lg-8">
+          <span class="fw-bolder fs-6 text-gray-800">{{ sampleProgrammer.city }}</span>
+        </div>
+        <!--end::Col-->
+      </div>
+      <!--end::Input group-->
+
+      <!--begin::Input group-->
+      <div class="row mb-7">
+        <!--begin::Label-->
         <label class="col-lg-4 fw-bold text-muted">Address
           <!--            <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip" title="Phone number must be active"></i>-->
         </label>
         <!--end::Label-->
+
         <!--begin::Col-->
         <div class="col-lg-8 d-flex align-items-center">
           <span class="fw-bolder fs-6 me-2 text-gray-800">{{ sampleProgrammer.address }}</span>
@@ -59,11 +73,11 @@
       <!--begin::Input group-->
       <div class="row mb-7">
         <!--begin::Label-->
-        <label class="col-lg-4 fw-bold text-muted">Type of Projects</label>
+        <label class="col-lg-4 fw-bold text-muted">Postcode</label>
         <!--end::Label-->
         <!--begin::Col-->
         <div class="col-lg-8">
-          <a href="#" class="fw-bold fs-6 text-gray-800 text-hover-primary">{{ sampleProgrammer.projectType }}</a>
+          <a href="#" class="fw-bold fs-6 text-gray-800 text-hover-primary">{{ sampleProgrammer.postcode }}</a>
         </div>
         <!--end::Col-->
       </div>
@@ -71,24 +85,12 @@
       <!--begin::Input group-->
       <div class="row mb-7">
         <!--begin::Label-->
-        <label class="col-lg-4 fw-bold text-muted">Knowledge
+        <label class="col-lg-4 fw-bold text-muted">Project Type
           <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip" title="Programming languages known"></i></label>
         <!--end::Label-->
         <!--begin::Col-->
         <div class="col-lg-8">
-          <span class="fw-bolder fs-6 text-gray-800">{{ sampleProgrammer.knowledge }}</span>
-        </div>
-        <!--end::Col-->
-      </div>
-      <!--end::Input group-->
-      <!--begin::Input group-->
-      <div class="row mb-7">
-        <!--begin::Label-->
-        <label class="col-lg-4 fw-bold text-muted">City</label>
-        <!--end::Label-->
-        <!--begin::Col-->
-        <div class="col-lg-8">
-          <span class="fw-bolder fs-6 text-gray-800">{{ sampleProgrammer.city }}</span>
+          <span class="fw-bolder fs-6 text-gray-800">{{ sampleProgrammer.projectType }}</span>
         </div>
         <!--end::Col-->
       </div>

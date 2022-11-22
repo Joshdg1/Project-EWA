@@ -56,7 +56,7 @@ export default {
   },
   data() {
     return {
-      sampleProgrammer: new Programmer(),
+      sampleProgrammer: new Programmer,
       editProfile: null,
       currentTab: null,
       skills: [],

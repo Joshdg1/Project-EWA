@@ -20,8 +20,8 @@
               <!--begin::Name-->
               <div class="d-flex align-items-center mb-2">
                 <a href="#"
-                   class="text-gray-800 text-hover-primary fs-2 fw-bolder me-1">{{ sampleProgrammer.firstname }}
-                  {{ sampleProgrammer.lastname }}</a>
+                   class="text-gray-800 text-hover-primary fs-2 fw-bolder me-1">{{ sampleProgrammer.firstName }}
+                  {{ sampleProgrammer.lastName }}</a>
 
 
               </div>
