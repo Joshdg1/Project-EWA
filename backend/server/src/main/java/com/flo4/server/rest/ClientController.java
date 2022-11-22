@@ -12,6 +12,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("clients")
+@CrossOrigin(origins = "http://localhost:8081")
 public class ClientController {
 
     @Autowired

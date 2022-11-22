@@ -40,7 +40,6 @@
       <div class="d-flex ms-3">
         <button class="btn background-florijn btn-active-info" @click="setSession">Next</button>
       </div>
-
     </div>
   </div>
 </template>

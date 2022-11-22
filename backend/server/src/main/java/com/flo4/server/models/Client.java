@@ -1,9 +1,7 @@
 package com.flo4.server.models;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 public class Client {
@@ -28,6 +26,9 @@ public class Client {
 //    private String availability;
     private String projectType;
 
+    @OneToMany(mappedBy = "client")
+    private Set<Project> projects;
+
     public Client() {
     }
 
@@ -35,7 +36,7 @@ public class Client {
         this.id = id;
     }
 
-    public Client(int id, String name, String email, String address, String city, String postcode, String projectType) {
+    public Client(int id, String name, String email, String address, String city, String postcode, String projectType, Set<Project> projects) {
         this.id = id;
         this.name = name;
         this.email = email;
@@ -43,6 +44,7 @@ public class Client {
         this.city = city;
         this.postcode = postcode;
         this.projectType = projectType;
+        this.setProjects(projects);
     }
 
 
@@ -100,5 +102,13 @@ public class Client {
 
     public void setProjectType(String projectType) {
         this.projectType = projectType;
+    }
+
+    public Set<Project> getProjects() {
+        return projects;
+    }
+
+    public void setProjects(Set<Project> projects) {
+        this.projects = projects;
     }
 }
