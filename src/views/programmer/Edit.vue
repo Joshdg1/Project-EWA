@@ -76,12 +76,6 @@ export default {
     },
   },
 
-  // async get() {
-  //   const data = await this.repository.updateProgrammer();
-  //
-  //   console.log(data)
-  //
-  // }
 }
 </script>
 

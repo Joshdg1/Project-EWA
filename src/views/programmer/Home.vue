@@ -28,7 +28,7 @@ export default {
     return {
       projects: [],
       programmers: [],
-      editProfile: null,
+      editProfile: false,
       repository: new ProgrammerRepository()
     }
   },

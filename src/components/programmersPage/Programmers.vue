@@ -65,7 +65,7 @@
                 <td>{{ programmer.projectType }}</td>
                 <td>{{ programmer.skills }}</td>
                 <div class="d-flex justify-content-end flex-shrink-0">
-                  <a href="#" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" @click="setEditStatus">
+                  <a  class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" @click="setEditStatus">
                     <!--begin::Svg Icon | path: icons/duotune/art/art005.svg-->
                     <span class="svg-icon svg-icon-3">
 																			<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
@@ -80,7 +80,7 @@
 																		</span>
                     <!--end::Svg Icon-->
                   </a>
-                  <a href="#" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm" @click="deleteProgrammer(programmer)">
+                  <a  class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm" @click="deleteProgrammer(programmer)">
                     <!--begin::Svg Icon | path: icons/duotune/general/gen027.svg-->
                     <span class="svg-icon svg-icon-3">
 																			<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"

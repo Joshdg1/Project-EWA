@@ -5,7 +5,7 @@
         <!--begin::Header-->
         <div class="card-header border-0 pt-5">
           <h3 class="card-title align-items-start flex-column">
-            <span class="card-label fw-bolder fs-3 mb-1">Programmer</span>
+            <span class="card-label fw-bolder fs-3 mb-1">Programmer EDIT</span>
           </h3>
           <div class="card-toolbar" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-trigger="hover"
                title="Click to add a user">
@@ -53,19 +53,19 @@
               <!--begin::Table body-->
               <tbody>
               <tr v-for="programmer in programmers" v-bind:key="programmer">
-                <td> <input v-model="programmer.id"></td>
-                <td> <input v-model="programmer.firstName"></td>
-                <td> <input v-model="programmer.lastName"></td>
-                <td> <input v-model="programmer.email"></td>
-                <td> <input v-model="programmer.address"></td>
-                <td> <input v-model="programmer.city"></td>
-                <td> <input v-model="programmer.postcode"></td>
-                <td> <input v-model="programmer.availability"></td>
-                <td> <input v-model="programmer.workPreference"></td>
-                <td> <input v-model="programmer.projectType"></td>
-                <td> <input v-model="programmer.skills"></td>
+                <td> {{programmer.id}}</td>
+                <td> <input class="listInput" v-model="programmer.firstName"></td>
+                <td> <input class="listInput" v-model="programmer.lastName"></td>
+                <td> <input class="listInputBig" v-model="programmer.email"></td>
+                <td> <input class="listInput" v-model="programmer.address"></td>
+                <td> <input class="listInput" v-model="programmer.city"></td>
+                <td> <input class="listInput" v-model="programmer.postcode"></td>
+                <td> <input class="listInput" v-model="programmer.availability"></td>
+                <td> <input class="listInput" v-model="programmer.workPreference"></td>
+                <td> <input class="listInput" v-model="programmer.projectType"></td>
+                <td> <input class="listInput" v-model="programmer.skills"></td>
                 <div class="d-flex justify-content-end flex-shrink-0">
-                  <a href="#" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1">
+                  <a class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" @click="setEditProfile">
                     <!--begin::Svg Icon | path: icons/duotune/art/art005.svg-->
                     <span class="svg-icon svg-icon-3">
 																			<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
@@ -80,7 +80,7 @@
 																		</span>
                     <!--end::Svg Icon-->
                   </a>
-                  <a href="#" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm" @click="deleteProgrammer(programmer)">
+                  <a class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm" @click="deleteProgrammer(programmer)">
                     <!--begin::Svg Icon | path: icons/duotune/general/gen027.svg-->
                     <span class="svg-icon svg-icon-3">
 																			<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
@@ -123,7 +123,11 @@ export default {
   name: "ProgrammersEdit",
   props:['programmers'],
   emits:['edit-status'],
-
+    data(){
+    return{
+      editingProfile: null
+    }
+    },
   methods:{
     profilePage(){
       this.$router.push('/programmers/view');
@@ -134,7 +138,7 @@ export default {
       await this.repository.deleteProgrammerById(wantedId)
       location.reload();
     },
-    async  setEditProfile(){
+      setEditProfile(){
       this.editingProfile = false
       this.$emit('edit-status' , this.editingProfile)
 
@@ -152,5 +156,10 @@ export default {
 </script>
 
 <style scoped>
-
+.listInputBig{
+  width: 8vw;
+}
+.listInput{
+  width: 4vw;
+}
 </style>
