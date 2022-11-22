@@ -47,7 +47,7 @@
 <script>
 export default {
   // eslint-disable-next-line
-  name: "CreateClientProjectView",
+  name: "CreateProjectView",
 
   data() {
     return {
@@ -71,7 +71,7 @@ export default {
       localStorage.company = this.company;
       localStorage.hoursWorked = this.hoursWorked;
 
-      this.$router.push("/createNewProject2")
+      this.$router.push("/createProject2")
     }
   }
 }

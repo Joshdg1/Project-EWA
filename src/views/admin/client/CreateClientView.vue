@@ -2,33 +2,43 @@
   <div>
     <form>
       <div class="text-center mb-10">
-        <h1 class="text-dark mb-3">Create a new Project</h1>
+        <h1 class="text-dark mb-3">Create a new Client</h1>
       </div>
 
 
       <div class="fv-row mb-10 fv-plugins-icon-container">
-        <label class="form-label fs-6 fw-bold text-dark">Project title</label>
+        <label class="form-label fs-6 fw-bold text-dark">name</label>
         <input class="form-control form-control-lg form-control-solid" type="text" name="text"
-               autocomplete="off" v-model="title">
+               autocomplete="off" v-model="name">
       </div>
       <div class="fv-row mb-10 fv-plugins-icon-container">
         <div class="d-flex flex-stack mb-2">
-          <label class="form-label fw-bold text-dark fs-6 mb-0">Project description</label>
+          <label class="form-label fw-bold text-dark fs-6 mb-0">email</label>
         </div>
         <input class="form-control form-control-lg form-control-solid" type="text"
-               name="Type of project" autocomplete="off" v-model="description">
+               name="Email" autocomplete="off" v-model="email">
       </div>
 
       <div class="fv-row mb-10 fv-plugins-icon-container">
-        <label class="form-label fs-6 fw-bold text-dark">Company name</label>
+        <label class="form-label fs-6 fw-bold text-dark">address</label>
         <input class="form-control form-control-lg form-control-solid" type="text" name="text"
-               autocomplete="off" v-model="company">
+               autocomplete="off" v-model="address">
       </div>
       <div class="fv-row mb-10 fv-plugins-icon-container">
-        <label class="form-label fs-6 fw-bold text-dark">hours worked on project</label>
-        <input class="form-control form-control-lg form-control-solid" type="number"
-               autocomplete="off" v-model="hoursWorked">
+        <label class="form-label fs-6 fw-bold text-dark">city</label>
+        <input class="form-control form-control-lg form-control-solid" type="text"
+               autocomplete="off" v-model="city">
       </div>
+      <div class="fv-row mb-10 fv-plugins-icon-container">
+        <label class="form-label fs-6 fw-bold text-dark">postcode</label>
+        <input class="form-control form-control-lg form-control-solid" type="text"
+               autocomplete="off" v-model="postcode">
+      </div><div class="fv-row mb-10 fv-plugins-icon-container">
+      <label class="form-label fs-6 fw-bold text-dark">projecttype</label>
+      <input class="form-control form-control-lg form-control-solid" type="text"
+             autocomplete="off" v-model="projectType">
+    </div>
+
     </form>
 
     <div class="d-flex flex-shrink-0">
@@ -51,27 +61,33 @@ export default {
 
   data() {
     return {
-      title: "",
-      description: "",
-      company: "",
-      hoursWorked: ""
+      name: "",
+      email: "",
+      address: "",
+      city: "",
+      postcode: "",
+      projectType: ""
     }
   },
 
   methods: {
     setSession() {
       //clear the session without clearing the user login details.
-      localStorage.title = "";
-      localStorage.description = "";
-      localStorage.company = "";
-      localStorage.hoursWorked = "";
+      localStorage.name = "";
+      localStorage.email = "";
+      localStorage.address = "";
+      localStorage.city = "";
+      localStorage.postcode = "";
+      localStorage.projectType = "";
 
-      localStorage.title = this.title;
-      localStorage.description = this.description;
-      localStorage.company = this.company;
-      localStorage.hoursWorked = this.hoursWorked;
+      localStorage.name = this.title;
+      localStorage.email = this.description;
+      localStorage.address = this.company;
+      localStorage.city = this.hoursWorked;
+      localStorage.postcode = this.postcode;
+      localStorage.projectType = this.projectType;
 
-      this.$router.push("/createNewProject2")
+      this.$router.push("/createNewClient2")
     }
   }
 }

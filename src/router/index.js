@@ -55,6 +55,16 @@ const routes = [
         path: '/clients',
         component: () => import(`../views/admin/client/ClientAdminView`),
     },
+    {
+        name: "CreateProjectView",
+        path: "/createNewClient",
+        component: () => import('../views/admin/client/CreateClientView')
+    },
+    {
+        name: "CreateClient-2",
+        path: "/createNewClient2",
+        component: () => import('../views/admin/client/CreateClient-2')
+    },
 
 
     // === PROJECTS ===
@@ -74,6 +84,7 @@ const routes = [
         component: () => import('../views/admin/project/CreateProject-2')
     }
 ];
+
 
 const router = new VueRouter({
     mode: 'history',
