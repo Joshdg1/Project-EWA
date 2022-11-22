@@ -47,10 +47,11 @@ public class ProgrammerRepository implements EntityRepository<Programmer> {
         updatedProgrammer.setAddress(entity.getAddress());
         updatedProgrammer.setCity(entity.getCity());
         updatedProgrammer.setPostcode(entity.getPostcode());
+        updatedProgrammer.setSkill(entity.getSkill());
         updatedProgrammer.setAvailability(entity.getAvailability());
         updatedProgrammer.setWorkPreference(entity.getWorkPreference());
         updatedProgrammer.setProjectType(entity.getProjectType());
-        updatedProgrammer.setSkill(entity.getSkill());
+
 
         return updatedProgrammer;
     }

@@ -39,7 +39,6 @@ public class ProgrammerController {
 
         Programmer newProgrammer = this.programmerRepository.save(programmer);
 
-
         return ResponseEntity.ok().body(newProgrammer);
     }
 

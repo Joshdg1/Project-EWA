@@ -158,7 +158,8 @@ export default {
     async deleteProgrammer(programmer){
     const wantedId = programmer.id
       console.log(wantedId)
-      // await this.repository.deleteProgrammerById(wantedId)
+      await this.repository.deleteProgrammerById(wantedId)
+     
     }
   }
 }
