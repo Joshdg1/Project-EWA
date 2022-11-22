@@ -5,25 +5,8 @@
         <!--begin::Header-->
         <div class="card-header border-0 pt-5">
           <h3 class="card-title align-items-start flex-column">
-            <span class="card-label fw-bolder fs-3 mb-1">Clients</span>
+            <span class="card-label fw-bolder fs-3 mb-1">Add project(s) to the client</span>
           </h3>
-          <router-link to="createNewClient">
-            <div class="card-toolbar" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-trigger="hover"
-                 title="Click to add a client">
-              <a href="#" class="btn btn-sm btn-light-primary" data-bs-toggle="modal"
-                 data-bs-target="#kt_modal_invite_friends">
-                <!--begin::Svg Icon | path: icons/duotune/arrows/arr075.svg-->
-                <span class="svg-icon svg-icon-3">
-													<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                               fill="none">
-														<rect opacity="0.5" x="11.364" y="20.364" width="16" height="2" rx="1"
-                                  transform="rotate(-90 11.364 20.364)" fill="black"/>
-														<rect x="4.36396" y="11.364" width="16" height="2" rx="1" fill="black"/>
-													</svg>
-												</span>
-                <!--end::Svg Icon-->New Client</a>
-            </div>
-          </router-link>
         </div>
         <!--end::Header-->
         <!--begin::Body-->
@@ -41,31 +24,33 @@
                            data-kt-check-target=".widget-9-check"/>
                   </div>
                 </th>
-                <th>Name</th>
-                <th>Address</th>
-                <th>City</th>
-                <th>Postcode</th>
-                <th>Project types</th>
+                <th>Id</th>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Company</th>
+                <th>Hours worked</th>
+                <th>Programmer(s)</th>
                 <th>Actions</th>
               </tr>
               </thead>
               <!--end::Table head-->
               <!--begin::Table body-->
               <tbody>
-              <tr v-for="client in clients" v-bind:key="client">
+              <tr v-for="project in projects" v-bind:key="project">
                 <div class="form-check form-check-sm form-check-custom form-check-solid">
                   <input class="form-check-input" type="checkbox" value="1" data-kt-check="true"
                          data-kt-check-target=".widget-9-check"/>
                 </div>
-                <td>{{ client.name }}</td>
-                <td>{{ client.address }}</td>
-                <td>{{ client.city }}</td>
-                <td>{{ client.postcode }}</td>
-                <td>{{ client.projectType }}</td>
+                <td>{{ project.id }}</td>
+                <td>{{ project.title }}</td>
+                <td>{{ project.description }}</td>
+                <td>{{ project.company }}</td>
+                <td>{{ project.hoursWorked }}</td>
+                <td>{{ project.programmers }}</td>
 
 
-                <div class="d-flex  flex-shrink-0">
-                  <a class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" @click="editClient()">
+                <div class="d-flex justify-content-end flex-shrink-0">
+                  <a class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" @click="editProject()">
                     <!--begin::Svg Icon | path: icons/duotune/art/art005.svg-->
                     <span class="svg-icon svg-icon-3">
 																			<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
@@ -80,7 +65,7 @@
 																		</span>
                     <!--end::Svg Icon-->
                   </a>
-                  <a class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm" @click="deleteClient(client)">
+                  <a class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm" @click="deleteProject(project)">
                     <!--begin::Svg Icon | path: icons/duotune/general/gen027.svg-->
                     <span class="svg-icon svg-icon-3">
 																			<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
@@ -115,19 +100,31 @@
 </template>
 
 <script>
+import ProjectRepository from '../../../repository/ProjectRepository'
+
 export default {
-  name: "ClientAdmin.vue",
-  props: ['clients'],
-  emits: ['deleteClient', 'editClient'],
+
+  name: "ProjectAdmin.vue",
+  props: ['projects'],
+  emits: ['deleteProject', 'editProject'],
+
+  data() {
+    return {
+      editingProject: null,
+      repository: new ProjectRepository(),
+    }
+  },
 
   methods: {
-    deleteClient(client) {
-      this.$emit('deleteClient', client)
+
+    async deleteProject(project) {
+      await this.repository.deleteProjectById(project.id);
+      location.reload();
     },
 
-    editClient() {
-      this.editingClient = true;
-      this.$emit('editClient', this.editingClient)
+    editProject() {
+      this.editingProject = true;
+      this.$emit('editProject', this.editingProject)
     }
   }
 }

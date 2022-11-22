@@ -2,7 +2,7 @@
   <div>
     <form>
       <div class="text-center mb-10">
-        <h1 class="text-dark mb-3">Create a new project</h1>
+        <h1 class="text-dark mb-3">Create a new Project</h1>
       </div>
 
 
@@ -40,7 +40,6 @@
       <div class="d-flex ms-3">
         <button class="btn background-florijn btn-active-info" @click="setSession">Next</button>
       </div>
-
     </div>
   </div>
 </template>
@@ -48,7 +47,7 @@
 <script>
 export default {
   // eslint-disable-next-line
-  name: "CreateClientProjectView",
+  name: "CreateProjectView",
 
   data() {
     return {
@@ -72,7 +71,7 @@ export default {
       localStorage.company = this.company;
       localStorage.hoursWorked = this.hoursWorked;
 
-      this.$router.push("/createNewProject2")
+      this.$router.push("/createProject2")
     }
   }
 }

@@ -55,6 +55,16 @@ const routes = [
         path: '/clients',
         component: () => import(`../views/admin/client/ClientAdminView`),
     },
+    {
+        name: "CreateProjectView",
+        path: "/createNewClient",
+        component: () => import('../views/admin/client/CreateClientView')
+    },
+    {
+        name: "CreateClient-2",
+        path: "/createNewClient2",
+        component: () => import('../views/admin/client/CreateClient-2')
+    },
 
 
     // === PROJECTS ===
@@ -63,17 +73,27 @@ const routes = [
         path: '/projects',
         component: () => import(`../views/admin/project/ProjectAdminView`),
     },
+
     {
-        name: "CreateClientProjectView",
+        name: "CreateProjectView",
         path: "/createNewProject",
-        component: () => import('../views/admin/client/CreateClientProjectView')
+        component: () => import('../views/admin/project/CreateProjectView')
     },
     {
-        name: "CreateClientProject-2",
+        name: "CreateProject-2",
         path: "/createNewProject2",
-        component: () => import('../views/admin/client/CreateClientProject-2')
-    }
+        component: () => import('../views/admin/project/CreateProject-2')
+    },
+
+    // === Client-pages ===
+    {
+        name: "Client Home",
+        path: '/c',
+        component: () => import(`../views/client/Home`),
+    },
+
 ];
+
 
 const router = new VueRouter({
     mode: 'history',

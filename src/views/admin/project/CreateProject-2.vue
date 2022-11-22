@@ -125,7 +125,7 @@ import Programmer from '../../../models/programmer/programmer.js'
 import ProjectRepository from '../../../repository/ProjectRepository'
 
 export default {
-  name: "CreateClientProject-2",
+  name: "CreateProject-2",
 
   created() {
     for (let i = 0; i < 8; i++) {

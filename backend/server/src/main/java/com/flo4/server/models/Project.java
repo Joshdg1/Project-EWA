@@ -17,6 +17,10 @@ public class Project {
     @OneToMany(mappedBy = "project")
     private Set<Programmer> programmers;
 
+    @ManyToOne
+    @JoinColumn(name = "client_id", nullable = false)
+    private Client client;
+
     public Project() {
 
     }
@@ -34,14 +38,16 @@ public class Project {
      * @param company
      * @param hoursWorked
      * @param programmers
+     * @param client
      */
-    public Project(int id, String title, String description, String company, int hoursWorked, Set<Programmer> programmers) {
+    public Project(int id, String title, String description, String company, int hoursWorked, Set<Programmer> programmers, Client client) {
         this(id);
         this.setTitle(title);
         this.setDescription(description);
         this.setCompany(company);
         this.setHoursWorked(hoursWorked);
         this.setProgrammers(programmers);
+        this.client = client;
     }
 
     public int getId() {

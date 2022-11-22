@@ -56,7 +56,7 @@
 
 <script>
 
-import {project} from '@/models/project.js';
+import {project} from '../../models/project';
 export default {
   name: "ProgrammerHome",
   created() {
