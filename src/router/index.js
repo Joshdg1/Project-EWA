@@ -73,6 +73,7 @@ const routes = [
         path: '/projects',
         component: () => import(`../views/admin/project/ProjectAdminView`),
     },
+
     {
         name: "CreateProjectView",
         path: "/createNewProject",
@@ -82,7 +83,15 @@ const routes = [
         name: "CreateProject-2",
         path: "/createNewProject2",
         component: () => import('../views/admin/project/CreateProject-2')
-    }
+    },
+
+    // === Client-pages ===
+    {
+        name: "Client Home",
+        path: '/c',
+        component: () => import(`../views/client/Home`),
+    },
+
 ];
 
 
