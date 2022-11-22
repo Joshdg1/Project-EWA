@@ -119,13 +119,16 @@
 </template>
 
 <script>
+import ProgrammerRepository from "@/assets/Repositories/ProgrammerService";
+
 export default {
   name: "ProgrammersComp",
   props:['programmers'],
   emits:['edit-status'],
   data(){
     return{
-      editStatus: null
+      editStatus: null,
+      repository: new ProgrammerRepository()
     }
   },
   methods:{

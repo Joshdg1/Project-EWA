@@ -65,7 +65,7 @@
                 <td> <input class="listInput" v-model="programmer.projectType"></td>
                 <td> <input class="listInput" v-model="programmer.skills"></td>
                 <div class="d-flex justify-content-end flex-shrink-0">
-                  <a class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" @click="setEditProfile">
+                  <a class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" @click="setEditProfile(programmer)">
                     <!--begin::Svg Icon | path: icons/duotune/art/art005.svg-->
                     <span class="svg-icon svg-icon-3">
 																			<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
@@ -119,13 +119,16 @@
 </template>
 
 <script>
+import ProgrammerRepository from "@/assets/Repositories/ProgrammerService";
+
 export default {
   name: "ProgrammersEdit",
   props:['programmers'],
   emits:['edit-status'],
     data(){
     return{
-      editingProfile: null
+      editingProfile: null,
+      repository: new ProgrammerRepository
     }
     },
   methods:{
@@ -138,18 +141,13 @@ export default {
       await this.repository.deleteProgrammerById(wantedId)
       location.reload();
     },
-      setEditProfile(){
+     async setEditProfile(programmer){
       this.editingProfile = false
       this.$emit('edit-status' , this.editingProfile)
 
-
-      // console.log(this.editProfile.lastName)
-      // console.log(this.editProfile.firstName)
-      // const profileId = 1;
-      // await this.repository.updateProgrammerById(profileId,this.editProfile.firstName, this.editProfile.lastName,
-      //     this.editProfile.email, this.editProfile.address,
-      //     this.editProfile.city, this.editProfile.postcode, this.editProfile.availability, this.editProfile.workPreference,
-      //     this.editProfile.projectType,this.editProfile.skills)
+      await this.repository.updateProgrammerById(programmer.id, programmer.firstName, programmer.lastName,
+          programmer.email, programmer.address, programmer.city, programmer.postcode, programmer.availability,
+          programmer.workPreference, programmer.projectType, programmer.skills)
     }
   }
 }
