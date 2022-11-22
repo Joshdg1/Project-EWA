@@ -14,7 +14,7 @@ public class Skill {
     double level;
 
     @ManyToOne
-    @JoinColumn(name = "skill_programmer_id")
+    @JoinColumn(name = "skill_programmer_id", nullable = false)
     private Programmer programmer;
 
     public Skill(){};
