@@ -10,6 +10,21 @@
           <div class="card-toolbar" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-trigger="hover"
                title="Click to add a user">
           </div>
+          <div class="card-toolbar" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-trigger="hover"
+               title="Click to add a project">
+            <a href="/programmers/add" class="btn btn-sm btn-light-primary" data-bs-toggle="modal"
+               data-bs-target="#kt_modal_invite_friends">
+              <!--begin::Svg Icon | path: icons/duotune/arrows/arr075.svg-->
+              <span class="svg-icon svg-icon-3">
+													<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                               fill="none">
+														<rect opacity="0.5" x="11.364" y="20.364" width="16" height="2" rx="1"
+                                  transform="rotate(-90 11.364 20.364)" fill="black"/>
+														<rect x="4.36396" y="11.364" width="16" height="2" rx="1" fill="black"/>
+													</svg>
+												</span>
+              <!--end::Svg Icon-->New Programmer</a>
+          </div>
         </div>
         <!--end::Header-->
         <!--begin::Body-->
@@ -21,6 +36,7 @@
               <!--begin::Table head-->
               <thead>
               <tr class="fw-bolder text-muted">
+                <th>Id</th>
                 <th>FirstName</th>
                 <th>LastName</th>
                 <th>E-Mail</th>
@@ -37,7 +53,7 @@
               <!--begin::Table body-->
               <tbody>
               <tr v-for="programmer in programmers" v-bind:key="programmer">
-
+                <td>{{ programmer.id }}</td>
                 <td>{{ programmer.firstName }}</td>
                 <td>{{ programmer.lastName }}</td>
                 <td>{{ programmer.email }}</td>
