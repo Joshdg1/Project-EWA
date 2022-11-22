@@ -1,36 +1,36 @@
-export default class ProjectRepository {
-    async getAllProjects() {
-        const response = await fetch('http://localhost:8080/projects');
+export default class ClientRepository {
+    async getAllClients() {
+        const response = await fetch('http://localhost:8080/clients');
         return await response.json();
     }
 
-    async createProject(title, description, company, hoursWorked, programmers) {
-        const response = await fetch('http://localhost:8080/projects/add', {
+    async createClient(name, email, address, city, postcode, projectType) {
+        const response = await fetch('http://localhost:8080/clients/add', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-                title, description, company, hoursWorked, programmers
+                name, email, address, city, postcode, projectType
             }),
         });
         return await response.json();
     }
 
-    async deleteProjectById(projectId){
-        const response = await fetch('http://localhost:8080/projects/' + projectId, {
+    async deleteClientById(clientId) {
+        const response = await fetch('http://localhost:8080/clients/' + clientId, {
             method: 'DELETE',
         });
         return await response.json();
     }
 
-    async updateProjectById(projectId, title, description, company, hoursWorked, programmers) {
-        const response = await fetch('http://localhost:8080/projects/' + projectId, {
+    async updateClientById(clientId, name, email, address, city, postcode, projectType) {
+        const response = await fetch('http://localhost:8080/clients/' + clientId, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({projectId, title, description, company, hoursWorked, programmers}),
+            body: JSON.stringify({name, email, address, city, postcode, projectType}),
         });
         return await response.json();
     }
