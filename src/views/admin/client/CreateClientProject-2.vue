@@ -29,16 +29,17 @@
               <input class="form-control m-2" v-model="projectTypeFilter" v-on:keyup="FilterFn()"
                      placeholder="Project type filter">
             </div>
-            <!-- <multiselect
-                  v-model="skillNameFilter"
-                  :options="options"
-                  :multiple="true"
-                  :close-on-select="true"
-                  placeholder="Pick some"
-                  label="name"
-                  track-by="name"
-                  v-on:keyup="FilterFn()">
-              </multiselect>-->
+
+<!--             <multiselect-->
+<!--                  v-model="skillNameFilter"-->
+<!--                  :options="options"-->
+<!--                  :multiple="true"-->
+<!--                  :close-on-select="true"-->
+<!--                  placeholder="Pick some"-->
+<!--                  label="name"-->
+<!--                  track-by="name"-->
+<!--                  >-->
+<!--              </multiselect>-->
           </div>
           <!--end::Header-->
           <!--begin::Body-->
@@ -87,7 +88,7 @@
                   <td>{{ programmer.workPreference }}</td>
                   <td>{{ programmer.projectType }}</td>
                   <td>
-                      <button class="btn background-florijn btn-active-info">Add programmer</button>
+                    <button class="btn background-florijn btn-active-info">Add</button>
                   </td>
                 </tr>
                 </tbody>
@@ -123,7 +124,7 @@
 import Programmer from '../../../models/programmer/programmer.js'
 // import Multiselect from 'vue-multiselect'
 // import Vue from "vue";
-
+//
 // Vue.component('multi-select', Multiselect)
 
 export default {
