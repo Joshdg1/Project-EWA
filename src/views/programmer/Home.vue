@@ -5,7 +5,7 @@
         <!--begin::Header-->
         <div class="card-header border-0 pt-5">
           <h3 class="card-title align-items-start flex-column">
-            <span class="card-label fw-bolder fs-3 mb-1">Projects</span>
+            <span class="card-label fw-bolder fs-3 mb-1">Programmer</span>
           </h3>
           <div class="card-toolbar" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-trigger="hover"
                title="Click to add a user">
@@ -21,6 +21,7 @@
               <!--begin::Table head-->
               <thead>
               <tr class="fw-bolder text-muted">
+
                 <th>Title</th>
                 <th>Description</th>
                 <th>Company</th>
@@ -30,11 +31,12 @@
               <!--end::Table head-->
               <!--begin::Table body-->
               <tbody>
-              <tr v-for="project in projects" v-bind:key="project">
-                <td>{{ project.title }}</td>
-                <td>{{ project.description }}</td>
-                <td>{{ project.company }}</td>
-                <td>{{ project.hoursWorked }}</td>
+              <tr v-for="programmer in programmers" v-bind:key="programmer">
+
+                <td>{{ programmer.firstName }}</td>
+                <td>{{ programmer.address }}</td>
+                <td>{{ programmer.workPreference }}</td>
+                <td>{{ programmer.projectType }}</td>
               </tr>
               </tbody>
               <!--end::Table body-->
@@ -57,16 +59,23 @@
 <script>
 
 import {project} from '@/models/project.js';
+import ProgrammerRepository from "@/assets/Repositories/ProgrammerService";
 export default {
   name: "ProgrammerHome",
-  created() {
-    this.fake();
-    this.fake();
-    this.fake();
+ async created() {
+    const programmer = await this.repository.getAllProgrammers()
+    console.log(programmer)
+
+    for (let j = 0; j < 3; j++) {
+      this.programmers.push(programmer[j])
+      console.log(programmer[j].id)
+    }
   },
   data() {
     return {
       projects: [],
+      programmers: [],
+      repository: new ProgrammerRepository()
     }
   },
 

@@ -50,12 +50,7 @@ export default {
     // console.log(allProgrammers)
     this.sampleProgrammer = await this.repository.findProgrammerById(1)
 
-    const programmer = await this.repository.getAllProgrammers()
-    console.log(programmer)
 
-    for (let j = 0; j < 3; j++) {
-      this.programmers.push(programmer[j])
-    }
     console.log(this.programmers)
     this.currentTab = 1;
   },
