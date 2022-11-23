@@ -5,15 +5,17 @@
         <!--begin::Header-->
         <div class="card-header border-0 pt-5">
           <h3 class="card-title align-items-start flex-column">
-            <span class="card-label fw-bolder fs-3 mb-1">Clients</span>
+            <span class="card-label fw-bolder fs-3 mb-1">Programmer EDIT</span>
           </h3>
-          <router-link to="/createNewClient">
-            <div class="card-toolbar" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-trigger="hover"
-                 title="Click to add a client">
-              <a href="#" class="btn btn-sm btn-light-primary" data-bs-toggle="modal"
-                 data-bs-target="#kt_modal_invite_friends">
-                <!--begin::Svg Icon | path: icons/duotune/arrows/arr075.svg-->
-                <span class="svg-icon svg-icon-3">
+          <div class="card-toolbar" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-trigger="hover"
+               title="Click to add a user">
+          </div>
+          <div class="card-toolbar" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-trigger="hover"
+               title="Click to add a project">
+            <a href="/programmers/add" class="btn btn-sm btn-light-primary" data-bs-toggle="modal"
+               data-bs-target="#kt_modal_invite_friends">
+              <!--begin::Svg Icon | path: icons/duotune/arrows/arr075.svg-->
+              <span class="svg-icon svg-icon-3">
 													<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                fill="none">
 														<rect opacity="0.5" x="11.364" y="20.364" width="16" height="2" rx="1"
@@ -21,9 +23,8 @@
 														<rect x="4.36396" y="11.364" width="16" height="2" rx="1" fill="black"/>
 													</svg>
 												</span>
-                <!--end::Svg Icon-->New Client</a>
-            </div>
-          </router-link>
+              <!--end::Svg Icon-->New Programmer</a>
+          </div>
         </div>
         <!--end::Header-->
         <!--begin::Body-->
@@ -35,41 +36,36 @@
               <!--begin::Table head-->
               <thead>
               <tr class="fw-bolder text-muted">
-                <th class="w-25px">
-                  <div class="form-check form-check-sm form-check-custom form-check-solid">
-                    <input class="form-check-input" type="checkbox" value="1" data-kt-check="true"
-                           data-kt-check-target=".widget-9-check"/>
-                  </div>
-                </th>
-                <th>Name</th>
-                <th>Email</th>
+                <th>Id</th>
+                <th>FirstName</th>
+                <th>LastName</th>
+                <th>E-Mail</th>
                 <th>Address</th>
                 <th>City</th>
                 <th>Postcode</th>
-                <th>Project types</th>
-                <th>Project</th>
-                <th>Actions</th>
+                <th>Availability</th>
+                <th>Work Preference</th>
+                <th>Project Type</th>
+                <th>Skills</th>
               </tr>
               </thead>
               <!--end::Table head-->
               <!--begin::Table body-->
               <tbody>
-              <tr v-for="client in clients" v-bind:key="client">
-                <div class="form-check form-check-sm form-check-custom form-check-solid">
-                  <input class="form-check-input" type="checkbox" value="1" data-kt-check="true"
-                         data-kt-check-target=".widget-9-check"/>
-                </div>
-                <td>{{ client.name }}</td>
-                <td>{{ client.email }}</td>
-                <td>{{ client.address }}</td>
-                <td>{{ client.city }}</td>
-                <td>{{ client.postcode }}</td>
-                <td>{{ client.projectType }}</td>
-                <td>{{ client.projects }}</td>
-
-
-                <div class="d-flex  flex-shrink-0">
-                  <a class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" @click="editClient()">
+              <tr v-for="programmer in programmers" v-bind:key="programmer">
+                <td> {{programmer.id}}</td>
+                <td> <input class="listInput" v-model="programmer.firstName"></td>
+                <td> <input class="listInput" v-model="programmer.lastName"></td>
+                <td> <input class="listInputBig" v-model="programmer.email"></td>
+                <td> <input class="listInput" v-model="programmer.address"></td>
+                <td> <input class="listInput" v-model="programmer.city"></td>
+                <td> <input class="listInput" v-model="programmer.postcode"></td>
+                <td> <input class="listInput" v-model="programmer.availability"></td>
+                <td> <input class="listInput" v-model="programmer.workPreference"></td>
+                <td> <input class="listInput" v-model="programmer.projectType"></td>
+                <td> <input class="listInput" v-model="programmer.skills"></td>
+                <div class="d-flex justify-content-end flex-shrink-0">
+                  <a class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" @click="setEditProfile(programmer)">
                     <!--begin::Svg Icon | path: icons/duotune/art/art005.svg-->
                     <span class="svg-icon svg-icon-3">
 																			<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
@@ -84,7 +80,7 @@
 																		</span>
                     <!--end::Svg Icon-->
                   </a>
-                  <a class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm" @click="deleteClient(client)">
+                  <a class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm" @click="deleteProgrammer(programmer)">
                     <!--begin::Svg Icon | path: icons/duotune/general/gen027.svg-->
                     <span class="svg-icon svg-icon-3">
 																			<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
@@ -115,39 +111,53 @@
       </div>
       <!--end::Tables Widget 3-->
     </div>
+    <div class="d-flex ms-3">
+      <a @click="profilePage()" class="btn background-florijn btn-active-info buttonFloatRight" tooltip="New App" data-bs-toggle="modal"
+         data-bs-target="#kt_modal_create_app" id="kt_toolbar_primary_button">Edit profile-page</a>
+    </div>
   </div>
 </template>
 
 <script>
-
-import ClientRepository from '../repository/ClientRepository'
+import ProgrammerRepository from "@/assets/Repositories/ProgrammerService";
 
 export default {
-  name: "ClientAdmin.vue",
-  props: ['clients'],
-  emits: ['deleteClient', 'editClient'],
-
-  data() {
-    return {
-      editingClient: null,
-      repository: new ClientRepository(),
+  name: "ProgrammersEdit",
+  props:['programmers'],
+  emits:['edit-status'],
+    data(){
+    return{
+      editingProfile: null,
+      repository: new ProgrammerRepository
     }
-  },
-
-  methods: {
-    async deleteClient(client) {
-      await this.repository.deleteClientById(client.id);
+    },
+  methods:{
+    profilePage(){
+      this.$router.push('/programmers/view');
+    },
+    async deleteProgrammer(programmer){
+      const wantedId = programmer.id
+      console.log(wantedId)
+      await this.repository.deleteProgrammerById(wantedId)
       location.reload();
     },
+     async setEditProfile(programmer){
+      this.editingProfile = false
+      this.$emit('edit-status' , this.editingProfile)
 
-    editClient() {
-      this.editingClient = true;
-      this.$emit('editClient', this.editingClient)
+      await this.repository.updateProgrammerById(programmer.id, programmer.firstName, programmer.lastName,
+          programmer.email, programmer.address, programmer.city, programmer.postcode, programmer.availability,
+          programmer.workPreference, programmer.projectType, programmer.skills)
     }
   }
 }
 </script>
 
 <style scoped>
-
+.listInputBig{
+  width: 8vw;
+}
+.listInput{
+  width: 4vw;
+}
 </style>

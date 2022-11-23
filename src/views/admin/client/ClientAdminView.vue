@@ -8,9 +8,9 @@
 </template>
 
 <script>
-import Client from '../../../models/client.js'
 import clientsList from '../../../components/ClientAdmin.vue'
 import edit from '../../../components/ClientAdminEdit.vue'
+import ClientRepository from '../../../repository/ClientRepository'
 
 export default {
   name: "ClientAdminView",
@@ -19,26 +19,26 @@ export default {
     edit
   },
 
-  created() {
-    for (let i = 0; i < 8; i++) {
-      this.clients.push(Client.createClient());
-    }
-  },
-
   data() {
     return {
       clients: [],
-      clientStatus: null
+      clientStatus: null,
+      repository: new ClientRepository()
     }
   },
+
+  async created() {
+    const data = await this.repository.getAllClients();
+
+    for (let i = 0; i < data.length; i++) {
+      this.clients.push(data[i]);
+    }
+  },
+
   methods:{
-    deleteClient(client){
-      for (let i = 0; i < this.clients.length; i++) {
-        if (client === this.clients[i])
-        {
-          this.clients.splice(i, 1);
-        }
-      }
+    async deleteClient(client) {
+      await this.repository.deleteClientById(client.id);
+      location.reload();
     },
 
     editClientStatus(clientStatus) {

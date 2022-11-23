@@ -17,6 +17,7 @@ import ProjectRepository from '../../../repository/ProjectRepository'
 import projectsList from '../../../components/ProjectAdmin.vue'
 import edit from '../../../components/ProjectAdminEdit.vue'
 
+
 export default {
   name: "ProjectAdminView",
   components: {
@@ -37,7 +38,6 @@ export default {
       projects: [],
       projectStatus: null,
       repository: new ProjectRepository(),
-
     }
   },
 

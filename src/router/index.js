@@ -11,14 +11,14 @@ const routes = [
             isPublic: true,
         },
         path: "/",
-        component: () =>  import('../views/Home'),
+        component: () => import('../views/Home'),
     },
     {
         meta: {
             isPublic: true,
         },
         path: "/register",
-        component: () =>  import('../views/auth/Register'),
+        component: () => import('../views/auth/Register'),
     },
     {
         meta: {
@@ -32,7 +32,7 @@ const routes = [
     {
         path: "/home",
         name: "Home",
-        component: () =>  import('../views/admin/AdminHome'),
+        component: () => import('../views/admin/AdminHome'),
     },
 
 
@@ -48,12 +48,27 @@ const routes = [
         path: '/programmers/view',
         component: () => import(`../views/programmer/Edit`),
     },
+    {
+        name: "Create Programmer",
+        path: '/programmers/add',
+        component: () => import('../views/programmer/AddProgrammer'),
+    },
 
     // === CLIENTS ===
     {
         name: "Clients",
         path: '/clients',
         component: () => import(`../views/admin/client/ClientAdminView`),
+    },
+    {
+        name: "createNewClient",
+        path: "/createNewClient",
+        component: () => import('../views/admin/client/CreateClientView')
+    },
+    {
+        name: "CreateClient-2",
+        path: "/createNewClient2",
+        component: () => import('../views/admin/client/CreateClient-2')
     },
 
 
@@ -63,17 +78,27 @@ const routes = [
         path: '/projects',
         component: () => import(`../views/admin/project/ProjectAdminView`),
     },
+
     {
-        name: "CreateClientProjectView",
+        name: "CreateProjectView",
         path: "/createNewProject",
-        component: () => import('../views/admin/client/CreateClientProjectView')
+        component: () => import('../views/admin/project/CreateProjectView')
     },
     {
-        name: "CreateClientProject-2",
+        name: "CreateProject-2",
         path: "/createNewProject2",
-        component: () => import('../views/admin/client/CreateClientProject-2')
-    }
+        component: () => import('../views/admin/project/CreateProject-2')
+    },
+
+    // === Client-pages ===
+    {
+        name: "Client Home",
+        path: '/c',
+        component: () => import(`../views/client/Home`),
+    },
+
 ];
+
 
 const router = new VueRouter({
     mode: 'history',
