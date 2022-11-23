@@ -23,7 +23,6 @@ public class Programmer {
 
     private String postcode;
 
-
     @OneToMany(mappedBy = "programmer")
     private Set<Skill> skills;
 
@@ -45,7 +44,8 @@ public class Programmer {
     }
 
     public Programmer(int id, String firstName, String lastName, String email, String address,
-                      String city, String postcode, Set<Skill> skills, Availability availability, String workPreference, String projectType, Project project) {
+                      String city, String postcode, Availability availability, String workPreference,
+                      String projectType, Project project, Set<Skill> skills) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -53,11 +53,11 @@ public class Programmer {
         this.address = address;
         this.city = city;
         this.postcode = postcode;
-        this.skills = skills;
         this.availability = availability;
         this.workPreference = workPreference;
         this.projectType = projectType;
         this.project = project;
+        this.skills = skills;
     }
 
     public int getId() {
@@ -149,5 +149,21 @@ public class Programmer {
 
     public void setProjectType(String projectType) {
         this.projectType = projectType;
+    }
+
+    public Set<Skill> getSkills() {
+        return skills;
+    }
+
+    public void setSkills(Set<Skill> skills) {
+        this.skills = skills;
+    }
+
+    public Project getProject() {
+        return project;
+    }
+
+    public void setProject(Project project) {
+        this.project = project;
     }
 }

@@ -7,6 +7,7 @@ import java.lang.reflect.Array;
 @Entity
 public class Skill {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     int Id;
 
     String name;
@@ -14,7 +15,7 @@ public class Skill {
     double level;
 
     @ManyToOne
-    @JoinColumn(name = "skill_programmer_id", nullable = false)
+    @JoinColumn(name = "skill_programmer_id", nullable = true)
     private Programmer programmer;
 
     public Skill(){};

@@ -20,10 +20,7 @@ class Programmer {
         this.address = address;
         this.city = city;
         this.postcode = postcode;
-        this.knowledge = knowledge;
-        this.experience = experience;
         this.availability = availability;
-        this.hours = hours;
         this.workPreference = workPreference;
         this.projectType = projectType;
         this.skills = skills;
