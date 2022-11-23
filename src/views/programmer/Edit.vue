@@ -6,7 +6,7 @@
                          @edit-profile="EditProfileStatus" @save-profile="updateProfile"></ProfileInputDetails>
 
     <ProfileDetails v-if="!this.editProfile && currentTab === 1" :sample-programmer="sampleProgrammer"
-                    @edit-profile="EditProfileStatus"></ProfileDetails>
+                    @edit-profile="EditProfileStatus" ></ProfileDetails>
     <AvailabilityProgrammer v-if="!this.editProfile && currentTab === 2 "></AvailabilityProgrammer>
 
     <programmer-skills v-if="!this.editProfile && currentTab === 3 " :skills="skills"
@@ -18,7 +18,7 @@
 </template>
 
 <script>
-import Programmer from "@/models/programmer/programmer";
+
 import ProfileDetails from "@/components/programmerProfile/ProfileDetails";
 import ProfileInputDetails from "@/components/programmerProfile/ProfileInputDetails";
 import {ProgrammerSkill} from "@/models/programmer/programmerSkill"
@@ -26,15 +26,17 @@ import TopProfileDetails from "@/components/programmerProfile/TopProfileDetails"
 import AvailabilityProgrammer from "@/components/programmerProfile/AvailabilityProgrammer";
 import ProgrammerSkills from "@/components/programmerProfile/programmerSkills";
 import ProgrammerInputSkills from "@/components/programmerProfile/ProgrammerInputSkills";
+import ProgrammerRepository from "@/assets/Repositories/ProgrammerService";
+import Programmer from "@/models/programmer/programmer";
 
 export default {
   name: "ProgrammerProfilePage",
   components: {
     ProgrammerInputSkills,
     ProgrammerSkills, AvailabilityProgrammer, TopProfileDetails, ProfileInputDetails, ProfileDetails},
-  created() {
-    this.sampleProgrammer = new Programmer(0, "John", "Doe", "JohnDoe@HvA.nl", "wiboutStraat", "Amsterdam", "Rust",
-        40, 12, 20, "On location", "Full stack")
+ async created() {
+    // this.sampleProgrammer = new Programmer(0, "John", "Doe", "JohnDoe@HvA.nl", "wiboutStraat", "Amsterdam", "Rust",
+    //     40, 12, 20, "On location", "Full stack")
 
     let languages = ["PowerBi" , "Flutter" ,"Dart", "C#" , "Rust"]
 
@@ -44,14 +46,22 @@ export default {
       this.skills.push(  new ProgrammerSkill(1, si ,language, Math.round(Math.random() * 4 + 1)))
       this.skills.skillName = language
     }
+    // const allProgrammers = this.repository.getAllProgrammers()
+    // console.log(allProgrammers)
+    this.sampleProgrammer = await this.repository.findProgrammerById(1)
+
+
+    console.log(this.programmers)
     this.currentTab = 1;
   },
   data() {
     return {
-      sampleProgrammer: null,
+      sampleProgrammer: new Programmer,
       editProfile: null,
       currentTab: null,
-      skills: []
+      skills: [],
+      programmers: [],
+      repository: new ProgrammerRepository(),
     }
   },
   methods: {
@@ -64,8 +74,8 @@ export default {
     changeSelectedTab(selectedTab) {
       this.currentTab = selectedTab;
     },
+  },
 
-  }
 }
 </script>
 

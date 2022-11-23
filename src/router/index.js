@@ -11,14 +11,14 @@ const routes = [
             isPublic: true,
         },
         path: "/",
-        component: () =>  import('../views/Home'),
+        component: () => import('../views/Home'),
     },
     {
         meta: {
             isPublic: true,
         },
         path: "/register",
-        component: () =>  import('../views/auth/Register'),
+        component: () => import('../views/auth/Register'),
     },
     {
         meta: {
@@ -32,7 +32,7 @@ const routes = [
     {
         path: "/home",
         name: "Home",
-        component: () =>  import('../views/admin/AdminHome'),
+        component: () => import('../views/admin/AdminHome'),
     },
 
 
@@ -47,6 +47,11 @@ const routes = [
         name: "Edit Programmer",
         path: '/programmers/view',
         component: () => import(`../views/programmer/Edit`),
+    },
+    {
+        name: "Create Programmer",
+        path: '/programmers/add',
+        component: () => import('../views/programmer/AddProgrammer'),
     },
 
     // === CLIENTS ===

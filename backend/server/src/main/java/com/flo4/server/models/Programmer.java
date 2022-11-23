@@ -1,12 +1,14 @@
 package com.flo4.server.models;
 
 import javax.persistence.*;
+import java.util.Set;
+
 
 @Entity
 public class Programmer {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     private String firstName;
@@ -21,13 +23,12 @@ public class Programmer {
 
     private String postcode;
 
-    // todo add skills
 
-    // todo add availability
-//    private String availability;
+    @OneToMany(mappedBy = "programmer")
+    private Set<Skill> skills;
 
-    private int hours;
-
+    @OneToOne
+    private Availability availability;
     private String workPreference;
 
     private String projectType;
@@ -44,7 +45,7 @@ public class Programmer {
     }
 
     public Programmer(int id, String firstName, String lastName, String email, String address,
-                      String city, String postcode, int hours, String workPreference, String projectType, Project project) {
+                      String city, String postcode, Set<Skill> skills, Availability availability, String workPreference, String projectType, Project project) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -52,12 +53,20 @@ public class Programmer {
         this.address = address;
         this.city = city;
         this.postcode = postcode;
-        this.hours = hours;
+        this.skills = skills;
+        this.availability = availability;
         this.workPreference = workPreference;
         this.projectType = projectType;
         this.project = project;
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getFirstName() {
         return firstName;
@@ -83,8 +92,21 @@ public class Programmer {
         return postcode;
     }
 
-    public int getHours() {
-        return hours;
+
+    public Set<Skill> getSkill() {
+        return skills;
+    }
+
+    public void setSkill(Set<Skill> skill) {
+        this.skills = skill;
+    }
+
+    public Availability getAvailability() {
+        return availability;
+    }
+
+    public void setAvailability(Availability availability) {
+        this.availability = availability;
     }
 
     public String getWorkPreference() {
@@ -121,31 +143,11 @@ public class Programmer {
     }
 
 
-    public void setHours(int hours) {
-        this.hours = hours;
-    }
-
     public void setWorkPreference(String workPreference) {
         this.workPreference = workPreference;
     }
 
     public void setProjectType(String projectType) {
         this.projectType = projectType;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public Project getProject() {
-        return project;
-    }
-
-    public void setProject(Project project) {
-        this.project = project;
     }
 }

@@ -25,8 +25,8 @@
         <!--begin::Col-->
         <div class="col-lg-8">
           <div class="fullNameInput">
-            <input type="text" class="form-control form-control-solid " id="fullNameLeft" name="search" v-model="editProfile.firstname" data-kt-search-element="input" />
-            <input type="text" class="form-control form-control-solid " id="fullNameRight" name="search" v-model="editProfile.lastname" data-kt-search-element="input" />
+            <input type="text" class="form-control form-control-solid " id="fullNameLeft" name="search" v-model="editProfile.firstName" data-kt-search-element="input" />
+            <input type="text" class="form-control form-control-solid " id="fullNameRight" name="search" v-model="editProfile.lastName" data-kt-search-element="input" />
           </div>
 
         </div>
@@ -48,6 +48,18 @@
       <!--begin::Input group-->
       <div class="row mb-7">
         <!--begin::Label-->
+        <label class="col-lg-4 fw-bold text-muted">City</label>
+        <!--end::Label-->
+        <!--begin::Col-->
+        <div class="col-lg-8">
+          <input type="text" class="form-control form-control-solid " name="search" v-model="editProfile.city" data-kt-search-element="input" />
+        </div>
+        <!--end::Col-->
+      </div>
+      <!--end::Input group-->
+      <!--begin::Input group-->
+      <div class="row mb-7">
+        <!--begin::Label-->
         <label class="col-lg-4 fw-bold text-muted">Address
 
         </label>
@@ -62,11 +74,11 @@
       <!--begin::Input group-->
       <div class="row mb-7">
         <!--begin::Label-->
-        <label class="col-lg-4 fw-bold text-muted">Type of Projects</label>
+        <label class="col-lg-4 fw-bold text-muted">Postcode</label>
         <!--end::Label-->
         <!--begin::Col-->
         <div class="col-lg-8">
-          <input type="text" class="form-control form-control-solid " name="search" v-model="editProfile.projectTypes" data-kt-search-element="input" />
+          <input type="text" class="form-control form-control-solid " name="search" v-model="editProfile.postcode" data-kt-search-element="input" />
         </div>
         <!--end::Col-->
       </div>
@@ -74,24 +86,12 @@
       <!--begin::Input group-->
       <div class="row mb-7">
         <!--begin::Label-->
-        <label class="col-lg-4 fw-bold text-muted">Knowledge
+        <label class="col-lg-4 fw-bold text-muted">Type of Project
           <em class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip" title="Programming Languages Known"></em></label>
         <!--end::Label-->
         <!--begin::Col-->
         <div class="col-lg-8">
-          <input type="text" class="form-control form-control-solid " name="search" v-model="editProfile.knowledge" data-kt-search-element="input" />
-        </div>
-        <!--end::Col-->
-      </div>
-      <!--end::Input group-->
-      <!--begin::Input group-->
-      <div class="row mb-7">
-        <!--begin::Label-->
-        <label class="col-lg-4 fw-bold text-muted">City</label>
-        <!--end::Label-->
-        <!--begin::Col-->
-        <div class="col-lg-8">
-          <input type="text" class="form-control form-control-solid " name="search" v-model="editProfile.city" data-kt-search-element="input" />
+          <input type="text" class="form-control form-control-solid " name="search" v-model="editProfile.projectType" data-kt-search-element="input" />
         </div>
         <!--end::Col-->
       </div>
@@ -115,25 +115,36 @@
 
 <script>
 import Programmer from "@/models/programmer/programmer";
+import ProgrammerRepository from "@/assets/Repositories/ProgrammerService";
+
 
 export default {
   name: "ProfileInputDetails",
   props: ['sampleProgrammer'],
-  emits: ['edit-profile','save-profile'],
+  emits: ['edit-profile'],
   created() {
     this.editProfile = Programmer.copyConstructor(this.sampleProgrammer)
   },
   data(){
     return{
-      editProfile: Programmer,
-      editingProfile: null
+      editProfile: new Programmer,
+      editingProfile: null,
+      repository: new ProgrammerRepository()
     }
   },
   methods: {
-    setEditProfile(){
+  async  setEditProfile(){
       this.editingProfile = false
       this.$emit('edit-profile' , this.editingProfile)
-      this.$emit('save-profile' , this.editProfile)
+    this.$emit('save-profile', this.editProfile)
+
+    console.log(this.editProfile.lastName)
+    console.log(this.editProfile.firstName)
+    const profileId = 1;
+   await this.repository.updateProgrammerById(profileId,this.editProfile.firstName, this.editProfile.lastName,
+       this.editProfile.email, this.editProfile.address,
+        this.editProfile.city, this.editProfile.postcode, this.editProfile.availability, this.editProfile.workPreference,
+        this.editProfile.projectType,this.editProfile.skills)
     }
   }
 }

@@ -1,7 +1,6 @@
 package com.flo4.server.repository;
 
 import com.flo4.server.models.Programmer;
-import com.flo4.server.models.Project;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
@@ -19,7 +18,7 @@ public class ProgrammerRepository implements EntityRepository<Programmer> {
 
     @Override
     public List<Programmer> findAll() {
-        TypedQuery<Programmer> query = this.entityManager.createQuery("select p from Programmer p", Programmer.class);
+        TypedQuery<Programmer> query = this.entityManager.createQuery("select pr from Programmer pr", Programmer.class);
 
         return query.getResultList();
     }
@@ -48,8 +47,11 @@ public class ProgrammerRepository implements EntityRepository<Programmer> {
         updatedProgrammer.setAddress(entity.getAddress());
         updatedProgrammer.setCity(entity.getCity());
         updatedProgrammer.setPostcode(entity.getPostcode());
+        updatedProgrammer.setSkill(entity.getSkill());
+        updatedProgrammer.setAvailability(entity.getAvailability());
         updatedProgrammer.setWorkPreference(entity.getWorkPreference());
         updatedProgrammer.setProjectType(entity.getProjectType());
+
 
         return updatedProgrammer;
     }
