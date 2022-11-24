@@ -10,10 +10,10 @@
     <AvailabilityProgrammer v-if="!this.editProfile && currentTab === 2 "></AvailabilityProgrammer>
 
     <programmer-skills v-if="!this.editProfile && currentTab === 3 " :skills="skills"
-                    @edit-profile="EditProfileStatus"></programmer-skills>
+                       @edit-profile="EditProfileStatus" @add-skill="addSkill"></programmer-skills>
 
-<ProgrammerInputSkills  v-if="this.editProfile && currentTab === 3 " :skills="skills"
-                        @edit-profile="EditProfileStatus"></ProgrammerInputSkills>
+    <ProgrammerInputSkills v-if="this.editProfile && currentTab === 3 " :skills="skills"
+                           @edit-profile="EditProfileStatus" @delete-skill="deleteSkill" @add-skill="addSkill"></ProgrammerInputSkills>
   </div>
 </template>
 
@@ -51,7 +51,7 @@ export default {
     this.sampleProgrammer = await this.repository.findProgrammerById(1)
 
 
-    console.log(this.programmers)
+    console.log("programmer"+  this.programmers)
     this.currentTab = 1;
   },
   data() {
@@ -74,6 +74,12 @@ export default {
     changeSelectedTab(selectedTab) {
       this.currentTab = selectedTab;
     },
+    deleteSkill(skill) {
+      this.skills = this.skills.filter(item => item.skillId !== skill.skillId)
+    },
+    addSkill(skill){
+      this.skills.push(skill)
+    }
   },
 
 }

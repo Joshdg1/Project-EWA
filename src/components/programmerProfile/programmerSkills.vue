@@ -8,20 +8,23 @@
       <!--end::Card title-->
       <!--begin::Action-->
       <div class="d-flex ms-3">
-        <a @click="setEditProfile()" class="btn background-florijn btn-active-info" tooltip="New App"
+        <a @click="setEditProfile()" class="btn background-florijn btn-active-info editSkill" tooltip="New App"
            data-bs-toggle="modal"
            data-bs-target="#kt_modal_create_app" id="kt_toolbar_primary_button">Edit skills</a>
       </div>
       <!--end::Action-->
     </div>
-    <div class="card-body p-9">
+    <SkillCardPopUp v-if="popupStatus" @close-popup="closePopup" @adding-skill="addSkill">
+
+    </SkillCardPopUp>
+    <div class="card-body p-11">
       <div class="card"
            v-for="skill in this.skills"
-          v-bind:key="skill.skillId"
+           v-bind:key="skill.skillId"
       >
         <div class="skillContainer">
 
-            <img src="https://cdn.onlinewebfonts.com/svg/img_133326.png" class="code-icon">
+          <img src="https://cdn.onlinewebfonts.com/svg/img_133326.png" class="code-icon">
           <div class="CardText">
             <div>{{ skill.skillName }}  </div>
             <div> {{skill.skillLevel}}<img src="https://cdn.onlinewebfonts.com/svg/img_561899.png" class="skillStar"> </div>
@@ -29,29 +32,39 @@
 
         </div>
       </div>
-      
     </div>
+    <button class="btn background-florijn btn-active-info addSkill" @click="(event) => this.popupStatus = true">Add</button>
   </div>
 </template>
 
 <script>
-
+import SkillCardPopUp from "@/components/programmerProfile/SkillCardPopUp";
 
 export default {
   name: "programmerSkills",
+  components: {SkillCardPopUp},
   props: ['skills'],
-  emits: ['edit-profile'],
+  emits: ['edit-profile', 'add-skill'],
 
   data() {
     return {
       editingProfile: null,
-      programSkill: null
+      programSkill: null,
+      popupStatus: null
+
     }
   },
   methods: {
     setEditProfile() {
       this.editingProfile = true
       this.$emit('edit-profile', this.editingProfile)
+    },
+    closePopup(newPopupStatus){
+      this.popupStatus = newPopupStatus
+    },
+    addSkill(skill) {
+      this.$emit('add-skill',skill)
+
     }
   }
 
@@ -59,6 +72,12 @@ export default {
 </script>
 
 <style scoped>
+.editSkill {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 2em;
+}
 .skillContainer {
   display: flex;
   flex-direction: column;
@@ -89,5 +108,9 @@ export default {
 }
 .skillStar{
   height: 1em;
+}
+.addSkill{
+  width: 5vw;
+  margin: 1em;
 }
 </style>

@@ -32,7 +32,7 @@ export default class ProgrammerRepository {
         return await response.json();
     }
     async  updateProgrammerById(programmerId,firstName, lastName, email,address, city, postcode,
-                                availability, workPreference, projectType, skills)
+                                availability, workPreference, projectType,)
     {
         const response = await fetch('http://localhost:8081/programmers/' + programmerId, {
             method: 'PUT',
@@ -40,7 +40,7 @@ export default class ProgrammerRepository {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({programmerId,firstName, lastName, email, address, city,
-                postcode, availability, workPreference, projectType, skills}),
+                postcode ,projectType, workPreference,availability}),
         });
         return await response.json();
     }

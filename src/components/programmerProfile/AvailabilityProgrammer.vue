@@ -8,34 +8,94 @@
       <!--end::Card title-->
       <!--begin::Action-->
       <div class="d-flex ms-3">
-        <a @click="setEditProfile()" class="btn background-florijn btn-active-info" tooltip="New App"
-           data-bs-toggle="modal"
-           data-bs-target="#kt_modal_create_app" id="kt_toolbar_primary_button">Edit profile-page</a>
       </div>
       <!--end::Action-->
     </div>
+    <div class="card-body p-9">
+      <div class="availableInput">
+        <FullCalendar class="calender" :options="calendarOptions" ref="calendar" />
+      </div>
+    </div>
+    <button @click="getAllCurrentDates"></button>
   </div>
 </template>
 
 <script>
+
+
+import '@fullcalendar/core/vdom' // solves problem with Vite
+import FullCalendar from "@fullcalendar/vue"
+import dayGridPlugin from '@fullcalendar/daygrid'
+import interactionPlugin from '@fullcalendar/interaction'
+
+
+
 export default {
-  name: "AvailabilityCardProgrammerProfile",
-  props: ['sampleProgrammer'],
-  emits: ['edit-profile'],
+
+  components: {
+    FullCalendar // make the <FullCalendar> tag available
+  },
+
+  name: 'availabilityProgrammer',
   data() {
     return {
-      editingProfile: null
+      calendarOptions: {
+        plugins: [ dayGridPlugin, interactionPlugin ],
+        initialView: 'dayGridMonth',
+        eventClick: this.handleDateClick,
+        editable:true,
+        events: [
+          { title: 'event 1', start: '2022-11-01',end: '2022-11-22'},
+
+        ]
+      }
     }
   },
   methods: {
-    setEditProfile() {
-      this.editingProfile = true
-      this.$emit('edit-profile', this.editingProfile)
+    handleDateClick: function(arg) {
+
+      alert('date click! ' + arg.dateStr)
+
+    },
+    getAllCurrentDates(){
+      let calendarApi = this.$refs.calendar.getApi();
+      const Avail =  calendarApi.getEvents()
+      const avail = Avail[0]
+      console.log(avail.start)
+      console.log(avail.end)
     }
+
   }
+
 }
 </script>
 
-<style scoped>
+<style>
+.inputBox {
+  margin: .5em;
+}
+
+.availableInput {
+  display: flex;
+  /*flex-direction: row;*/
+  justify-content: center;
+  align-content: center;
+
+}
+.calender{
+  height: 70vh;
+  width: 60vw;
+}
+.dateInput {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: #E4E6EF;
+  border-radius: 20px;
+  padding: 1em;
+  margin: 2em;
+  height: 30vh;
+}
+
 
 </style>

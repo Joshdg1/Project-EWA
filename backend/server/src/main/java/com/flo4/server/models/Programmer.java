@@ -32,9 +32,9 @@ public class Programmer {
 
     private String projectType;
 
-    @ManyToOne
-    @JoinColumn(name = "project_id", nullable = false)
-    private Project project;
+//    @ManyToOne
+//    @JoinColumn(name = "project_id", nullable = false)
+//    private Project project;
 
     public Programmer() {
     }
@@ -45,7 +45,7 @@ public class Programmer {
 
     public Programmer(int id, String firstName, String lastName, String email, String address,
                       String city, String postcode, Availability availability, String workPreference,
-                      String projectType, Project project, Set<Skill> skills) {
+                      String projectType, Set<Skill> skills) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -56,7 +56,7 @@ public class Programmer {
         this.availability = availability;
         this.workPreference = workPreference;
         this.projectType = projectType;
-        this.project = project;
+//        this.project = project;
         this.skills = skills;
     }
 
@@ -159,11 +159,11 @@ public class Programmer {
         this.skills = skills;
     }
 
-    public Project getProject() {
-        return project;
-    }
-
-    public void setProject(Project project) {
-        this.project = project;
-    }
+//    public Project getProject() {
+//        return project;
+//    }
+//
+//    public void setProject(Project project) {
+//        this.project = project;
+//    }
 }

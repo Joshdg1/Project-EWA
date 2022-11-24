@@ -116,7 +116,7 @@ export default {
 
       await this.repository.createProject(title, description, company, hoursWorked)
 
-      this.$router.push("/");
+      this.$router.push("/projects");
     }
   }
 }

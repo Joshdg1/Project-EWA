@@ -14,8 +14,8 @@ public class Project {
     private String company;
     private int hoursWorked;
 
-    @OneToMany(mappedBy = "project")
-    private Set<Programmer> programmers;
+//    @OneToMany(mappedBy = "project")
+//    private Set<Programmer> programmers;
 
     //@todo make it possible to have nullable on false and add client
     @ManyToOne
@@ -38,16 +38,16 @@ public class Project {
      * @param description
      * @param company
      * @param hoursWorked
-     * @param programmers
+//     * @param programmers
      * @param client
      */
-    public Project(int id, String title, String description, String company, int hoursWorked, Set<Programmer> programmers, Client client) {
+    public Project(int id, String title, String description, String company, int hoursWorked, Client client) {
         this(id);
         this.setTitle(title);
         this.setDescription(description);
         this.setCompany(company);
         this.setHoursWorked(hoursWorked);
-        this.setProgrammers(programmers);
+//        this.setProgrammers(programmers);
         this.setClient(client);
     }
 
@@ -90,14 +90,14 @@ public class Project {
     public void setHoursWorked(int hoursWorked) {
         this.hoursWorked = hoursWorked;
     }
-
-    public Set<Programmer> getProgrammers() {
-        return programmers;
-    }
-
-    public void setProgrammers(Set<Programmer> programmers) {
-        this.programmers = programmers;
-    }
+//
+//    public Set<Programmer> getProgrammers() {
+//        return programmers;
+//    }
+//
+//    public void setProgrammers(Set<Programmer> programmers) {
+//        this.programmers = programmers;
+//    }
 
     public Client getClient() {
         return client;

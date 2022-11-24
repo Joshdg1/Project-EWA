@@ -84,8 +84,10 @@ export default {
   methods: {
   async  createProgrammer() {
    await this.repository.createProgrammers(this.programmer.firstName,this.programmer.lastName,this.programmer.email,
-          this.programmer.address,this.programmer.city,this.programmer.postcode,this.programmer.availability,this.programmer.workPreference,
-          this.programmer.projectType,this.programmer.skills)
+          this.programmer.address,this.programmer.city,this.programmer.postcode,   this.programmer.projectType,this.programmer.workPreference,this.programmer.availability
+       )
+
+    this.$router.push("/programmers");
     }
 
   }

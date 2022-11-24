@@ -104,66 +104,66 @@
             <a href="#">See All</a>
           </div>
         </div>
-        <div class="top-sales box">
-          <div class="title">Top Seling Product</div>
-          <ul class="top-sales-details">
-            <li>
-              <a href="#">
-                <!--<img src="images/sunglasses.jpg" alt="">-->
-                <span class="product">Vuitton Sunglasses</span>
-              </a>
-              <span class="price">$1107</span>
-            </li>
-            <li>
-              <a href="#">
-                <!--<img src="images/jeans.jpg" alt="">-->
-                <span class="product">Hourglass Jeans </span>
-              </a>
-              <span class="price">$1567</span>
-            </li>
-            <li>
-              <a href="#">
-                <!-- <img src="images/nike.jpg" alt="">-->
-                <span class="product">Nike Sport Shoe</span>
-              </a>
-              <span class="price">$1234</span>
-            </li>
-            <li>
-              <a href="#">
-                <!--<img src="images/scarves.jpg" alt="">-->
-                <span class="product">Hermes Silk Scarves.</span>
-              </a>
-              <span class="price">$2312</span>
-            </li>
-            <li>
-              <a href="#">
-                <!--<img src="images/blueBag.jpg" alt="">-->
-                <span class="product">Succi Ladies Bag</span>
-              </a>
-              <span class="price">$1456</span>
-            </li>
-            <li>
-              <a href="#">
-                <!--<img src="images/bag.jpg" alt="">-->
-                <span class="product">Gucci Womens's Bags</span>
-              </a>
-              <span class="price">$2345</span>
-            <li>
-              <a href="#">
-                <!--<img src="images/addidas.jpg" alt="">-->
-                <span class="product">Addidas Running Shoe</span>
-              </a>
-              <span class="price">$2345</span>
-            </li>
-            <li>
-              <a href="#">
-                <!--<img src="images/shirt.jpg" alt="">-->
-                <span class="product">Bilack Wear's Shirt</span>
-              </a>
-              <span class="price">$1245</span>
-            </li>
-          </ul>
-        </div>
+<!--        <div class="top-sales box">-->
+<!--          <div class="title">Top Seling Product</div>-->
+<!--          <ul class="top-sales-details">-->
+<!--            <li>-->
+<!--              <a href="#">-->
+<!--                &lt;!&ndash;<img src="images/sunglasses.jpg" alt="">&ndash;&gt;-->
+<!--                <span class="product">Vuitton Sunglasses</span>-->
+<!--              </a>-->
+<!--              <span class="price">$1107</span>-->
+<!--            </li>-->
+<!--            <li>-->
+<!--              <a href="#">-->
+<!--                &lt;!&ndash;<img src="images/jeans.jpg" alt="">&ndash;&gt;-->
+<!--                <span class="product">Hourglass Jeans </span>-->
+<!--              </a>-->
+<!--              <span class="price">$1567</span>-->
+<!--            </li>-->
+<!--            <li>-->
+<!--              <a href="#">-->
+<!--                &lt;!&ndash; <img src="images/nike.jpg" alt="">&ndash;&gt;-->
+<!--                <span class="product">Nike Sport Shoe</span>-->
+<!--              </a>-->
+<!--              <span class="price">$1234</span>-->
+<!--            </li>-->
+<!--            <li>-->
+<!--              <a href="#">-->
+<!--                &lt;!&ndash;<img src="images/scarves.jpg" alt="">&ndash;&gt;-->
+<!--                <span class="product">Hermes Silk Scarves.</span>-->
+<!--              </a>-->
+<!--              <span class="price">$2312</span>-->
+<!--            </li>-->
+<!--            <li>-->
+<!--              <a href="#">-->
+<!--                &lt;!&ndash;<img src="images/blueBag.jpg" alt="">&ndash;&gt;-->
+<!--                <span class="product">Succi Ladies Bag</span>-->
+<!--              </a>-->
+<!--              <span class="price">$1456</span>-->
+<!--            </li>-->
+<!--            <li>-->
+<!--              <a href="#">-->
+<!--                &lt;!&ndash;<img src="images/bag.jpg" alt="">&ndash;&gt;-->
+<!--                <span class="product">Gucci Womens's Bags</span>-->
+<!--              </a>-->
+<!--              <span class="price">$2345</span>-->
+<!--            <li>-->
+<!--              <a href="#">-->
+<!--                &lt;!&ndash;<img src="images/addidas.jpg" alt="">&ndash;&gt;-->
+<!--                <span class="product">Addidas Running Shoe</span>-->
+<!--              </a>-->
+<!--              <span class="price">$2345</span>-->
+<!--            </li>-->
+<!--            <li>-->
+<!--              <a href="#">-->
+<!--                &lt;!&ndash;<img src="images/shirt.jpg" alt="">&ndash;&gt;-->
+<!--                <span class="product">Bilack Wear's Shirt</span>-->
+<!--              </a>-->
+<!--              <span class="price">$1245</span>-->
+<!--            </li>-->
+<!--          </ul>-->
+<!--        </div>-->
       </div>
     </div>
   </section>

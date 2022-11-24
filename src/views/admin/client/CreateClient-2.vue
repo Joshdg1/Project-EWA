@@ -114,7 +114,7 @@ export default {
 
       await this.ClientRepository.createClient(name, email, address, city, postcode, projectType);
 
-      this.$router.push("/");
+      this.$router.push("/clients");
     }
   }
 }
