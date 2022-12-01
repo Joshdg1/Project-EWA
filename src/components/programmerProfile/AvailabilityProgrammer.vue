@@ -13,10 +13,10 @@
     </div>
     <div class="card-body p-9">
       <div class="availableInput">
-        <FullCalendar class="calender" :options="calendarOptions" ref="calendar" />
+        <FullCalendar class="calender" :options="calendarOptions" ref="calendar"/>
       </div>
     </div>
-    <button @click="getAllCurrentDates"></button>
+    <AddDatePopUp v-if="popupStatus" @close-popup="closePopup" @adding-date="addDate"></AddDatePopUp>
   </div>
 </template>
 
@@ -24,46 +24,66 @@
 
 
 import '@fullcalendar/core/vdom' // solves problem with Vite
+import AddDatePopUp from "@/components/programmerProfile/AddDatePopUp";
 import FullCalendar from "@fullcalendar/vue"
 import dayGridPlugin from '@fullcalendar/daygrid'
 import interactionPlugin from '@fullcalendar/interaction'
 
 
-
 export default {
 
   components: {
-    FullCalendar // make the <FullCalendar> tag available
+    AddDatePopUp, FullCalendar // make the <FullCalendar> tag available
   },
 
   name: 'availabilityProgrammer',
+  emits:['add-date'],
   data() {
     return {
+      popupStatus: null,
+
       calendarOptions: {
-        plugins: [ dayGridPlugin, interactionPlugin ],
+        plugins: [dayGridPlugin, interactionPlugin],
         initialView: 'dayGridMonth',
-        eventClick: this.handleDateClick,
-        editable:true,
+        dateClick: this.dateClick,
+        editable: true,
         events: [
-          { title: 'event 1', start: '2022-11-01',end: '2022-11-22'},
+          // {title: 'event 1', start: '2022-12-01', end: '2022-12-22'},
 
         ]
       }
     }
   },
   methods: {
-    handleDateClick: function(arg) {
 
-      alert('date click! ' + arg.dateStr)
-
+    dateClick: function () {
+        this.popupStatus = true
     },
-    getAllCurrentDates(){
+
+    closePopup(newPopupStatus) {
+      this.popupStatus = newPopupStatus
+    },
+    addDate(date){
       let calendarApi = this.$refs.calendar.getApi();
-      const Avail =  calendarApi.getEvents()
-      const avail = Avail[0]
-      console.log(avail.start)
-      console.log(avail.end)
+      calendarApi.addEvent({
+        title: date.title,
+        start: date.start,
+        end: date.end,
+          })
+
+
+
     }
+
+
+
+    // getAllCurrentDates(){
+
+    //   const Avail =  calendarApi.getEvents()
+    //   const avail = Avail[0]
+    //   console.log(avail.start)
+    //   console.log(avail.end)
+    // }
 
   }
 
@@ -82,10 +102,12 @@ export default {
   align-content: center;
 
 }
-.calender{
+
+.calender {
   height: 70vh;
   width: 60vw;
 }
+
 .dateInput {
   display: flex;
   flex-direction: column;
