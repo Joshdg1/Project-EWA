@@ -30,7 +30,7 @@ class Programmer {
     constructor(firstname, lastname, email, address, city, postcode, knowledge, experience, availability, hours, workPreference, projectType) {
         this.firstname = firstname;
         this.lastname = lastname;
-        this.email = email
+        this.email = email;
         this.address = address;
         this.city = city;
         this.postcode = postcode;
