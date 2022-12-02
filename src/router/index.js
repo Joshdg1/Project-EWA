@@ -63,7 +63,16 @@ const routes = [
         path: '/projects',
         component: () => import(`../views/admin/project/ProjectAdminView`),
     },
-
+    {
+        name: "CreateClientProjectView",
+        path: "/createNewProject",
+        component: () => import('../views/admin/client/CreateClientProjectView')
+    },
+    {
+        name: "CreateClientProject-2",
+        path: "/createNewProject2",
+        component: () => import('../views/admin/client/CreateClientProject-2')
+    }
 ];
 
 const router = new VueRouter({
