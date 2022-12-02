@@ -13,25 +13,31 @@
     </div>
     <div class="card-body p-9">
       <div class="hours">
-        {{totalHours}} aantal uren
+        {{ totalHours }} aantal uren
       </div>
       <div class="availableInput">
-        <FullCalendar class="calender" :options="calendarOptions" ref="calendar"/>
+        <FullCalendar
+            class="calender"
+            :options="calendarOptions"
+            ref="calendar"/>
       </div>
     </div>
-    <AddDatePopUp v-if="popupStatus" :selectedDate = "selectedDate" @close-popup="closePopup" @adding-date="addDate"></AddDatePopUp>
+    <AddDatePopUp
+        v-if="popupStatus"
+        :selectedDate="selectedDate"
+        @close-popup="closePopup"
+        @adding-date="addDate">
+    </AddDatePopUp>
   </div>
 </template>
 
 <script>
-
 
 import '@fullcalendar/core/vdom' // solves problem with Vite
 import AddDatePopUp from "@/components/programmerProfile/AddDatePopUp";
 import FullCalendar from "@fullcalendar/vue"
 import dayGridPlugin from '@fullcalendar/daygrid'
 import interactionPlugin from '@fullcalendar/interaction'
-
 
 export default {
 
@@ -52,9 +58,7 @@ export default {
         initialView: 'dayGridMonth',
         dateClick: this.dateClick,
         editable: true,
-        events: [
-
-        ]
+        events: []
       }
     }
   },
@@ -64,9 +68,9 @@ export default {
       return Math.round((second - first) / (1000 * 60 * 60 * 24));
     },
     // eventClick: function () {
-     // let deleteEvent =  confirm("wil je " + arg)
-     //  let deletingEvent = this.calendarApi.getEventById()
-     //  this.events.filter()
+    // let deleteEvent =  confirm("wil je " + arg)
+    //  let deletingEvent = this.calendarApi.getEventById()
+    //  this.events.filter()
     // },
     dateClick: function (arg) {
       this.selectedDate = arg.date
@@ -77,7 +81,7 @@ export default {
     closePopup(newPopupStatus) {
       this.popupStatus = newPopupStatus
     },
-    addDate(date){
+    addDate(date) {
       let calendarApi = this.$refs.calendar.getApi();
       calendarApi.addEvent({
         title: date.title,
@@ -90,9 +94,9 @@ export default {
 
       const end = new Date(date.end)
 
-        const hoursOfEvent = this.datediff(start.getTime(), end.getTime()) * date.hoursPerDay
+      const hoursOfEvent = this.datediff(start.getTime(), end.getTime()) * date.hoursPerDay
 
-        this.totalHours = this.totalHours + hoursOfEvent
+      this.totalHours = this.totalHours + hoursOfEvent
     },
 
   }
@@ -101,13 +105,10 @@ export default {
 </script>
 
 <style>
-
 .availableInput {
   display: flex;
-  /*flex-direction: row;*/
   justify-content: center;
   align-content: center;
-
 }
 
 .calender {
@@ -115,13 +116,10 @@ export default {
   width: 60vw;
 }
 
-
-.hours{
+.hours {
   display: flex;
   justify-content: right;
   font-size: 1.7em;
   margin-bottom: 1em;
 }
-
-
 </style>
