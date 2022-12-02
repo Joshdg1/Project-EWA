@@ -1,7 +1,7 @@
 <template>
     <div>
-        <div class="row g-5 g-xl-10 mb-5 mb-xl-10" v-for="project in projects" v-bind:key="project">
-            <div class="col-lg-6">
+        <div class="row g-5 g-xl-10 mb-5 mb-xl-10" >
+            <div v-for="project in projects" v-bind:key="project" class="col-lg-6">
                 <!--begin::Card widget 18-->
                 <div class="card card-flush h-md-100">
                     <!--begin::Body-->
@@ -104,7 +104,7 @@
                             </div>
                             <!--end::Body-->
                             <!--begin::Footer-->
-                          <span class="fw-semibold text-gray-400 d-block fs-8 mb-2">Programmers</span>
+                          <span class="fw-semibold text-gray-400 d-block fs-8 mb-2">Assigned programmer(s)</span>
                             <div class="d-flex flex-stack mt-auto bd-highlight">
                                 <!--begin::Users group-->
                                 <div class="symbol-group symbol-hover flex-nowrap">
