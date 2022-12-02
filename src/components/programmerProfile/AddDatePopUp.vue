@@ -7,10 +7,10 @@
         <input v-model="newDate.title" placeholder="title" class="cardInput">
         <input v-model="newDate.hoursPerDay" type="number"  placeholder="hours"  class="cardInput">
         <div class="SkillLevel">
-          <input v-model="newDate.start" type="date"  placeholder="start"  class="cardInput">
+          <input v-model="newDate.start" type="date"  class="cardInput">
         </div>
 
-        <input v-model="newDate.end" type="date"  placeholder="end"  class="cardInput">
+        <input v-model="newDate.end" type="date"   class="cardInput">
 
       </div>
       <div class="buttons">
@@ -29,9 +29,13 @@ import programmerDate from "@/models/programmer/programmerDate";
 
 export default {
   name: "AddDatePopUp",
+  props: ['selectedDate'],
   emits: ['close-popup', 'adding-date'],
   created() {
     this.newDate = new programmerDate()
+
+    this.newDate.start = new Date(this.selectedDate);
+    console.log(this.newDate.start)
   },
   data(){
     return {

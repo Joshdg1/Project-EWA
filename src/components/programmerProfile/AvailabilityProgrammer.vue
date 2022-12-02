@@ -19,7 +19,7 @@
         <FullCalendar class="calender" :options="calendarOptions" ref="calendar"/>
       </div>
     </div>
-    <AddDatePopUp v-if="popupStatus" @close-popup="closePopup" @adding-date="addDate"></AddDatePopUp>
+    <AddDatePopUp v-if="popupStatus" :selectedDate = "selectedDate" @close-popup="closePopup" @adding-date="addDate"></AddDatePopUp>
   </div>
 </template>
 
@@ -45,7 +45,7 @@ export default {
     return {
       popupStatus: null,
       totalHours: 0,
-
+      selectedDate: null,
 
       calendarOptions: {
         plugins: [dayGridPlugin, interactionPlugin],
@@ -68,10 +68,11 @@ export default {
      //  let deletingEvent = this.calendarApi.getEventById()
      //  this.events.filter()
     // },
-    dateClick: function () {
+    dateClick: function (arg) {
+      this.selectedDate = arg.date
+      console.log(arg)
       this.popupStatus = true
     },
-
 
     closePopup(newPopupStatus) {
       this.popupStatus = newPopupStatus
@@ -94,24 +95,12 @@ export default {
         this.totalHours = this.totalHours + hoursOfEvent
     },
 
-
-// getAllCurrentDates(){
-
-    //   const Avail =  calendarApi.getEvents()
-    //   const avail = Avail[0]
-    //   console.log(avail.start)
-    //   console.log(avail.end)
-    // }
-
   }
 
 }
 </script>
 
 <style>
-.inputBox {
-  margin: .5em;
-}
 
 .availableInput {
   display: flex;
@@ -126,20 +115,12 @@ export default {
   width: 60vw;
 }
 
-.dateInput {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  background-color: #E4E6EF;
-  border-radius: 20px;
-  padding: 1em;
-  margin: 2em;
-  height: 30vh;
-}
+
 .hours{
   display: flex;
   justify-content: right;
   font-size: 1.7em;
+  margin-bottom: 1em;
 }
 
 
