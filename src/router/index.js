@@ -64,14 +64,14 @@ const routes = [
         component: () => import(`../views/admin/project/ProjectAdminView`),
     },
     {
-        name: "CreateClientProjectView",
+        name: "CreateProjectView",
         path: "/createNewProject",
-        component: () => import('../views/admin/client/CreateClientProjectView')
+        component: () => import('../views/admin/project/CreateProjectView')
     },
     {
-        name: "CreateClientProject-2",
+        name: "CreateProject-2",
         path: "/createNewProject2",
-        component: () => import('../views/admin/client/CreateClientProject-2')
+        component: () => import('../views/admin/project/CreateProject-2')
     }
 ];
 
