@@ -12,6 +12,9 @@
       <!--end::Action-->
     </div>
     <div class="card-body p-9">
+      <div class="hours">
+        {{totalHours}} aantal uren
+      </div>
       <div class="availableInput">
         <FullCalendar class="calender" :options="calendarOptions" ref="calendar"/>
       </div>
@@ -37,10 +40,12 @@ export default {
   },
 
   name: 'availabilityProgrammer',
-  emits:['add-date'],
+  emits: ['add-date'],
   data() {
     return {
       popupStatus: null,
+      totalHours: 0,
+
 
       calendarOptions: {
         plugins: [dayGridPlugin, interactionPlugin],
@@ -48,7 +53,6 @@ export default {
         dateClick: this.dateClick,
         editable: true,
         events: [
-          // {title: 'event 1', start: '2022-12-01', end: '2022-12-22'},
 
         ]
       }
@@ -56,9 +60,18 @@ export default {
   },
   methods: {
 
-    dateClick: function () {
-        this.popupStatus = true
+    datediff(first, second) {
+      return Math.round((second - first) / (1000 * 60 * 60 * 24));
     },
+    // eventClick: function () {
+     // let deleteEvent =  confirm("wil je " + arg)
+     //  let deletingEvent = this.calendarApi.getEventById()
+     //  this.events.filter()
+    // },
+    dateClick: function () {
+      this.popupStatus = true
+    },
+
 
     closePopup(newPopupStatus) {
       this.popupStatus = newPopupStatus
@@ -69,15 +82,20 @@ export default {
         title: date.title,
         start: date.start,
         end: date.end,
-          })
+      })
+
+      // To calculate the time difference of two dates
+      const start = new Date(date.start)
+
+      const end = new Date(date.end)
+
+        const hoursOfEvent = this.datediff(start.getTime(), end.getTime()) * date.hoursPerDay
+
+        this.totalHours = this.totalHours + hoursOfEvent
+    },
 
 
-
-    }
-
-
-
-    // getAllCurrentDates(){
+// getAllCurrentDates(){
 
     //   const Avail =  calendarApi.getEvents()
     //   const avail = Avail[0]
@@ -117,6 +135,11 @@ export default {
   padding: 1em;
   margin: 2em;
   height: 30vh;
+}
+.hours{
+  display: flex;
+  justify-content: right;
+  font-size: 1.7em;
 }
 
 

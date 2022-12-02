@@ -2,13 +2,16 @@
   <div class="popup">
     <div class="popup-inner">
 
-      <img src="https://cdn.onlinewebfonts.com/svg/img_133326.png" class="code-icon">
+      <img src="https://clipground.com/images/date-symbol-clipart.jpg" class="code-icon">
       <div class="CardText">
         <input v-model="newDate.title" placeholder="title" class="cardInput">
+        <input v-model="newDate.hoursPerDay" type="number"  placeholder="hours"  class="cardInput">
         <div class="SkillLevel">
           <input v-model="newDate.start" type="date"  placeholder="start"  class="cardInput">
         </div>
+
         <input v-model="newDate.end" type="date"  placeholder="end"  class="cardInput">
+
       </div>
       <div class="buttons">
         <button  class="btn background-florijn btn-active-info addSkill" @click="cancel">anuleren</button>
@@ -43,7 +46,7 @@ export default {
     },
     addSkill(){
       // if (!(this.newDate.start).type === DateTime || !isNaN(this.newDate.end)) {
-        alert(this.newDate.start)
+
         this.$emit('adding-date', this.newDate)
         this.popupStatus = false
         this.$emit('close-popup', this.popupStatus)
@@ -77,7 +80,7 @@ export default {
   align-items: center;
   flex-direction: column;
   background-color: #E4E6EF;
-  padding: 5em;
+  padding: 3em;
   border-radius: 20px;
 }
 .code-icon {
