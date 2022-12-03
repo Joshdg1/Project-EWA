@@ -5,7 +5,7 @@ import VueRouter from 'vue-router'
 import ProgrammerPage from '../views/programmer/Home.vue'
 import Login from "@/auth/Login";
 import Register from "@/auth/Register";
-import Home from "@/views/Home";
+import Home from "../views/Home";
 
 // Programmer
 import ProgrammerEdit from "../views/programmer/Edit.vue";

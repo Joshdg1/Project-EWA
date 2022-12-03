@@ -17,7 +17,7 @@
 </template>
 
 <script>
-import {ProgrammerSkill} from "@/models/programmer/programmerSkill";
+import {ProgrammerSkill} from "../../models/programmer/programmerSkill";
 
 export default {
   name: "SkillCardPopUp",

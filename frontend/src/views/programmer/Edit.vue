@@ -19,15 +19,15 @@
 
 <script>
 
-import ProfileDetails from "@/components/programmerProfile/ProfileDetails";
-import ProfileInputDetails from "@/components/programmerProfile/ProfileInputDetails";
-import {ProgrammerSkill} from "@/models/programmer/programmerSkill"
-import TopProfileDetails from "@/components/programmerProfile/TopProfileDetails";
-import AvailabilityProgrammer from "@/components/programmerProfile/AvailabilityProgrammer";
-import ProgrammerSkills from "@/components/programmerProfile/programmerSkills";
-import ProgrammerInputSkills from "@/components/programmerProfile/ProgrammerInputSkills";
-import ProgrammerRepository from "@/assets/Repositories/ProgrammerService";
-import Programmer from "@/models/programmer/programmer";
+import ProfileDetails from "../../components/programmerProfile/ProfileDetails";
+import ProfileInputDetails from "../../components/programmerProfile/ProfileInputDetails";
+import {ProgrammerSkill} from "../../models/programmer/programmerSkill"
+import TopProfileDetails from "../../components/programmerProfile/TopProfileDetails";
+import AvailabilityProgrammer from "../../components/programmerProfile/AvailabilityProgrammer";
+import ProgrammerSkills from "../../components/programmerProfile/programmerSkills";
+import ProgrammerInputSkills from "../../components/programmerProfile/ProgrammerInputSkills";
+import ProgrammerRepository from "../../assets/Repositories/ProgrammerService";
+import Programmer from "../../models/programmer/programmer";
 
 export default {
   name: "ProgrammerProfilePage",

@@ -10,7 +10,7 @@
       <!--begin::Action-->
       <div class="d-flex ms-3">
         <a @click="setEditProfile()" class="btn background-florijn btn-active-info" tooltip="New App" data-bs-toggle="modal"
-           data-bs-target="#kt_modal_create_app" id="kt_toolbar_primary_button">Edit profile-page</a>
+           data-bs-target="#kt_modal_create_app" id="kt_toolbar_primary_button">Save profile-page</a>
       </div>
       <!--end::Action-->
     </div>
@@ -24,7 +24,11 @@
         <!--end::Label-->
         <!--begin::Col-->
         <div class="col-lg-8">
-          <span class="fw-bolder fs-6 text-gray-800">{{sampleProgrammer.firstName}} {{sampleProgrammer.lastName}}</span>
+          <div class="fullNameInput">
+            <input type="text" class="form-control form-control-solid " id="fullNameLeft" name="search" v-model="editProfile.firstName" data-kt-search-element="input" />
+            <input type="text" class="form-control form-control-solid " id="fullNameRight" name="search" v-model="editProfile.lastName" data-kt-search-element="input" />
+          </div>
+
         </div>
         <!--end::Col-->
       </div>
@@ -36,7 +40,7 @@
         <!--end::Label-->
         <!--begin::Col-->
         <div class="col-lg-8 fv-row">
-          <span class="fw-bold fs-6 text-gray-800">{{ sampleProgrammer.email }}</span>
+          <input type="text" class="form-control form-control-solid " name="search" v-model="editProfile.email" data-kt-search-element="input" />
         </div>
         <!--end::Col-->
       </div>
@@ -48,24 +52,21 @@
         <!--end::Label-->
         <!--begin::Col-->
         <div class="col-lg-8">
-          <span class="fw-bolder fs-6 text-gray-800">{{ sampleProgrammer.city }}</span>
+          <input type="text" class="form-control form-control-solid " name="search" v-model="editProfile.city" data-kt-search-element="input" />
         </div>
         <!--end::Col-->
       </div>
       <!--end::Input group-->
-
       <!--begin::Input group-->
       <div class="row mb-7">
         <!--begin::Label-->
         <label class="col-lg-4 fw-bold text-muted">Address
-          <!--            <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip" title="Phone number must be active"></i>-->
+
         </label>
         <!--end::Label-->
-
         <!--begin::Col-->
         <div class="col-lg-8 d-flex align-items-center">
-          <span class="fw-bolder fs-6 me-2 text-gray-800">{{ sampleProgrammer.address }}</span>
-          <!--          <span class="badge badge-success">Verified</span>-->
+          <input type="text" class="form-control form-control-solid " name="search" v-model="editProfile.address" data-kt-search-element="input" />
         </div>
         <!--end::Col-->
       </div>
@@ -77,7 +78,7 @@
         <!--end::Label-->
         <!--begin::Col-->
         <div class="col-lg-8">
-          <a href="#" class="fw-bold fs-6 text-gray-800 text-hover-primary">{{ sampleProgrammer.postcode }}</a>
+          <input type="text" class="form-control form-control-solid " name="search" v-model="editProfile.postcode" data-kt-search-element="input" />
         </div>
         <!--end::Col-->
       </div>
@@ -85,12 +86,12 @@
       <!--begin::Input group-->
       <div class="row mb-7">
         <!--begin::Label-->
-        <label class="col-lg-4 fw-bold text-muted">Project Type
-          <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip" title="Programming languages known"></i></label>
+        <label class="col-lg-4 fw-bold text-muted">Type of Project
+          <em class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip" title="Programming Languages Known"></em></label>
         <!--end::Label-->
         <!--begin::Col-->
         <div class="col-lg-8">
-          <span class="fw-bolder fs-6 text-gray-800">{{ sampleProgrammer.projectType }}</span>
+          <input type="text" class="form-control form-control-solid " name="search" v-model="editProfile.projectType" data-kt-search-element="input" />
         </div>
         <!--end::Col-->
       </div>
@@ -102,7 +103,7 @@
         <!--begin::Label-->
         <!--begin::Label-->
         <div class="col-lg-8">
-          <span class="fw-bold fs-6">{{ sampleProgrammer.workPreference }}</span>
+          <input type="text" class="form-control form-control-solid " name="search" v-model="editProfile.workPreference" data-kt-search-element="input" />
         </div>
         <!--begin::Label-->
       </div>
@@ -113,29 +114,55 @@
 </template>
 
 <script>
-import ProgrammerRepository from "@/assets/Repositories/ProgrammerService";
+import Programmer from "../../models/programmer/programmer";
+import ProgrammerRepository from "../../assets/Repositories/ProgrammerService";
+
 
 export default {
-  name: "ProfileDetails",
+  name: "ProfileInputDetails",
   props: ['sampleProgrammer'],
   emits: ['edit-profile'],
-
-
+  created() {
+    this.editProfile = Programmer.copyConstructor(this.sampleProgrammer)
+  },
   data(){
-    return {
+    return{
+      editProfile: new Programmer,
       editingProfile: null,
       repository: new ProgrammerRepository()
     }
   },
   methods: {
-    setEditProfile(){
-      this.editingProfile = true
+  async  setEditProfile(){
+      this.editingProfile = false
       this.$emit('edit-profile' , this.editingProfile)
+    this.$emit('save-profile', this.editProfile)
+
+    console.log(this.editProfile.lastName)
+    console.log(this.editProfile.firstName)
+    const profileId = 1;
+   await this.repository.updateProgrammerById(profileId,this.editProfile.firstName, this.editProfile.lastName,
+       this.editProfile.email, this.editProfile.address,
+        this.editProfile.city, this.editProfile.postcode, this.editProfile.availability, this.editProfile.workPreference,
+        this.editProfile.projectType,this.editProfile.skills)
     }
   }
 }
+
 </script>
 
 <style scoped>
+.fullNameInput {
+  display: flex;
+  flex-direction: row;
+}
 
+#fullNameLeft {
+  width: 15vw !important;
+  margin-right: .5em;
+}
+
+#fullNameRight {
+  width: 15vw !important;
+}
 </style>

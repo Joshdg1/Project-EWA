@@ -170,7 +170,7 @@
 </template>
 
 <script>
-import ProjectAdminView from "@/views/admin/project/ProjectAdminView";
+import ProjectAdminView from "./project/ProjectAdminView";
 export default {
   name: "AdminHome",
   components: {ProjectAdminView}

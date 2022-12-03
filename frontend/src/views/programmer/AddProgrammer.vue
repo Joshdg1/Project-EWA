@@ -67,8 +67,8 @@
 
 <script>
 
-import Programmer from "@/models/programmer/programmer";
-import ProgrammerRepository from "@/assets/Repositories/ProgrammerService";
+import Programmer from "../../models/programmer/programmer";
+import ProgrammerRepository from "../../assets/Repositories/ProgrammerService";
 
 export default {
   // eslint-disable-next-line

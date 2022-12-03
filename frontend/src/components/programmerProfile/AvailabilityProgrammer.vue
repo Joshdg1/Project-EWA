@@ -34,7 +34,7 @@
 <script>
 
 import '@fullcalendar/core/vdom' // solves problem with Vite
-import AddDatePopUp from "@/components/programmerProfile/AddDatePopUp";
+import AddDatePopUp from "./AddDatePopUp";
 import FullCalendar from "@fullcalendar/vue"
 import dayGridPlugin from '@fullcalendar/daygrid'
 import interactionPlugin from '@fullcalendar/interaction'

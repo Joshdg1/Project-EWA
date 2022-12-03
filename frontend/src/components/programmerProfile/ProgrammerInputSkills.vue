@@ -49,7 +49,7 @@
 </template>
 
 <script>
-import SkillCardPopUp from "@/components/programmerProfile/SkillCardPopUp";
+import SkillCardPopUp from "./SkillCardPopUp";
 export default {
   name: "programmerInputSkills",
   components: {SkillCardPopUp},

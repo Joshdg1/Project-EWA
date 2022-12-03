@@ -25,7 +25,7 @@
 
 <script>
 
-import programmerDate from "@/models/programmer/programmerDate";
+import programmerDate from "../../models/programmer/programmerDate";
 
 export default {
   name: "AddDatePopUp",
