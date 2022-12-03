@@ -19,7 +19,7 @@ public class Project {
 
     //@todo make it possible to have nullable on false and add client
     @ManyToOne
-    @JoinColumn(name = "client_id", nullable = true)
+    @JoinColumn(name = "client_id", nullable = false)
     private Client client;
 
     public Project() {
