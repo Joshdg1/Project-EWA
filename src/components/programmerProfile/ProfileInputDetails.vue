@@ -115,7 +115,7 @@
 
 <script>
 import Programmer from "@/models/programmer/programmer";
-import ProgrammerRepository from "@/assets/Repositories/ProgrammerService";
+import ProgrammerRepository from "@/repository/ProgrammerService";
 
 
 export default {

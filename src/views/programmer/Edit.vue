@@ -26,7 +26,7 @@ import TopProfileDetails from "@/components/programmerProfile/TopProfileDetails"
 import AvailabilityProgrammer from "@/components/programmerProfile/AvailabilityProgrammer";
 import ProgrammerSkills from "@/components/programmerProfile/programmerSkills";
 import ProgrammerInputSkills from "@/components/programmerProfile/ProgrammerInputSkills";
-import ProgrammerRepository from "@/assets/Repositories/ProgrammerService";
+import ProgrammerRepository from "@/repository/ProgrammerService";
 import Programmer from "@/models/programmer/programmer";
 
 export default {
