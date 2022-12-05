@@ -2,7 +2,6 @@ package com.flo4.server.rest;
 
 import com.flo4.server.Exceptions.NotFoundException;
 import com.flo4.server.models.Availability;
-import com.flo4.server.models.Programmer;
 import com.flo4.server.repository.EntityRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -25,7 +24,8 @@ public class AvailabilityController {
     }
 
     @GetMapping(path = "{id}", produces = "application/json")
-    public ResponseEntity<Availability> findOneAvailability(@PathVariable() int id) {
+    public ResponseEntity<Availability> findOneAvailability(@PathVariable() int  id) {
+
         Availability availability = this.availabilityRepository.findById(id);
         if (availability == null) {
             throw new NotFoundException(String.format(notFound, id));

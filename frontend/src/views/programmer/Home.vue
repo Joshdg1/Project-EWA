@@ -7,9 +7,9 @@
 
 <script>
 
-import ProgrammerRepository from "../../assets/Repositories/ProgrammerService";
-import Programmers from "../../components/programmersPage/Programmers";
-import ProgrammersEdit from "../../components/programmersPage/ProgrammersEdit";
+import ProgrammerRepository from "@/repository/ProgrammerService";
+import Programmers from "@/components/programmersPage/Programmers";
+import ProgrammersEdit from "@/components/programmersPage/ProgrammersEdit";
 export default {
   name: "ProgrammerHome",
   components:{

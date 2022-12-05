@@ -38,11 +38,27 @@ import AddDatePopUp from "./AddDatePopUp";
 import FullCalendar from "@fullcalendar/vue"
 import dayGridPlugin from '@fullcalendar/daygrid'
 import interactionPlugin from '@fullcalendar/interaction'
+import AvailabilityRepository from "@/repository/AvailabilityRepository";
+import ProgrammerRepository from "@/repository/ProgrammerService";
 
 export default {
 
   components: {
     AddDatePopUp, FullCalendar // make the <FullCalendar> tag available
+  },
+  async created(){
+    console.log("CREATED")
+    const availability = await this.availabilityRepository.getAvailabilityById(1)
+    availability.title = "KREK"
+
+
+    let calendarApi = this.$refs.calendar.getApi();
+    calendarApi.addEvent({
+      title: availability.title,
+      start: availability.startDate,
+      end: availability.endDate,
+    })
+
   },
 
   name: 'availabilityProgrammer',
@@ -52,6 +68,8 @@ export default {
       popupStatus: null,
       totalHours: 0,
       selectedDate: null,
+      programmerRepository: new ProgrammerRepository(),
+      availabilityRepository: new AvailabilityRepository(),
 
       calendarOptions: {
         plugins: [dayGridPlugin, interactionPlugin],
@@ -63,6 +81,7 @@ export default {
     }
   },
   methods: {
+
 
     datediff(first, second) {
       return Math.round((second - first) / (1000 * 60 * 60 * 24));
@@ -81,12 +100,14 @@ export default {
     closePopup(newPopupStatus) {
       this.popupStatus = newPopupStatus
     },
-    addDate(date) {
+    async addDate(date) {
       let calendarApi = this.$refs.calendar.getApi();
+
+      let calendarData = await this.availabilityRepository.createAvailability(1, date.start, date.end)
       calendarApi.addEvent({
         title: date.title,
-        start: date.start,
-        end: date.end,
+        start: calendarData.start,
+        end: calendarData.end,
       })
 
       // To calculate the time difference of two dates

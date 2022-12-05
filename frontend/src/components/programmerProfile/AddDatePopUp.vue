@@ -5,7 +5,7 @@
       <img src="https://clipground.com/images/date-symbol-clipart.jpg" class="code-icon">
       <div class="CardText">
         <input v-model="newDate.title" placeholder="title" class="cardInput">
-        <input v-model="newDate.hoursPerDay" type="number"  placeholder="hours"  class="cardInput">
+        <input v-model="newDate.hoursPerDay" type="number"  placeholder="hours per day"  class="cardInput">
         <div class="SkillLevel">
           <input v-model="newDate.start" type="date"  class="cardInput">
         </div>

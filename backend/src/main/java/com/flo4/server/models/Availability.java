@@ -11,7 +11,7 @@ public class Availability {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long Id;
+    private Integer Id;
 
     private LocalDate startDate;
 
@@ -19,20 +19,20 @@ public class Availability {
 
     public Availability(){}
 
-    public Availability(long Id){this.Id = Id;}
+    public Availability(int Id){this.Id = Id;}
 
-    public Availability(Long Id, LocalDate startDate, LocalDate endDate) {
+    public Availability(int Id, LocalDate startDate, LocalDate endDate) {
         this.Id = Id;
         this.startDate = startDate;
         this.endDate = endDate;
     }
 
-    public void setId(Long Id) {
+    public void setId(int Id) {
         this.Id = Id;
     }
 
 
-    public Long getId() {
+    public int getId() {
         return Id;
     }
 

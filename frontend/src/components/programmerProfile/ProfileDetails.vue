@@ -113,7 +113,7 @@
 </template>
 
 <script>
-import ProgrammerRepository from "../../assets/Repositories/ProgrammerService";
+import ProgrammerRepository from "@/repository/ProgrammerService";
 
 export default {
   name: "ProfileDetails",
