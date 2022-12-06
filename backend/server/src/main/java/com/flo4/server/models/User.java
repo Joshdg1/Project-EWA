@@ -30,6 +30,10 @@ public class User {
         this.id = id;
     }
 
+    public static User of(String email, String firstName, String lastName, String password, String phoneNumber) {
+        return new User(null, email,firstName, lastName, password, phoneNumber, null);
+    }
+
 
     public User(Long id, String email, String firstName, String lastName, String password, String phoneNumber, String userType) {
         this.id = id;
@@ -41,7 +45,4 @@ public class User {
         this.userType = userType;
     }
 
-    public static User of(String email, String firstName, String lastName, String password, String phoneNumber) {
-        return new User(null, email,firstName, lastName, password, phoneNumber, null);
-    }
 }

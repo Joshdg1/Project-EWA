@@ -43,7 +43,6 @@ public class UserController {
         if (!Objects.equals(registerRequest.password(), registerRequest.passwordConfirmation()))
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Wachtwoorden komen niet overeen");
 
-
       var user =  userService.registerUser(
               registerRequest.email(),
               registerRequest.firstName(),
@@ -53,5 +52,18 @@ public class UserController {
               registerRequest.passwordConfirmation()
       );
       return new RegisterResponse(user.getEmail(), user.getFirstName(), user.getLastName(), user.getPhoneNumber());
+  }
+
+  record LoginRequest(String email, String password){}
+    record LoginResponse(String email,
+                         @JsonProperty("first_name") String firstName,
+                         @JsonProperty("last_name")String lastName,
+                         @JsonProperty("phone_number") String phoneNumber){}
+
+  @PostMapping(value = "login")
+    public LoginResponse login(@RequestBody LoginRequest loginRequest){
+        var user = userService.login(loginRequest.email(), loginRequest.password());
+
+        return new LoginResponse(user.getEmail(), user.getFirstName(), user.getLastName(), user.getPhoneNumber());
   }
 }

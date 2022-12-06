@@ -28,4 +28,16 @@ public class UserService {
                 User.of(email, firstName, lastName, passwordEncoder.encode(password), phoneNumber)
         );
     }
+
+    public User login(String email, String password) {
+        //Find user by email
+        var user = userRepository.findByEmail(email);
+
+        //see if passwords match
+        if (!passwordEncoder.matches(password, user.getPassword()))
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Verkeerde gegevens");
+
+        //return user
+        return user;
+    }
 }

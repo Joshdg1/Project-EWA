@@ -9,6 +9,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Optional;
 
 @Repository("USER.JPA")
 @Transactional
@@ -71,5 +72,10 @@ public class UserRepository implements EntityRepository<User> {
 
         //Execute the query and return all the results.
         return query.getResultList();
+    }
+
+
+    public User findByEmail(String email) {
+        return this.entityManager.find(User.class, email);
     }
 }
