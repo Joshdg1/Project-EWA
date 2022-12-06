@@ -16,25 +16,32 @@ import javax.persistence.Id;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
     private String email;
-    private String firstname;
-    private String lastname;
+    private String firstName;
+    private String lastName;
     private String password;
+    private String phoneNumber;
     private String userType;
 
     public User(){}
 
-    public User(int id) {
+    public User(Long id) {
         this.id = id;
     }
 
-    public User(int id, String email, String firstname, String lastname, String password, String userType) {
+
+    public User(Long id, String email, String firstName, String lastName, String password, String phoneNumber, String userType) {
         this.id = id;
         this.email = email;
-        this.firstname = firstname;
-        this.lastname = lastname;
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.password = password;
+        this.phoneNumber = phoneNumber;
         this.userType = userType;
+    }
+
+    public static User of(String email, String firstName, String lastName, String password, String phoneNumber) {
+        return new User(null, email,firstName, lastName, password, phoneNumber, null);
     }
 }
