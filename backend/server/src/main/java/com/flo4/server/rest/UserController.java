@@ -3,32 +3,26 @@ package com.flo4.server.rest;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.flo4.server.models.User;
 
-import com.flo4.server.repository.EntityRepository;
 import com.flo4.server.repository.UserRepository;
 import com.flo4.server.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
-import javax.transaction.Transactional;
+
 import java.util.Objects;
 
 @RestController
 @RequestMapping(value = "user")
 public class UserController {
-    private final UserRepository userRepository;
+    private final UserService userService;
 
 
 
-    @Autowired
-    UserService userService;
 
-    public UserController(UserRepository userRepository) {
-        this.userRepository = userRepository;
+    public UserController(UserService userService) {
+        this.userService = userService;
     }
 
     record RegisterRequest(String email,
@@ -50,15 +44,13 @@ public class UserController {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Wachtwoorden komen niet overeen");
 
 
-      var user =  userRepository.save(
-             User.of(
-                     registerRequest.email(),
-                     registerRequest.firstName(),
-                     registerRequest.lastName(),
-                     registerRequest.password(),
-                     registerRequest.phoneNumber()
-
-             )
+      var user =  userService.registerUser(
+              registerRequest.email(),
+              registerRequest.firstName(),
+              registerRequest.lastName(),
+              registerRequest.password(),
+              registerRequest.phoneNumber(),
+              registerRequest.passwordConfirmation()
       );
       return new RegisterResponse(user.getEmail(), user.getFirstName(), user.getLastName(), user.getPhoneNumber());
   }
