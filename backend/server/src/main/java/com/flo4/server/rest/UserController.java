@@ -66,4 +66,5 @@ public class UserController {
 
         return new LoginResponse(user.getEmail(), user.getFirstName(), user.getLastName(), user.getPhoneNumber());
   }
+  
 }

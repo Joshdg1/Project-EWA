@@ -1,5 +1,6 @@
 package com.flo4.server.service;
 
+import com.flo4.server.Exceptions.NotFoundException;
 import com.flo4.server.models.User;
 import com.flo4.server.repository.UserRepository;
 import org.springframework.http.HttpStatus;
@@ -24,6 +25,7 @@ public class UserService {
         if(!Objects.equals(password, passwordConfirmation))
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Wachtwoorden komen niet overeen");
 
+        var user = userRepository.findByEmail(email);
 
 
         return userRepository.save(
@@ -44,4 +46,6 @@ public class UserService {
         //return user
         return user;
     }
+
+
 }
