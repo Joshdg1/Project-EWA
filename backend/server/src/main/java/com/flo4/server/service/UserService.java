@@ -24,10 +24,13 @@ public class UserService {
         if(!Objects.equals(password, passwordConfirmation))
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Wachtwoorden komen niet overeen");
 
+
+
         return userRepository.save(
                 User.of(email, firstName, lastName, passwordEncoder.encode(password), phoneNumber)
         );
     }
+
 
     public User login(String email, String password) {
         //Find user by email
