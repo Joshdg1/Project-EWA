@@ -9,6 +9,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import javax.persistence.NoResultException;
 import java.util.Objects;
 
 @Service
@@ -26,6 +27,8 @@ public class UserService {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Wachtwoorden komen niet overeen");
 
         var user = userRepository.findByEmail(email);
+
+
 
 
         return userRepository.save(
