@@ -23,7 +23,8 @@ public class UserController {
         this.userService = userService;
     }
 
-    record RegisterRequest(String email,
+    record RegisterRequest(int id,
+                            String email,
                            @JsonProperty("first_name") String firstName,
                            @JsonProperty("last_name")String lastName,
                            String password,
@@ -42,6 +43,7 @@ public class UserController {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Wachtwoorden komen niet overeen");
 
       var user =  userService.registerUser(
+              registerRequest.id(),
               registerRequest.email(),
               registerRequest.firstName(),
               registerRequest.lastName(),

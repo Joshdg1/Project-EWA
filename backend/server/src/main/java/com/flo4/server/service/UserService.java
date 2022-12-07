@@ -20,14 +20,14 @@ public class UserService {
         this.passwordEncoder = new BCryptPasswordEncoder();
     }
 
-    public User registerUser(String email, String firstName, String lastName, String password, String phoneNumber, String passwordConfirmation){
+    public User registerUser(int id, String email, String firstName, String lastName, String password, String phoneNumber, String passwordConfirmation){
         if(!Objects.equals(password, passwordConfirmation))
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Wachtwoorden komen niet overeen");
 
 
 
         return userRepository.save(
-                User.of(email, firstName, lastName, passwordEncoder.encode(password), phoneNumber)
+                User.of(id, email, firstName, lastName, passwordEncoder.encode(password), phoneNumber)
         );
     }
 
@@ -36,6 +36,7 @@ public class UserService {
         //Find user by email
         var user = userRepository.findByEmail(email);
 
+        System.out.println(userRepository.findByEmail(email));
         //see if passwords match
         if (!passwordEncoder.matches(password, user.getPassword()))
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Verkeerde gegevens");
