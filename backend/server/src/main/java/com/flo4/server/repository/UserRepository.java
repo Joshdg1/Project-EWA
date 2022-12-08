@@ -74,7 +74,6 @@ public class UserRepository implements EntityRepository<User> {
         return query.getResultList();
     }
 
-
     //of de user returned
     //of returned null
     public User findByEmail(String email) {

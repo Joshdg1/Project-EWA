@@ -55,16 +55,13 @@ public class UserController {
   }
 
   record LoginRequest(String email, String password){}
-    record LoginResponse(String email,
-                         @JsonProperty("first_name") String firstName,
-                         @JsonProperty("last_name")String lastName,
-                         @JsonProperty("phone_number") String phoneNumber){}
+    record LoginResponse(String token){}
 
   @PostMapping(value = "login")
     public LoginResponse login(@RequestBody LoginRequest loginRequest){
-        var user = userService.login(loginRequest.email(), loginRequest.password());
+        var token = userService.login(loginRequest.email(), loginRequest.password());
 
-        return new LoginResponse(user.getEmail(), user.getFirstName(), user.getLastName(), user.getPhoneNumber());
+        return new LoginResponse(token.getToken());
   }
 
 }
