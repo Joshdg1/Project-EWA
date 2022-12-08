@@ -14,7 +14,10 @@
 
     <ProgrammerInputSkills v-if="this.editProfile && currentTab === 3 " :skills="skills"
                            @edit-profile="EditProfileStatus" @delete-skill="deleteSkill" @add-skill="addSkill"></ProgrammerInputSkills>
+
+    <ProgrammerProjects></ProgrammerProjects>
   </div>
+
 </template>
 
 <script>
@@ -28,10 +31,12 @@ import ProgrammerSkills from "@/components/programmerProfile/programmerSkills";
 import ProgrammerInputSkills from "@/components/programmerProfile/ProgrammerInputSkills";
 import ProgrammerRepository from "@/repository/ProgrammerService";
 import Programmer from "@/models/programmer/programmer";
+import ProgrammerProjects from "@/components/programmerProfile/ProgrammerProjects";
 
 export default {
   name: "ProgrammerProfilePage",
   components: {
+    ProgrammerProjects,
     ProgrammerInputSkills,
     ProgrammerSkills, AvailabilityProgrammer, TopProfileDetails, ProfileInputDetails, ProfileDetails},
  async created() {
