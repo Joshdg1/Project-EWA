@@ -1,5 +1,7 @@
 package com.flo4.server.models;
 
+
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -44,5 +46,6 @@ public class User {
         this.phoneNumber = phoneNumber;
         this.userType = userType;
     }
+
 
 }
