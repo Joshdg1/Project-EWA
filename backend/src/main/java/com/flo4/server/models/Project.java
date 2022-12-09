@@ -1,7 +1,8 @@
 package com.flo4.server.models;
 
+import com.flo4.server.models.old.Client;
+
 import javax.persistence.*;
-import java.util.Set;
 
 @Entity
 public class Project {
@@ -11,16 +12,8 @@ public class Project {
     private int id;
     private String title;
     private String description;
-    private String company;
-    private int hoursWorked;
-
-//    @OneToMany(mappedBy = "project")
-//    private Set<Programmer> programmers;
-
-    //@todo make it possible to have nullable on false and add client
-    @ManyToOne
-    @JoinColumn(name = "client_id", nullable = false)
-    private Client client;
+    private String startDate;
+    private String endDate;
 
     public Project() {
 
@@ -30,25 +23,10 @@ public class Project {
         this.id = id;
     }
 
-    /**
-     * Constructor
-     *
-     * @param id
-     * @param title
-     * @param description
-     * @param company
-     * @param hoursWorked
-//     * @param programmers
-     * @param client
-     */
     public Project(int id, String title, String description, String company, int hoursWorked, Client client) {
         this(id);
         this.setTitle(title);
         this.setDescription(description);
-        this.setCompany(company);
-        this.setHoursWorked(hoursWorked);
-//        this.setProgrammers(programmers);
-        this.setClient(client);
     }
 
     public int getId() {
@@ -73,37 +51,5 @@ public class Project {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public String getCompany() {
-        return company;
-    }
-
-    public void setCompany(String company) {
-        this.company = company;
-    }
-
-    public int getHoursWorked() {
-        return hoursWorked;
-    }
-
-    public void setHoursWorked(int hoursWorked) {
-        this.hoursWorked = hoursWorked;
-    }
-//
-//    public Set<Programmer> getProgrammers() {
-//        return programmers;
-//    }
-//
-//    public void setProgrammers(Set<Programmer> programmers) {
-//        this.programmers = programmers;
-//    }
-
-    public Client getClient() {
-        return client;
-    }
-
-    public void setClient(Client client) {
-        this.client = client;
     }
 }

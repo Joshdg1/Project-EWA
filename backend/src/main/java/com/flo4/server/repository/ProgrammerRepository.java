@@ -1,6 +1,6 @@
 package com.flo4.server.repository;
 
-import com.flo4.server.models.Programmer;
+import com.flo4.server.models.old.Programmer;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
@@ -47,7 +47,7 @@ public class ProgrammerRepository implements EntityRepository<Programmer> {
         updatedProgrammer.setAddress(entity.getAddress());
         updatedProgrammer.setCity(entity.getCity());
         updatedProgrammer.setPostcode(entity.getPostcode());
-        updatedProgrammer.setSkill(entity.getSkill());
+//        updatedProgrammer.setSkill(entity.getSkill());
         updatedProgrammer.setAvailability(entity.getAvailability());
         updatedProgrammer.setWorkPreference(entity.getWorkPreference());
         updatedProgrammer.setProjectType(entity.getProjectType());

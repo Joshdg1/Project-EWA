@@ -1,72 +1,70 @@
 package com.flo4.server.repository;
 
 
-import com.flo4.server.models.Skill;
+import com.flo4.server.models.UserSkills;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
-import java.util.ArrayList;
 import java.util.List;
 
 @Repository("SKILL.JPA")
 @Transactional
-public class SkillRepository implements EntityRepository<Skill> {
+public class SkillRepository implements EntityRepository<UserSkills> {
 
-    private List<Skill> skills;
+    private List<UserSkills> userSkills;
 
     @PersistenceContext
     protected EntityManager entityManager;
 
 
     @Override
-    public List<Skill> findAll() {
-        TypedQuery<Skill> query = this.entityManager.createQuery("select s from Skill s", Skill.class);
+    public List<UserSkills> findAll() {
+        TypedQuery<UserSkills> query = this.entityManager.createQuery("select s from UserSkillss s", UserSkills.class);
 
         return query.getResultList();
     }
 
     @Override
-    public Skill findById(int id) {
-        return this.entityManager.find(Skill.class, id);
+    public UserSkills findById(int id) {
+        return this.entityManager.find(UserSkills.class, id);
     }
 
     @Override
-    public Skill save(Skill entity) {
+    public UserSkills save(UserSkills entity) {
         return this.entityManager.merge(entity);
     }
 
     @Override
-    public Skill update(Skill entity, int id) {
-        Skill updatedSKill = findById(id);
+    public UserSkills update(UserSkills entity, int id) {
+        UserSkills updatedSKill = findById(id);
 
         if (updatedSKill == null) {
             return null;
         }
 
-        updatedSKill.setId(entity.getId());
+//        updatedSKill.setId(entity.getId());
         updatedSKill.setName(entity.getName());
         updatedSKill.setLevel(entity.getLevel());
-        updatedSKill.setProgrammer(entity.getProgrammer());
-
+        updatedSKill.setUser(entity.getUser());
 
         return updatedSKill;
     }
 
 
     @Override
-    public Skill deleteById(int id) {
-        Skill skill = entityManager.find(Skill.class, id);
-        entityManager.remove(skill);
-        return skill;
+    public UserSkills deleteById(int id) {
+        UserSkills UserSkills = entityManager.find(UserSkills.class, id);
+        entityManager.remove(UserSkills);
+        return UserSkills;
 
     }
 
     @Override
-    public List<Skill> findByQuery(String jpqlName, Object... params) {
-        TypedQuery<Skill> query = this.entityManager.createNamedQuery(jpqlName, Skill.class);
+    public List<UserSkills> findByQuery(String jpqlName, Object... params) {
+        TypedQuery<UserSkills> query = this.entityManager.createNamedQuery(jpqlName, UserSkills.class);
 
         //Put all params into the query.
         for (int i = 0; i < params.length; i++) {

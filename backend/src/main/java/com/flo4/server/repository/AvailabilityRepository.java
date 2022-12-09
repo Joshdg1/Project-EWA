@@ -1,6 +1,6 @@
 package com.flo4.server.repository;
 
-import com.flo4.server.models.Availability;
+import com.flo4.server.models.UserAvailability;
 
 import org.springframework.stereotype.Repository;
 
@@ -12,56 +12,56 @@ import java.util.List;
 
 @Repository("AVAILABILITY.JPA")
 @Transactional
-public class AvailabilityRepository implements EntityRepository<Availability> {
+public class AvailabilityRepository implements EntityRepository<UserAvailability> {
 
     @PersistenceContext
     protected EntityManager entityManager;
 
     @Override
-    public List<Availability> findAll() {
-        TypedQuery<Availability> query = this.entityManager.createQuery("select a from Availability a", Availability.class);
+    public List<UserAvailability> findAll() {
+        TypedQuery<UserAvailability> query = this.entityManager.createQuery("select a from UserAvailability a", UserAvailability.class);
 
         return query.getResultList();
     }
 
     @Override
-    public Availability findById(int id) {
-        return this.entityManager.find(Availability.class, id);
+    public UserAvailability findById(int id) {
+        return this.entityManager.find(UserAvailability.class, id);
     }
 
     @Override
-    public Availability save(Availability entity) {
+    public UserAvailability save(UserAvailability entity) {
         return this.entityManager.merge(entity);
     }
 
     @Override
-    public Availability update(Availability entity, int id) {
-        Availability updatedAvailability = findById(id);
+    public UserAvailability update(UserAvailability entity, int id) {
+        UserAvailability updatedUserAvailability = findById(id);
 
-        if (updatedAvailability == null) {
+        if (updatedUserAvailability == null) {
             return null;
         }
 
-        updatedAvailability.setId(entity.getId());
-        updatedAvailability.setStartDate(entity.getStartDate());
-        updatedAvailability.setEndDate(entity.getEndDate());
+        updatedUserAvailability.setId(entity.getId());
+        updatedUserAvailability.setStartDate(entity.getStartDate());
+        updatedUserAvailability.setEndDate(entity.getEndDate());
 
 
-        return updatedAvailability;
+        return updatedUserAvailability;
     }
 
 
     @Override
-    public Availability deleteById(int id) {
-        Availability availability = entityManager.find(Availability.class, id);
-        entityManager.remove(availability);
-        return availability;
+    public UserAvailability deleteById(int id) {
+        UserAvailability userAvailability = entityManager.find(UserAvailability.class, id);
+        entityManager.remove(userAvailability);
+        return userAvailability;
 
     }
 
     @Override
-    public List<Availability> findByQuery(String jpqlName, Object... params) {
-        TypedQuery<Availability> query = this.entityManager.createNamedQuery(jpqlName, Availability.class);
+    public List<UserAvailability> findByQuery(String jpqlName, Object... params) {
+        TypedQuery<UserAvailability> query = this.entityManager.createNamedQuery(jpqlName, UserAvailability.class);
 
         //Put all params into the query.
         for (int i = 0; i < params.length; i++) {

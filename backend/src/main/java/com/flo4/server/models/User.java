@@ -1,16 +1,12 @@
 package com.flo4.server.models;
 
-
-
 import lombok.Getter;
 import lombok.Setter;
-
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-
 
 @Getter
 @Setter
@@ -36,7 +32,6 @@ public class User {
         return new User(id, email,firstName, lastName, password, phoneNumber, null);
     }
 
-
     public User(int id, String email, String firstName, String lastName, String password, String phoneNumber, String userType) {
         this.id = id;
         this.email = email;
@@ -46,6 +41,4 @@ public class User {
         this.phoneNumber = phoneNumber;
         this.userType = userType;
     }
-
-
 }
