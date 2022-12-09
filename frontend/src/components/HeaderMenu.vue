@@ -58,10 +58,16 @@
 
 <script>
 export default {
-  name: 'HeaderMenu'
+  name: 'HeaderMenu',
+  props: ['mode']
 }
 </script>
 
 <style scoped>
+
+.dark #kt_header {
+  background: #0d1323;
+  color: #f3f3f3;
+}
 
 </style>
