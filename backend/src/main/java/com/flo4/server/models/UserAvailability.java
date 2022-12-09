@@ -27,27 +27,24 @@ public class UserAvailability {
         this.user = user;
     }
 
-    @ManyToOne
-    @JoinColumn(name = "userId", nullable = true)
-    private User user;
 
     public UserAvailability(){}
 
-    public UserAvailability(int id){this.id = id;}
+    public UserAvailability(int Id){this.Id = Id;}
 
-    public UserAvailability(int id, LocalDate startDate, LocalDate endDate) {
-        this.id = id;
+    public UserAvailability(int Id, LocalDateTime startDate, LocalDateTime endDate) {
+        this.Id = Id;
         this.startDate = startDate;
         this.endDate = endDate;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setId(int Id) {
+        this.Id = Id;
     }
 
 
     public int getId() {
-        return id;
+        return Id;
     }
 
     public LocalDateTime getStartDate() {
