@@ -35,8 +35,6 @@ const routes = [
         component: () => import('../views/admin/AdminHome.vue'),
     },
 
-
-    // === PROGRAMMERS ===
     {
         name: "Programmers",
         path: '/programmers',
@@ -52,6 +50,13 @@ const routes = [
         name: "Create Programmer",
         path: '/programmers/add',
         component: () => import('../views/programmer/AddProgrammer.vue'),
+    },
+
+    // === PROGRAMMERS ===
+    {
+        name: "Projects",
+        path: '/programmer/projects',
+        component: () => import(`../views/programmer/project/View`),
     },
 
     // === CLIENTS ===
