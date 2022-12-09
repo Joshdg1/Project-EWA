@@ -10,11 +10,11 @@ public class UserProject {
     int id;
 
     @ManyToOne
-    @JoinColumn(name = "userId", nullable = true)
+    //@JoinColumn(name = "userId", nullable = true)
     private User user;
 
     @ManyToOne
-    @JoinColumn(name = "userId", nullable = true)
+    //@JoinColumn(name = "userId", nullable = true)
     private Project project;
 
     public UserProject() {

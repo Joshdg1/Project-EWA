@@ -1,6 +1,6 @@
 package com.flo4.server.repository;
 
-import com.flo4.server.models.old.Client;
+import old.Client;
 
 import org.springframework.stereotype.Repository;
 

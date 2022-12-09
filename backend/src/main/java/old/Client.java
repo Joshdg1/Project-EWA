@@ -1,4 +1,4 @@
-package com.flo4.server.models.old;
+package old;
 
 import com.flo4.server.models.Project;
 

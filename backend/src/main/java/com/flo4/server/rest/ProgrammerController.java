@@ -1,7 +1,7 @@
 package com.flo4.server.rest;
 
 import com.flo4.server.Exceptions.NotFoundException;
-import com.flo4.server.models.old.Programmer;
+import old.Programmer;
 import com.flo4.server.repository.EntityRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

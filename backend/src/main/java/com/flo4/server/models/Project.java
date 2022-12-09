@@ -1,6 +1,6 @@
 package com.flo4.server.models;
 
-import com.flo4.server.models.old.Client;
+import old.Client;
 
 import javax.persistence.*;
 
