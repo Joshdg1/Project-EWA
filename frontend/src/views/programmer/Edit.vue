@@ -29,9 +29,9 @@ import TopProfileDetails from "@/components/programmerProfile/TopProfileDetails"
 import AvailabilityProgrammer from "@/components/programmerProfile/AvailabilityProgrammer";
 import ProgrammerSkills from "@/components/programmerProfile/programmerSkills";
 import ProgrammerInputSkills from "@/components/programmerProfile/ProgrammerInputSkills";
-import ProgrammerRepository from "@/repository/ProgrammerService";
 import Programmer from "@/models/programmer/programmer";
 import ProgrammerProjects from "@/components/programmerProfile/ProgrammerProjects";
+import UserRepository from "@/repository/UserRepository";
 
 export default {
   name: "ProgrammerProfilePage",
@@ -66,7 +66,7 @@ export default {
       currentTab: null,
       skills: [],
       programmers: [],
-      repository: new ProgrammerRepository(),
+      repository: new UserRepository(),
     }
   },
   methods: {
