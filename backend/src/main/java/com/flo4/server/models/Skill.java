@@ -2,7 +2,6 @@ package com.flo4.server.models;
 
 
 import javax.persistence.*;
-import java.lang.reflect.Array;
 
 @Entity
 public class Skill {

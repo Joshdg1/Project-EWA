@@ -1,10 +1,8 @@
 package com.flo4.server.models;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 public class Availability {
@@ -13,15 +11,27 @@ public class Availability {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer Id;
 
-    private LocalDate startDate;
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 
-    private LocalDate endDate;
+    private LocalDateTime startDate;
+
+    private LocalDateTime endDate;
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 
     public Availability(){}
 
     public Availability(int Id){this.Id = Id;}
 
-    public Availability(int Id, LocalDate startDate, LocalDate endDate) {
+    public Availability(int Id, LocalDateTime startDate, LocalDateTime endDate) {
         this.Id = Id;
         this.startDate = startDate;
         this.endDate = endDate;
@@ -36,19 +46,19 @@ public class Availability {
         return Id;
     }
 
-    public LocalDate getStartDate() {
+    public LocalDateTime getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(LocalDate startDate) {
+    public void setStartDate(LocalDateTime startDate) {
         this.startDate = startDate;
     }
 
-    public LocalDate getEndDate() {
+    public LocalDateTime getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(LocalDate endDate) {
+    public void setEndDate(LocalDateTime endDate) {
         this.endDate = endDate;
     }
 }
