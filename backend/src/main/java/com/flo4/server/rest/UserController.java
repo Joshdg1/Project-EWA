@@ -6,7 +6,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.flo4.server.Exceptions.NotFoundException;
 import com.flo4.server.models.User;
 import com.flo4.server.repository.EntityRepository;
-import com.flo4.server.repository.UserRepository;
 import com.flo4.server.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
