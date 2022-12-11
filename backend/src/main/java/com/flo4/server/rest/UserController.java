@@ -3,16 +3,20 @@ package com.flo4.server.rest;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 
+import com.flo4.server.models.User;
 import com.flo4.server.service.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.Objects;
 
 @RestController
-@RequestMapping(value = "user")
+@RequestMapping(value = "/user")
 public class UserController {
     private final UserService userService;
 
@@ -58,10 +62,21 @@ public class UserController {
     record LoginResponse(String token){}
 
   @PostMapping(value = "login")
-    public LoginResponse login(@RequestBody LoginRequest loginRequest){
-        var token = userService.login(loginRequest.email(), loginRequest.password());
+    public LoginResponse login(@RequestBody LoginRequest loginRequest, HttpServletResponse response){
+        var login = userService.login(loginRequest.email(), loginRequest.password());
 
-        return new LoginResponse(token.getToken());
+      Cookie cookie = new Cookie("secretRefreshToken", login.getRefreshToken().getToken());
+      cookie.setMaxAge(3600);
+      cookie.setHttpOnly(true);
+      cookie.setPath("/user");
+
+      response.addCookie(cookie);
+        return new LoginResponse(login.getAccessToken().getToken());
   }
 
+    record UserResponse(String email,
+                            @JsonProperty("first_name") String firstName,
+                            @JsonProperty("last_name")String lastName,
+                            @JsonProperty("phone_number") String phoneNumber){}
+    
 }

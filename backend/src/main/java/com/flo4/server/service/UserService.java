@@ -1,32 +1,35 @@
 package com.flo4.server.service;
 
-import com.flo4.server.Exceptions.NotFoundException;
 import com.flo4.server.models.User;
 import com.flo4.server.repository.UserRepository;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
-import javax.persistence.NoResultException;
+
 import java.util.Objects;
 
 @Service
 public class UserService {
-    UserRepository userRepository;
-    PasswordEncoder passwordEncoder;
+    private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
+    private final String secretAccessToken;
+    private final String secretRefreshToken;
 
-    public UserService(UserRepository userRepository) {
+    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder,
+                       @Value("${application.security.secret-access-token}") String secretAccessToken,
+                       @Value("${application.security.secret-refresh-token}")String secretRefreshToken) {
         this.userRepository = userRepository;
-        this.passwordEncoder = new BCryptPasswordEncoder();
+        this.passwordEncoder = passwordEncoder;
+        this.secretAccessToken = secretAccessToken;
+        this.secretRefreshToken = secretRefreshToken;
     }
 
     public User registerUser(int id, String email, String firstName, String lastName, String password, String phoneNumber, String passwordConfirmation){
         if(!Objects.equals(password, passwordConfirmation))
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Wachtwoorden komen niet overeen");
-        User emailValidation = userRepository.findByEmail(email);
-
         
         return userRepository.save(
                 User.of(id, email, firstName, lastName, passwordEncoder.encode(password), phoneNumber)
@@ -34,7 +37,7 @@ public class UserService {
     }
 
 
-    public Token login(String email, String password) {
+    public Login login(String email, String password) {
         //Find user by email
         var user = userRepository.findByEmail(email);
 
@@ -44,7 +47,8 @@ public class UserService {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Verkeerde gegevens");
 
 
-        return Token.of(user.getId(), 10L, "SecretKey for this user it's really secret");
+        return Login.of(user.getId(), secretAccessToken,
+                secretRefreshToken);
     }
 
 
