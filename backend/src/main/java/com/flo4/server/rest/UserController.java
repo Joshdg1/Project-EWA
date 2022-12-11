@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.Objects;
 
 @RestController
-@RequestMapping(value = "/user")
+@RequestMapping(value = "/api")
 public class UserController {
     private final UserService userService;
 
@@ -68,7 +68,7 @@ public class UserController {
       Cookie cookie = new Cookie("secretRefreshToken", login.getRefreshToken().getToken());
       cookie.setMaxAge(3600);
       cookie.setHttpOnly(true);
-      cookie.setPath("/user");
+      cookie.setPath("/api");
 
       response.addCookie(cookie);
         return new LoginResponse(login.getAccessToken().getToken());
@@ -78,5 +78,11 @@ public class UserController {
                             @JsonProperty("first_name") String firstName,
                             @JsonProperty("last_name")String lastName,
                             @JsonProperty("phone_number") String phoneNumber){}
-    
+
+    @GetMapping(value = "user")
+    public UserResponse user(HttpServletRequest request){
+        var user = (User) request.getAttribute("user");
+
+        return new UserResponse(user.getEmail(), user.getFirstName(), user.getLastName(), user.getPhoneNumber());
+    }
 }

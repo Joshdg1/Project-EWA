@@ -52,4 +52,7 @@ public class UserService {
     }
 
 
+    public User getUserFromToken(String token) {
+        return userRepository.findById(Token.from(token, secretAccessToken));
+    }
 }

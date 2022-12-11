@@ -1,5 +1,6 @@
 package com.flo4.server.service;
 
+import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import lombok.Getter;
@@ -27,5 +28,14 @@ public class Token {
                         .setExpiration(Date.from(issueDate.plus(validity, ChronoUnit.MINUTES)))
                         .signWith(SignatureAlgorithm.HS256, Base64.getEncoder().encodeToString(secretKey.getBytes(StandardCharsets.UTF_8)))
                         .compact());
+    }
+
+    public static Integer from(String token, String secretKey){
+       return ((Claims) Jwts.parserBuilder()
+               .setSigningKey(Base64.getEncoder().encodeToString(secretKey.getBytes(StandardCharsets.UTF_8)))
+               .build()
+               .parse(token)
+               .getBody())
+               .get("user_id", Integer.class);
     }
 }
