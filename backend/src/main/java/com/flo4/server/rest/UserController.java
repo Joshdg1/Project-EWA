@@ -85,4 +85,11 @@ public class UserController {
 
         return new UserResponse(user.getEmail(), user.getFirstName(), user.getLastName(), user.getPhoneNumber());
     }
+
+    record RefreshResponse(String token){}
+
+    @PostMapping(value = "refresh")
+    public RefreshResponse refresh(@CookieValue("secretRefreshToken") String refreshToken){
+        return new RefreshResponse(userService.refreshAccess(refreshToken).getAccessToken().getToken());
+    }
 }

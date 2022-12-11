@@ -55,4 +55,10 @@ public class UserService {
     public User getUserFromToken(String token) {
         return userRepository.findById(Token.from(token, secretAccessToken));
     }
+
+    public Login refreshAccess(String refreshToken) {
+        var id = Token.from(refreshToken, secretRefreshToken);
+
+        return Login.of(id, secretAccessToken, Token.of(refreshToken));
+    }
 }

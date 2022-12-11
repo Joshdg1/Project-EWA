@@ -19,4 +19,11 @@ public class Login {
                 Token.of(userId, 1440L, refreshSecretKey)
         );
     }
+
+    public static Login of(int id, String accessSecret, Token refreshToken){
+        return new Login(
+                Token.of(id, 1L, accessSecret),
+                refreshToken
+        );
+    }
 }
