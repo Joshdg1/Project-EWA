@@ -92,4 +92,15 @@ public class UserController {
     public RefreshResponse refresh(@CookieValue("secretRefreshToken") String refreshToken){
         return new RefreshResponse(userService.refreshAccess(refreshToken).getAccessToken().getToken());
     }
+
+    record LogoutResponse(String msg){}
+    @PostMapping(value = "logout")
+    public LogoutResponse logout(@CookieValue("secretRefreshToken") String refreshToken, HttpServletResponse response){
+        Cookie cookie = new Cookie("secretRefreshToken" ,null);
+        cookie.setMaxAge(0);
+        cookie.setHttpOnly(true);
+
+        response.addCookie(cookie);
+        return new LogoutResponse("Logout successful");
+    }
 }
