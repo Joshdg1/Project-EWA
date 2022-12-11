@@ -8,6 +8,9 @@ public class Login {
     @Getter
     private final Token refreshToken;
 
+    private static final Long accessTokenValidity = 1L;
+    private static final Long refreshTokenValidity = 1440L;
+
     public Login(Token accessToken, Token refreshToken) {
         this.accessToken = accessToken;
         this.refreshToken = refreshToken;
@@ -15,14 +18,14 @@ public class Login {
 
     public static Login of(int userId, String accessSecretKey, String refreshSecretKey){
          return new Login(
-                Token.of(userId, 1L, accessSecretKey),
-                Token.of(userId, 1440L, refreshSecretKey)
+                Token.of(userId, accessTokenValidity, accessSecretKey),
+                Token.of(userId, refreshTokenValidity, refreshSecretKey)
         );
     }
 
     public static Login of(int id, String accessSecret, Token refreshToken){
         return new Login(
-                Token.of(id, 1L, accessSecret),
+                Token.of(id, accessTokenValidity, accessSecret),
                 refreshToken
         );
     }
