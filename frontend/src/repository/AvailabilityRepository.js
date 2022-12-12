@@ -8,14 +8,14 @@ export default class AvailabilityRepository {
         return await response.json();
     }
 
-    async createAvailability(id, startDate, endDate) {
+    async createAvailability(startDate, endDate , userId) {
         const response = await fetch('http://localhost:8081/availability/add', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-                id, startDate, endDate
+                 startDate, endDate , userId
             }),
         });
         return await response.json();

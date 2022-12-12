@@ -25,8 +25,8 @@
     <AddDatePopUp
         v-if="popupStatus"
         :selectedDate="selectedDate"
-        @close-popup="closePopup"
-        @adding-date="addDate">
+        @close-popup="closePopup">
+
     </AddDatePopUp>
   </div>
 </template>
@@ -46,19 +46,24 @@ export default {
   components: {
     AddDatePopUp, FullCalendar // make the <FullCalendar> tag available
   },
-  async created(){
-    console.log("CREATED")
+  async created() {
 
-    const availability = await this.availabilityRepository.getAvailabilityById(1)
-    availability.title = "KREK"
-    console.log(this.betweenDates(availability.st, availability.endDate))
+    const availability = await this.availabilityRepository.getAvailabilityById(20)
+    console.log(availability)
+    for (let i = 0; i < availability.length; i++) {
+      let calendarApi = this.$refs.calendar.getApi();
+      availability[i].title = "KREK"
 
-    let calendarApi = this.$refs.calendar.getApi();
-    calendarApi.addEvent({
-      title: availability.title,
-      start: availability.startDate,
-      end: availability.endDate,
-    })
+      calendarApi.addEvent({
+        title: availability[i].title,
+        start: availability[i].startDate,
+        end: availability[i].endDate,
+      })
+    }
+
+
+
+
 
   },
 
@@ -78,7 +83,9 @@ export default {
         dateClick: this.dateClick,
         eventClick: this.editEvent,
         editable: true,
-        events: []
+        events: [
+          {title: 'event 1', date: '2022-12-11 10:30'},
+          {title: 'event 2', date: '2022-12-12 16:15'}]
       }
     }
   },
@@ -92,40 +99,19 @@ export default {
     closePopup(newPopupStatus) {
       this.popupStatus = newPopupStatus
     },
-    async addDate(date) {
-      let calendarApi = this.$refs.calendar.getApi();
+    // async addDate(date) {
+    //   let calendarApi = this.$refs.calendar.getApi();
+    //
+    //   let calendarData = await this.availabilityRepository.createAvailability(1, date.start, date.end)
+    //   calendarApi.addEvent({
+    //     title: date.title,
+    //     start: calendarData.start,
+    //     end: calendarData.end,
+    //   })
+    //
+    // },
 
-      let calendarData = await this.availabilityRepository.createAvailability(1, date.start, date.end)
-      calendarApi.addEvent({
-        title: date.title,
-        start: calendarData.start,
-        end: calendarData.end,
-      })
-
-      // To calculate the time difference of two dates
-      const start = new Date(date.start)
-
-      const end = new Date(date.end)
-
-      const hoursOfEvent = this.betweenDates(start.getTime(), end.getTime())
-      console.log(hoursOfEvent)
-    },
-   betweenDates(from, to ){
-     const addDays = (date, days = 1) => {
-       const result = new Date(date);
-       result.setDate(result.getDate() + days);
-       return result;
-     };
-
-     const dateRange = (start, end, range = []) => {
-       if (start > end) return range;
-       const next = addDays(start, 1);
-       return dateRange(next, end, [...range, start]);
-     };
-
-     return dateRange(from,to);
-   },
-    editEvent(){
+    editEvent() {
       alert("JEMOER")
     }
   }

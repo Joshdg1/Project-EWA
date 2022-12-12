@@ -2,14 +2,16 @@ class ProgrammerDate{
     title
     start
     end
-    hoursPerDay
+    hoursPerDayStart
+    hoursPerDayEnd
 
 
-    constructor(title, start, end, hoursPerDay) {
+    constructor(title, start, end, hoursPerDayStart, hoursPerDayEnd) {
         this.title = title;
         this.start = start;
         this.end = end;
-        this.hoursPerDay = hoursPerDay;
+        this.hoursPerDayStart = hoursPerDayStart;
+        this.hoursPerDayEnd = hoursPerDayEnd;
     }
 }
 export default ProgrammerDate
