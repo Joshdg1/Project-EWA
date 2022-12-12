@@ -53,10 +53,14 @@ export default {
     }
     // const allProgrammers = this.repository.getAllProgrammers()
     // console.log(allProgrammers)
-    this.sampleProgrammer = await this.repository.findProgrammerById(1)
 
 
-    console.log("programmer"+  this.programmers)
+    this.sampleProgrammer = await this.repository.findUserById(20)
+
+
+    console.log("user"+  this.sampleProgrammer.firstName)
+
+
     this.currentTab = 1;
   },
   data() {

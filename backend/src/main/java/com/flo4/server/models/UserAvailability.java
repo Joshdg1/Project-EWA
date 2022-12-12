@@ -32,10 +32,11 @@ public class UserAvailability {
 
     public UserAvailability(int Id){this.Id = Id;}
 
-    public UserAvailability(int Id, LocalDateTime startDate, LocalDateTime endDate) {
+    public UserAvailability(int Id, LocalDateTime startDate, LocalDateTime endDate, User user) {
         this.Id = Id;
         this.startDate = startDate;
         this.endDate = endDate;
+        this.user = user;
     }
 
     public void setId(int Id) {
