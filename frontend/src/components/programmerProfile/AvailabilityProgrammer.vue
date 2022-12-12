@@ -36,7 +36,7 @@
 import '@fullcalendar/core/vdom' // solves problem with Vite
 import AddDatePopUp from "./AddDatePopUp";
 import FullCalendar from "@fullcalendar/vue"
-import dayGridPlugin from '@fullcalendar/daygrid'
+import timeGridPlugin from '@fullcalendar/timegrid'
 import interactionPlugin from '@fullcalendar/interaction'
 import AvailabilityRepository from "@/repository/AvailabilityRepository";
 import ProgrammerRepository from "@/repository/ProgrammerService";
@@ -48,9 +48,10 @@ export default {
   },
   async created(){
     console.log("CREATED")
+
     const availability = await this.availabilityRepository.getAvailabilityById(1)
     availability.title = "KREK"
-
+    console.log(this.betweenDates(availability.st, availability.endDate))
 
     let calendarApi = this.$refs.calendar.getApi();
     calendarApi.addEvent({
@@ -72,25 +73,16 @@ export default {
       availabilityRepository: new AvailabilityRepository(),
 
       calendarOptions: {
-        plugins: [dayGridPlugin, interactionPlugin],
-        initialView: 'dayGridMonth',
+        plugins: [timeGridPlugin, interactionPlugin],
+        initialView: 'timeGridWeek',
         dateClick: this.dateClick,
+        eventClick: this.editEvent,
         editable: true,
         events: []
       }
     }
   },
   methods: {
-
-
-    datediff(first, second) {
-      return Math.round((second - first) / (1000 * 60 * 60 * 24));
-    },
-    // eventClick: function () {
-    // let deleteEvent =  confirm("wil je " + arg)
-    //  let deletingEvent = this.calendarApi.getEventById()
-    //  this.events.filter()
-    // },
     dateClick: function (arg) {
       this.selectedDate = arg.date
       console.log(arg)
@@ -115,13 +107,28 @@ export default {
 
       const end = new Date(date.end)
 
-      const hoursOfEvent = this.datediff(start.getTime(), end.getTime()) * date.hoursPerDay
-
-      this.totalHours = this.totalHours + hoursOfEvent
+      const hoursOfEvent = this.betweenDates(start.getTime(), end.getTime())
+      console.log(hoursOfEvent)
     },
+   betweenDates(from, to ){
+     const addDays = (date, days = 1) => {
+       const result = new Date(date);
+       result.setDate(result.getDate() + days);
+       return result;
+     };
 
+     const dateRange = (start, end, range = []) => {
+       if (start > end) return range;
+       const next = addDays(start, 1);
+       return dateRange(next, end, [...range, start]);
+     };
+
+     return dateRange(from,to);
+   },
+    editEvent(){
+      alert("JEMOER")
+    }
   }
-
 }
 </script>
 

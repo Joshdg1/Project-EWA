@@ -1,4 +1,6 @@
-package com.flo4.server.models;
+package old;
+
+import com.flo4.server.models.UserAvailability;
 
 import javax.persistence.*;
 import java.util.Set;
@@ -22,12 +24,12 @@ public class Programmer {
     private String city;
 
     private String postcode;
-
-    @OneToMany(mappedBy = "programmer")
-    private Set<Skill> skills;
+//
+//    @OneToMany(mappedBy = "programmer")
+//    private Set<UserSkill> userSkills;
 
     @OneToOne
-    private Availability availability;
+    private UserAvailability userAvailability;
     private String workPreference;
 
     private String projectType;
@@ -43,22 +45,22 @@ public class Programmer {
         this.id = id;
     }
 
-    public Programmer(int id, String firstName, String lastName, String email, String address,
-                      String city, String postcode, Availability availability, String workPreference,
-                      String projectType, Set<Skill> skills) {
-        this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-        this.address = address;
-        this.city = city;
-        this.postcode = postcode;
-        this.availability = availability;
-        this.workPreference = workPreference;
-        this.projectType = projectType;
-//        this.project = project;
-        this.skills = skills;
-    }
+//    public Programmer(int id, String firstName, String lastName, String email, String address,
+//                      String city, String postcode, UserAvailability userAvailability, String workPreference,
+//                      String projectType, Set<UserSkill> userSkills) {
+//        this.id = id;
+//        this.firstName = firstName;
+//        this.lastName = lastName;
+//        this.email = email;
+//        this.address = address;
+//        this.city = city;
+//        this.postcode = postcode;
+//        this.userAvailability = userAvailability;
+//        this.workPreference = workPreference;
+//        this.projectType = projectType;
+////        this.project = project;
+//        this.userSkills = userSkills;
+//    }
 
     public int getId() {
         return id;
@@ -93,20 +95,20 @@ public class Programmer {
     }
 
 
-    public Set<Skill> getSkill() {
-        return skills;
+//    public Set<UserSkill> getSkill() {
+//        return userSkills;
+//    }
+//
+//    public void setSkill(Set<UserSkill> userSkill) {
+//        this.userSkills = userSkill;
+//    }
+
+    public UserAvailability getAvailability() {
+        return userAvailability;
     }
 
-    public void setSkill(Set<Skill> skill) {
-        this.skills = skill;
-    }
-
-    public Availability getAvailability() {
-        return availability;
-    }
-
-    public void setAvailability(Availability availability) {
-        this.availability = availability;
+    public void setAvailability(UserAvailability userAvailability) {
+        this.userAvailability = userAvailability;
     }
 
     public String getWorkPreference() {
@@ -151,13 +153,13 @@ public class Programmer {
         this.projectType = projectType;
     }
 
-    public Set<Skill> getSkills() {
-        return skills;
-    }
-
-    public void setSkills(Set<Skill> skills) {
-        this.skills = skills;
-    }
+//    public Set<UserSkill> getSkills() {
+//        return userSkills;
+//    }
+//
+//    public void setSkills(Set<UserSkill> userSkills) {
+//        this.userSkills = userSkills;
+//    }
 
 //    public Project getProject() {
 //        return project;

@@ -1,8 +1,5 @@
 package com.flo4.server.repository;
 
-import com.flo4.server.models.Programmer;
-import com.flo4.server.models.Project;
-
 import java.util.List;
 
 public interface EntityRepository<E> {

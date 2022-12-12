@@ -1,4 +1,6 @@
-package com.flo4.server.models;
+package old;
+
+import com.flo4.server.models.Project;
 
 import javax.persistence.*;
 import java.util.Set;
