@@ -46,6 +46,10 @@ public class UserService {
         if (!passwordEncoder.matches(password, user.getPassword()))
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Verkeerde gegevens");
 
+//        var login = Login.of(user.getId(), secretAccessToken,
+//                secretRefreshToken);
+//        var refreshJwt = login.getRefreshToken();
+//        user.addToken()
 
         return Login.of(user.getId(), secretAccessToken,
                 secretRefreshToken);

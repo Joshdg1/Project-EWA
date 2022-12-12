@@ -1,5 +1,5 @@
 <template>
-    <form class="form w-100" @submit="checkForm">
+    <form class="form w-100">
         <div class="text-center mb-10">
             <h1 class="text-dark mb-3">Register to Florijn</h1>
             <div class="text-gray-400 fw-semibold fs-4">Already have an account?
@@ -16,18 +16,49 @@
 
         <div class="fv-row mb-10 fv-plugins-icon-container">
             <label class="form-label fs-6 fw-bold text-dark">Email</label>
-            <input class="form-control form-control-lg form-control-solid" v-model="email" type="email" name="email"
+            <input id="email" class="form-control form-control-lg form-control-solid" v-model="email" type="email" name="email"
                    autocomplete="off">
             <div class="fv-plugins-message-container invalid-feedback"></div>
         </div>
-        <div class="fv-row mb-10 fv-plugins-icon-container">
-            <div class="d-flex flex-stack mb-2">
-                <label class="form-label fw-bold text-dark fs-6 mb-0">Password</label>
-            </div>
-            <input class="form-control form-control-lg form-control-solid" v-model="password" type="password" name="password">
-        </div>
+
+      <div class="fv-row mb-10 fv-plugins-icon-container">
+        <label class="form-label fs-6 fw-bold text-dark">First Name</label>
+        <input id="firstName" class="form-control form-control-lg form-control-solid" v-model="firstName" type="text" name="First name"
+               autocomplete="off">
+        <div class="fv-plugins-message-container invalid-feedback"></div>
+      </div>
+
+      <div class="fv-row mb-10 fv-plugins-icon-container">
+        <label class="form-label fs-6 fw-bold text-dark">Last Name</label>
+        <input id="lastName" class="form-control form-control-lg form-control-solid" v-model="lastName"  type="text" name="Last name"
+               autocomplete="off">
+        <div class="fv-plugins-message-container invalid-feedback"></div>
+      </div>
+
+      <div class="fv-row mb-10 fv-plugins-icon-container">
+        <label class="form-label fs-6 fw-bold text-dark">Password</label>
+        <input id="password" class="form-control form-control-lg form-control-solid"  v-model="password"  type="text" name="Password"
+               autocomplete="off">
+        <div class="fv-plugins-message-container invalid-feedback"></div>
+      </div>
+
+      <div class="fv-row mb-10 fv-plugins-icon-container">
+        <label class="form-label fs-6 fw-bold text-dark">Phone Number</label>
+        <input id="phoneNumber" class="form-control form-control-lg form-control-solid"  v-model="phoneNumber"  type="text" name="Phone number"
+               autocomplete="off">
+        <div class="fv-plugins-message-container invalid-feedback"></div>
+      </div>
+
+      <div class="fv-row mb-10 fv-plugins-icon-container">
+        <label class="form-label fs-6 fw-bold text-dark">User type</label>
+        <input id="userType" class="form-control form-control-lg form-control-solid"  v-model="userType" type="text" name="User type"
+               autocomplete="off">
+        <div class="fv-plugins-message-container invalid-feedback"></div>
+      </div>
+
+
         <div class="text-center">
-            <button type="submit" id="kt_sign_in_submit" class="btn btn-lg btn-primary w-100 mb-5">
+            <button type="submit" @click="saveUser()" id="kt_sign_in_submit" class="btn btn-lg btn-primary w-100 mb-5">
                 <span class="indicator-label">Register</span>
                 <span class="indicator-progress">Please wait...
 									<span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
@@ -38,34 +69,38 @@
 </template>
 
 <script>
+import UserRepository from "@/repository/UserRepository";
+
     export default {
         // eslint-disable-next-line
         name: "Register",
         data() {
             return {
+              userRepository: new UserRepository(),
                 errors: [],
-                email: null,
+                email: '',
+                firstName: '',
+                lastName: '',
                 password: null,
+                phoneNumber: '',
+                userType: '',
             }
         },
         methods: {
-            checkForm: function (e) {
-                e.preventDefault();
+           async saveUser(){
+              // const email = document.getElementById("email").value();
+              // const firstName = document.getElementById("firstName").value();
+              // const lastName = document.getElementById("lastName").value();
+              // const password = document.getElementById("password").value();
+              // const phoneNumber = document.getElementById("phoneNumber").value();
+              // const userType = document.getElementById("userType");
+             console.log(this.email)
 
-                if (this.email && this.password) {
-                  alert('Todo: register')
-                    return true;
-                }
+              await this.userRepository.createUser(this.email, this.firstName, this.lastName,
+                  this.password, this.phoneNumber)
 
-                this.errors = [];
 
-                if (!this.email) {
-                    this.errors.push('Email required.');
-                }
-                if (!this.password) {
-                    this.errors.push('Password required.');
-                }
-            }
+          }
         }
     }
 </script>

@@ -8,6 +8,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+
+
 @Getter
 @Setter
 @Entity
@@ -22,6 +24,8 @@ public class User {
     private String phoneNumber;
     private String userType;
 
+
+
     public User(){}
 
     public User(int id) {
@@ -32,6 +36,7 @@ public class User {
         return new User(id, email,firstName, lastName, password, phoneNumber, null);
     }
 
+
     public User(int id, String email, String firstName, String lastName, String password, String phoneNumber, String userType) {
         this.id = id;
         this.email = email;
@@ -41,4 +46,6 @@ public class User {
         this.phoneNumber = phoneNumber;
         this.userType = userType;
     }
+
+
 }

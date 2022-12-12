@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.Objects;
 
 @RestController
-@RequestMapping(value = "/api")
+@RequestMapping(value = "/users")
 public class UserController {
     private final UserService userService;
 
@@ -41,7 +41,7 @@ public class UserController {
                             @JsonProperty("last_name")String lastName,
                             @JsonProperty("phone_number") String phoneNumber){}
 
-    @PostMapping("add")
+    @PostMapping("register")
     public RegisterResponse registerUser(@RequestBody RegisterRequest registerRequest){
         if (!Objects.equals(registerRequest.password(), registerRequest.passwordConfirmation()))
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Wachtwoorden komen niet overeen");
@@ -68,7 +68,7 @@ public class UserController {
       Cookie cookie = new Cookie("secretRefreshToken", login.getRefreshToken().getToken());
       cookie.setMaxAge(3600);
       cookie.setHttpOnly(true);
-      cookie.setPath("/api");
+      cookie.setPath("/users");
 
       response.addCookie(cookie);
         return new LoginResponse(login.getAccessToken().getToken());
@@ -79,7 +79,7 @@ public class UserController {
                             @JsonProperty("last_name")String lastName,
                             @JsonProperty("phone_number") String phoneNumber){}
 
-    @GetMapping(value = "user")
+    @GetMapping(value = "token")
     public UserResponse user(HttpServletRequest request){
         var user = (User) request.getAttribute("user");
 

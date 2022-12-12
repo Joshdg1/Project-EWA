@@ -17,7 +17,7 @@ const routes = [
         meta: {
             isPublic: true,
         },
-        path: "/register",
+        path: "/users/register",
         component: () => import('../views/auth/Register.vue'),
     },
     {
