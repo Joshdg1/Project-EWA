@@ -23,14 +23,14 @@
 
       <div class="fv-row mb-10 fv-plugins-icon-container">
         <label class="form-label fs-6 fw-bold text-dark">First Name</label>
-        <input id="firstName" class="form-control form-control-lg form-control-solid" v-model="firstName" type="text" name="First name"
+        <input id="firstName" class="form-control form-control-lg form-control-solid" v-model="first_name" type="text" name="First name"
                autocomplete="off">
         <div class="fv-plugins-message-container invalid-feedback"></div>
       </div>
 
       <div class="fv-row mb-10 fv-plugins-icon-container">
         <label class="form-label fs-6 fw-bold text-dark">Last Name</label>
-        <input id="lastName" class="form-control form-control-lg form-control-solid" v-model="lastName"  type="text" name="Last name"
+        <input id="lastName" class="form-control form-control-lg form-control-solid" v-model="last_name"  type="text" name="Last name"
                autocomplete="off">
         <div class="fv-plugins-message-container invalid-feedback"></div>
       </div>
@@ -79,8 +79,8 @@ import UserRepository from "@/repository/UserRepository";
               userRepository: new UserRepository(),
                 errors: [],
                 email: '',
-                firstName: '',
-                lastName: '',
+                first_name: '',
+                last_name: '',
                 password: null,
                 phoneNumber: '',
                 userType: '',
@@ -95,8 +95,9 @@ import UserRepository from "@/repository/UserRepository";
               // const phoneNumber = document.getElementById("phoneNumber").value();
               // const userType = document.getElementById("userType");
              console.log(this.email)
-
-              await this.userRepository.createUser(this.email, this.firstName, this.lastName,
+             console.log(this.first_name)
+             console.log(this.last_name)
+              await this.userRepository.createProgrammers(this.email, this.first_name, this.last_name,
                   this.password, this.phoneNumber)
 
 

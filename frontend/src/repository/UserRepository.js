@@ -13,14 +13,14 @@ export default class UserRepository {
     }
 
 
-    async createProgrammers (  email,  firstName,  lastName,  password,  phoneNumber,  userType) {
+    async createProgrammers ( email,  first_name,  last_name,  password,  phone_number) {
         const response = await fetch('http://localhost:8081/users/register', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-                 email,  firstName,  lastName,  password,  phoneNumber,  userType
+                 email,  first_name,  last_name,  password,  phone_number
             }),
         });
         return await response.json();

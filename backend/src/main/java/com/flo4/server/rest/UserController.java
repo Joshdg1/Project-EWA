@@ -5,18 +5,19 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import com.flo4.server.models.User;
 import com.flo4.server.service.UserService;
-import org.springframework.http.HttpStatus;
+
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.server.ResponseStatusException;
+
 
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.Objects;
+
 
 @RestController
 @RequestMapping(value = "/users")
+@CrossOrigin(origins = "http://localhost:8080")
 public class UserController {
     private final UserService userService;
 
@@ -29,8 +30,8 @@ public class UserController {
 
     record RegisterRequest(int id,
                             String email,
-                           @JsonProperty("first_name") String firstName,
-                           @JsonProperty("last_name")String lastName,
+                           @JsonProperty("first_name") String first_name,
+                           @JsonProperty("last_name")String last_name,
                            String password,
                            @JsonProperty("password_confirm") String passwordConfirmation,
                            @JsonProperty("phone_number") String phoneNumber
@@ -43,14 +44,15 @@ public class UserController {
 
     @PostMapping("register")
     public RegisterResponse registerUser(@RequestBody RegisterRequest registerRequest){
-        if (!Objects.equals(registerRequest.password(), registerRequest.passwordConfirmation()))
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Wachtwoorden komen niet overeen");
+//        if (!Objects.equals(registerRequest.password(), registerRequest.passwordConfirmation()))
+//            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Wachtwoorden komen niet overeen");
+
 
       var user =  userService.registerUser(
               registerRequest.id(),
               registerRequest.email(),
-              registerRequest.firstName(),
-              registerRequest.lastName(),
+              registerRequest.first_name(),
+              registerRequest.last_name(),
               registerRequest.password(),
               registerRequest.phoneNumber(),
               registerRequest.passwordConfirmation()
