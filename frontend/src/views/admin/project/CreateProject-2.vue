@@ -42,8 +42,6 @@
                 <td>{{ programmer.lastName }}</td>
                 <td>{{ programmer.email }}</td>
                 <td>{{ programmer.phoneNumber }}</td>
-
-
               </tr>
               </tbody>
               <!--end::Table body-->
@@ -78,6 +76,7 @@ export default {
   name: "CreateProject-2",
 
   async created() {
+
     const data = await this.userRepository.getAllProgrammers();
     for (let i = 0; i < data.length; i++) {
       this.programmers.push(data[i]);
@@ -98,11 +97,13 @@ export default {
       const title = localStorage.getItem('title');
       const description = localStorage.getItem('description');
       const company = localStorage.getItem('company');
-      const hoursWorked = localStorage.getItem('hoursWorked');
+      const startDate = localStorage.getItem('startDate');
+      const endDate = localStorage.getItem('endDate');
+      console.log(localStorage.getItem('startDate'))
 
       //@todo add programmers
 
-      await this.repository.createProject(title, description, company, hoursWorked)
+      await this.repository.createProject(title, description, company, startDate, endDate)
 
       this.$router.push("/projects");
     }

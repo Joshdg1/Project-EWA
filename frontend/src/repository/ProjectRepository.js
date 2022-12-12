@@ -4,14 +4,14 @@ export default class ProjectRepository {
         return await response.json();
     }
 
-    async createProject(title, description, company, hoursWorked, programmers) {
+    async createProject(title, description, company, startDate, endDate, programmers) {
         const response = await fetch('http://localhost:8081/projects/add', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-                title, description, company, hoursWorked, programmers
+                title, description, company, startDate, endDate, programmers
             }),
         });
         return await response.json();

@@ -65,10 +65,9 @@
                 <td>{{ project.description }}</td>
                 <td>{{ project.company }}</td>
                 <td>{{ project.hoursWorked }}</td>
-                <td>{{ project.endDate }}</td>
-                <td>{{ project.startDate }}</td>
+                <td>{{ dateFormat(project.endDate) }}</td>
+                <td>{{ dateFormat(project.startDate) }}</td>
                 <td>{{ project.clients }}</td>
-
 
                 <div class="d-flex justify-content-end flex-shrink-0">
                   <a class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" @click="editProject()">
@@ -146,6 +145,13 @@ export default {
     editProject() {
       this.editingProject = true;
       this.$emit('editProject', this.editingProject)
+    },
+
+    dateFormat(date) {
+      if (date == null) {
+        return null;
+      }
+      return new Date(date).toLocaleDateString('en-GB');
     }
   }
 }

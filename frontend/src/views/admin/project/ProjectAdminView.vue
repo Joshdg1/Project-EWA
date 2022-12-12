@@ -31,6 +31,7 @@ export default {
     for (let i = 0; i < data.length; i++) {
       this.projects.push(data[i]);
     }
+
   },
 
   data() {
