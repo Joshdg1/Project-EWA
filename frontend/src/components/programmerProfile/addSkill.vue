@@ -28,7 +28,7 @@
         </div>
         <!--end::Heading-->
         <div>
-          <label class="typo__label">Single select</label>
+          <label class="typo__label">Selecteer een skill</label>
           <multiselect v-model="value" :options="skills" :searchable="false" :close-on-select="false" :show-labels="false" placeholder="Pick a value"></multiselect>
           <pre class="language-json"><code>{{ value  }}</code></pre>
         </div>
@@ -57,8 +57,7 @@ export default {
     }
   },
   async created() {
-    const data = await this.repository.getAllSkills();
-
+    const data = await this.repository.findSkillsById();
     for (let i = 0; i < data.length; i++) {
       this.skills.push(data[i]);
     }
