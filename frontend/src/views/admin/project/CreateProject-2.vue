@@ -20,22 +20,14 @@
               <thead>
               <tr class="fw-bolder text-muted">
                 <th class="w-25px">
-                  <div class="form-check form-check-sm form-check-custom form-check-solid">
-                    <input class="form-check-input" type="checkbox" value="1" data-kt-check="true"
-                           data-kt-check-target=".widget-9-check"/>
-                  </div>
+
                 </th>
                 <th>Firstname</th>
                 <th>Lastname</th>
-                <th>Address</th>
-                <th>City</th>
-                <th>Postcode</th>
-                <th>Knowledge</th>
-                <th>Experience</th>
-                <th>Availability</th>
-                <th>Weekly work hours</th>
-                <th>Work space</th>
-                <th>Project types</th>
+                <th>Email</th>
+                <th>Phone number</th>
+                <th>Skills
+                </th>
               </tr>
               </thead>
               <!--end::Table head-->
@@ -46,17 +38,10 @@
                   <input class="form-check-input" type="checkbox" value="1" data-kt-check="true"
                          data-kt-check-target=".widget-9-check"/>
                 </div>
-                <td>{{ programmer.firstname }}</td>
-                <td>{{ programmer.lastname }}</td>
-                <td>{{ programmer.address }}</td>
-                <td>{{ programmer.city }}</td>
-                <td>{{ programmer.postcode }}</td>
-                <td>{{ programmer.knowledge }}</td>
-                <td>{{ programmer.experience }}</td>
-                <td>{{ programmer.availability }}</td>
-                <td>{{ programmer.hours }}</td>
-                <td>{{ programmer.workPreference }}</td>
-                <td>{{ programmer.projectType }}</td>
+                <td>{{ programmer.firstName }}</td>
+                <td>{{ programmer.lastName }}</td>
+                <td>{{ programmer.email }}</td>
+                <td>{{ programmer.phoneNumber }}</td>
 
 
               </tr>
@@ -85,23 +70,26 @@
 </template>
 
 <script>
-import Programmer from '../../../models/programmer/programmer.js'
+// import Programmer from '../../../models/programmer/programmer.js'
 import ProjectRepository from '../../../repository/ProjectRepository'
+import UserRepository from '../../../repository/UserRepository'
 
 export default {
   name: "CreateProject-2",
 
-  created() {
-    for (let i = 0; i < 8; i++) {
-      this.programmers.push(Programmer.createProgrammer());
+  async created() {
+    const data = await this.userRepository.getAllProgrammers();
+    for (let i = 0; i < data.length; i++) {
+      this.programmers.push(data[i]);
     }
-
   },
 
   data() {
     return {
       programmers: [],
-      repository: new ProjectRepository()
+      repository: new ProjectRepository(),
+      userRepository: new UserRepository()
+
     }
   },
 
