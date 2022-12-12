@@ -16,6 +16,7 @@
       </div>
       <div class="buttons">
         <button class="btn background-florijn btn-active-info addSkill" @click="cancel">anuleren</button>
+        <button class="btn background-florijn btn-active-info addSkill" @click="deleteAvail">verweideren</button>
         <button class="btn background-florijn btn-active-info addSkill" @click="updateDate">Sla datum op</button>
       </div>
 
@@ -61,16 +62,16 @@ export default {
     async updateDate() {
       // if (!(this.newDate.start).type === DateTime || !isNaN(this.newDate.end)) {
       const allAvailabilitys = await this.repository.getAvailabilityById(20)
-      console.log("ALL AVAILABILITYS" + allAvailabilitys)
+
       for (let i = 0; i < allAvailabilitys.length; i++) {
         if ( (allAvailabilitys[i].startDate).toString().substring(0,10) === (this.selectedEvent.start)) {
           if ((allAvailabilitys[i].endDate).toString().substring(0,10) === (this.selectedEvent.end)) {
             this.currentId = allAvailabilitys[i].id
+            console.log("Winnar")
             break;
           }
         }
       }
-
       const newStartDate = new Date(this.newDate.start)
       const newEndDate = new Date(this.newDate.end)
       newStartDate.setHours(0)
@@ -114,6 +115,36 @@ export default {
       daylist.map((v) => v.toISOString().slice(0, 10)).join("")
       return daylist
     },
+  async  deleteAvail(){
+    const allAvailabilitys = await this.repository.getAvailabilityById(20)
+
+    const start  = new Date(this.selectedEvent.start).toLocaleDateString()
+
+    const end  = new Date(this.selectedEvent.end).toLocaleDateString()
+
+
+    for (let i = 0; i < allAvailabilitys.length; i++) {
+
+      console.log(new Date((allAvailabilitys[i].endDate)).toLocaleDateString()  +  'DATABASE')
+      console.log(start + "OUR")
+      console.log()
+      if ( new Date((allAvailabilitys[i].startDate)).toLocaleDateString() === (start)) {
+        console.log("KOMT ER IN")
+
+        console.log(new Date((allAvailabilitys[i].endDate)).toLocaleDateString() +  'DATABASE')
+        console.log(end + "OUR")
+        console.log()
+        if (new Date((allAvailabilitys[i].endDate)).toLocaleDateString() === (end)) {
+          this.currentId = allAvailabilitys[i].id
+          console.log("WINNAAR")
+          break;
+        }
+      }
+    }
+    console.log(this.currentId)
+    await this.repository.deleteAvailability(this.currentId)
+
+    }
   }
 }
 </script>
