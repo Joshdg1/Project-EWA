@@ -28,12 +28,12 @@
         </div>
         <!--end::Heading-->
         <div>
-          <label class="typo__label">Selecteer een skill</label>
-          <multiselect v-model="value" :options="skills" :searchable="false" :close-on-select="false" :show-labels="false" placeholder="Pick a value"></multiselect>
-          <pre class="language-json"><code>{{ value  }}</code></pre>
+          <label class="typo__label">Selecteer een skill:</label>
+          <multiselect v-model= "value" :options="skills" :searchable="false" :close-on-select="false" :show-labels="false" placeholder="Pick a skill"></multiselect>
+          <label class="typo__label">Geef een cijfer van 1-5:</label> <br>
+          <input class="levelSkill" v-model="this.newSkill.skillLevel">
         </div>
-        <!--begin::Textarea-->
-        <!--end::Textarea-->
+        <button class="btn background-florijn btn-active-info addSkill" @click="addSkill">Add</button>
       </div>
       <!--end::Modal body-->
     </div>
@@ -44,6 +44,7 @@
 <script>
 import Multiselect from 'vue-multiselect';
 import SkillRepository from "@/repository/SkillRepository";
+import {ProgrammerSkill} from "@/models/programmer/programmerSkill";
 export default {
   components: {Multiselect},
   name: "addSkill",
@@ -51,15 +52,16 @@ export default {
   data() {
     return {
       popupStatus: null,
-      skills: [],
+      skills: ["Javascript", "Java", "SQL", "HTML", "CSS"],
       repository: new SkillRepository(),
       value: null,
+      newSkill: new ProgrammerSkill,
     }
   },
   async created() {
-    const data = await this.repository.findSkillsById();
+    const data = await this.repository.findSkillsById(20);
     for (let i = 0; i < data.length; i++) {
-      this.skills.push(data[i]);
+      console.log(data[i])
     }
   },
   methods: {
@@ -67,10 +69,12 @@ export default {
       this.popupStatus = false;
       this.$emit('close-popup', this.popupStatus)
     },
-    addSkill(skill) {
-      this.$emit('add-skill',skill)
+    addSkill() {
+     this.closePopup();
+     this.newSkill.skillName = this.value;
 
     }
+
   }
 }
 </script>

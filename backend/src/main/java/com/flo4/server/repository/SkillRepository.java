@@ -22,7 +22,7 @@ public class SkillRepository implements EntityRepository<UserSkills> {
 
     @Override
     public List<UserSkills> findAll() {
-        TypedQuery<UserSkills> query = this.entityManager.createQuery("select s from UserSkillss s", UserSkills.class);
+        TypedQuery<UserSkills> query = this.entityManager.createQuery("select s from UserSkills s", UserSkills.class);
 
         return query.getResultList();
     }

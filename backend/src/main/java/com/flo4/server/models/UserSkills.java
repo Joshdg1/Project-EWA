@@ -14,7 +14,6 @@ public class UserSkills {
     double level;
 
     @ManyToOne
-    @JoinColumn(name = "userId", nullable = true)
     private User user;
 
     public UserSkills(){};
