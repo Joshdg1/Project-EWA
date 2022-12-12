@@ -71,8 +71,13 @@ public class AvailabilityController {
     }
 
     @PutMapping(path = "{id}", produces = "application/json")
-    public ResponseEntity<UserAvailability> updateAvailability(@PathVariable int id, @RequestBody UserAvailability userAvailability) {
-        UserAvailability updatedUserAvailability = this.availabilityRepository.update(userAvailability, id);
+    public ResponseEntity<UserAvailability> updateAvailability(@PathVariable int id, @RequestBody GetUserAvailability userAvailability) {
+
+        UserAvailability userAvailability1 = new UserAvailability();
+        userAvailability1.setStartDate(userAvailability.getStartDate());
+        userAvailability1.setEndDate(userAvailability.getEndDate());
+        userAvailability1.setUser(this.userEntityRepository.findById(userAvailability.getUserId()));
+        UserAvailability updatedUserAvailability = this.availabilityRepository.update(userAvailability1, id);
 
         if (updatedUserAvailability == null) {
             throw new NotFoundException(String.format(notFound, id));

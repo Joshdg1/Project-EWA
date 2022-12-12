@@ -23,11 +23,18 @@
       </div>
     </div>
     <AddDatePopUp
-        v-if="popupStatus"
+        v-if="popupStatusAdd"
         :selectedDate="selectedDate"
         @close-popup="closePopup">
 
     </AddDatePopUp>
+    <EditDatePopUp
+    v-if="popupStatusEdit"
+    :selected-event="selectedDate"
+    @close-popup="closeEditPopup"
+    >
+
+    </EditDatePopUp>
   </div>
 </template>
 
@@ -40,10 +47,13 @@ import timeGridPlugin from '@fullcalendar/timegrid'
 import interactionPlugin from '@fullcalendar/interaction'
 import AvailabilityRepository from "@/repository/AvailabilityRepository";
 import ProgrammerRepository from "@/repository/ProgrammerService";
+import EditDatePopUp from "@/components/programmerProfile/EditDatePopUp.vue";
+import programmerDate from "@/models/programmer/programmerDate";
 
 export default {
 
   components: {
+    EditDatePopUp,
     AddDatePopUp, FullCalendar // make the <FullCalendar> tag available
   },
   async created() {
@@ -60,20 +70,18 @@ export default {
         end: availability[i].endDate,
       })
     }
-
-
-
-
-
   },
 
   name: 'availabilityProgrammer',
   emits: ['add-date'],
   data() {
     return {
-      popupStatus: null,
+      popupStatusAdd: null,
+      popupStatusEdit: null,
       totalHours: 0,
       selectedDate: null,
+      eventStart: null,
+      eventEnd: null,
       programmerRepository: new ProgrammerRepository(),
       availabilityRepository: new AvailabilityRepository(),
 
@@ -83,36 +91,28 @@ export default {
         dateClick: this.dateClick,
         eventClick: this.editEvent,
         editable: true,
-        events: [
-          {title: 'event 1', date: '2022-12-11 10:30'},
-          {title: 'event 2', date: '2022-12-12 16:15'}]
+        events: []
       }
     }
   },
   methods: {
-    dateClick: function (arg) {
-      this.selectedDate = arg.date
-      console.log(arg)
-      this.popupStatus = true
+    dateClick: function () {
+      this.popupStatusAdd = true
     },
-
+    closeEditPopup(newPopupStatus){
+      this.popupStatusEdit = newPopupStatus
+    },
     closePopup(newPopupStatus) {
-      this.popupStatus = newPopupStatus
+      this.popupStatusAdd = newPopupStatus
     },
-    // async addDate(date) {
-    //   let calendarApi = this.$refs.calendar.getApi();
-    //
-    //   let calendarData = await this.availabilityRepository.createAvailability(1, date.start, date.end)
-    //   calendarApi.addEvent({
-    //     title: date.title,
-    //     start: calendarData.start,
-    //     end: calendarData.end,
-    //   })
-    //
-    // },
 
-    editEvent() {
-      alert("JEMOER")
+
+    editEvent: function (info) {
+      this.eventStart = info.event.start
+      this.eventEnd = info.event.end
+      this.selectedDate = new programmerDate("anus",this.eventStart,this.eventEnd,"05:00","05:00")
+
+      this.popupStatusEdit = true
     }
   }
 }

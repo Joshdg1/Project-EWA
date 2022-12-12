@@ -1,6 +1,13 @@
 
 
 export default class AvailabilityRepository {
+
+    async findAllAvailibilitys(){
+        const response = await fetch('http://localhost:8081/availability/', {
+            method: "GET"
+        });
+        return await response.json();
+    }
     async getAvailabilityById(id) {
         const response = await fetch('http://localhost:8081/availability/' + id , {
             method: "GET"
@@ -28,13 +35,15 @@ export default class AvailabilityRepository {
         return await response.json();
     }
 
-    async updateAvailabilityById(clientId) {
-        const response = await fetch('http://localhost:8081/availability/' + clientId, {
+    async updateAvailabilityById(Id,startDate, endDate, userID ) {
+        const response = await fetch('http://localhost:8081/availability/',  + Id, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({}),
+            body: JSON.stringify({
+                startDate, endDate , userID
+            }),
         });
         return await response.json();
     }
