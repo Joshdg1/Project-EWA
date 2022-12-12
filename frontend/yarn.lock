@@ -6272,6 +6272,18 @@
     "hash-sum" "^2.0.0"
     "loader-utils" "^2.0.0"
 
+"vue-multi-select@^4.6.0":
+  "integrity" "sha512-9NlTUsjIKvvn+93Ud9RUhJv/YHXcbSPuLkgF+s6JAy+YHMymEzEnnA+tdffF+wLSlgQlZ/sguIlykfrh9V6WOQ=="
+  "resolved" "https://registry.npmjs.org/vue-multi-select/-/vue-multi-select-4.6.0.tgz"
+  "version" "4.6.0"
+  dependencies:
+    "vue" "^2.6.10"
+
+"vue-multiselect@^2.1.6":
+  "integrity" "sha512-s7jmZPlm9FeueJg1RwJtnE9KNPtME/7C8uRWSfp9/yEN4M8XcS/d+bddoyVwVnvFyRh9msFo0HWeW0vTL8Qv+w=="
+  "resolved" "https://registry.npmjs.org/vue-multiselect/-/vue-multiselect-2.1.6.tgz"
+  "version" "2.1.6"
+
 "vue-router@^3.1.6":
   "integrity" "sha512-VYXZQLtjuvKxxcshuRAwjHnciqZVoXAjTjcqBTz4rKc8qih9g9pI3hbDjmqXaHdgL3v8pV6P8Z335XvHzESxLQ=="
   "resolved" "https://registry.npmjs.org/vue-router/-/vue-router-3.6.5.tgz"
@@ -6303,7 +6315,7 @@
   "resolved" "https://registry.npmjs.org/vue-template-es2015-compiler/-/vue-template-es2015-compiler-1.9.1.tgz"
   "version" "1.9.1"
 
-"vue@*", "vue@^2 || ^3.2.13", "vue@^2.6.11", "vue@^2.6.12", "vue@>=3":
+"vue@*", "vue@^2 || ^3.2.13", "vue@^2.6.10", "vue@^2.6.11", "vue@^2.6.12", "vue@>=3":
   "integrity" "sha512-HmFC70qarSHPXcKtW8U8fgIkF6JGvjEmDiVInTkKZP0gIlEPhlVlcJJLkdGIDiNkIeA2zJPQTWJUI4iWe+AVfg=="
   "resolved" "https://registry.npmjs.org/vue/-/vue-2.7.10.tgz"
   "version" "2.7.10"
