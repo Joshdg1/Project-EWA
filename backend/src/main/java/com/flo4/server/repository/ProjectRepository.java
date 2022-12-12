@@ -43,9 +43,12 @@ public class ProjectRepository implements EntityRepository<Project> {
 
         updatedProject.setTitle(project.getTitle());
         updatedProject.setDescription(project.getDescription());
-//        updatedProject.setCompany(project.getCompany());
+        updatedProject.setCompany(project.getCompany());
+        updatedProject.setUsers(project.getUsers());
+        updatedProject.setStartDate(project.getStartDate());
+        updatedProject.setEndDate(project.getEndDate());
+//        updatedProject.setUsers(project.getUsers());
 //        updatedProject.setHoursWorked(project.getHoursWorked());
-//        updatedProject.setProgrammers(project.getProgrammers());
 
         return updatedProject;
     }

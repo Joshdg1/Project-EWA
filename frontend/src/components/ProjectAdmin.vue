@@ -46,6 +46,8 @@
                 <th>Description</th>
                 <th>Company</th>
                 <th>Hours worked</th>
+                <th>End date</th>
+                <th>Start date</th>
                 <th>Programmer(s)</th>
                 <th>Actions</th>
               </tr>
@@ -63,7 +65,9 @@
                 <td>{{ project.description }}</td>
                 <td>{{ project.company }}</td>
                 <td>{{ project.hoursWorked }}</td>
-                <td>{{ project.programmers }}</td>
+                <td>{{ project.endDate }}</td>
+                <td>{{ project.startDate }}</td>
+                <td>{{ project.clients }}</td>
 
 
                 <div class="d-flex justify-content-end flex-shrink-0">
