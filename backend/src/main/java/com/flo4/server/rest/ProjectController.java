@@ -2,6 +2,7 @@ package com.flo4.server.rest;
 
 import com.flo4.server.Exceptions.NotFoundException;
 import com.flo4.server.models.Project;
+//import com.flo4.server.models.UserProject;
 import com.flo4.server.repository.EntityRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -20,6 +21,8 @@ public class ProjectController {
 
     @GetMapping(path = "", produces = "application/json")
     public List<Project> getAllProjects() {
+
+
         return this.projectRepository.findAll();
     }
 
