@@ -89,7 +89,7 @@ import UserRepository from "@/repository/UserRepository";
         methods: {
            async saveUser(){
               await this.userRepository.createProgrammers(this.email, this.first_name, this.last_name,
-                  this.password, this.phoneNumber)
+                  this.password, this.phoneNumber, this.userType)
           }
         }
     }

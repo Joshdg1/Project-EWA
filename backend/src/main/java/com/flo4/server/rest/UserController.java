@@ -34,7 +34,8 @@ public class UserController {
                            @JsonProperty("last_name")String last_name,
                            String password,
                            @JsonProperty("password_confirm") String passwordConfirmation,
-                           @JsonProperty("phone_number") String phoneNumber
+                           @JsonProperty("phone_number") String phoneNumber,
+                           @JsonProperty("user_type") String userType
                            ){}
 
     record RegisterResponse(String email,
@@ -55,13 +56,13 @@ public class UserController {
               registerRequest.last_name(),
               registerRequest.password(),
               registerRequest.phoneNumber(),
-              registerRequest.passwordConfirmation()
+              registerRequest.userType()
       );
       return new RegisterResponse(user.getEmail(), user.getFirstName(), user.getLastName(), user.getPhoneNumber());
   }
 
   record LoginRequest(String email, String password){}
-    record LoginResponse(User user, String token){}
+    record LoginResponse(int id ,User user, String token){}
 
   @PostMapping(value = "login")
     public LoginResponse login(@RequestBody LoginRequest loginRequest, HttpServletResponse response){
@@ -73,7 +74,7 @@ public class UserController {
       cookie.setPath("/users");
 
       response.addCookie(cookie);
-        return new LoginResponse(login.getUser(), login.getAccessToken().getToken());
+        return new LoginResponse(login.getId(),login.getUser(), login.getAccessToken().getToken());
   }
 
     record UserResponse(String email,
