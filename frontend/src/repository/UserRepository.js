@@ -26,14 +26,13 @@ export default class UserRepository {
         return await response.json();
     }
     async deleteProgrammerById(userId){
-        const response = await fetch('http://localhost:8081/user/' + userId, {
+        const response = await fetch('http://localhost:8081/users/' + userId, {
             method: 'DELETE',
         });
         return await response.json();
     }
-    async  updateProgrammerById(userId,  email,  firstName,  lastName,  password,  phoneNumber,  userType)
-    {
-        const response = await fetch('http://localhost:8081/user/' + userId, {
+    async  updateProgrammerById(userId,  email,  firstName,  lastName,  password,  phoneNumber,  userType) {
+        const response = await fetch('http://localhost:8081/users/' + userId, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
@@ -43,6 +42,17 @@ export default class UserRepository {
         return await response.json();
     }
 
-
+    async loginUser ( email, password) {
+        const response = await fetch('http://localhost:8081/users/login', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                email, password
+            }),
+        });
+        return await response.json();
+    }
 
 }

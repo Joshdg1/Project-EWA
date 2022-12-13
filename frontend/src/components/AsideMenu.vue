@@ -788,7 +788,7 @@ l47 37 -47 42 c-43 40 -55 62 -39 77 14 14 32 5 89 -44z"/>
                 <!--begin::Username-->
                 <div class="d-flex flex-column">
                   <div class="fw-bolder d-flex align-items-center fs-5">Max Smith
-                    <span class="badge badge-light-success fw-bolder fs-8 px-2 py-1 ms-2">Pro</span></div>
+                   </div>
                   <a href="#" class="fw-bold text-muted text-hover-primary fs-7">max@kt.com</a>
                 </div>
                 <!--end::Username-->
@@ -884,7 +884,7 @@ export default {
   name: "AsideMenu",
   methods: {
     singOut(){
-      delete localStorage.user;
+      sessionStorage.clear()
       this.$router.push("/");
     },
 

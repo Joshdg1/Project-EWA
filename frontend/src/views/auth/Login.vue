@@ -30,7 +30,7 @@
             <div class="fv-plugins-message-container invalid-feedback"></div>
         </div>
         <div class="text-center">
-            <button type="submit"  class="btn btn-lg btn-primary w-100 mb-5">
+            <button type="submit" @click="login()" class="btn btn-lg btn-primary w-100 mb-5">
                 <span class="indicator-label">Login</span>
                 <span class="indicator-progress">Please wait...
 									<span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
@@ -40,11 +40,13 @@
 </template>
 
 <script>
+import UserRepository from "@/repository/UserRepository";
     export default {
         // eslint-disable-next-line
         name: "Login",
         data() {
             return {
+                userRepository: new UserRepository(),
                 errors: [],
                 email: null,
                 password: null,
@@ -54,13 +56,6 @@
             checkForm: function (e) {
                 e.preventDefault();
 
-                if (this.email && this.password) {
-                    localStorage.user = this.email;
-                    this.$router.push("/");
-
-                    return;
-                }
-
                 this.errors = [];
 
                 if (!this.email) {
@@ -69,7 +64,24 @@
                 if (!this.password) {
                     this.errors.push('Password required.');
                 }
-            }
+
+
+            },
+          async login(){
+             this.userRepository.loginUser(this.email, this.password).then((response) =>{
+               // if response status 500, then user does not exist
+               if (response.status === 400) {
+                 this.errors = []
+                 this.errors.push("Username or password is incorrect");
+               }else {
+                 console.log(response["token"])
+                 let token = response["token"];
+                 sessionStorage.setItem("token", token)
+                 this.$router.push("/home")
+               }
+             })
+          }
         }
+
     }
 </script>

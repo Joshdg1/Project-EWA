@@ -24,7 +24,7 @@ const routes = [
         meta: {
             isPublic: true,
         },
-        path: "/login",
+        path: "/users/login",
         component: () => import('../views/auth/Login.vue'),
     },
 
@@ -113,12 +113,12 @@ const router = new VueRouter({
 })
 
 router.beforeEach((to, from, next) => {
-    const loggedIn = localStorage.getItem('user');
+    const loggedIn = sessionStorage.getItem('token');
 
     // trying to access a restricted page + not logged in
     // redirect to auth page
     if (!loggedIn && !to.meta.isPublic && !from.meta.isPublic) {
-        next('/login');
+        next('/users/login');
     } else if (loggedIn && to.meta.isPublic) {
         next('/home');
     } else {
