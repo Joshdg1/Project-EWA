@@ -22,7 +22,6 @@ public class ProjectController {
     @GetMapping(path = "", produces = "application/json")
     public List<Project> getAllProjects() {
 
-
         return this.projectRepository.findAll();
     }
 

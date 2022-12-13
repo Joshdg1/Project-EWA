@@ -46,8 +46,8 @@
                 <th>Description</th>
                 <th>Company</th>
                 <th>Hours worked</th>
-                <th>End date</th>
                 <th>Start date</th>
+                <th>End date</th>
                 <th>Programmer(s)</th>
                 <th>Actions</th>
               </tr>
@@ -65,9 +65,9 @@
                 <td>{{ project.description }}</td>
                 <td>{{ project.company }}</td>
                 <td>{{ project.hoursWorked }}</td>
-                <td>{{ dateFormat(project.endDate) }}</td>
                 <td>{{ dateFormat(project.startDate) }}</td>
-                <td>{{ project.users }}</td>
+                <td>{{ dateFormat(project.endDate) }}</td>
+                <td>{{ getUserProjects(project.users) }}</td>
 
                 <div class="d-flex justify-content-end flex-shrink-0">
                   <a class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" @click="editProject()">
@@ -152,6 +152,16 @@ export default {
         return null;
       }
       return new Date(date).toLocaleDateString('en-GB');
+    },
+
+    getUserProjects(users) {
+
+      let content = [];
+      for (const user of users) {
+        content.push(`${user.firstName} ${user.lastName}`)
+      }
+
+      return content.join(", ")
     }
   }
 }
