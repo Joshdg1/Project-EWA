@@ -11,6 +11,9 @@
         <a @click="setEditProfile()" class="btn background-florijn btn-active-info editSkill" tooltip="New App"
            data-bs-toggle="modal"
            data-bs-target="#kt_modal_create_app" id="kt_toolbar_primary_button">Edit skills</a>
+        <a @click="(event) => this.popupStatus = true" class="btn background-florijn btn-active-info editSkill" tooltip="New App"
+           data-bs-toggle="modal"
+           data-bs-target="#kt_modal_create_app" id="kt_toolbar_primary_button">Add skill</a>
       </div>
       <!--end::Action-->
     </div>
@@ -44,8 +47,6 @@
           </div>
         </div>
       </div>
-      <button class="btn background-florijn btn-active-info addSkill" @click="(event) => this.popupStatus = true">Add
-      </button>
     </div>
   </div>
 </template>
@@ -111,6 +112,7 @@ export default {
   flex-direction: row;
   justify-content: center;
   align-items: center;
+  flex-wrap: wrap;
 }
 
 .code-icon {
@@ -126,11 +128,6 @@ export default {
 
 .skillStar {
   height: 2em;
-}
-
-.addSkill {
-  width: 5vw;
-  margin: 1em;
 }
 
 .backgroundCard {
