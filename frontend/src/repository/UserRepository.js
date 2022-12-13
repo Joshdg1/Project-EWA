@@ -31,14 +31,14 @@ export default class UserRepository {
         });
         return await response.json();
     }
-    async  updateProgrammerById(userId,  email,  firstName,  lastName,  password,  phoneNumber,  userType)
+    async  updateProgrammerById(userId,  email,  firstName,  lastName,  phoneNumber)
     {
         const response = await fetch('http://localhost:8081/user/' + userId, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({userId,  email,  firstName,  lastName,  password,  phoneNumber,  userType}),
+            body: JSON.stringify({  email,  firstName,  lastName, phoneNumber}),
         });
         return await response.json();
     }

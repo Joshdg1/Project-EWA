@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 
 import com.flo4.server.Exceptions.NotFoundException;
+import com.flo4.server.models.GetUser;
 import com.flo4.server.models.User;
 import com.flo4.server.repository.EntityRepository;
 import com.flo4.server.service.UserService;
@@ -33,57 +34,79 @@ public class UserController {
     }
 
     record RegisterRequest(int id,
-                            String email,
+                           String email,
                            @JsonProperty("first_name") String firstName,
-                           @JsonProperty("last_name")String lastName,
+                           @JsonProperty("last_name") String lastName,
                            String password,
                            @JsonProperty("password_confirm") String passwordConfirmation,
                            @JsonProperty("phone_number") String phoneNumber
-                           ){}
+    ) {
+    }
 
     record RegisterResponse(String email,
                             @JsonProperty("first_name") String firstName,
-                            @JsonProperty("last_name")String lastName,
-                            @JsonProperty("phone_number") String phoneNumber){}
+                            @JsonProperty("last_name") String lastName,
+                            @JsonProperty("phone_number") String phoneNumber) {
+    }
 
     @PostMapping("add")
-    public RegisterResponse registerUser(@RequestBody RegisterRequest registerRequest){
+    public RegisterResponse registerUser(@RequestBody RegisterRequest registerRequest) {
         if (!Objects.equals(registerRequest.password(), registerRequest.passwordConfirmation()))
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Wachtwoorden komen niet overeen");
 
-      var user =  userService.registerUser(
-              registerRequest.id(),
-              registerRequest.email(),
-              registerRequest.firstName(),
-              registerRequest.lastName(),
-              registerRequest.password(),
-              registerRequest.phoneNumber(),
-              registerRequest.passwordConfirmation()
-      );
-      return new RegisterResponse(user.getEmail(), user.getFirstName(), user.getLastName(), user.getPhoneNumber());
-  }
+        var user = userService.registerUser(
+                registerRequest.id(),
+                registerRequest.email(),
+                registerRequest.firstName(),
+                registerRequest.lastName(),
+                registerRequest.password(),
+                registerRequest.phoneNumber(),
+                registerRequest.passwordConfirmation()
+        );
+        return new RegisterResponse(user.getEmail(), user.getFirstName(), user.getLastName(), user.getPhoneNumber());
+    }
 
-  record LoginRequest(String email, String password){}
-    record LoginResponse(String token){}
+    record LoginRequest(String email, String password) {
+    }
 
-  @PostMapping(value = "login")
-    public LoginResponse login(@RequestBody LoginRequest loginRequest){
+    record LoginResponse(String token) {
+    }
+
+    @PostMapping(value = "login")
+    public LoginResponse login(@RequestBody LoginRequest loginRequest) {
         var token = userService.login(loginRequest.email(), loginRequest.password());
 
         return new LoginResponse(token.getToken());
     }
+
     @GetMapping(value = "", produces = "application/json")
-    public List<User> getUsers(){
-return this.userRepository.findAll();
+    public List<User> getUsers() {
+        return this.userRepository.findAll();
     }
+
     @GetMapping(path = "{id}", produces = "application/json")
-    public User getUserById(@PathVariable int id){
-  User user = this.userRepository.findById(id);
+    public User getUserById(@PathVariable int id) {
+        User user = this.userRepository.findById(id);
         if (user == null) {
             throw new NotFoundException(String.format(String.valueOf(user), id));
         }
 
         return ResponseEntity.ok().body(user).getBody();
+    }
+
+    @PutMapping(path = "{id}", produces = "application/json")
+    public ResponseEntity<User> updateUserById(@PathVariable int id, @RequestBody GetUser user) {
+
+        User user2 = this.userRepository.findById(id);
+
+        user2.setFirstName(user.getFirstName());
+        user2.setLastName(user.getLastName());
+        user2.setPhoneNumber(user.getPhoneNumber());
+        user2.setEmail(user.getEmail());
+
+        User user1 = this.userRepository.update(user2, id);
+
+        return ResponseEntity.ok().body(user1);
     }
 
 }
