@@ -14,27 +14,39 @@
       </div>
       <!--end::Action-->
     </div>
-<!--    <SkillCardPopUp v-if="popupStatus" @close-popup="closePopup" @adding-skill="addSkill">-->
+    <!--    <SkillCardPopUp v-if="popupStatus" @close-popup="closePopup" @adding-skill="addSkill">-->
 
-<!--    </SkillCardPopUp>-->
+    <!--    </SkillCardPopUp>-->
     <addSkill v-if="popupStatus" @close-popup="closePopup"></addSkill>
     <div class="card-body p-11">
       <div class="card"
            v-for="skill in this.skills"
-           v-bind:key="skill.skillId"
-      >
-        <div class="skillContainer">
-
-          <img src="https://cdn.onlinewebfonts.com/svg/img_133326.png" class="code-icon">
-          <div class="CardText">
-            <div>{{ skill.skillName }}  </div>
-            <div> {{skill.skillLevel}}<img src="https://cdn.onlinewebfonts.com/svg/img_561899.png" class="skillStar"> </div>
+           v-bind:key="skill.skillId">
+        <div class="modal-dialog mw-650px">
+          <!--begin::Modal content-->
+          <div class="modal-content backgroundCard">
+            <!--begin::Modal header-->
+            <div class="modal-header pb-0 border-0 justify-content-end">
+              <!--begin::Close-->
+              <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
+              </div>
+              <!--end::Close-->
+            </div>
+            <!--begin::Modal header-->
+            <!--begin::Modal body-->
+            <div class="backgroundText">{{ skill.name }}</div>
+            <div class="backgroundText"> {{ skill.level }}
+              <img src="../../assets/florijnster.png" class="skillStar">
+            </div>
+            <div class="modal-body scroll-y mx-5 mx-xl-18 pt-0 pb-15">
+              <!--end::Modal body-->
+            </div>
           </div>
-
         </div>
       </div>
+      <button class="btn background-florijn btn-active-info addSkill" @click="(event) => this.popupStatus = true">Add
+      </button>
     </div>
-    <button class="btn background-florijn btn-active-info addSkill" @click="(event) => this.popupStatus = true">Add</button>
   </div>
 </template>
 
@@ -51,7 +63,7 @@ export default {
     return {
       editingProfile: null,
       programSkill: null,
-      popupStatus: null
+      popupStatus: null,
 
     }
   },
@@ -60,11 +72,11 @@ export default {
       this.editingProfile = true
       this.$emit('edit-profile', this.editingProfile)
     },
-    closePopup(newPopupStatus){
+    closePopup(newPopupStatus) {
       this.popupStatus = newPopupStatus
     },
     addSkill(skill) {
-      this.$emit('add-skill',skill)
+      this.$emit('add-skill', skill)
 
     }
   }
@@ -79,6 +91,7 @@ export default {
   align-items: center;
   margin: 2em;
 }
+
 .skillContainer {
   display: flex;
   flex-direction: column;
@@ -88,9 +101,10 @@ export default {
   width: 12.5em;
   align-items: center;
   justify-content: center;
-  border-radius: 20px!important;
+  border-radius: 20px !important;
   margin-right: 2em
 }
+
 .card-body {
   display: flex;
 
@@ -98,20 +112,46 @@ export default {
   justify-content: center;
   align-items: center;
 }
+
 .code-icon {
   height: 2em;
   margin: 2em;
 
 }
+
 .CardText {
-  border-top: 2px solid #EF5722!important;
+  border-top: 2px solid #EF5722 !important;
   text-align: center;
 }
-.skillStar{
-  height: 1em;
+
+.skillStar {
+  height: 2em;
 }
-.addSkill{
+
+.addSkill {
   width: 5vw;
   margin: 1em;
+}
+
+.backgroundCard {
+  background-color: #192440 !important;
+}
+
+.backgroundText {
+  color: white !important;
+  margin-left: 5px;
+  margin-right: 5px;
+  font-family: Poppins, Helvetica, "sans-serif";
+  font-size: 15px;
+  text-align: center;
+}
+
+.card {
+  margin: 15px;
+}
+
+.skillStar {
+  color: #ec5a29;
+  align-content: center;
 }
 </style>

@@ -104,6 +104,7 @@ export default {
       if (this.newSkill.skillLevel <= 5 && this.newSkill.skillLevel >= 1 && this.newSkill.skillName != null) {
         await this.repository.createSkill(this.newSkill.skillName, this.newSkill.skillLevel, this.userId)
         this.closePopup();
+        location.reload();
       } else alert("Getal moet tussen de 1-5 zijn & er moet een skill geselecteerd zijn.")
 
     }
