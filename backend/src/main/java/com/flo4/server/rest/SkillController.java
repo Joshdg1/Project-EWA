@@ -1,6 +1,7 @@
 package com.flo4.server.rest;
 
 import com.flo4.server.Exceptions.NotFoundException;
+import com.flo4.server.models.GetUserSkills;
 import com.flo4.server.models.User;
 import com.flo4.server.models.UserAvailability;
 import com.flo4.server.models.UserSkills;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
+
 @RestController
 @RequestMapping("skills")
 @CrossOrigin(origins = "http://localhost:8080")
@@ -32,8 +34,8 @@ public class SkillController {
         User ourUser = this.userEntityRepository.findById(id);
         List<UserSkills> skillList = new ArrayList<>(this.SkillRepository.findAll());
         List<UserSkills> updatedList = new ArrayList<>();
-        for (UserSkills userSkills : skillList){
-            if (userSkills.getUser().getId() == ourUser.getId()){
+        for (UserSkills userSkills : skillList) {
+            if (userSkills.getUser().getId() == ourUser.getId()) {
                 updatedList.add(userSkills);
             }
         }
@@ -42,12 +44,16 @@ public class SkillController {
     }
 
 
-
     @Transactional
     @PostMapping(path = "add", produces = "application/json")
-    public ResponseEntity<UserSkills> addSkill(@RequestBody UserSkills UserSkills) {
+    public ResponseEntity<UserSkills> addSkill(@RequestBody GetUserSkills UserSkills) {
 
-        UserSkills newUserSkills = this.SkillRepository.save(UserSkills);
+        UserSkills userSkills = new UserSkills();
+        userSkills.setName(UserSkills.getSkillName());
+        userSkills.setLevel(UserSkills.getSkillLevel());
+        userSkills.setUser(this.userEntityRepository.findById(UserSkills.getUserId()));
+
+        UserSkills newUserSkills = this.SkillRepository.save(userSkills);
 
 
         return ResponseEntity.ok().body(newUserSkills);
@@ -74,5 +80,5 @@ public class SkillController {
             throw new NotFoundException(String.format(notFound, id));
         }
         return ResponseEntity.ok().body(updatedUserSkills);
-}
+    }
 }

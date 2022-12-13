@@ -12,18 +12,18 @@ export default class SkillRepository {
     }
 
 
-    // async createSkill (id, name, level) {
-    //     const response = await fetch('http://localhost:8081/skills/add', {
-    //         method: 'POST',
-    //         headers: {
-    //             'Content-Type': 'application/json',
-    //         },
-    //         body: JSON.stringify({
-    //            id, name, level,
-    //         }),
-    //     });
-    //     return await response.json();
-    // }
+    async createSkill (name, level, userId) {
+        const response = await fetch('http://localhost:8081/skills/add', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+               name, level, userId
+            }),
+        });
+        return await response.json();
+    }
     async deleteSkillsById(skillsId){
         const response = await fetch('http://localhost:8081/programmers/' + skillsId, {
             method: 'DELETE',
