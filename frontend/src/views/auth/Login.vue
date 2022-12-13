@@ -74,6 +74,14 @@ import UserRepository from "@/repository/UserRepository";
                  this.errors = []
                  this.errors.push("Username or password is incorrect");
                }else {
+                   // TODO: set real user
+                   sessionStorage.user = JSON.stringify({
+                       firstName: 'test',
+                       lastName: 'gebruiker',
+                       email: 'test@gebruiker.nl',
+                       userType: 'programmer',
+                   });
+
                  console.log(response["token"])
                  let token = response["token"];
                  let id = response["id"]
