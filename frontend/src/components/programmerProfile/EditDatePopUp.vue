@@ -1,6 +1,12 @@
 <template>
   <div class="popup">
     <div class="popup-inner">
+          <span class="svg-icon svg-icon-1" @click="cancel">
+								<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+									<rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="black" />
+									<rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="black" />
+								</svg>
+							</span>
 
       <img src="https://clipground.com/images/date-symbol-clipart.jpg" class="code-icon">
       <div class="CardText">
@@ -15,7 +21,8 @@
 
       </div>
       <div class="buttons">
-        <button class="btn background-florijn btn-active-info addSkill" @click="cancel">anuleren</button>
+<!--        <button class="btn background-florijn btn-active-info addSkill" @click="cancel">anuleren</button>-->
+        <button class="btn background-florijn btn-active-info addSkill" @click="deleteAvail">verweideren</button>
         <button class="btn background-florijn btn-active-info addSkill" @click="updateDate">Sla datum op</button>
       </div>
 
@@ -61,16 +68,16 @@ export default {
     async updateDate() {
       // if (!(this.newDate.start).type === DateTime || !isNaN(this.newDate.end)) {
       const allAvailabilitys = await this.repository.getAvailabilityById(20)
-      console.log("ALL AVAILABILITYS" + allAvailabilitys)
+
       for (let i = 0; i < allAvailabilitys.length; i++) {
         if ( (allAvailabilitys[i].startDate).toString().substring(0,10) === (this.selectedEvent.start)) {
           if ((allAvailabilitys[i].endDate).toString().substring(0,10) === (this.selectedEvent.end)) {
             this.currentId = allAvailabilitys[i].id
+            console.log("Winnar")
             break;
           }
         }
       }
-
       const newStartDate = new Date(this.newDate.start)
       const newEndDate = new Date(this.newDate.end)
       newStartDate.setHours(0)
@@ -89,8 +96,16 @@ export default {
       const endDate = this.addHoursToDate(newEndDate, endHours)
 
 
-      const newAvail = await this.repository.updateAvailabilityById(this.currentId, startDate, endDate, 20)
-      console.log(newAvail)
+      const starting = new Date(startDate)
+      const ending = new Date(endDate)
+
+      console.log(typeof this.currentId)
+      console.log( typeof starting)
+      console.log( typeof ending)
+      console.log(typeof 20)
+
+      await this.repository.updateAvailabilityById(this.currentId, starting, ending, 20)
+
 
       // this.$emit('adding-date', this.newDate)
       this.popupStatus = false
@@ -114,6 +129,36 @@ export default {
       daylist.map((v) => v.toISOString().slice(0, 10)).join("")
       return daylist
     },
+  async  deleteAvail(){
+    const allAvailabilitys = await this.repository.getAvailabilityById(20)
+
+    const start  = new Date(this.selectedEvent.start).toLocaleDateString()
+
+    const end  = new Date(this.selectedEvent.end).toLocaleDateString()
+
+
+    for (let i = 0; i < allAvailabilitys.length; i++) {
+
+      console.log(new Date((allAvailabilitys[i].endDate)).toLocaleDateString()  +  'DATABASE')
+      console.log(start + "OUR")
+      console.log()
+      if ( new Date((allAvailabilitys[i].startDate)).toLocaleDateString() === (start)) {
+        console.log("KOMT ER IN")
+
+        console.log(new Date((allAvailabilitys[i].endDate)).toLocaleDateString() +  'DATABASE')
+        console.log(end + "OUR")
+        console.log()
+        if (new Date((allAvailabilitys[i].endDate)).toLocaleDateString() === (end)) {
+          this.currentId = allAvailabilitys[i].id
+          console.log("WINNAAR")
+          break;
+        }
+      }
+    }
+    console.log(this.currentId)
+    await this.repository.deleteAvailability(this.currentId)
+
+    }
   }
 }
 </script>

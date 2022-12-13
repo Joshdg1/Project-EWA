@@ -67,7 +67,7 @@
                 <td>{{ project.hoursWorked }}</td>
                 <td>{{ dateFormat(project.endDate) }}</td>
                 <td>{{ dateFormat(project.startDate) }}</td>
-                <td>{{ project.clients }}</td>
+                <td>{{ project.users }}</td>
 
                 <div class="d-flex justify-content-end flex-shrink-0">
                   <a class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" @click="editProject()">

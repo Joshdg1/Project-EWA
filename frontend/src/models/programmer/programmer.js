@@ -3,27 +3,15 @@ class Programmer {
     firstName;
     lastName;
     email;
-    address;
-    city;
-    postcode;
-    availability;
-    workPreference;
-    projectType;
-    skills;
+    phoneNumber
 
 
-    constructor(id, firstName, lastName, email, address, city, postcode, availability, workPreference, projectType, skills) {
-        this.id = id
+    constructor(id, firstName, lastName, email, phoneNumber) {
+        this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
-        this.address = address;
-        this.city = city;
-        this.postcode = postcode;
-        this.availability = availability;
-        this.workPreference = workPreference;
-        this.projectType = projectType;
-        this.skills = skills;
+        this.phoneNumber = phoneNumber;
     }
 
     static createProgrammer(){

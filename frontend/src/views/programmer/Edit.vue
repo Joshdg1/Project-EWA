@@ -54,8 +54,8 @@ export default {
     // const allProgrammers = this.repository.getAllProgrammers()
     // console.log(allProgrammers)
 
-
-    this.sampleProgrammer = await this.repository.findUserById(20)
+   const userID = sessionStorage.getItem("id")
+    this.sampleProgrammer = await this.repository.findUserById(userID)
 
 
     console.log("user"+  this.sampleProgrammer.firstName)

@@ -33,14 +33,14 @@ export default class AvailabilityRepository {
         return await response.json();
     }
 
-    async updateAvailabilityById(Id,startDate, endDate, userID ) {
-        const response = await fetch('http://localhost:8081/availability/',  + Id, {
+    async updateAvailabilityById(Id,startDate, endDate, userId ) {
+        const response = await fetch('http://localhost:8081/availability/'  + Id, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-                startDate, endDate , userID
+                startDate, endDate , userId
             }),
         });
         return await response.json();

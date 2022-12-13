@@ -35,11 +35,14 @@
 
 <script>
 import {Project} from "@/models/project";
+import ProjectRepository from "@/repository/ProjectRepository";
 
 export default {
 
   name: "ProgrammerProjects",
   created() {
+
+
 
     let project1 = new Project(1, "COELE PROJECT", "DESC", "HVA", 0)
     console.log(project1)
@@ -47,7 +50,8 @@ export default {
   },
   data() {
     return {
-      projects: []
+      projects: [],
+      repository: new ProjectRepository()
     }
   },
 

@@ -20,13 +20,25 @@
       <!--begin::Row-->
       <div class="row mb-7">
         <!--begin::Label-->
-        <label class="col-lg-4 fw-bold text-muted">Full Name</label>
+        <label class="col-lg-4 fw-bold text-muted">Firstname</label>
         <!--end::Label-->
         <!--begin::Col-->
         <div class="col-lg-8">
           <div class="fullNameInput">
-            <input type="text" class="form-control form-control-solid " id="fullNameLeft" name="search" v-model="editProfile.firstName" data-kt-search-element="input" />
-            <input type="text" class="form-control form-control-solid " id="fullNameRight" name="search" v-model="editProfile.lastName" data-kt-search-element="input" />
+            <input type="text" class="form-control form-control-solid " name="search" v-model="editProfile.firstName" data-kt-search-element="input" />
+          </div>
+
+        </div>
+        <!--end::Col-->
+      </div>
+      <div class="row mb-7">
+        <!--begin::Label-->
+        <label class="col-lg-4 fw-bold text-muted">Lastname</label>
+        <!--end::Label-->
+        <!--begin::Col-->
+        <div class="col-lg-8">
+          <div class="fullNameInput">
+            <input type="text" class="form-control form-control-solid "  name="search" v-model="editProfile.lastName" data-kt-search-element="input" />
           </div>
 
         </div>
@@ -48,64 +60,13 @@
       <!--begin::Input group-->
       <div class="row mb-7">
         <!--begin::Label-->
-        <label class="col-lg-4 fw-bold text-muted">City</label>
+        <label class="col-lg-4 fw-bold text-muted">Phone number</label>
         <!--end::Label-->
         <!--begin::Col-->
-        <div class="col-lg-8">
-          <input type="text" class="form-control form-control-solid " name="search" v-model="editProfile.city" data-kt-search-element="input" />
+        <div class="col-lg-8 fv-row">
+          <input type="text" class="form-control form-control-solid " name="search" v-model="editProfile.phoneNumber" data-kt-search-element="input" />
         </div>
         <!--end::Col-->
-      </div>
-      <!--end::Input group-->
-      <!--begin::Input group-->
-      <div class="row mb-7">
-        <!--begin::Label-->
-        <label class="col-lg-4 fw-bold text-muted">Address
-
-        </label>
-        <!--end::Label-->
-        <!--begin::Col-->
-        <div class="col-lg-8 d-flex align-items-center">
-          <input type="text" class="form-control form-control-solid " name="search" v-model="editProfile.address" data-kt-search-element="input" />
-        </div>
-        <!--end::Col-->
-      </div>
-      <!--end::Input group-->
-      <!--begin::Input group-->
-      <div class="row mb-7">
-        <!--begin::Label-->
-        <label class="col-lg-4 fw-bold text-muted">Postcode</label>
-        <!--end::Label-->
-        <!--begin::Col-->
-        <div class="col-lg-8">
-          <input type="text" class="form-control form-control-solid " name="search" v-model="editProfile.postcode" data-kt-search-element="input" />
-        </div>
-        <!--end::Col-->
-      </div>
-      <!--end::Input group-->
-      <!--begin::Input group-->
-      <div class="row mb-7">
-        <!--begin::Label-->
-        <label class="col-lg-4 fw-bold text-muted">Type of Project
-          <em class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip" title="Programming Languages Known"></em></label>
-        <!--end::Label-->
-        <!--begin::Col-->
-        <div class="col-lg-8">
-          <input type="text" class="form-control form-control-solid " name="search" v-model="editProfile.projectType" data-kt-search-element="input" />
-        </div>
-        <!--end::Col-->
-      </div>
-      <!--end::Input group-->
-      <!--begin::Input group-->
-      <div class="row mb-10">
-        <!--begin::Label-->
-        <label class="col-lg-4 fw-bold text-muted">Work preference</label>
-        <!--begin::Label-->
-        <!--begin::Label-->
-        <div class="col-lg-8">
-          <input type="text" class="form-control form-control-solid " name="search" v-model="editProfile.workPreference" data-kt-search-element="input" />
-        </div>
-        <!--begin::Label-->
       </div>
       <!--end::Input group-->
     </div>
@@ -115,7 +76,7 @@
 
 <script>
 import Programmer from "@/models/programmer/programmer";
-import ProgrammerRepository from "@/repository/ProgrammerService";
+import UserRepository from "@/repository/UserRepository";
 
 
 export default {
@@ -129,22 +90,22 @@ export default {
     return{
       editProfile: new Programmer,
       editingProfile: null,
-      repository: new ProgrammerRepository()
+      repository: new UserRepository()
     }
   },
   methods: {
+
   async  setEditProfile(){
+
       this.editingProfile = false
       this.$emit('edit-profile' , this.editingProfile)
-    this.$emit('save-profile', this.editProfile)
+    // this.$emit('save-profile', this.editProfile)
 
-    console.log(this.editProfile.lastName)
-    console.log(this.editProfile.firstName)
-    const profileId = 1;
-   await this.repository.updateProgrammerById(profileId,this.editProfile.firstName, this.editProfile.lastName,
-       this.editProfile.email, this.editProfile.address,
-        this.editProfile.city, this.editProfile.postcode, this.editProfile.availability, this.editProfile.workPreference,
-        this.editProfile.projectType,this.editProfile.skills)
+
+    console.log(this.editProfile)
+
+   await this.repository.updateProgrammerById(20, this.editProfile.email, this.editProfile.firstName, this.editProfile.lastName,
+       this.editProfile.phoneNumber)
     }
   }
 }
@@ -157,12 +118,4 @@ export default {
   flex-direction: row;
 }
 
-#fullNameLeft {
-  width: 15vw !important;
-  margin-right: .5em;
-}
-
-#fullNameRight {
-  width: 15vw !important;
-}
 </style>
