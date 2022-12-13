@@ -37,9 +37,10 @@ public class User {
         this.id = id;
     }
 
-    public static User of(int id, String email, String firstName, String lastName, String password, String phoneNumber) {
-        return new User(id, email,firstName, lastName, password, phoneNumber, null);
+    public static User of(int id, String email, String firstName, String lastName, String password, String phoneNumber, String userType) {
+        return new User(id, email,firstName, lastName, password, phoneNumber, userType);
     }
+
 
     public User(int id, String email, String firstName, String lastName, String password, String phoneNumber, String userType) {
         this.id = id;

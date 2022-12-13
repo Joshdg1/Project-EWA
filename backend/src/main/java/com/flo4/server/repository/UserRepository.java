@@ -2,12 +2,15 @@ package com.flo4.server.repository;
 
 
 import com.flo4.server.models.User;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
+import java.time.LocalDateTime;
 import java.util.List;
 
 
@@ -79,5 +82,22 @@ public class UserRepository implements EntityRepository<User> {
     public User findByEmail(String email) {
         return this.entityManager.createQuery("select u from User u where email = ?1", User.class).setParameter(1, email).getSingleResult();
     }
+
+
+
+//public User findByIdAndTokenAndExpired(int id, String refresh_token, LocalDateTime expired_at){
+//    User user = this.entityManager
+//            .createQuery("select u from User u inner join Token t on u.id = t.user where u.id = :id and t.refresh_token = :refresh_token and t.expired_at >= :expired_at", User.class)
+//            .setParameter("id", id)
+//            .setParameter("refresh_token", refresh_token)
+//            .setParameter("expired_at", expired_at)
+//            .getSingleResult();
+//
+//    if (user == null) {
+//        throw new NoResultException("No matching user found");
+//    }
+//
+//    return user;
+//}
 
 }
