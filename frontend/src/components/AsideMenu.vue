@@ -771,7 +771,7 @@ l47 37 -47 42 c-43 40 -55 62 -39 77 14 14 32 5 89 -44z"/>
           <div class="cursor-pointer symbol symbol-40px" data-kt-menu-trigger="click" data-kt-menu-overflow="true"
                data-kt-menu-placement="top-start" data-bs-toggle="tooltip" data-bs-placement="right"
                data-bs-dismiss="click" title="User profile">
-            <img src="/assets/media/avatars/150-26.jpg" alt="image"/>
+            <span class="symbol-label bg-primary text-inverse-primary fw-bold">{{ user.firstName[0] }}</span>
           </div>
           <!--begin::Menu-->
           <div
@@ -782,14 +782,14 @@ l47 37 -47 42 c-43 40 -55 62 -39 77 14 14 32 5 89 -44z"/>
               <div class="menu-content d-flex align-items-center px-3">
                 <!--begin::Avatar-->
                 <div class="symbol symbol-50px me-5">
-                  <img alt="Logo" src="/assets/media/avatars/150-26.jpg"/>
+                  <span class="symbol-label bg-primary text-inverse-primary fw-bold">{{ user.firstName[0] }}</span>
                 </div>
                 <!--end::Avatar-->
                 <!--begin::Username-->
                 <div class="d-flex flex-column">
-                  <div class="fw-bolder d-flex align-items-center fs-5">Max Smith
+                  <div class="fw-bolder d-flex align-items-center fs-5">{{ user.firstName }} {{ user.lastName }}
                    </div>
-                  <a href="#" class="fw-bold text-muted text-hover-primary fs-7">max@kt.com</a>
+                  <a href="#" class="fw-bold text-muted text-hover-primary fs-7">{{ user.email }}</a>
                 </div>
                 <!--end::Username-->
               </div>
@@ -807,26 +807,26 @@ l47 37 -47 42 c-43 40 -55 62 -39 77 14 14 32 5 89 -44z"/>
             <div class="separator my-2"></div>
             <!--end::Menu separator-->
             <!--begin::Menu item-->
-            <div class="menu-item px-5" data-kt-menu-trigger="hover" data-kt-menu-placement="right-end">
-              <a href="#" class="menu-link px-5">
-											<span class="menu-title position-relative">Language
-											<span class="fs-8 rounded bg-light px-3 py-2 position-absolute translate-middle-y top-50 end-0">English
-											<img class="w-15px h-15px rounded-1 ms-2" src="/assets/media/flags/united-states.svg"
-                           alt=""/></span></span>
-              </a>
-              <!--begin::Menu sub-->
-              <div class="menu-sub menu-sub-dropdown w-175px py-4">
-                <!--begin::Menu item-->
-                <div class="menu-item px-3">
-                  <a href="#" class="menu-link d-flex px-5 active">
-												<span class="symbol symbol-20px me-4">
-													<img class="rounded-1" src="/assets/media/flags/united-states.svg" alt=""/>
-												</span>English</a>
-                </div>
-                <!--end::Menu item-->
-              </div>
-              <!--end::Menu sub-->
-            </div>
+<!--            <div class="menu-item px-5" data-kt-menu-trigger="hover" data-kt-menu-placement="right-end">-->
+<!--              <a href="#" class="menu-link px-5">-->
+<!--											<span class="menu-title position-relative">Language-->
+<!--											<span class="fs-8 rounded bg-light px-3 py-2 position-absolute translate-middle-y top-50 end-0">English-->
+<!--											<img class="w-15px h-15px rounded-1 ms-2" src="/assets/media/flags/united-states.svg"-->
+<!--                           alt=""/></span></span>-->
+<!--              </a>-->
+<!--              &lt;!&ndash;begin::Menu sub&ndash;&gt;-->
+<!--              <div class="menu-sub menu-sub-dropdown w-175px py-4">-->
+<!--                &lt;!&ndash;begin::Menu item&ndash;&gt;-->
+<!--                <div class="menu-item px-3">-->
+<!--                  <a href="#" class="menu-link d-flex px-5 active">-->
+<!--												<span class="symbol symbol-20px me-4">-->
+<!--													<img class="rounded-1" src="/assets/media/flags/united-states.svg" alt=""/>-->
+<!--												</span>English</a>-->
+<!--                </div>-->
+<!--                &lt;!&ndash;end::Menu item&ndash;&gt;-->
+<!--              </div>-->
+<!--              &lt;!&ndash;end::Menu sub&ndash;&gt;-->
+<!--            </div>-->
             <!--end::Menu item-->
             <!--begin::Menu item-->
             <div class="menu-item px-5">
@@ -834,20 +834,20 @@ l47 37 -47 42 c-43 40 -55 62 -39 77 14 14 32 5 89 -44z"/>
             </div>
             <!--end::Menu item-->
             <!--begin::Menu separator-->
-            <div class="separator my-2"></div>
+<!--            <div class="separator my-2"></div>-->
             <!--end::Menu separator-->
             <!--begin::Menu item-->
-            <div class="menu-item px-5">
-              <div class="menu-content px-5">
-                <label class="form-check form-switch form-check-custom form-check-solid pulse pulse-success"
-                       for="kt_user_menu_dark_mode_toggle">
-                  <input class="form-check-input w-30px h-20px" type="checkbox" value="1" name="mode"
-                         id="kt_user_menu_dark_mode_toggle" data-kt-url="../dist/index.html"/>
-                  <span class="pulse-ring ms-n1"></span>
-                  <span class="form-check-label text-gray-600 fs-7">Dark Mode</span>
-                </label>
-              </div>
-            </div>
+<!--            <div class="menu-item px-5">-->
+<!--              <div class="menu-content px-5">-->
+<!--                <label class="form-check form-switch form-check-custom form-check-solid pulse pulse-success"-->
+<!--                       for="kt_user_menu_dark_mode_toggle">-->
+<!--                  <input class="form-check-input w-30px h-20px" type="checkbox" value="1" name="mode"-->
+<!--                         id="kt_user_menu_dark_mode_toggle" data-kt-url="../dist/index.html"/>-->
+<!--                  <span class="pulse-ring ms-n1"></span>-->
+<!--                  <span class="form-check-label text-gray-600 fs-7">Dark Mode</span>-->
+<!--                </label>-->
+<!--              </div>-->
+<!--            </div>-->
             <!--end::Menu item-->
           </div>
           <!--end::Menu-->
@@ -882,6 +882,11 @@ l47 37 -47 42 c-43 40 -55 62 -39 77 14 14 32 5 89 -44z"/>
 <script>
 export default {
   name: "AsideMenu",
+  data(){
+    return{
+      user: JSON.parse(sessionStorage.user),
+    }
+  },
   methods: {
     singOut(){
       sessionStorage.clear()

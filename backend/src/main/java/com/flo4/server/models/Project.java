@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import old.Client;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -16,18 +17,23 @@ public class Project {
     private String company;
     private String description;
     private String title;
-    @OneToMany(mappedBy = "project")
-    @JsonManagedReference(value = "project")
-    private List<UserProject> users;
+
+    @ManyToMany
+    @JoinTable(
+            name = "user_project",
+            joinColumns = @JoinColumn(name = "project_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id")
+    )
+    private List<User> users;
     private Date startDate;
     private Date endDate;
 
-    public List<UserProject> getUsers() {
+    public List<User> getUsers() {
         return users;
     }
 
-    public void setUsers(List<UserProject> users) {
-        this.users = users;
+    public void setUsers(List<User> users) {
+//        this.users = users;
     }
 
     public Project() {

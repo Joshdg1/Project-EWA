@@ -46,8 +46,8 @@
                 <th>Description</th>
                 <th>Company</th>
                 <th>Hours worked</th>
-                <th>End date</th>
                 <th>Start date</th>
+                <th>End date</th>
                 <th>Programmer(s)</th>
                 <th>Actions</th>
               </tr>
@@ -65,9 +65,9 @@
                 <td>{{ project.description }}</td>
                 <td>{{ project.company }}</td>
                 <td>{{ project.hoursWorked }}</td>
-                <td>{{ dateFormat(project.endDate) }}</td>
                 <td>{{ dateFormat(project.startDate) }}</td>
-                <td>{{ project.users }}</td>
+                <td>{{ dateFormat(project.endDate) }}</td>
+                <td v-html="getUserProjects(project.users)"></td>
 
                 <div class="d-flex justify-content-end flex-shrink-0">
                   <a class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" @click="editProject()">
@@ -152,6 +152,23 @@ export default {
         return null;
       }
       return new Date(date).toLocaleDateString('en-GB');
+    },
+
+    getUserProjects(users) {
+      if (users.length === 0)
+        return "";
+
+      let content = `<div class="symbol-group symbol-hover flex-nowrap">`;
+      for (const user of users) {
+        content += `<div title="${user.firstName} ${user.lastName}" class="symbol symbol-35px symbol-circle" data-bs-toggle="tooltip"
+      data-bs-original-title="Susan Redwood" data-kt-initialized="1">
+              <span class="symbol-label bg-primary text-inverse-primary fw-bold">${(user.firstName[0]).toUpperCase()}</span>
+              </div>`;
+      }
+      content += `</div>`;
+
+
+      return content
     }
   }
 }

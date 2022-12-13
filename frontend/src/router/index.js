@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 
 Vue.use(VueRouter)
 
+// const user = JSON.parse(sessionStorage.user);
 
 const routes = [
     {

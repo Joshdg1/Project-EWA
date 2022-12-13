@@ -1,5 +1,6 @@
 package com.flo4.server.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Getter;
 import lombok.Setter;
@@ -21,9 +22,14 @@ public class User {
     private String phoneNumber;
     private String userType;
 
-    @OneToMany(mappedBy = "user")
-    @JsonManagedReference(value = "user")
-    private List<UserProject> projects;
+    @ManyToMany
+    @JoinTable(
+            name = "user_project",
+            joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "project_id", referencedColumnName = "id")
+    )
+    @JsonIgnore()
+    private List<Project> projects;
 
     public User(){}
 
@@ -31,8 +37,8 @@ public class User {
         this.id = id;
     }
 
-    public static User of(int id, String email, String firstName, String lastName, String password, String phoneNumber) {
-        return new User(id, email,firstName, lastName, password, phoneNumber, null);
+    public static User of(int id, String email, String firstName, String lastName, String password, String phoneNumber, String userType) {
+        return new User(id, email,firstName, lastName, password, phoneNumber, userType);
     }
 
     public User(int id, String email, String firstName, String lastName, String password, String phoneNumber, String userType) {

@@ -4,7 +4,7 @@ import lombok.Getter;
 
 public class Login {
     @Getter
-    private final int Id;
+    private final int id;
     @Getter
     private final Token accessToken;
     @Getter
@@ -13,8 +13,8 @@ public class Login {
     private static final Long accessTokenValidity = 1L;
     private static final Long refreshTokenValidity = 1440L;
 
-    public Login(int Id, Token accessToken, Token refreshToken) {
-        this.Id = Id;
+    public Login(int id, Token accessToken, Token refreshToken) {
+        this.id = id;
         this.accessToken = accessToken;
         this.refreshToken = refreshToken;
     }
@@ -26,9 +26,9 @@ public class Login {
         );
     }
 
-    public static Login of(int Id, String accessSecret, Token refreshToken){
+    public static Login of(int id, String accessSecret, Token refreshToken){
         return new Login(
-                Id, Token.of(Id, accessTokenValidity, accessSecret),
+                id, Token.of(id, accessTokenValidity, accessSecret),
                 refreshToken
         );
     }
