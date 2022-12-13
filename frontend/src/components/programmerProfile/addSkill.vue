@@ -95,8 +95,6 @@ export default {
       this.newSkill.skillLevel = document.getElementsByClassName("levelSkill")[0].value;
       console.log(currentSkill)
       for (let i = 0; i < currentSkill.length; i++) {
-        console.log(typeof currentSkill[i])
-        console.log(typeof this.newSkill.skillName)
         if (currentSkill[i].name === this.newSkill.skillName) {
           alert("Deze skill bezit u al.")
           return
