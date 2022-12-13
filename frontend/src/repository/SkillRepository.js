@@ -12,14 +12,14 @@ export default class SkillRepository {
     }
 
 
-    async createSkill (name, level, userId) {
+    async createSkill (skillName, skillLevel, userId) {
         const response = await fetch('http://localhost:8081/skills/add', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-               name, level, userId
+                skillName, skillLevel, userId
             }),
         });
         return await response.json();
