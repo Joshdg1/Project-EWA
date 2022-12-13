@@ -94,13 +94,15 @@ export default {
     }
   },
   methods: {
+
   async  setEditProfile(){
+
       this.editingProfile = false
       this.$emit('edit-profile' , this.editingProfile)
-    this.$emit('save-profile', this.editProfile)
+    // this.$emit('save-profile', this.editProfile)
 
-    console.log(this.editProfile.lastName)
-    console.log(this.editProfile.firstName)
+
+    console.log(this.editProfile)
 
    await this.repository.updateProgrammerById(20, this.editProfile.email, this.editProfile.firstName, this.editProfile.lastName,
        this.editProfile.phoneNumber)

@@ -90,8 +90,16 @@ export default {
       const endDate = this.addHoursToDate(newEndDate, endHours)
 
 
-      const newAvail = await this.repository.updateAvailabilityById(this.currentId, startDate, endDate, 20)
-      console.log(newAvail)
+      const starting = new Date(startDate)
+      const ending = new Date(endDate)
+
+      console.log(typeof this.currentId)
+      console.log( typeof starting)
+      console.log( typeof ending)
+      console.log(typeof 20)
+
+      await this.repository.updateAvailabilityById(this.currentId, starting, ending, 20)
+
 
       // this.$emit('adding-date', this.newDate)
       this.popupStatus = false
