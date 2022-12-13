@@ -1,4 +1,4 @@
-package com.flo4.server.rest;
+package old;
 
 import com.flo4.server.Exceptions.NotFoundException;
 import old.Client;

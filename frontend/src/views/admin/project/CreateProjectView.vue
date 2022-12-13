@@ -25,9 +25,14 @@
                autocomplete="off" v-model="company">
       </div>
       <div class="fv-row mb-10 fv-plugins-icon-container">
-        <label class="form-label fs-6 fw-bold text-dark">hours worked on project</label>
-        <input class="form-control form-control-lg form-control-solid" type="number"
-               autocomplete="off" v-model="hoursWorked">
+        <label class="form-label fs-6 fw-bold text-dark">Begin date</label>
+        <input class="form-control form-control-lg form-control-solid" type="date"
+               autocomplete="off" v-model="startDate">
+      </div>
+      <div class="fv-row mb-10 fv-plugins-icon-container">
+        <label class="form-label fs-6 fw-bold text-dark">End date</label>
+        <input class="form-control form-control-lg form-control-solid" type="date"
+               autocomplete="off" v-model="endDate">
       </div>
     </form>
 
@@ -54,7 +59,8 @@ export default {
       title: "",
       description: "",
       company: "",
-      hoursWorked: ""
+      startDate: "",
+      endDate: ""
     }
   },
 
@@ -64,12 +70,14 @@ export default {
       localStorage.title = "";
       localStorage.description = "";
       localStorage.company = "";
-      localStorage.hoursWorked = "";
+      localStorage.startDate = "";
+      localStorage.endDate = "";
 
       localStorage.title = this.title;
       localStorage.description = this.description;
       localStorage.company = this.company;
-      localStorage.hoursWorked = this.hoursWorked;
+      localStorage.startDate = this.startDate;
+      localStorage.endDate = this.endDate;
 
       this.$router.push("/createNewProject2")
     }

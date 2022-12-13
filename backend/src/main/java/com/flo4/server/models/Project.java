@@ -1,8 +1,11 @@
 package com.flo4.server.models;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import old.Client;
 
 import javax.persistence.*;
+import java.util.Date;
+import java.util.List;
 
 @Entity
 public class Project {
@@ -10,10 +13,22 @@ public class Project {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private String title;
+    private String company;
     private String description;
-    private String startDate;
-    private String endDate;
+    private String title;
+    @OneToMany(mappedBy = "project")
+    @JsonManagedReference(value = "project")
+    private List<UserProject> users;
+    private Date startDate;
+    private Date endDate;
+
+    public List<UserProject> getUsers() {
+        return users;
+    }
+
+    public void setUsers(List<UserProject> users) {
+        this.users = users;
+    }
 
     public Project() {
 
@@ -51,5 +66,29 @@ public class Project {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getCompany() {
+        return company;
+    }
+
+    public void setCompany(String company) {
+        this.company = company;
+    }
+
+    public Date getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(Date startDate) {
+        this.startDate = startDate;
+    }
+
+    public Date getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(Date endDate) {
+        this.endDate = endDate;
     }
 }

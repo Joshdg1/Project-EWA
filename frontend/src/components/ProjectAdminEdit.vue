@@ -44,6 +44,8 @@
                 <th>Description</th>
                 <th>Company</th>
                 <th>Hours worked</th>
+                <th>End date</th>
+                <th>Start date</th>
                 <th>Programmer(s)</th>
                 <th>Actions</th>
               </tr>
@@ -61,7 +63,9 @@
                 <td><input type="text" v-model="project.description"></td>
                 <td><input type="text" v-model="project.company"></td>
                 <td><input type="text" v-model="project.hoursWorked"></td>
-                <td>{{ project.programmers }}</td>
+                <td><input type="text" v-model="project.endDate"></td>
+                <td><input type="text" v-model="project.startDate"></td>
+                <td><input type="text" v-model="project.clients"></td>
 
 
                 <div class="d-flex justify-content-end flex-shrink-0">

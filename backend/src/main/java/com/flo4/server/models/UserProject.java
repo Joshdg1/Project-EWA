@@ -1,6 +1,8 @@
 package com.flo4.server.models;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 
 @Entity
@@ -10,11 +12,11 @@ public class UserProject {
     int id;
 
     @ManyToOne
-    //@JoinColumn(name = "userId", nullable = true)
+    @JsonBackReference(value = "user")
     private User user;
 
     @ManyToOne
-    //@JoinColumn(name = "userId", nullable = true)
+    @JsonBackReference(value = "project")
     private Project project;
 
     public UserProject() {
@@ -28,6 +30,30 @@ public class UserProject {
     public UserProject(int id, Project project, User user) {
         this(id);
         this.user = user;
+        this.project = project;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public Project getProject() {
+        return project;
+    }
+
+    public void setProject(Project project) {
         this.project = project;
     }
 }

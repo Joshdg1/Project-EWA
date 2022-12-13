@@ -1,6 +1,8 @@
 package com.flo4.server.repository;
 
 import com.flo4.server.models.Project;
+import com.flo4.server.models.UserProject;
+import org.hibernate.Hibernate;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
@@ -19,8 +21,13 @@ public class ProjectRepository implements EntityRepository<Project> {
 
     public List<Project> findAll() {
         TypedQuery<Project> query = this.entityManager.createQuery("select p from Project p", Project.class);
+        List<Project> projects = query.getResultList();
 
-        return query.getResultList();
+        for (Project project : projects) {
+            Hibernate.initialize(project.getUsers());   
+        }
+
+        return projects;
     }
 
     @Override
@@ -43,9 +50,12 @@ public class ProjectRepository implements EntityRepository<Project> {
 
         updatedProject.setTitle(project.getTitle());
         updatedProject.setDescription(project.getDescription());
-//        updatedProject.setCompany(project.getCompany());
+        updatedProject.setCompany(project.getCompany());
+        updatedProject.setUsers(project.getUsers());
+        updatedProject.setStartDate(project.getStartDate());
+        updatedProject.setEndDate(project.getEndDate());
+//        updatedProject.setUsers(project.getUsers());
 //        updatedProject.setHoursWorked(project.getHoursWorked());
-//        updatedProject.setProgrammers(project.getProgrammers());
 
         return updatedProject;
     }
