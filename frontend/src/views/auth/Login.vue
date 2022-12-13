@@ -76,7 +76,9 @@ import UserRepository from "@/repository/UserRepository";
                }else {
                  console.log(response["token"])
                  let token = response["token"];
+                 let id = response["id"]
                  sessionStorage.setItem("token", token)
+                 sessionStorage.setItem("id", id)
                  this.$router.push("/home")
                }
              })

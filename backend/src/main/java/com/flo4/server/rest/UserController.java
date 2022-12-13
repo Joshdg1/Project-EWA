@@ -61,7 +61,7 @@ public class UserController {
   }
 
   record LoginRequest(String email, String password){}
-    record LoginResponse(String token){}
+    record LoginResponse(int id, String token){}
 
   @PostMapping(value = "login")
     public LoginResponse login(@RequestBody LoginRequest loginRequest, HttpServletResponse response){
@@ -73,7 +73,7 @@ public class UserController {
       cookie.setPath("/users");
 
       response.addCookie(cookie);
-        return new LoginResponse(login.getAccessToken().getToken());
+        return new LoginResponse(login.getId(), login.getAccessToken().getToken());
   }
 
     record UserResponse(String email,
