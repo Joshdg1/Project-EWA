@@ -67,7 +67,7 @@
                 <td>{{ project.hoursWorked }}</td>
                 <td>{{ dateFormat(project.startDate) }}</td>
                 <td>{{ dateFormat(project.endDate) }}</td>
-                <td>{{ getUserProjects(project.users) }}</td>
+                <td v-html="getUserProjects(project.users)"></td>
 
                 <div class="d-flex justify-content-end flex-shrink-0">
                   <a class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" @click="editProject()">
@@ -155,13 +155,20 @@ export default {
     },
 
     getUserProjects(users) {
+      if (users.length === 0)
+        return "";
 
-      let content = [];
+      let content = `<div class="symbol-group symbol-hover flex-nowrap">`;
       for (const user of users) {
-        content.push(`${user.firstName} ${user.lastName}`)
+        content += `<div title="${user.firstName} ${user.lastName}" class="symbol symbol-35px symbol-circle" data-bs-toggle="tooltip"
+      data-bs-original-title="Susan Redwood" data-kt-initialized="1">
+              <span class="symbol-label bg-primary text-inverse-primary fw-bold">${(user.firstName[0]).toUpperCase()}</span>
+              </div>`;
       }
+      content += `</div>`;
 
-      return content.join(", ")
+
+      return content
     }
   }
 }
