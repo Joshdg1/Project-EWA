@@ -51,8 +51,7 @@ public class UserService {
 //        var refreshJwt = login.getRefreshToken();
 //        user.addToken()
 
-        return Login.of(user.getId(), secretAccessToken,
-                secretRefreshToken);
+        return Login.of(user.getId(), secretAccessToken, secretRefreshToken, user);
     }
 
 
@@ -63,6 +62,6 @@ public class UserService {
     public Login refreshAccess(String refreshToken) {
         var id = Token.from(refreshToken, secretRefreshToken);
 
-        return Login.of(id, secretAccessToken, Token.of(refreshToken));
+        return Login.of(id,secretAccessToken,secretRefreshToken,getUserFromToken(secretAccessToken));
     }
 }
