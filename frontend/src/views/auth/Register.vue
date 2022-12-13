@@ -88,19 +88,8 @@ import UserRepository from "@/repository/UserRepository";
         },
         methods: {
            async saveUser(){
-              // const email = document.getElementById("email").value();
-              // const firstName = document.getElementById("firstName").value();
-              // const lastName = document.getElementById("lastName").value();
-              // const password = document.getElementById("password").value();
-              // const phoneNumber = document.getElementById("phoneNumber").value();
-              // const userType = document.getElementById("userType");
-             console.log(this.email)
-             console.log(this.first_name)
-             console.log(this.last_name)
               await this.userRepository.createProgrammers(this.email, this.first_name, this.last_name,
                   this.password, this.phoneNumber)
-
-
           }
         }
     }
