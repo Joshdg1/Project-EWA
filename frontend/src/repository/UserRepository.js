@@ -1,7 +1,7 @@
 
 export default class UserRepository {
     async findUserById(userId){
-        const response = await fetch("http://localhost:8081/user/" + userId, {
+        const response = await fetch("http://localhost:8081/users/" + userId, {
             method: 'GET',
         });
         return await response.json()
@@ -33,7 +33,7 @@ export default class UserRepository {
     }
     async  updateProgrammerById(userId,  email,  firstName,  lastName,  phoneNumber)
     {
-        const response = await fetch('http://localhost:8081/user/' + userId, {
+        const response = await fetch('http://localhost:8081/users/' + userId, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',

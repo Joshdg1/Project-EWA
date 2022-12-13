@@ -118,12 +118,4 @@ export default {
   flex-direction: row;
 }
 
-#fullNameLeft {
-  width: 15vw !important;
-  margin-right: .5em;
-}
-
-#fullNameRight {
-  width: 15vw !important;
-}
 </style>
