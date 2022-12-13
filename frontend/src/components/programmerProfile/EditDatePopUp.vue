@@ -103,13 +103,15 @@ export default {
       console.log( typeof starting)
       console.log( typeof ending)
       console.log(typeof 20)
-
-      await this.repository.updateAvailabilityById(this.currentId, starting, ending, 20)
+      const userID = sessionStorage.getItem("id")
+      await this.repository.updateAvailabilityById(this.currentId, starting, ending, userID)
 
 
       // this.$emit('adding-date', this.newDate)
       this.popupStatus = false
       this.$emit('close-popup', this.popupStatus)
+      location.reload()
+
     },
     cancel() {
       this.popupStatus = false

@@ -81,14 +81,16 @@ export default {
         const startDate = this.addHoursToDate(allDates[i],startHours)
 
         const endDate = this.addHoursToDate(allDates[i],endHours)
-
-        this.repository.createAvailability(startDate,endDate , 20)
+        const userID = sessionStorage.getItem("id")
+        this.repository.createAvailability(startDate,endDate , userID)
 
       }
 
         // this.$emit('adding-date', this.newDate)
         this.popupStatus = false
         this.$emit('close-popup', this.popupStatus)
+      location.reload()
+
     },
     cancel(){
       this.popupStatus = false

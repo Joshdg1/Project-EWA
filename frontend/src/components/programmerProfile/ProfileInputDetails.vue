@@ -103,9 +103,11 @@ export default {
 
 
     console.log(this.editProfile)
+    const userID = sessionStorage.getItem("id")
 
-   await this.repository.updateProgrammerById(20, this.editProfile.email, this.editProfile.firstName, this.editProfile.lastName,
+   await this.repository.updateProgrammerById(userID, this.editProfile.email, this.editProfile.firstName, this.editProfile.lastName,
        this.editProfile.phoneNumber)
+    location.reload()
     }
   }
 }
