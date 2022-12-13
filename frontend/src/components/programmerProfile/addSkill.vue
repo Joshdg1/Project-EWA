@@ -89,16 +89,24 @@ export default {
       this.popupStatus = false;
       this.$emit('close-popup', this.popupStatus)
     },
-    addSkill() {
+    async addSkill() {
+      const currentSkill = await this.repository.getAllSkills();
       this.newSkill.skillName = this.value;
       this.newSkill.skillLevel = document.getElementsByClassName("levelSkill")[0].value;
-      console.log(this.newSkill.skillName)
-      console.log(this.newSkill.skillLevel)
+      console.log(currentSkill)
+      for (let i = 0; i < currentSkill.length; i++) {
+        console.log(typeof currentSkill[i])
+        console.log(typeof this.newSkill.skillName)
+        if (currentSkill[i].name === this.newSkill.skillName) {
+          alert("Deze skill bezit u al.")
+          return
+        }
+      }
 
       if (this.newSkill.skillLevel <= 5 && this.newSkill.skillLevel >= 1 && this.newSkill.skillName != null) {
-        this.repository.createSkill(this.newSkill.skillName, this.newSkill.skillLevel, this.userId)
+        await this.repository.createSkill(this.newSkill.skillName, this.newSkill.skillLevel, this.userId)
         this.closePopup();
-      } else alert("Getal moet tussen de 1-5 zijn & er moet een skill geslecteerd zijn.")
+      } else alert("Getal moet tussen de 1-5 zijn & er moet een skill geselecteerd zijn.")
 
     }
 
