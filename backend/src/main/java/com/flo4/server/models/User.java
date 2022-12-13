@@ -44,6 +44,4 @@ public class User {
         this.phoneNumber = phoneNumber;
         this.userType = userType;
     }
-
-
 }
