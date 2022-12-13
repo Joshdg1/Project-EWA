@@ -71,7 +71,7 @@ public class AvailabilityController {
     }
 
     @PutMapping(path = "{id}", produces = "application/json")
-    public ResponseEntity<UserAvailability> updateAvailability(@PathVariable int id, @RequestBody GetUserAvailability userAvailability) {
+    public ResponseEntity<UserAvailability> updateAvailability(@PathVariable int id, @RequestBody GetUser   Availability userAvailability) {
 
         UserAvailability userAvailability1 = new UserAvailability();
         userAvailability1.setId(id);
