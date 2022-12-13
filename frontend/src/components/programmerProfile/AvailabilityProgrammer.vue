@@ -13,7 +13,7 @@
     </div>
     <div class="card-body p-9">
       <div class="hours">
-        {{ totalHours }} aantal uren
+        {{ totalHours }}  uren
       </div>
       <div class="availableInput">
         <FullCalendar
@@ -59,11 +59,15 @@ export default {
   async created() {
     const userID = sessionStorage.getItem("id")
     const availability = await this.availabilityRepository.getAvailabilityById(userID)
-    console.log(availability)
-    for (let i = 0; i < availability.length; i++) {
-      let calendarApi = this.$refs.calendar.getApi();
-      availability[i].title = "KREK"
 
+      for (let i = 0; i < availability.length; i++) {
+      let calendarApi = this.$refs.calendar.getApi();
+
+      let start = new Date( availability[i].startDate).getTime()
+      let end = new Date( availability[i].endDate).getTime()
+     const time = ((end - start)/60/60/1000)
+      console.log(time)
+      this.totalHours+=time
       calendarApi.addEvent({
         title: availability[i].title,
         start: availability[i].startDate,
@@ -110,7 +114,12 @@ export default {
     editEvent: function (info) {
       this.eventStart = info.event.start
       this.eventEnd = info.event.end
-      this.selectedDate = new programmerDate("anus",this.eventStart,this.eventEnd,"05:00","05:00")
+
+      const hoursStart = this.eventStart.toString().substring(16,21)
+      const hoursEnd = this.eventEnd.toString().substring(16,21)
+
+      console.log(hoursStart)
+      this.selectedDate = new programmerDate(info.event.title,this.eventStart,this.eventEnd,hoursStart,hoursEnd)
 
       this.popupStatusEdit = true
     }

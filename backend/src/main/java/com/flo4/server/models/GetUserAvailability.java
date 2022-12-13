@@ -4,13 +4,16 @@ import java.time.LocalDateTime;
 
 public class GetUserAvailability {
 
+    private String title;
+
     private LocalDateTime startDate;
 
     private LocalDateTime endDate;
 
     private int userId;
 
-    public GetUserAvailability(LocalDateTime startDate, LocalDateTime endDate, int userId) {
+    public GetUserAvailability(String title, LocalDateTime startDate, LocalDateTime endDate, int userId) {
+        this.title = title;
         this.startDate = startDate;
         this.endDate = endDate;
         this.userId = userId;
@@ -38,5 +41,13 @@ public class GetUserAvailability {
 
     public void setUserId(int userId) {
         this.userId = userId;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 }

@@ -1,27 +1,31 @@
 <template>
   <div class="popup">
+
     <div class="popup-inner">
-          <span class="svg-icon svg-icon-1" @click="cancel">
+      <div class="close">
+
+        <span class="svg-icon svg-icon-1 " @click="cancel">
 								<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-									<rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="black" />
-									<rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="black" />
+									<rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)"
+                        fill="black"/>
+									<rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="black"/>
 								</svg>
 							</span>
-
+      </div>
       <img src="https://clipground.com/images/date-symbol-clipart.jpg" class="code-icon">
       <div class="CardText">
-        <input v-model="newDate.title"  class="cardInput">
-        <input v-model="newDate.hoursPerDayStart" type="time"  class="cardInput">
+        <input v-model="newDate.title" class="cardInput">
+        <input v-model="newDate.hoursPerDayStart" type="time" class="cardInput">
         <input v-model="newDate.hoursPerDayEnd" type="time" class="cardInput">
         <div class="SkillLevel">
           <input v-model="newDate.start" type="date" class="cardInput">
         </div>
-
+        
         <input v-model="newDate.end" type="date" class="cardInput">
 
       </div>
       <div class="buttons">
-<!--        <button class="btn background-florijn btn-active-info addSkill" @click="cancel">anuleren</button>-->
+        <!--        <button class="btn background-florijn btn-active-info addSkill" @click="cancel">anuleren</button>-->
         <button class="btn background-florijn btn-active-info addSkill" @click="deleteAvail">verweideren</button>
         <button class="btn background-florijn btn-active-info addSkill" @click="updateDate">Sla datum op</button>
       </div>
@@ -66,12 +70,12 @@ export default {
       return new Date(numberOfMlSeconds + addMlSeconds);
     },
     async updateDate() {
-      // if (!(this.newDate.start).type === DateTime || !isNaN(this.newDate.end)) {
-      const allAvailabilitys = await this.repository.getAvailabilityById(20)
+      const userID = sessionStorage.getItem("id")
+      const allAvailabilitys = await this.repository.getAvailabilityById(userID)
 
       for (let i = 0; i < allAvailabilitys.length; i++) {
-        if ( (allAvailabilitys[i].startDate).toString().substring(0,10) === (this.selectedEvent.start)) {
-          if ((allAvailabilitys[i].endDate).toString().substring(0,10) === (this.selectedEvent.end)) {
+        if ((allAvailabilitys[i].startDate).toString().substring(0, 10) === (this.selectedEvent.start)) {
+          if ((allAvailabilitys[i].endDate).toString().substring(0, 10) === (this.selectedEvent.end)) {
             this.currentId = allAvailabilitys[i].id
             console.log("Winnar")
             break;
@@ -92,33 +96,22 @@ export default {
       const endHours = ((this.newDate.hoursPerDayEnd.substring(0, 2) * 1) + (this.newDate.hoursPerDayEnd.substring(3, 5) / 60))
 
       const startDate = this.addHoursToDate(newStartDate, startHours)
-
       const endDate = this.addHoursToDate(newEndDate, endHours)
-
 
       const starting = new Date(startDate)
       const ending = new Date(endDate)
 
-      console.log(typeof this.currentId)
-      console.log( typeof starting)
-      console.log( typeof ending)
-      console.log(typeof 20)
-      const userID = sessionStorage.getItem("id")
-      await this.repository.updateAvailabilityById(this.currentId, starting, ending, userID)
+      await this.repository.updateAvailabilityById(this.currentId, this.newDate.title, starting, ending, userID)
 
-
-      // this.$emit('adding-date', this.newDate)
       this.popupStatus = false
       this.$emit('close-popup', this.popupStatus)
       location.reload()
-
     },
     cancel() {
       this.popupStatus = false
       this.$emit('close-popup', this.popupStatus)
     },
     betweenDates(from, to) {
-
       const getDaysArray = function (start, end) {
 
         let dt = new Date(start);
@@ -131,41 +124,35 @@ export default {
       daylist.map((v) => v.toISOString().slice(0, 10)).join("")
       return daylist
     },
-  async  deleteAvail(){
-    const allAvailabilitys = await this.repository.getAvailabilityById(20)
+    async deleteAvail() {
 
-    const start  = new Date(this.selectedEvent.start).toLocaleDateString()
+      if (confirm("Wil je deze datum verweideren?") === true) {
+        const allAvailabilitys = await this.repository.getAvailabilityById(20)
 
-    const end  = new Date(this.selectedEvent.end).toLocaleDateString()
+        const start = new Date(this.selectedEvent.start).toLocaleDateString()
+        const end = new Date(this.selectedEvent.end).toLocaleDateString()
 
-
-    for (let i = 0; i < allAvailabilitys.length; i++) {
-
-      console.log(new Date((allAvailabilitys[i].endDate)).toLocaleDateString()  +  'DATABASE')
-      console.log(start + "OUR")
-      console.log()
-      if ( new Date((allAvailabilitys[i].startDate)).toLocaleDateString() === (start)) {
-        console.log("KOMT ER IN")
-
-        console.log(new Date((allAvailabilitys[i].endDate)).toLocaleDateString() +  'DATABASE')
-        console.log(end + "OUR")
-        console.log()
-        if (new Date((allAvailabilitys[i].endDate)).toLocaleDateString() === (end)) {
-          this.currentId = allAvailabilitys[i].id
-          console.log("WINNAAR")
-          break;
+        for (let i = 0; i < allAvailabilitys.length; i++) {
+          if (new Date((allAvailabilitys[i].startDate)).toLocaleDateString() === (start)) {
+            if (new Date((allAvailabilitys[i].endDate)).toLocaleDateString() === (end)) {
+              this.currentId = allAvailabilitys[i].id
+              break;
+            }
+          }
         }
+        await this.repository.deleteAvailability(this.currentId)
       }
-    }
-    console.log(this.currentId)
-    await this.repository.deleteAvailability(this.currentId)
-
     }
   }
 }
 </script>
 
 <style scoped>
+.close {
+  display: flex;
+  justify-content: right;
+  width: 100%;
+}
 
 .popup {
   position: fixed;
@@ -196,9 +183,6 @@ export default {
   margin: 2em;
 }
 
-.skillStar {
-  height: 1em;
-}
 
 .CardText {
   display: flex;

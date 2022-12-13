@@ -15,6 +15,7 @@ public class UserAvailability {
     @JoinColumn(name = "user_id")
     private User user;
 
+    private String title;
     private LocalDateTime startDate;
 
     private LocalDateTime endDate;
@@ -32,11 +33,12 @@ public class UserAvailability {
 
     public UserAvailability(int Id){this.Id = Id;}
 
-    public UserAvailability(int Id, LocalDateTime startDate, LocalDateTime endDate, User user) {
-        this.Id = Id;
+    public UserAvailability(Integer id, User user, String title, LocalDateTime startDate, LocalDateTime endDate) {
+        Id = id;
+        this.user = user;
+        this.title = title;
         this.startDate = startDate;
         this.endDate = endDate;
-        this.user = user;
     }
 
     public void setId(int Id) {
@@ -62,5 +64,13 @@ public class UserAvailability {
 
     public void setEndDate(LocalDateTime endDate) {
         this.endDate = endDate;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 }

@@ -13,14 +13,14 @@ export default class AvailabilityRepository {
         return await response.json();
     }
 
-    async createAvailability(startDate, endDate , userId) {
+    async createAvailability(title, startDate, endDate , userId) {
         const response = await fetch('http://localhost:8081/availability/add', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-                 startDate, endDate , userId
+                 title, startDate, endDate , userId
             }),
         });
         return await response.json();
@@ -33,14 +33,14 @@ export default class AvailabilityRepository {
         return await response.json();
     }
 
-    async updateAvailabilityById(Id,startDate, endDate, userId ) {
+    async updateAvailabilityById(Id,title,startDate, endDate, userId ) {
         const response = await fetch('http://localhost:8081/availability/'  + Id, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-                startDate, endDate , userId
+                title, startDate, endDate , userId
             }),
         });
         return await response.json();
