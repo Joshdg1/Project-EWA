@@ -17,9 +17,6 @@
       </div>
       <!--end::Action-->
     </div>
-    <!--    <SkillCardPopUp v-if="popupStatus" @close-popup="closePopup" @adding-skill="addSkill">-->
-
-    <!--    </SkillCardPopUp>-->
     <addSkill v-if="popupStatus" @close-popup="closePopup"></addSkill>
     <div class="card-body p-11">
       <div class="card"
