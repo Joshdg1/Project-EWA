@@ -22,7 +22,7 @@
       <div class="card"
            v-for="skill in this.skills"
            v-bind:key="skill.skillId">
-        <div class="modal-dialog mw-650px">
+        <div class="modal-dialog mw-650px ms-2 me-2 mb-2">
           <!--begin::Modal content-->
           <div class="modal-content backgroundCard">
             <!--begin::Modal header-->
