@@ -205,16 +205,14 @@ public class UserController {
         return new UserResponse(user.getEmail(), user.getFirstName(), user.getLastName(), user.getPhoneNumber());
     }
 
-    record RefreshResponse(String token) {
-    }
-    @GetMapping(path = "{id}", produces = "application/json")
-    public User getUserById(@PathVariable int id) {
-        User user = this.userRepository.findById(id);
-        if (user == null) {
-            throw new NotFoundException(String.format(String.valueOf(user), id));
-        }
-        return user;
-    }
+//    @GetMapping(path = "{id}", produces = "application/json")
+//    public User getUserById(@PathVariable int id) {
+//        User user = this.userRepository.findById(id);
+//        if (user == null) {
+//            throw new NotFoundException(String.format(String.valueOf(user), id));
+//        }
+//        return user;
+//    }
 
     record RefreshResponse(String token) {
     }
@@ -224,23 +222,20 @@ public class UserController {
         return new RefreshResponse(userService.refreshAccess(refreshToken).getAccessToken().getToken());
     }
 
-    record LogoutResponse(String msg) {
-    }
-
-    @PutMapping(path = "{id}", produces = "application/json")
-    public ResponseEntity<User> updateUserById(@PathVariable int id, @RequestBody GetUser user) {
-
-        User user2 = this.userRepository.findById(id);
-
-        user2.setFirstName(user.getFirstName());
-        user2.setLastName(user.getLastName());
-        user2.setPhoneNumber(user.getPhoneNumber());
-        user2.setEmail(user.getEmail());
-
-        User user1 = this.userRepository.update(user2, id);
-
-        return ResponseEntity.ok().body(user1);
-    }
+//    @PutMapping(path = "{id}", produces = "application/json")
+//    public ResponseEntity<User> updateUserById(@PathVariable int id, @RequestBody GetUser user) {
+//
+//        User user2 = this.userRepository.findById(id);
+//
+//        user2.setFirstName(user.getFirstName());
+//        user2.setLastName(user.getLastName());
+//        user2.setPhoneNumber(user.getPhoneNumber());
+//        user2.setEmail(user.getEmail());
+//
+//        User user1 = this.userRepository.update(user2, id);
+//
+//        return ResponseEntity.ok().body(user1);
+//    }
 
     record LogoutResponse(String msg) {
     }
