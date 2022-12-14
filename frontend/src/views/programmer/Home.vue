@@ -1,7 +1,7 @@
 <template>
   <div>
     <programmersList v-if="!this.programmerStatus" :programmers="this.programmers" @deleteProgrammer="deleteProgrammer"
-                 @editProgrammer="editProgrammerStatus"></programmersList>
+                     @editProgrammer="editProgrammerStatus"></programmersList>
     <edit v-if="this.programmerStatus" :programmers="this.programmers" @deleteProgrammer="deleteProgrammer"
           @editProgrammer="editProgrammerStatus"></edit>
   </div>
