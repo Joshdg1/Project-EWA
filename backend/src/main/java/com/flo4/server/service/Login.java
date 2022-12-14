@@ -23,14 +23,14 @@ public class Login {
         this.user = user;
     }
 
-    public static Login of(int userId, String accessSecretKey, String refreshSecretKey, User user){
-         return new Login(
-                 userId, Token.of(userId, accessTokenValidity, accessSecretKey),
+    public static Login of(int userId, String accessSecretKey, String refreshSecretKey, User user) {
+        return new Login(
+                userId, Token.of(userId, accessTokenValidity, accessSecretKey),
                 Token.of(userId, refreshTokenValidity, refreshSecretKey),
-                 user);
+                user);
     }
 
-    public static Login of(int id, String accessSecret, Token refreshToken, User user){
+    public static Login of(int id, String accessSecret, Token refreshToken, User user) {
         return new Login(
                 id, Token.of(id, accessTokenValidity, accessSecret),
                 refreshToken,

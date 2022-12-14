@@ -3,6 +3,12 @@ export default class ProjectRepository {
         const response = await fetch('http://localhost:8081/projects');
         return await response.json();
     }
+    async getAllProjectsByUser(id){
+        const response = await fetch('http://localhost:8081/projects' + id, {
+            method: "GET"
+        });
+        return await response.json();
+    }
 
     async createProject(title, description, company, startDate, endDate, programmers) {
         const response = await fetch('http://localhost:8081/projects/add', {

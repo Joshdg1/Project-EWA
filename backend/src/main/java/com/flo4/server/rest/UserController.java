@@ -4,8 +4,10 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 
 import com.flo4.server.Exceptions.NotFoundException;
+import com.flo4.server.models.GetUser;
 import com.flo4.server.models.User;
 import com.flo4.server.repository.UserRepository;
+import com.flo4.server.repository.EntityRepository;
 import com.flo4.server.service.UserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -205,10 +207,39 @@ public class UserController {
 
     record RefreshResponse(String token) {
     }
+    @GetMapping(path = "{id}", produces = "application/json")
+    public User getUserById(@PathVariable int id) {
+        User user = this.userRepository.findById(id);
+        if (user == null) {
+            throw new NotFoundException(String.format(String.valueOf(user), id));
+        }
+        return user;
+    }
+
+    record RefreshResponse(String token) {
+    }
 
     @PostMapping(value = "refresh")
     public RefreshResponse refresh(@CookieValue("secretRefreshToken") String refreshToken) {
         return new RefreshResponse(userService.refreshAccess(refreshToken).getAccessToken().getToken());
+    }
+
+    record LogoutResponse(String msg) {
+    }
+
+    @PutMapping(path = "{id}", produces = "application/json")
+    public ResponseEntity<User> updateUserById(@PathVariable int id, @RequestBody GetUser user) {
+
+        User user2 = this.userRepository.findById(id);
+
+        user2.setFirstName(user.getFirstName());
+        user2.setLastName(user.getLastName());
+        user2.setPhoneNumber(user.getPhoneNumber());
+        user2.setEmail(user.getEmail());
+
+        User user1 = this.userRepository.update(user2, id);
+
+        return ResponseEntity.ok().body(user1);
     }
 
     record LogoutResponse(String msg) {

@@ -13,7 +13,7 @@
     </div>
     <div class="card-body p-9">
       <div class="hours">
-        {{ totalHours }} aantal uren
+        {{ totalHours }}  uren
       </div>
       <div class="availableInput">
         <FullCalendar
@@ -23,11 +23,18 @@
       </div>
     </div>
     <AddDatePopUp
-        v-if="popupStatus"
+        v-if="popupStatusAdd"
         :selectedDate="selectedDate"
         @close-popup="closePopup">
 
     </AddDatePopUp>
+    <EditDatePopUp
+    v-if="popupStatusEdit"
+    :selected-event="selectedDate"
+    @close-popup="closeEditPopup"
+    >
+
+    </EditDatePopUp>
   </div>
 </template>
 
@@ -40,40 +47,46 @@ import timeGridPlugin from '@fullcalendar/timegrid'
 import interactionPlugin from '@fullcalendar/interaction'
 import AvailabilityRepository from "@/repository/AvailabilityRepository";
 import ProgrammerRepository from "@/repository/ProgrammerService";
+import EditDatePopUp from "@/components/programmerProfile/EditDatePopUp.vue";
+import programmerDate from "@/models/programmer/programmerDate";
 
 export default {
 
   components: {
+    EditDatePopUp,
     AddDatePopUp, FullCalendar // make the <FullCalendar> tag available
   },
   async created() {
+    const id = sessionStorage.getItem("id")
 
-    const availability = await this.availabilityRepository.getAvailabilityById(20)
-    console.log(availability)
-    for (let i = 0; i < availability.length; i++) {
+    const availability = await this.availabilityRepository.getAvailabilityById(id)
+
+      for (let i = 0; i < availability.length; i++) {
       let calendarApi = this.$refs.calendar.getApi();
-      availability[i].title = "KREK"
 
+      let start = new Date( availability[i].startDate).getTime()
+      let end = new Date( availability[i].endDate).getTime()
+     const time = ((end - start)/60/60/1000)
+      console.log(time)
+      this.totalHours+=time
       calendarApi.addEvent({
         title: availability[i].title,
         start: availability[i].startDate,
         end: availability[i].endDate,
       })
     }
-
-
-
-
-
   },
 
   name: 'availabilityProgrammer',
   emits: ['add-date'],
   data() {
     return {
-      popupStatus: null,
+      popupStatusAdd: null,
+      popupStatusEdit: null,
       totalHours: 0,
       selectedDate: null,
+      eventStart: null,
+      eventEnd: null,
       programmerRepository: new ProgrammerRepository(),
       availabilityRepository: new AvailabilityRepository(),
 
@@ -83,36 +96,33 @@ export default {
         dateClick: this.dateClick,
         eventClick: this.editEvent,
         editable: true,
-        events: [
-          {title: 'event 1', date: '2022-12-11 10:30'},
-          {title: 'event 2', date: '2022-12-12 16:15'}]
+        events: []
       }
     }
   },
   methods: {
-    dateClick: function (arg) {
-      this.selectedDate = arg.date
-      console.log(arg)
-      this.popupStatus = true
+    dateClick: function () {
+      this.popupStatusAdd = true
     },
-
+    closeEditPopup(newPopupStatus){
+      this.popupStatusEdit = newPopupStatus
+    },
     closePopup(newPopupStatus) {
-      this.popupStatus = newPopupStatus
+      this.popupStatusAdd = newPopupStatus
     },
-    // async addDate(date) {
-    //   let calendarApi = this.$refs.calendar.getApi();
-    //
-    //   let calendarData = await this.availabilityRepository.createAvailability(1, date.start, date.end)
-    //   calendarApi.addEvent({
-    //     title: date.title,
-    //     start: calendarData.start,
-    //     end: calendarData.end,
-    //   })
-    //
-    // },
 
-    editEvent() {
-      alert("JEMOER")
+
+    editEvent: function (info) {
+      this.eventStart = info.event.start
+      this.eventEnd = info.event.end
+
+      const hoursStart = this.eventStart.toString().substring(16,21)
+      const hoursEnd = this.eventEnd.toString().substring(16,21)
+
+      console.log(hoursStart)
+      this.selectedDate = new programmerDate(info.event.title,this.eventStart,this.eventEnd,hoursStart,hoursEnd)
+
+      this.popupStatusEdit = true
     }
   }
 }

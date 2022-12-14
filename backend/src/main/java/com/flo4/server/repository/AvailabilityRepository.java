@@ -45,6 +45,8 @@ public class AvailabilityRepository implements EntityRepository<UserAvailability
         updatedUserAvailability.setId(entity.getId());
         updatedUserAvailability.setStartDate(entity.getStartDate());
         updatedUserAvailability.setEndDate(entity.getEndDate());
+        updatedUserAvailability.setUser(entity.getUser());
+        updatedUserAvailability.setTitle(entity.getTitle());
 
 
         return updatedUserAvailability;

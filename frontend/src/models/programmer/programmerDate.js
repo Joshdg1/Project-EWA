@@ -13,5 +13,7 @@ class ProgrammerDate{
         this.hoursPerDayStart = hoursPerDayStart;
         this.hoursPerDayEnd = hoursPerDayEnd;
     }
+
+
 }
 export default ProgrammerDate

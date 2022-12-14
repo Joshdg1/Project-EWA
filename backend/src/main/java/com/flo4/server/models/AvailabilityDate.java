@@ -2,21 +2,14 @@ package com.flo4.server.models;
 
 import java.time.LocalDateTime;
 
-public class GetUserAvailability {
-
-    private String title;
+public class AvailabilityDate {
 
     private LocalDateTime startDate;
-
     private LocalDateTime endDate;
 
-    private int userId;
-
-    public GetUserAvailability(String title, LocalDateTime startDate, LocalDateTime endDate, int userId) {
-        this.title = title;
+    public AvailabilityDate(LocalDateTime startDate, LocalDateTime endDate) {
         this.startDate = startDate;
         this.endDate = endDate;
-        this.userId = userId;
     }
 
     public LocalDateTime getStartDate() {
@@ -33,21 +26,5 @@ public class GetUserAvailability {
 
     public void setEndDate(LocalDateTime endDate) {
         this.endDate = endDate;
-    }
-
-    public int getUserId() {
-        return userId;
-    }
-
-    public void setUserId(int userId) {
-        this.userId = userId;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
     }
 }

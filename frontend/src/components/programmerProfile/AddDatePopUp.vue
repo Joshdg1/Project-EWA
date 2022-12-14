@@ -1,6 +1,14 @@
 <template>
   <div class="popup">
     <div class="popup-inner">
+      <div class="close">
+        <span class="svg-icon svg-icon-1 " @click="cancel">
+								<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+									<rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="black" />
+									<rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="black" />
+								</svg>
+							</span>
+      </div>
 
       <img src="https://clipground.com/images/date-symbol-clipart.jpg" class="code-icon">
       <div class="CardText">
@@ -15,7 +23,7 @@
 
       </div>
       <div class="buttons">
-        <button  class="btn background-florijn btn-active-info addSkill" @click="cancel">anuleren</button>
+<!--        <button  class="btn background-florijn btn-active-info addSkill" @click="cancel">anuleren</button>-->
         <button class="btn background-florijn btn-active-info addSkill" @click="addSkill">Voeg Datum toe</button>
       </div>
 
@@ -59,7 +67,7 @@ export default {
 
       return new Date(numberOfMlSeconds + addMlSeconds);
     },
-    addSkill(){
+  async  addSkill(){
       // if (!(this.newDate.start).type === DateTime || !isNaN(this.newDate.end)) {
 
      const allDates = this.betweenDates(this.newDate.start, this.newDate.end)
@@ -73,16 +81,18 @@ export default {
         const endHours = ((this.newDate.hoursPerDayEnd.substring(0,2) * 1)  + (this.newDate.hoursPerDayEnd.substring(3,5) / 60))
 
         const startDate = this.addHoursToDate(allDates[i],startHours)
-
         const endDate = this.addHoursToDate(allDates[i],endHours)
 
-        this.repository.createAvailability(startDate,endDate , 20)
+        const userID = sessionStorage.getItem("id")
+       await this.repository.createAvailability(this.newDate.title,startDate,endDate , userID)
 
       }
 
         // this.$emit('adding-date', this.newDate)
         this.popupStatus = false
         this.$emit('close-popup', this.popupStatus)
+      location.reload()
+
     },
     cancel(){
       this.popupStatus = false
@@ -107,7 +117,12 @@ export default {
 </script>
 
 <style scoped>
+.close{
+  display: flex;
+  justify-content: right;
+  width: 100%;
 
+}
 .popup {
   position: fixed;
   top: 0;

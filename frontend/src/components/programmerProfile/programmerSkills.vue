@@ -14,9 +14,10 @@
       </div>
       <!--end::Action-->
     </div>
-    <SkillCardPopUp v-if="popupStatus" @close-popup="closePopup" @adding-skill="addSkill">
+<!--    <SkillCardPopUp v-if="popupStatus" @close-popup="closePopup" @adding-skill="addSkill">-->
 
-    </SkillCardPopUp>
+<!--    </SkillCardPopUp>-->
+    <addSkill v-if="popupStatus" @close-popup="closePopup"></addSkill>
     <div class="card-body p-11">
       <div class="card"
            v-for="skill in this.skills"
@@ -38,11 +39,11 @@
 </template>
 
 <script>
-import SkillCardPopUp from "./SkillCardPopUp";
+import addSkill from "./addSkill";
 
 export default {
   name: "programmerSkills",
-  components: {SkillCardPopUp},
+  components: {addSkill},
   props: ['skills'],
   emits: ['edit-profile', 'add-skill'],
 
