@@ -24,7 +24,6 @@
 
 import ProfileDetails from "@/components/programmerProfile/ProfileDetails";
 import ProfileInputDetails from "@/components/programmerProfile/ProfileInputDetails";
-import {ProgrammerSkill} from "@/models/programmer/programmerSkill"
 import TopProfileDetails from "@/components/programmerProfile/TopProfileDetails";
 import AvailabilityProgrammer from "@/components/programmerProfile/AvailabilityProgrammer";
 import ProgrammerSkills from "@/components/programmerProfile/programmerSkills";
@@ -32,6 +31,8 @@ import ProgrammerInputSkills from "@/components/programmerProfile/ProgrammerInpu
 import Programmer from "@/models/programmer/programmer";
 import UserRepository from "@/repository/UserRepository";
 import ProjectRepository from "@/repository/ProjectRepository";
+import SkillRepository from "@/repository/SkillRepository";
+
 
 export default {
   name: "ProgrammerProfilePage",
@@ -41,17 +42,31 @@ export default {
     ProgrammerSkills, AvailabilityProgrammer, TopProfileDetails, ProfileInputDetails, ProfileDetails},
  async created() {
 
-    let languages = ["PowerBi" , "Flutter" ,"Dart", "C#" , "Rust"]
+    // let languages = ["PowerBi" , "Flutter" ,"Dart", "C#" , "Rust"]
 
-    for (let i = 0; i < 5; i++) {
-      let si = i
-      const language = languages[i]
-      this.skills.push(  new ProgrammerSkill(1, si ,language, Math.round(Math.random() * 4 + 1)))
-      this.skills.skillName = language
-    }
+    // for (let i = 0; i < 5; i++) {
+    //   let si = i
+    //   const language = languages[i]
+    //   this.skills.push(  new ProgrammerSkill(1, si ,language, Math.round(Math.random() * 4 + 1)))
+    //   this.skills.skillName = language
+    // }
+    // for (let i = 0; i < 5; i++) {
+    //   let si = i
+    //   const language = languages[i]
+    //   this.skills.push(  new ProgrammerSkill(1, si ,language, Math.round(Math.random() * 4 + 1)))
+    //   this.skills.skillName = language
+    // }
+    // const allProgrammers = this.repository.getAllProgrammers()
+    // console.log(allProgrammers)
 
    const userID = sessionStorage.getItem("id")
     this.sampleProgrammer = await this.repository.findProgrammerById(userID)
+   const databaseSkills = await this.repositoryGood.findSkillsById(userID);
+   for (let i = 0; i < databaseSkills.length; i++) {
+     this.skills.push(databaseSkills[i]);
+   }
+
+    this.sampleProgrammer = await this.repository.findUserById(userID)
 
 
 
@@ -67,6 +82,7 @@ export default {
       projects: [],
       repository: new UserRepository(),
       projectRepository: new ProjectRepository(),
+      repositoryGood: new SkillRepository(),
     }
   },
   methods: {

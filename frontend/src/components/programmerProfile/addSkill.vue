@@ -90,7 +90,7 @@ export default {
       this.$emit('close-popup', this.popupStatus)
     },
     async addSkill() {
-      const currentSkill = await this.repository.getAllSkills();
+      const currentSkill = await this.repository.getAllSkills(this.userId);
       this.newSkill.skillName = this.value;
       this.newSkill.skillLevel = document.getElementsByClassName("levelSkill")[0].value;
       console.log(currentSkill)
@@ -104,6 +104,7 @@ export default {
       if (this.newSkill.skillLevel <= 5 && this.newSkill.skillLevel >= 1 && this.newSkill.skillName != null) {
         await this.repository.createSkill(this.newSkill.skillName, this.newSkill.skillLevel, this.userId)
         this.closePopup();
+        location.reload();
       } else alert("Getal moet tussen de 1-5 zijn & er moet een skill geselecteerd zijn.")
 
     }
