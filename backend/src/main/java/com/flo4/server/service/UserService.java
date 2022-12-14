@@ -52,7 +52,7 @@ public class UserService {
 //        user.addToken()
 
         return Login.of(user.getId(), secretAccessToken,
-                secretRefreshToken);
+                secretRefreshToken, user);
     }
 
 
@@ -63,6 +63,6 @@ public class UserService {
     public Login refreshAccess(String refreshToken) {
         var id = Token.from(refreshToken, secretRefreshToken);
 
-        return Login.of(id, secretAccessToken, Token.of(refreshToken));
+        return Login.of(id, secretAccessToken, Token.of(refreshToken), getUserFromToken(secretAccessToken));
     }
 }

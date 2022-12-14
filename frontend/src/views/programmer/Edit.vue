@@ -15,7 +15,7 @@
     <ProgrammerInputSkills v-if="this.editProfile && currentTab === 3 " :skills="skills"
                            @edit-profile="EditProfileStatus" @delete-skill="deleteSkill" @add-skill="addSkill"></ProgrammerInputSkills>
 
-    <ProgrammerProjects></ProgrammerProjects>
+
   </div>
 
 </template>
@@ -30,18 +30,16 @@ import AvailabilityProgrammer from "@/components/programmerProfile/AvailabilityP
 import ProgrammerSkills from "@/components/programmerProfile/programmerSkills";
 import ProgrammerInputSkills from "@/components/programmerProfile/ProgrammerInputSkills";
 import Programmer from "@/models/programmer/programmer";
-import ProgrammerProjects from "@/components/programmerProfile/ProgrammerProjects";
 import UserRepository from "@/repository/UserRepository";
+import ProjectRepository from "@/repository/ProjectRepository";
 
 export default {
   name: "ProgrammerProfilePage",
   components: {
-    ProgrammerProjects,
+
     ProgrammerInputSkills,
     ProgrammerSkills, AvailabilityProgrammer, TopProfileDetails, ProfileInputDetails, ProfileDetails},
  async created() {
-    // this.sampleProgrammer = new Programmer(0, "John", "Doe", "JohnDoe@HvA.nl", "wiboutStraat", "Amsterdam", "Rust",
-    //     40, 12, 20, "On location", "Full stack")
 
     let languages = ["PowerBi" , "Flutter" ,"Dart", "C#" , "Rust"]
 
@@ -51,14 +49,10 @@ export default {
       this.skills.push(  new ProgrammerSkill(1, si ,language, Math.round(Math.random() * 4 + 1)))
       this.skills.skillName = language
     }
-    // const allProgrammers = this.repository.getAllProgrammers()
-    // console.log(allProgrammers)
 
    const userID = sessionStorage.getItem("id")
-    this.sampleProgrammer = await this.repository.findUserById(userID)
+    this.sampleProgrammer = await this.repository.findProgrammerById(userID)
 
-
-    console.log("user"+  this.sampleProgrammer.firstName)
 
 
     this.currentTab = 1;
@@ -70,7 +64,9 @@ export default {
       currentTab: null,
       skills: [],
       programmers: [],
+      projects: [],
       repository: new UserRepository(),
+      projectRepository: new ProjectRepository(),
     }
   },
   methods: {
