@@ -4,11 +4,8 @@ import com.flo4.server.models.User;
 import lombok.Getter;
 
 public class Login {
-
-
     @Getter
     private final int id;
-
     @Getter
     private final Token accessToken;
     @Getter

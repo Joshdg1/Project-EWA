@@ -49,10 +49,8 @@ public class UserRepository implements EntityRepository<User> {
         updatedUser.setEmail(entity.getEmail());
         updatedUser.setFirstName(entity.getFirstName());
         updatedUser.setLastName(entity.getLastName());
-        updatedUser.setPassword(entity.getPassword());
         updatedUser.setPhoneNumber(entity.getPhoneNumber());
-
-
+        updatedUser.setUserType(entity.getUserType());
         return updatedUser;
     }
 
@@ -81,6 +79,18 @@ public class UserRepository implements EntityRepository<User> {
     //of returned null
     public User findByEmail(String email) {
         return this.entityManager.createQuery("select u from User u where email = ?1", User.class).setParameter(1, email).getSingleResult();
+    }
+
+    public List<User> findAllProgrammers() {
+        TypedQuery<User> query = this.entityManager.createQuery("select u from User u WHERE user_type = 'programmer'", User.class);
+
+        return query.getResultList();
+    }
+
+    public List<User> findAllClients() {
+        TypedQuery<User> query = this.entityManager.createQuery("select u from User u where user_type = 'client'", User.class);
+
+        return query.getResultList();
     }
 
 

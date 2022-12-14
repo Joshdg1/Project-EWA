@@ -1,49 +1,67 @@
-
 export default class UserRepository {
-    async findProgrammerById(userId){
-        const response = await fetch("http://localhost:8081/users/" + userId, {
+
+    url;
+
+    constructor() {
+        /* eslint-disable */
+        this.url = process.env.VUE_APP_API_URL + '/users/';
+    }
+
+    async findProgrammerById(userId) {
+        const response = await fetch(this.url + userId, {
             method: 'GET',
         });
         return await response.json()
     }
 
-    async getAllProgrammers() {
-        const response = await fetch('http://localhost:8081/users');
+    async getAllUsers() {
+        const response = await fetch(this.url);
         return await response.json();
     }
 
-    async createProgrammers ( email,  first_name,  last_name,  password,  phone_number) {
-        const response = await fetch('http://localhost:8081/users/register', {
+    async getAllProgrammers() {
+        const response = await fetch(this.url + "programmers");
+        return await response.json();
+    }
+
+    async getAllClients() {
+        const response = await fetch(this.url + "clients");
+        return await response.json();
+    }
+
+    async createUser(email, firstName, lastName, password, phoneNumber, userType) {
+        const response = await fetch(this.url + 'add', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-                 email,  first_name,  last_name,  password,  phone_number
+                email, firstName, lastName, password, phoneNumber, userType
             }),
         });
         return await response.json();
     }
-    async deleteProgrammerById(userId){
-        const response = await fetch('http://localhost:8081/users/' + userId, {
+
+    async deleteUserById(userId) {
+        const response = await fetch(this.url + userId, {
             method: 'DELETE',
         });
         return await response.json();
     }
-    async  updateProgrammerById(userId,  email,  firstName,  lastName,  phoneNumber)
-    {
-        const response = await fetch('http://localhost:8081/users/' + userId, {
+
+    async updateUserById(userId, email, firstName, lastName, phoneNumber, userType) {
+        const response = await fetch(this.url + userId, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({  email,  firstName,  lastName, phoneNumber}),
+            body: JSON.stringify({userId, email, firstName, lastName, phoneNumber, userType}),
         });
         return await response.json();
     }
 
-    async loginUser ( email, password) {
-        const response = await fetch('http://localhost:8081/users/login', {
+    async loginUser(email, password) {
+        const response = await fetch(this.url + 'login', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

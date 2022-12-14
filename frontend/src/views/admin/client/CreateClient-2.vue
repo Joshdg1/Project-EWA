@@ -29,6 +29,8 @@
                 <th>Description</th>
                 <th>Company</th>
                 <th>Hours worked</th>
+                <th>Start date</th>
+                <th>End date</th>
                 <th>Programmer(s)</th>
               </tr>
               </thead>
@@ -45,7 +47,9 @@
                 <td>{{ project.description }}</td>
                 <td>{{ project.company }}</td>
                 <td>{{ project.hoursWorked }}</td>
-                <td>{{ project.programmers }}</td>
+                <td>{{ dateFormat(project.startDate) }}</td>
+                <td>{{ dateFormat(project.endDate) }}</td>
+                <td v-html="getUserProjects(project.users)"></td>
 
               </tr>
               </tbody>
@@ -80,7 +84,7 @@
 //{project} import is for fake data.
 // import {project} from '../../../models/project.js'
 import ProjectRepository from '../../../repository/ProjectRepository'
-import ClientRepository from '../../../repository/ClientRepository'
+import UserRepository from '../../../repository/UserRepository'
 
 
 export default {
@@ -98,23 +102,49 @@ export default {
     return {
       projects: [],
       ProjectRepository: new ProjectRepository(),
-      ClientRepository: new ClientRepository()
+      UserRepository: new UserRepository()
     }
   },
 
   methods: {
 
     async createClient() {
-      const name = localStorage.getItem('name');
       const email = localStorage.getItem('email');
-      const address = localStorage.getItem('address');
-      const city = localStorage.getItem('city');
-      const postcode = localStorage.getItem('postcode');
-      const projectType = localStorage.getItem('projectType');
+      const firstname = localStorage.getItem('firstname');
+      const lastname = localStorage.getItem('lastname');
+      const password = localStorage.getItem('password');
+      const phoneNumber = localStorage.getItem('phoneNumber');
+      const usertype = "client";
+      console.log(firstname, password)
 
-      await this.ClientRepository.createClient(name, email, address, city, postcode, projectType);
+      await this.UserRepository.createUser(email, firstname, lastname, password, phoneNumber, usertype);
 
       this.$router.push("/clients");
+    },
+
+    dateFormat(date) {
+      if (date == null) {
+        return null;
+      }
+      return new Date(date).toLocaleDateString('en-GB');
+    },
+
+    getUserProjects(users) {
+      console.log(users)
+      if (users.length === 0)
+        return "";
+
+      let content = `<div class="symbol-group symbol-hover flex-nowrap">`;
+      for (const user of users) {
+        content += `<div title="${user.firstName} ${user.lastName}" class="symbol symbol-35px symbol-circle" data-bs-toggle="tooltip"
+      data-bs-original-title="Susan Redwood" data-kt-initialized="1">
+              <span class="symbol-label bg-primary text-inverse-primary fw-bold">${(user.firstName[0]).toUpperCase()}</span>
+              </div>`;
+      }
+      content += `</div>`;
+
+
+      return content
     }
   }
 }

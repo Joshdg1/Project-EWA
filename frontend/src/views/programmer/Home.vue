@@ -1,57 +1,54 @@
 <template>
- <div class="row">
-   <Programmers v-if="!this.editProfile" :programmers="this.programmers" @edit-status="editStatus"></Programmers>
-   <ProgrammersEdit  v-if="this.editProfile === true" :programmers="this.programmers" @edit-status="editStatus"></ProgrammersEdit>
- </div>
+  <div>
+    <programmersList v-if="!this.programmerStatus" :programmers="this.programmers" @deleteProgrammer="deleteProgrammer"
+                 @editProgrammer="editProgrammerStatus"></programmersList>
+    <edit v-if="this.programmerStatus" :programmers="this.programmers" @deleteProgrammer="deleteProgrammer"
+          @editProgrammer="editProgrammerStatus"></edit>
+  </div>
 </template>
 
 <script>
+import programmersList from '../../components/ProgrammerAdmin'
+import edit from '../../components/ProgrammerAdminEdit'
+import UserRepository from '../../repository/UserRepository'
 
-import ProgrammerRepository from "@/repository/ProgrammerService";
-import Programmers from "@/components/programmersPage/Programmers";
-import ProgrammersEdit from "@/components/programmersPage/ProgrammersEdit";
 export default {
-  name: "ProgrammerHome",
-  components:{
-    Programmers, ProgrammersEdit
+  name: "ProgrammerAdminView",
+  components: {
+    programmersList,
+    edit
   },
- async created() {
-    const programmer = await this.repository.getAllProgrammers()
-    console.log(programmer)
 
-    for (let j = 0; j < programmer.length; j++) {
-      this.programmers.push(programmer[j])
-      console.log(programmer[j].id)
-    }
-  },
   data() {
     return {
-      projects: [],
       programmers: [],
-      editProfile: false,
-      repository: new ProgrammerRepository()
+      programmerStatus: null,
+      repository: new UserRepository()
+    }
+  },
+
+  async created() {
+    const data = await this.repository.getAllProgrammers();
+
+    for (let i = 0; i < data.length; i++) {
+      this.programmers.push(data[i]);
     }
   },
 
   methods:{
-    // createProject()
-    // {
-    //   this.projects.push("alle project ophalen en hier neerzettten")
-    //   "project moet in array worden gezet."
-    // },
-  editStatus(status){
-    this.editProfile = status
+    async deleteProgrammer(programmer) {
+      await this.repository.deleteUserById(programmer.id);
+      location.reload();
+    },
+
+    editProgrammerStatus(programmerStatus) {
+      this.programmerStatus = programmerStatus;
+    }
   }
 
-
-  }
 }
-
 </script>
 
 <style scoped>
-/*.buttonFloatRight {*/
-/*  display: flex;*/
-/*  float: right!important;*/
-/*}*/
+
 </style>

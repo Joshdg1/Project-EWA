@@ -39,14 +39,11 @@
                            data-kt-check-target=".widget-9-check"/>
                   </div>
                 </th>
-                <th>Name</th>
                 <th>Email</th>
-                <th>Address</th>
-                <th>City</th>
-                <th>Postcode</th>
-                <th>Project types</th>
-                <th>Projects</th>
-                <th>Actions</th>
+                <th>Firstname</th>
+                <th>Lastname</th>
+                <th>Phone number</th>
+                <th>Usertype</th>
               </tr>
               </thead>
               <!--end::Table head-->
@@ -57,14 +54,11 @@
                   <input class="form-check-input" type="checkbox" value="1" data-kt-check="true"
                          data-kt-check-target=".widget-9-check"/>
                 </div>
-                <td><input type="text" v-model="client.name"></td>
                 <td><input type="text" v-model="client.email"></td>
-                <td><input type="text" v-model="client.address"></td>
-                <td><input type="text" v-model="client.city"></td>
-                <td><input type="text" v-model="client.postcode"></td>
-                <td><input type="text" v-model="client.projectType"></td>
-                <td><input type="text" v-model="client.projects"></td>
-
+                <td><input type="text" v-model="client.firstName"></td>
+                <td><input type="text" v-model="client.lastName"></td>
+                <td><input type="text" v-model="client.phoneNumber"></td>
+                <td><input type="text" v-model="client.userType"></td>
 
                 <div class="d-flex  flex-shrink-0">
                   <a class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" @click="editClient(client)">
@@ -100,7 +94,7 @@
 </template>
 
 <script>
-import ClientRepository from '../repository/ClientRepository'
+import UserRepository from '../repository/UserRepository'
 
 export default {
   name: "ClientAdminEdit.vue",
@@ -109,7 +103,7 @@ export default {
 
   data() {
     return {
-      repository: new ClientRepository(),
+      repository: new UserRepository(),
     }
   },
 
@@ -119,8 +113,8 @@ export default {
       this.editingClient = false;
       this.$emit('editClient', this.editingClient)
 
-      await this.repository.updateClientById(client.id, client.name, client.email, client.address, client.city,
-          client.postcode, client.projectType, []);
+      await this.repository.updateUserById(client.id, client.email, client.firstName, client.lastName,
+          client.phoneNumber, client.userType);
     }
   }
 }
