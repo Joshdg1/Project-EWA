@@ -4,7 +4,7 @@ export default class ClientRepository {
 
     constructor() {
         /* eslint-disable */
-        this.url = process.env.VUE_APP_API_URL + '/clients/';
+        this.url = process.env.VUE_APP_API_URL + '/users/';
     }
 
 

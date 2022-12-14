@@ -155,6 +155,7 @@ export default {
     },
 
     getUserProjects(users) {
+      console.log(users)
       if (users.length === 0)
         return "";
 

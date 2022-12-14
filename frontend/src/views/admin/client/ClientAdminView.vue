@@ -10,7 +10,7 @@
 <script>
 import clientsList from '../../../components/ClientAdmin.vue'
 import edit from '../../../components/ClientAdminEdit.vue'
-import ClientRepository from '../../../repository/ClientRepository'
+import UserRepository from '../../../repository/UserRepository'
 
 export default {
   name: "ClientAdminView",
@@ -23,7 +23,7 @@ export default {
     return {
       clients: [],
       clientStatus: null,
-      repository: new ClientRepository()
+      repository: new UserRepository()
     }
   },
 
@@ -37,7 +37,7 @@ export default {
 
   methods:{
     async deleteClient(client) {
-      await this.repository.deleteClientById(client.id);
+      await this.repository.deleteUserById(client.id);
       location.reload();
     },
 

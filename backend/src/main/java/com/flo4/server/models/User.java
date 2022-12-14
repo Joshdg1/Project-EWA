@@ -31,16 +31,16 @@ public class User {
     @JsonIgnore()
     private List<Project> projects;
 
-    public User(){}
+    public User() {
+    }
 
     public User(int id) {
         this.id = id;
     }
 
     public static User of(int id, String email, String firstName, String lastName, String password, String phoneNumber, String userType) {
-        return new User(id, email,firstName, lastName, password, phoneNumber, userType);
+        return new User(id, email, firstName, lastName, password, phoneNumber, userType);
     }
-
 
     public User(int id, String email, String firstName, String lastName, String password, String phoneNumber, String userType) {
         this.id = id;
@@ -51,6 +51,4 @@ public class User {
         this.phoneNumber = phoneNumber;
         this.userType = userType;
     }
-
-
 }

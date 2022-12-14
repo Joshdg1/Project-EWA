@@ -7,12 +7,13 @@
           <h3 class="card-title align-items-start flex-column">
             <span class="card-label fw-bolder fs-3 mb-1">Programmers</span>
           </h3>
-          <div class="card-toolbar" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-trigger="hover"
-               title="Click to add a programmer">
-            <a href="#" class="btn btn-sm btn-light-primary" data-bs-toggle="modal"
-               data-bs-target="#kt_modal_invite_friends">
-              <!--begin::Svg Icon | path: icons/duotune/arrows/arr075.svg-->
-              <span class="svg-icon svg-icon-3">
+          <router-link to="/programmers/add">
+            <div class="card-toolbar" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-trigger="hover"
+                 title="Click to add a programmer">
+              <a href="#" class="btn btn-sm btn-light-primary" data-bs-toggle="modal"
+                 data-bs-target="#kt_modal_invite_friends">
+                <!--begin::Svg Icon | path: icons/duotune/arrows/arr075.svg-->
+                <span class="svg-icon svg-icon-3">
 													<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                fill="none">
 														<rect opacity="0.5" x="11.364" y="20.364" width="16" height="2" rx="1"
@@ -20,8 +21,9 @@
 														<rect x="4.36396" y="11.364" width="16" height="2" rx="1" fill="black"/>
 													</svg>
 												</span>
-              <!--end::Svg Icon-->New Programmer</a>
-          </div>
+                <!--end::Svg Icon-->New Programmer</a>
+            </div>
+          </router-link>
         </div>
         <!--end::Header-->
         <!--begin::Body-->
@@ -39,18 +41,11 @@
                            data-kt-check-target=".widget-9-check"/>
                   </div>
                 </th>
+                <th>Email</th>
                 <th>Firstname</th>
                 <th>Lastname</th>
-                <th>Address</th>
-                <th>City</th>
-                <th>Postcode</th>
-                <th>Knowledge</th>
-                <th>Experience</th>
-                <th>Availability</th>
-                <th>Weekly work hours</th>
-                <th>Work space</th>
-                <th>Project types</th>
-                <th>Actions</th>
+                <th>Phone number</th>
+                <th>Usertype</th>
               </tr>
               </thead>
               <!--end::Table head-->
@@ -61,20 +56,13 @@
                   <input class="form-check-input" type="checkbox" value="1" data-kt-check="true"
                          data-kt-check-target=".widget-9-check"/>
                 </div>
-                <td>{{ programmer.firstname }}</td>
-                <td>{{ programmer.lastname }}</td>
-                <td>{{ programmer.address }}</td>
-                <td>{{ programmer.city }}</td>
-                <td>{{ programmer.postcode }}</td>
-                <td>{{ programmer.knowledge }}</td>
-                <td>{{ programmer.experience }}</td>
-                <td>{{ programmer.availability }}</td>
-                <td>{{ programmer.hours }}</td>
-                <td>{{ programmer.workPreference }}</td>
-                <td>{{ programmer.projectType }}</td>
+                <td>{{ programmer.email }}</td>
+                <td>{{ programmer.firstName }}</td>
+                <td>{{ programmer.lastName }}</td>
+                <td>{{ programmer.phoneNumber }}</td>
+                <td>{{ programmer.userType }}</td>
 
-
-                <div class="d-flex justify-content-end flex-shrink-0">
+                <div class="d-flex  flex-shrink-0">
                   <a class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" @click="editProgrammer()">
                     <!--begin::Svg Icon | path: icons/duotune/art/art005.svg-->
                     <span class="svg-icon svg-icon-3">
@@ -90,8 +78,7 @@
 																		</span>
                     <!--end::Svg Icon-->
                   </a>
-                  <a class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm"
-                     @click="deleteProgrammer(programmer)">
+                  <a class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm" @click="deleteProgrammer(programmer)">
                     <!--begin::Svg Icon | path: icons/duotune/general/gen027.svg-->
                     <span class="svg-icon svg-icon-3">
 																			<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
@@ -126,6 +113,9 @@
 </template>
 
 <script>
+
+import UserRepository from '../repository/UserRepository'
+
 export default {
   name: "ProgrammerAdmin.vue",
   props: ['programmers'],
@@ -133,18 +123,19 @@ export default {
 
   data() {
     return {
-      editingProgrammer: null
+      editingProgrammer: null,
+      repository: new UserRepository(),
     }
   },
 
   methods: {
-
-    deleteProgrammer(programmer) {
-      this.$emit('deleteProgrammer', programmer)
+    async deleteProgrammer(programmer) {
+      await this.repository.deleteUserById(programmer.id);
+      location.reload();
     },
 
     editProgrammer() {
-      this.editingProgrammer = true;
+      this.editingClient = true;
       this.$emit('editProgrammer', this.editingProgrammer)
     }
   }

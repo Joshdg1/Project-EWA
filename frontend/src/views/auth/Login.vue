@@ -3,7 +3,7 @@
         <div class="text-center mb-10">
             <h1 class="text-dark mb-3">Sign In to Florijn</h1>
             <div class="text-gray-400 fw-semibold fs-4">New Here?
-                <router-link to="/register" class="link-primary fw-bold">Create an Account</router-link>
+                <router-link to="/users/register" class="link-primary fw-bold">Create an Account</router-link>
             </div>
         </div>
 

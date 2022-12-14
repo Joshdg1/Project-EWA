@@ -36,6 +36,15 @@ public class UserService {
         );
     }
 
+    public User registerClient(int id, String email, String firstName, String lastName, String password, String phoneNumber, String userType){
+//        if(!Objects.equals(password, passwordConfirmation))
+//            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Wachtwoorden komen niet overeen");
+
+        return userRepository.save(
+                User.of(id, email, firstName, lastName, passwordEncoder.encode(password), phoneNumber, userType)
+        );
+    }
+
 
     public Login login(String email, String password) {
         //Find user by email

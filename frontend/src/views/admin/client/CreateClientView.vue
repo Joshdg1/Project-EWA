@@ -5,12 +5,6 @@
         <h1 class="text-dark mb-3">Create a new Client</h1>
       </div>
 
-
-      <div class="fv-row mb-10 fv-plugins-icon-container">
-        <label class="form-label fs-6 fw-bold text-dark">name</label>
-        <input class="form-control form-control-lg form-control-solid" type="text" name="text"
-               autocomplete="off" v-model="name">
-      </div>
       <div class="fv-row mb-10 fv-plugins-icon-container">
         <div class="d-flex flex-stack mb-2">
           <label class="form-label fw-bold text-dark fs-6 mb-0">email</label>
@@ -20,24 +14,29 @@
       </div>
 
       <div class="fv-row mb-10 fv-plugins-icon-container">
-        <label class="form-label fs-6 fw-bold text-dark">address</label>
+        <label class="form-label fs-6 fw-bold text-dark">Firstname</label>
         <input class="form-control form-control-lg form-control-solid" type="text" name="text"
-               autocomplete="off" v-model="address">
+               autocomplete="off" v-model="firstname">
       </div>
+
       <div class="fv-row mb-10 fv-plugins-icon-container">
-        <label class="form-label fs-6 fw-bold text-dark">city</label>
-        <input class="form-control form-control-lg form-control-solid" type="text"
-               autocomplete="off" v-model="city">
+        <label class="form-label fs-6 fw-bold text-dark">Lastname</label>
+        <input class="form-control form-control-lg form-control-solid" type="text" name="text"
+               autocomplete="off" v-model="lastname">
       </div>
+
       <div class="fv-row mb-10 fv-plugins-icon-container">
-        <label class="form-label fs-6 fw-bold text-dark">postcode</label>
-        <input class="form-control form-control-lg form-control-solid" type="text"
-               autocomplete="off" v-model="postcode">
-      </div><div class="fv-row mb-10 fv-plugins-icon-container">
-      <label class="form-label fs-6 fw-bold text-dark">projecttype</label>
-      <input class="form-control form-control-lg form-control-solid" type="text"
-             autocomplete="off" v-model="projectType">
-    </div>
+        <label class="form-label fs-6 fw-bold text-dark">Password</label>
+        <input class="form-control form-control-lg form-control-solid" type="password" name="text"
+               autocomplete="off" v-model="password">
+      </div>
+
+      <div class="fv-row mb-10 fv-plugins-icon-container">
+        <label class="form-label fs-6 fw-bold text-dark">Phone number</label>
+        <input class="form-control form-control-lg form-control-solid" type="text" name="text"
+               autocomplete="off" v-model="phoneNumber">
+      </div>
+
 
     </form>
 
@@ -61,31 +60,28 @@ export default {
 
   data() {
     return {
-      name: "",
       email: "",
-      address: "",
-      city: "",
-      postcode: "",
-      projectType: ""
+      firstname: "",
+      lastname: "",
+      password: "",
+      phoneNumber: "",
     }
   },
 
   methods: {
     setSession() {
       //clear the session without clearing the user login details.
-      localStorage.name = "";
       localStorage.email = "";
-      localStorage.address = "";
-      localStorage.city = "";
-      localStorage.postcode = "";
-      localStorage.projectType = "";
+      localStorage.firstname = "";
+      localStorage.lastname = "";
+      localStorage.password = "";
+      localStorage.phoneNumber = "";
 
-      localStorage.name = this.name;
       localStorage.email = this.email;
-      localStorage.address = this.address;
-      localStorage.city = this.city;
-      localStorage.postcode = this.postcode;
-      localStorage.projectType = this.projectType;
+      localStorage.firstname = this.firstname;
+      localStorage.lastname = this.lastname;
+      localStorage.password = this.password;
+      localStorage.phoneNumber = this.phoneNumber;
 
       this.$router.push("/createNewClient2")
     }

@@ -41,14 +41,11 @@
                            data-kt-check-target=".widget-9-check"/>
                   </div>
                 </th>
-                <th>Name</th>
                 <th>Email</th>
-                <th>Address</th>
-                <th>City</th>
-                <th>Postcode</th>
-                <th>Project types</th>
-                <th>Project</th>
-                <th>Actions</th>
+                <th>Firstname</th>
+                <th>Lastname</th>
+                <th>Phone number</th>
+                <th>Usertype</th>
               </tr>
               </thead>
               <!--end::Table head-->
@@ -59,14 +56,11 @@
                   <input class="form-check-input" type="checkbox" value="1" data-kt-check="true"
                          data-kt-check-target=".widget-9-check"/>
                 </div>
-                <td>{{ client.name }}</td>
                 <td>{{ client.email }}</td>
-                <td>{{ client.address }}</td>
-                <td>{{ client.city }}</td>
-                <td>{{ client.postcode }}</td>
-                <td>{{ client.projectType }}</td>
-                <td>{{ client.projects }}</td>
-
+                <td>{{ client.firstName }}</td>
+                <td>{{ client.lastName }}</td>
+                <td>{{ client.phoneNumber }}</td>
+                <td>{{ client.userType }}</td>
 
                 <div class="d-flex  flex-shrink-0">
                   <a class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" @click="editClient()">
@@ -120,7 +114,7 @@
 
 <script>
 
-import ClientRepository from '../repository/ClientRepository'
+import UserRepository from '../repository/UserRepository'
 
 export default {
   name: "ClientAdmin.vue",
@@ -130,13 +124,13 @@ export default {
   data() {
     return {
       editingClient: null,
-      repository: new ClientRepository(),
+      repository: new UserRepository(),
     }
   },
 
   methods: {
     async deleteClient(client) {
-      await this.repository.deleteClientById(client.id);
+      await this.repository.deleteUserById(client.id);
       location.reload();
     },
 
