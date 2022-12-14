@@ -9,8 +9,11 @@
       <!--end::Card title-->
       <!--begin::Action-->
       <div class="d-flex ms-3">
-        <a @click="setEditProfile()" class="btn background-florijn btn-active-info" tooltip="New App" data-bs-toggle="modal"
-           data-bs-target="#kt_modal_create_app" id="kt_toolbar_primary_button">Save profile-page</a>
+          <div style="margin-top: 20px">
+            <a @click="setEditProfile()" class="btn btn-sm background-florijn btn-active-info" tooltip="New App" data-bs-toggle="modal"
+               data-bs-target="#kt_modal_create_app" id="kt_toolbar_primary_button">Save profile-page</a>
+        </div>
+
       </div>
       <!--end::Action-->
     </div>

@@ -26,7 +26,7 @@
       </div>
       <div class="buttons">
         <!--        <button class="btn background-florijn btn-active-info addSkill" @click="cancel">anuleren</button>-->
-        <button class="btn background-florijn btn-active-info addSkill" @click="deleteAvail">verweideren</button>
+        <button class="btn background-florijn btn-active-info addSkill" @click="deleteAvail">Verwijderen</button>
         <button class="btn background-florijn btn-active-info addSkill" @click="updateDate">Sla datum op</button>
       </div>
 
@@ -126,7 +126,7 @@ export default {
     },
     async deleteAvail() {
 
-      if (confirm("Wil je deze datum verweideren?") === true) {
+      if (confirm("Wil je deze datum verwijderen?") === true) {
         const allAvailabilitys = await this.repository.getAvailabilityById(20)
 
         const start = new Date(this.selectedEvent.start).toLocaleDateString()

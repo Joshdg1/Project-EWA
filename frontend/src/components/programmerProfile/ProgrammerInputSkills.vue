@@ -186,9 +186,7 @@ export default {
   text-align: center;
 }
 
-.card {
-  margin: 15px;
-}
+
 
 .skillStar {
   color: #ec5a29;

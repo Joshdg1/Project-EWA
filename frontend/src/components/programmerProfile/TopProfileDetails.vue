@@ -1,12 +1,13 @@
 <template>
-  <div class="card mb-5 mb-xl-10">
+  <div class="card mb-5 pb-5 mb-xl-10">
     <div class="card-body pt-9 pb-0">
       <!--begin::Details-->
       <div class="d-flex flex-wrap flex-sm-nowrap mb-3">
         <!--begin: Pic-->
         <div class="me-7 mb-4">
           <div class="symbol symbol-100px symbol-lg-160px symbol-fixed position-relative">
-            <img src="/assets/media/avatars/150-2.jpg" alt="image"/>
+            <span class="fs-1 symbol-label bg-primary text-inverse-primary fw-bold">{{ user.firstName[0] }}</span>
+
             <!--            <div class="position-absolute translate-middle bottom-0 start-100 mb-6 bg-success rounded-circle border border-4 border-white h-20px w-20px"></div>-->
           </div>
         </div>
@@ -76,26 +77,6 @@
             <!--end::User-->
             <!--begin::Actions-->
             <div class="d-flex my-2">
-              <a href="#" class="btn btn-light me-3" id="kt_user_follow_button">
-                <!--begin::Svg Icon | path: icons/duotune/arrows/arr012.svg-->
-                <span class="svg-icon svg-icon-3 d-none">
-															<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                   fill="none">
-																<path opacity="0.3"
-                                      d="M10 18C9.7 18 9.5 17.9 9.3 17.7L2.3 10.7C1.9 10.3 1.9 9.7 2.3 9.3C2.7 8.9 3.29999 8.9 3.69999 9.3L10.7 16.3C11.1 16.7 11.1 17.3 10.7 17.7C10.5 17.9 10.3 18 10 18Z"
-                                      fill="black"/>
-																<path
-                                    d="M10 18C9.7 18 9.5 17.9 9.3 17.7C8.9 17.3 8.9 16.7 9.3 16.3L20.3 5.3C20.7 4.9 21.3 4.9 21.7 5.3C22.1 5.7 22.1 6.30002 21.7 6.70002L10.7 17.7C10.5 17.9 10.3 18 10 18Z"
-                                    fill="black"/>
-															</svg>
-														</span>
-                <!--end::Svg Icon-->
-                <!--                &lt;!&ndash;begin::Indicator&ndash;&gt;-->
-                <!--                <span class="indicator-label">Follow</span>-->
-                <span class="indicator-progress">Please wait...
-														<span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
-                <!--end::Indicator-->
-              </a>
             </div>
             <!--end::Actions-->
           </div>
@@ -187,16 +168,16 @@
             </div>
             <!--end::Wrapper-->
             <!--begin::Progress-->
-            <div class="d-flex align-items-center w-200px w-sm-300px flex-column mt-3">
-              <div class="d-flex justify-content-between w-100 mt-auto mb-2">
-                <span class="fw-bold fs-6 text-gray-400">Hours still available</span>
-                <span class="fw-bolder fs-6">6 hours</span>
-              </div>
-              <div class="h-5px mx-3 w-100 bg-light mb-3">
-                <div class="bg-success rounded h-5px" role="progressbar" style="width: 50%;" aria-valuenow="50"
-                     aria-valuemin="0" aria-valuemax="100"></div>
-              </div>
-            </div>
+<!--            <div class="d-flex align-items-center w-200px w-sm-300px flex-column mt-3">-->
+<!--              <div class="d-flex justify-content-between w-100 mt-auto mb-2">-->
+<!--                <span class="fw-bold fs-6 text-gray-400">Hours still available</span>-->
+<!--                <span class="fw-bolder fs-6">6 hours</span>-->
+<!--              </div>-->
+<!--              <div class="h-5px mx-3 w-100 bg-light mb-3">-->
+<!--                <div class="bg-success rounded h-5px" role="progressbar" style="width: 50%;" aria-valuenow="50"-->
+<!--                     aria-valuemin="0" aria-valuemax="100"></div>-->
+<!--              </div>-->
+<!--            </div>-->
             <!--end::Progress-->
           </div>
           <!--end::Stats-->
@@ -246,7 +227,8 @@ export default {
   },
   data() {
     return {
-      selectedTab: null
+      selectedTab: null,
+      user: JSON.parse(sessionStorage.user),
     }
   },
   methods: {
