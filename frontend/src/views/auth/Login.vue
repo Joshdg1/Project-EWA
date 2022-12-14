@@ -67,29 +67,30 @@ import UserRepository from "@/repository/UserRepository";
 
 
             },
-          async login(){
-             this.userRepository.loginUser(this.email, this.password).then((response) =>{
-               // if response status 500, then user does not exist
-               if (response.status === 400) {
-                 this.errors = []
-                 this.errors.push("Username or password is incorrect");
-               }else {
-                   // TODO: set real user
-                   sessionStorage.user = JSON.stringify({
-                       firstName: 'test',
-                       lastName: 'gebruiker',
-                       email: 'test@gebruiker.nl',
-                       userType: 'programmer',
-                   });
+          async login() {
+            this.userRepository.loginUser(this.email, this.password).then((response) => {
+              // if response status 500, then user does not exist
+              if (response.status === 400) {
+                this.errors = []
+                this.errors.push("Username or password is incorrect");
+              } else {
+                sessionStorage.setItem("id", response.user["id"],)
+                sessionStorage.user = JSON.stringify({
+                  id: response.user.id,
+                  firstName: response.user.firstName,
+                  lastName: response.user.lastName,
+                  email: response.user.email,
+                  userType: response.user.userType,
+                });
 
-                 console.log(response["token"])
-                 let token = response["token"];
-                 let id = response["id"]
-                 sessionStorage.setItem("token", token)
-                 sessionStorage.setItem("id", id)
-                 this.$router.push("/home")
-               }
-             })
+                console.log(response["token"])
+                let token = response["token"];
+
+                sessionStorage.setItem("token", token)
+
+                this.$router.push("/home")
+              }
+            })
           }
         }
 
