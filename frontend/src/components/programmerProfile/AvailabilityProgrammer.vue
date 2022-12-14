@@ -57,8 +57,9 @@ export default {
     AddDatePopUp, FullCalendar // make the <FullCalendar> tag available
   },
   async created() {
-    const userID = sessionStorage.getItem("id")
-    const availability = await this.availabilityRepository.getAvailabilityById(userID)
+    const id = sessionStorage.getItem("id")
+
+    const availability = await this.availabilityRepository.getAvailabilityById(id)
 
       for (let i = 0; i < availability.length; i++) {
       let calendarApi = this.$refs.calendar.getApi();

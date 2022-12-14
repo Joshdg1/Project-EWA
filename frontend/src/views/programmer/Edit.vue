@@ -15,7 +15,7 @@
     <ProgrammerInputSkills v-if="this.editProfile && currentTab === 3 " :skills="skills"
                            @edit-profile="EditProfileStatus" @delete-skill="deleteSkill" @add-skill="addSkill"></ProgrammerInputSkills>
 
-    <ProgrammerProjects></ProgrammerProjects>
+
   </div>
 
 </template>
@@ -29,23 +29,27 @@ import AvailabilityProgrammer from "@/components/programmerProfile/AvailabilityP
 import ProgrammerSkills from "@/components/programmerProfile/programmerSkills";
 import ProgrammerInputSkills from "@/components/programmerProfile/ProgrammerInputSkills";
 import Programmer from "@/models/programmer/programmer";
-import ProgrammerProjects from "@/components/programmerProfile/ProgrammerProjects";
 import UserRepository from "@/repository/UserRepository";
+import ProjectRepository from "@/repository/ProjectRepository";
 import SkillRepository from "@/repository/SkillRepository";
 
 
 export default {
   name: "ProgrammerProfilePage",
   components: {
-    ProgrammerProjects,
+
     ProgrammerInputSkills,
     ProgrammerSkills, AvailabilityProgrammer, TopProfileDetails, ProfileInputDetails, ProfileDetails},
  async created() {
-    // this.sampleProgrammer = new Programmer(0, "John", "Doe", "JohnDoe@HvA.nl", "wiboutStraat", "Amsterdam", "Rust",
-    //     40, 12, 20, "On location", "Full stack")
 
     // let languages = ["PowerBi" , "Flutter" ,"Dart", "C#" , "Rust"]
 
+    // for (let i = 0; i < 5; i++) {
+    //   let si = i
+    //   const language = languages[i]
+    //   this.skills.push(  new ProgrammerSkill(1, si ,language, Math.round(Math.random() * 4 + 1)))
+    //   this.skills.skillName = language
+    // }
     // for (let i = 0; i < 5; i++) {
     //   let si = i
     //   const language = languages[i]
@@ -56,6 +60,7 @@ export default {
     // console.log(allProgrammers)
 
    const userID = sessionStorage.getItem("id")
+    this.sampleProgrammer = await this.repository.findProgrammerById(userID)
    const databaseSkills = await this.repositoryGood.findSkillsById(userID);
    for (let i = 0; i < databaseSkills.length; i++) {
      this.skills.push(databaseSkills[i]);
@@ -63,8 +68,6 @@ export default {
 
     this.sampleProgrammer = await this.repository.findUserById(userID)
 
-
-    console.log("user"+  this.sampleProgrammer.firstName)
 
 
     this.currentTab = 1;
@@ -76,7 +79,9 @@ export default {
       currentTab: null,
       skills: [],
       programmers: [],
+      projects: [],
       repository: new UserRepository(),
+      projectRepository: new ProjectRepository(),
       repositoryGood: new SkillRepository(),
     }
   },

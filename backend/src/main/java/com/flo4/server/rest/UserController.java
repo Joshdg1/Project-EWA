@@ -66,11 +66,8 @@ public class UserController {
         return new RegisterResponse(user.getEmail(), user.getFirstName(), user.getLastName(), user.getPhoneNumber());
     }
 
-    record LoginRequest(String email, String password) {
-    }
-
-    record LoginResponse(int id, String token) {
-    }
+  record LoginRequest(String email, String password){}
+    record LoginResponse(User user, String token){}
 
     @PostMapping(value = "login")
     public LoginResponse login(@RequestBody LoginRequest loginRequest, HttpServletResponse response) {
@@ -81,9 +78,9 @@ public class UserController {
         cookie.setHttpOnly(true);
         cookie.setPath("/users");
 
-        response.addCookie(cookie);
-        return new LoginResponse(login.getId(), login.getAccessToken().getToken());
-    }
+      response.addCookie(cookie);
+        return new LoginResponse(login.getUser(), login.getAccessToken().getToken());
+  }
 
     record UserResponse(String email,
                         @JsonProperty("first_name") String firstName,

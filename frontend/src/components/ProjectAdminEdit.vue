@@ -44,8 +44,8 @@
                 <th>Description</th>
                 <th>Company</th>
                 <th>Hours worked</th>
+                <th>Start date
                 <th>End date</th>
-                <th>Start date</th>
                 <th>Programmer(s)</th>
                 <th>Actions</th>
               </tr>
@@ -63,8 +63,8 @@
                 <td><input type="text" v-model="project.description"></td>
                 <td><input type="text" v-model="project.company"></td>
                 <td><input type="text" v-model="project.hoursWorked"></td>
-                <td><input type="text" v-model="project.endDate"></td>
-                <td><input type="text" v-model="project.startDate"></td>
+                <td><input type="date" v-model="project.startDate"></td>
+                <td><input type="date" v-model="project.endDate"></td>
                 <td><input type="text" v-model="project.clients"></td>
 
 
@@ -124,7 +124,7 @@ export default {
       this.$emit('editProject', this.editingProject)
 
       await this.repository.updateProjectById(project.id, project.title, project.description,
-          project.company, project.hoursWorked);
+          project.company, project.startDate, project.endDate, project.clients);
 
     }
   }

@@ -1,6 +1,6 @@
 
 export default class UserRepository {
-    async findUserById(userId){
+    async findProgrammerById(userId){
         const response = await fetch("http://localhost:8081/users/" + userId, {
             method: 'GET',
         });
@@ -11,7 +11,6 @@ export default class UserRepository {
         const response = await fetch('http://localhost:8081/users');
         return await response.json();
     }
-
 
     async createProgrammers ( email,  first_name,  last_name,  password,  phone_number) {
         const response = await fetch('http://localhost:8081/users/register', {
