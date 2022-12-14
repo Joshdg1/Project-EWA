@@ -800,7 +800,7 @@ l47 37 -47 42 c-43 40 -55 62 -39 77 14 14 32 5 89 -44z"/>
             <!--end::Menu separator-->
             <!--begin::Menu item-->
             <div class="menu-item px-5">
-              <div @click="goToProfile" class="menu-link px-5">My Profile</div>
+              <div @click="goToProfile" class="menu-link px-5">Mijn account</div>
             </div>
             <!--end::Menu item-->
             <!--begin::Menu separator-->
@@ -830,7 +830,7 @@ l47 37 -47 42 c-43 40 -55 62 -39 77 14 14 32 5 89 -44z"/>
             <!--end::Menu item-->
             <!--begin::Menu item-->
             <div class="menu-item px-5">
-              <div @click="singOut" class="menu-link px-5">Sign Out</div>
+              <div @click="singOut" class="menu-link px-5">Uitloggen</div>
             </div>
             <!--end::Menu item-->
             <!--begin::Menu separator-->
@@ -902,7 +902,7 @@ export default {
     },
 
     goToProfile() {
-      this.$router.push("/programmers/view");
+      this.$router.push("/profile/view");
     },
 
     goToClients() {

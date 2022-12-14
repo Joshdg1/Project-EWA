@@ -14,12 +14,8 @@
 
     <ProgrammerInputSkills v-if="this.editProfile && currentTab === 3 " :skills="skills"
                            @edit-profile="EditProfileStatus" @delete-skill="deleteSkill" @add-skill="addSkill"></ProgrammerInputSkills>
-
-
   </div>
-
 </template>
-
 <script>
 
 import ProfileDetails from "@/components/programmerProfile/ProfileDetails";
@@ -35,7 +31,7 @@ import SkillRepository from "@/repository/SkillRepository";
 
 
 export default {
-  name: "ProgrammerProfilePage",
+  name: "ClientProfilePage",
   components: {
 
     ProgrammerInputSkills,

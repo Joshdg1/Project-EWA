@@ -11,7 +11,7 @@
         <!--begin::Breadcrumb-->
         <ul class="breadcrumb breadcrumb-line text-muted fw-bold fs-base my-1">
           <li class="breadcrumb-item text-muted">
-            <div class="text-muted">Admin</div>
+            <div class="text-muted">{{translatedUserType()}}</div>
           </li>
           <li class="breadcrumb-item text-florijn">{{$route.name}}</li>
         </ul>
@@ -58,6 +58,23 @@
 
 <script>
 export default {
+  data(){
+    return{
+      user: JSON.parse(sessionStorage.user),
+    }
+  },
+  methods: {
+    translatedUserType() {
+      switch (this.user.userType) {
+        case 'administrator':
+          return "Administrator";
+        case 'client':
+          return 'Opdrachtgever';
+        case 'programmer':
+          return 'Specialist';
+      }
+    },
+  },
   name: 'HeaderMenu',
   props: ['mode']
 }

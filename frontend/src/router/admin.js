@@ -2,28 +2,32 @@ const adminRoutes = [
     {
         path: "/home",
         name: "Home",
-        component: () => import('../views/admin/AdminHome.vue'),
+        component: () => import('../views/admin/Home.vue'),
     },
-
     {
-        name: "Programmers",
+        name: "Specialisten",
         path: '/programmers',
         component: () => import(`../views/programmer/Home.vue`),
     },
 
     {
-        name: "Edit Programmer",
-        path: '/programmers/view',
-        component: () => import(`../views/programmer/Edit.vue`),
+        name: "Mijn account",
+        path: '/profile/view',
+        component: () => import(`../views/admin/profile/View.vue`),
     },
     {
-        name: "Create Programmer",
+        name: "Specialist",
+        path: '/programmers/view',
+        component: () => import(`../views/admin/profile/View.vue`),
+    },
+    {
+        name: "Specialist aanmaken",
         path: '/programmers/add',
         component: () => import('../views/programmer/AddProgrammer.vue'),
     },
 
     {
-        name: "Projects",
+        name: "Projecten",
         path: '/projects',
         component: () => import(`../views/admin/project/ProjectAdminView.vue`),
     },
@@ -39,7 +43,7 @@ const adminRoutes = [
         component: () => import('../views/admin/project/CreateProject-2.vue')
     },
     {
-        name: "Clients",
+        name: "Opdrachtgevers",
         path: '/clients',
         component: () => import(`../views/admin/client/ClientAdminView.vue`),
     },
