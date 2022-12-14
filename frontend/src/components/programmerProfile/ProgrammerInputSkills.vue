@@ -15,9 +15,9 @@
            tooltip="New App"
            data-bs-toggle="modal"
            data-bs-target="#kt_modal_create_app" id="kt_toolbar_primary_button">Add skill</a>
-        <a @click="saveSkill()" class="btn background-florijn btn-active-info editSkill" tooltip="New App"
-           data-bs-toggle="modal"
-           data-bs-target="#kt_modal_create_app" id="kt_toolbar_primary_button">Save skills</a>
+<!--        <a @click="saveSkill()" class="btn background-florijn btn-active-info editSkill" tooltip="New App"-->
+<!--           data-bs-toggle="modal"-->
+<!--           data-bs-target="#kt_modal_create_app" id="kt_toolbar_primary_button">Save skills</a>-->
       </div>
       <!--end::Action-->
     </div>
@@ -82,19 +82,18 @@ export default {
       }
     },
 
-    async saveSkill() {
-      for (let i = 0; i < this.skills.length; i++) {
-        console.log(this.skills)
-        if (this.skills[i].skillLevel <= 5 && this.skills[i].skillLevel >= 1) {
-          await this.repository.createSkill(this.skills.skillName, this.skills[i].skillLevel, this.userId)
-          this.closePopup();
-          location.reload();
-          // } else alert("Getal moet tussen de 1-5 zijn & er moet een skill geselecteerd zijn.")
-        }
-      }
+    // async saveSkill() {
+    //   for (let i = 0; i < this.skills.length; i++) {
+    //     console.log(this.skills)
+    //     if (this.skills[i].skillLevel <= 5 && this.skills[i].skillLevel >= 1) {
+    //       await this.repository.createSkill(this.skills.skillName, this.skills[i].skillLevel, this.userId)
+    //       this.closePopup();
+    //       location.reload();
+    //     } else alert("Getal moet tussen de 1-5 zijn & er moet een skill geselecteerd zijn.")
+    //   }
+    // }
 
 
-    }
   },
   selectSkill(skill) {
     if (skill !== null) {

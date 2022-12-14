@@ -6,8 +6,8 @@ export default class SkillRepository {
         return await response.json()
     }
 
-    async getAllSkills() {
-        const response = await fetch('http://localhost:8081/skills');
+    async getAllSkills(userId) {
+        const response = await fetch('http://localhost:8081/skills/' + userId);
         return await response.json();
     }
 
