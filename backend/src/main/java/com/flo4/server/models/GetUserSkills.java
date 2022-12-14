@@ -8,10 +8,10 @@ import lombok.Setter;
 public class GetUserSkills {
 
     private String skillName;
-    private int skillLevel;
+    private double skillLevel;
     private int userId;
 
-    public GetUserSkills(String skillName, int skillLevel, int userId) {
+    public GetUserSkills(String skillName, double skillLevel, int userId) {
         this.skillName = skillName;
         this.skillLevel = skillLevel;
         this.userId = userId;
