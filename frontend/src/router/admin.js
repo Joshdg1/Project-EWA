@@ -7,7 +7,7 @@ const adminRoutes = [
     {
         name: "Specialisten",
         path: '/programmers',
-        component: () => import(`../views/programmer/Home.vue`),
+        component: () => import(`../views/admin/programmer/View.vue`),
     },
 
     {
