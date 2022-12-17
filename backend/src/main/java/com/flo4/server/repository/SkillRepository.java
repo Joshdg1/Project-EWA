@@ -74,4 +74,11 @@ public class SkillRepository implements EntityRepository<UserSkills> {
         //Execute the query and return all the results.
         return query.getResultList();
     }
+
+    public UserSkills updateProgrammerSkill(int skillsId, double skillLevel) {
+        return this.entityManager.createQuery
+                ("UPDATE UserSkills s SET level = ?1 WHERE s.id = ?2",
+                        UserSkills.class).setParameter(1, skillLevel).setParameter(2, skillsId).getSingleResult();
+
+    }
 }

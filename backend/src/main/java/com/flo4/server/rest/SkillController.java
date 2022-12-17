@@ -6,6 +6,7 @@ import com.flo4.server.models.User;
 import com.flo4.server.models.UserAvailability;
 import com.flo4.server.models.UserSkills;
 import com.flo4.server.repository.EntityRepository;
+import com.flo4.server.repository.SkillRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -21,6 +22,8 @@ public class SkillController {
     private static final String notFound = "Skill with id %d was not found!";
     @Autowired
     EntityRepository<UserSkills> SkillRepository;
+    @Autowired
+    com.flo4.server.repository.SkillRepository SkillRepository2;
     @Autowired
     EntityRepository<User> userEntityRepository;
 
@@ -80,5 +83,24 @@ public class SkillController {
             throw new NotFoundException(String.format(notFound, id));
         }
         return ResponseEntity.ok().body(updatedUserSkills);
+    }
+
+    @PutMapping(path = "userSkills/{id}", produces = "application/json")
+    public List<UserSkills> updateProgrammerSkill(@PathVariable() int userId, int skillId) {
+        User ourUser = this.userEntityRepository.findById(userId);
+        List<UserSkills> skillList = new ArrayList<>(this.SkillRepository.findAll());
+        List<UserSkills> updatedList = new ArrayList<>();
+        for (UserSkills userSkills : skillList) {
+            if (userSkills.getUser().getId() == ourUser.getId()) {
+                updatedList.add(userSkills);
+            }
+        }
+        for (UserSkills userSkills: updatedList){
+            if (userSkills.getId() == skillId){
+                this.SkillRepository2.updateProgrammerSkill(userSkills.getId(), userSkills.getLevel());
+            }
+        }
+
+        return updatedList;
     }
 }

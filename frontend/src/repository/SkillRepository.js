@@ -30,16 +30,14 @@ export default class SkillRepository {
         });
         return await response.json();
     }
-    async  updateProgrammerById(programmerId,firstName, lastName, email,address, city, postcode,
-                                availability, workPreference, projectType,)
+    async  updateProgrammerSkillById(programmerId, skillId, level)
     {
         const response = await fetch('http://localhost:8081/programmers/' + programmerId, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({programmerId,firstName, lastName, email, address, city,
-                postcode ,projectType, workPreference,availability}),
+            body: JSON.stringify({programmerId, skillId, level}),
         });
         return await response.json();
     }

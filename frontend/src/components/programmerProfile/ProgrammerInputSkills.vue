@@ -48,7 +48,7 @@
 </template>
 
 <script>
-import SkillRepository from '../repository/SkillRepository.vue';
+import SkillRepository from '../../../repository/SkillRepository.js'
 
 export default {
   name: "programmerInputSkills",
@@ -72,15 +72,15 @@ export default {
       this.editingProfile = false
       this.$emit('edit-profile', this.editingProfile)
     },
-    // setCurrentId(id) {
-    //   if (id === this.currentId) {
-    //     this.currentId = null
-    //     this.selectedSkill = null
-    //   } else {
-    //     this.currentId = id;
-    //   }
-    //
-    // },
+    setCurrentId(id) {
+      if (id === this.currentId) {
+        this.currentId = null
+        this.selectedSkill = null
+      } else {
+        this.currentId = id;
+      }
+
+    },
 
     closePopup(newPopupStatus) {
       this.popupStatus = newPopupStatus
@@ -93,8 +93,7 @@ export default {
       this.editingSkill = false;
       this.$emit('editSkill', this.editingSkill)
 
-      // await this.repository.updateUserById(client.id, client.email, client.firstName, client.lastName,
-      //     client.phoneNumber, client.userType);
+      await this.repository.updateProgrammerSkillById(this.id, skill.id, skill.level);
     }
   }
 }
