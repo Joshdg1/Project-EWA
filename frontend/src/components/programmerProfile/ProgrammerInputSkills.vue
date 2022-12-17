@@ -39,7 +39,7 @@
             <!--begin::Modal header-->
             <!--begin::Modal body-->
             <div class="backgroundTextName">{{ skill.name }}</div>
-            <input class="backgroundText inputLevelSkill" v-model="skill.level">
+            <input type="number" class="backgroundText inputLevelSkill" v-model="skill.level">
             <img src="../../assets/florijnster.png" class="skillStar">
             <div class="modal-body scroll-y mx-5 mx-xl-18 pt-0 pb-15">
               <!--end::Modal body-->
@@ -80,6 +80,7 @@ export default {
       } else {
         this.currentId = id;
       }
+
     },
 
     // async saveSkill() {
