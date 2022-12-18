@@ -78,7 +78,7 @@ m-3120 -960 c108 -33 161 -106 161 -226 0 -120 -48 -187 -158 -224 -63 -21
             <li class="nav-item mb-2" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="right"
                 data-bs-dismiss="click" title="Clients">
               <!--begin::Nav link-->
-              <div class="nav-link btn btn-custom btn-icon" data-bs-toggle="tab" @click="goToClients()">
+              <div v-if="translatedUserType() === 'Administrator'" class="nav-link btn btn-custom btn-icon" data-bs-toggle="tab" @click="goToClients()">
                 <!--begin::Svg Icon | path: icons/duotune/general/gen048.svg-->
                 <span class="svg-icon svg-icon-2x">
 											<svg  version="1.0" xmlns="http://www.w3.org/2000/svg"
@@ -142,7 +142,7 @@ m-3120 -960 c108 -33 161 -106 161 -226 0 -120 -48 -187 -158 -224 -63 -21
             <li class="nav-item mb-2" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="right"
                 data-bs-dismiss="click" title="Programmers">
               <!--begin::Nav link-->
-              <div @click="goToProgrammers()" class="nav-link btn btn-custom btn-icon" data-bs-toggle="tab" >
+              <div v-if="translatedUserType() === 'Administrator'" @click="goToProgrammers()" class="nav-link btn btn-custom btn-icon" data-bs-toggle="tab" >
                 <!--begin::Svg Icon | path: icons/duotune/finance/fin006.svg-->
                 <span class="svg-icon svg-icon-2x">
 											<svg  version="1.0" xmlns="http://www.w3.org/2000/svg"

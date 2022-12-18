@@ -42,7 +42,7 @@
                                     fill="black"/>
 															</svg>
 														</span>
-                  <!--end::Svg Icon-->Developer</a>
+                  <!--end::Svg Icon-->{{ translatedUserType() }}</a>
                 <a href="#" class="d-flex align-items-center text-gray-400 text-hover-primary me-5 mb-2">
                   <!--begin::Svg Icon | path: icons/duotune/general/gen018.svg-->
                   <span class="svg-icon svg-icon-4 me-1">
@@ -247,6 +247,16 @@ export default {
       el.classList.add("active")
 
       this.$emit('selectedTab', this.selectedTab)
+    },
+    translatedUserType() {
+      switch (this.user.userType) {
+        case 'administrator':
+          return "Administrator";
+        case 'client':
+          return 'Opdrachtgever';
+        case 'programmer':
+          return 'Specialist';
+      }
     },
     setSelectedTabDetails() {
       const oldSelectedTab = this.selectedTab;

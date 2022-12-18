@@ -15,7 +15,7 @@ const programmerRoutes = [
         component: () => import(`../views/programmer/profile/View.vue`),
     },
     {
-        name: "404PageNotFound",
+        name: "404 PageNotFound",
         path: "*",
         component: () => import('../404page.vue')
     },
