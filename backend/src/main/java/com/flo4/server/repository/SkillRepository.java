@@ -39,18 +39,18 @@ public class SkillRepository implements EntityRepository<UserSkills> {
 
     @Override
     public UserSkills update(UserSkills entity, int id) {
-        UserSkills updatedSKill = findById(id);
+        UserSkills updatedSkill = findById(id);
 
-        if (updatedSKill == null) {
+        if (updatedSkill == null) {
             return null;
         }
 
 //        updatedSKill.setId(entity.getId());
-        updatedSKill.setName(entity.getName());
-        updatedSKill.setLevel(entity.getLevel());
-        updatedSKill.setUser(entity.getUser());
+        updatedSkill.setName(entity.getName());
+        updatedSkill.setLevel(entity.getLevel());
+        updatedSkill.setUser(entity.getUser());
 
-        return updatedSKill;
+        return updatedSkill;
     }
 
 

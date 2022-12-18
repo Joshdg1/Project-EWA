@@ -48,12 +48,12 @@
 </template>
 
 <script>
-import SkillRepository from '../../../repository/SkillRepository.js'
+import SkillRepository from "@/repository/SkillRepository";
 
 export default {
   name: "programmerInputSkills",
   props: ['skills'],
-  emits: ['edit-profile', 'add-skill', 'deleteClient', 'editClient'],
+  emits: ['edit-profile', 'add-skill', 'editSkill', 'deleteSkill'],
 
 
   data() {
@@ -64,7 +64,7 @@ export default {
       selectedSkill: null,
       popupStatus: null,
       editingSkill: null,
-      repository: new SkillRepository,
+      repository: new SkillRepository(),
     }
   },
   methods: {
@@ -92,7 +92,6 @@ export default {
     async editSkill(skill) {
       this.editingSkill = false;
       this.$emit('editSkill', this.editingSkill)
-
       await this.repository.updateProgrammerSkillById(this.id, skill.id, skill.level);
     }
   }

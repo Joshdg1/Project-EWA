@@ -86,8 +86,8 @@ public class SkillController {
     }
 
     @PutMapping(path = "userSkills/{id}", produces = "application/json")
-    public List<UserSkills> updateProgrammerSkill(@PathVariable() int userId, int skillId) {
-        User ourUser = this.userEntityRepository.findById(userId);
+    public List<UserSkills> updateProgrammerSkill(@PathVariable() int id, int skillId) {
+        User ourUser = this.userEntityRepository.findById(id);
         List<UserSkills> skillList = new ArrayList<>(this.SkillRepository.findAll());
         List<UserSkills> updatedList = new ArrayList<>();
         for (UserSkills userSkills : skillList) {

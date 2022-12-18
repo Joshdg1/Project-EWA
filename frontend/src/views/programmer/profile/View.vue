@@ -6,14 +6,12 @@
                          @edit-profile="EditProfileStatus" @save-profile="updateProfile"></ProfileInputDetails>
 
     <ProfileDetails v-if="!this.editProfile && currentTab === 1" :sample-programmer="sampleProgrammer"
-                    @edit-profile="EditProfileStatus" ></ProfileDetails>
+                    @edit-profile="EditProfileStatus"></ProfileDetails>
     <AvailabilityProgrammer v-if="!this.editProfile && currentTab === 2 "></AvailabilityProgrammer>
-
-    <programmer-skills v-if="!this.editProfile && currentTab === 3 " :skills="skills"
-                       @edit-profile="EditProfileStatus" @add-skill="addSkill"></programmer-skills>
-
-    <ProgrammerInputSkills v-if="this.editProfile && currentTab === 3 " :skills="skills"
-                           @edit-profile="EditProfileStatus" @delete-skill="deleteSkill" @add-skill="addSkill"></ProgrammerInputSkills>
+    <programmerSkillList v-if="!this.skillStatus" :skills="this.skills" @deleteSkill="deleteSkill"
+                         @editSkill="editSkillStatus"></programmerSkillList>
+    <edit v-if="this.skillStatus" :skills="this.skills" @deleteSkill="deleteSkill"
+          @editSkill="editSkillStatus"></edit>
   </div>
 </template>
 <script>
@@ -22,21 +20,20 @@ import ProfileDetails from "@/components/programmerProfile/ProfileDetails";
 import ProfileInputDetails from "@/components/programmerProfile/ProfileInputDetails";
 import TopProfileDetails from "@/components/programmerProfile/TopProfileDetails";
 import AvailabilityProgrammer from "@/components/programmerProfile/AvailabilityProgrammer";
-import ProgrammerSkills from "@/components/programmerProfile/programmerSkills";
-import ProgrammerInputSkills from "@/components/programmerProfile/ProgrammerInputSkills";
 import Programmer from "@/models/programmer/programmer";
 import UserRepository from "@/repository/UserRepository";
 import ProjectRepository from "@/repository/ProjectRepository";
 import SkillRepository from "@/repository/SkillRepository";
+import programmerSkillList from '../../../components/programmerProfile/programmerSkills.vue'
+import edit from '../../../components/programmerProfile/ProgrammerInputSkills.vue'
 
 
 export default {
   name: "ProgrammerProfilePage",
   components: {
-
-    ProgrammerInputSkills,
-    ProgrammerSkills, AvailabilityProgrammer, TopProfileDetails, ProfileInputDetails, ProfileDetails},
- async created() {
+    AvailabilityProgrammer, TopProfileDetails, ProfileInputDetails, ProfileDetails, programmerSkillList, edit
+  },
+  async created() {
 
     // let languages = ["PowerBi" , "Flutter" ,"Dart", "C#" , "Rust"]
 
@@ -55,15 +52,14 @@ export default {
     // const allProgrammers = this.repository.getAllProgrammers()
     // console.log(allProgrammers)
 
-   const userID = sessionStorage.getItem("id")
+    const userID = sessionStorage.getItem("id")
     this.sampleProgrammer = await this.repository.findProgrammerById(userID)
-   const databaseSkills = await this.repositoryGood.findSkillsById(userID);
-   for (let i = 0; i < databaseSkills.length; i++) {
-     this.skills.push(databaseSkills[i]);
-   }
+    const databaseSkills = await this.repositoryGood.findSkillsById(userID);
+    for (let i = 0; i < databaseSkills.length; i++) {
+      this.skills.push(databaseSkills[i]);
+    }
 
     this.sampleProgrammer = await this.repository.findUserById(userID)
-
 
 
     this.currentTab = 1;
@@ -79,6 +75,7 @@ export default {
       repository: new UserRepository(),
       projectRepository: new ProjectRepository(),
       repositoryGood: new SkillRepository(),
+      skillStatus: null,
     }
   },
   methods: {
@@ -91,13 +88,20 @@ export default {
     changeSelectedTab(selectedTab) {
       this.currentTab = selectedTab;
     },
-    deleteSkill(skill) {
-      this.skills = this.skills.filter(item => item.skillId !== skill.skillId)
-    },
-    addSkill(skill){
+    addSkill(skill) {
       this.skills.push(skill)
+    },
+    async deleteSkill(skills) {
+      await this.repositoryGood.deleteSkillsById(skills.id);
+      location.reload();
+    },
+
+    editSkillStatus(skillStatus) {
+      console.log(skillStatus)
+      this.skillStatus = skillStatus;
     }
-  },
+  }
+
 
 }
 </script>

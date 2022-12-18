@@ -25,14 +25,14 @@ export default class SkillRepository {
         return await response.json();
     }
     async deleteSkillsById(skillsId){
-        const response = await fetch('http://localhost:8081/programmers/' + skillsId, {
+        const response = await fetch('http://localhost:8081/skills/' + skillsId, {
             method: 'DELETE',
         });
         return await response.json();
     }
     async  updateProgrammerSkillById(programmerId, skillId, level)
     {
-        const response = await fetch('http://localhost:8081/programmers/' + programmerId, {
+        const response = await fetch('http://localhost:8081/skills/' + programmerId, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',

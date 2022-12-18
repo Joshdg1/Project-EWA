@@ -10,7 +10,7 @@
 <script>
 import programmerSkillList from '../../../components/programmerProfile/programmerSkills.vue'
 import edit from '../../../components/programmerProfile/ProgrammerInputSkills.vue'
-import SkillRepository from '../../../repository/SkillRepository.js'
+import SkillRepository from "@/repository/SkillRepository";
 
 export default {
   name: "ProgrammerSkillsView",
@@ -31,7 +31,7 @@ export default {
     const data = await this.repository.getAllSkills();
 
     for (let i = 0; i < data.length; i++) {
-      this.clients.push(data[i]);
+      this.skills.push(data[i]);
     }
   },
 
@@ -42,6 +42,7 @@ export default {
     },
 
     editSkillStatus(skillStatus) {
+      console.log(skillStatus)
       this.skillStatus = skillStatus;
     }
   }

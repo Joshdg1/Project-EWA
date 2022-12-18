@@ -83,7 +83,7 @@
 
 <script>
 import addSkill from "./addSkill";
-import SkillRepository from '../repository/SkillRepository.vue'
+import SkillRepository from "@/repository/SkillRepository";
 
 export default {
   name: "programmerSkills",
