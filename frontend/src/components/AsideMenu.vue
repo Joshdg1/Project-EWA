@@ -888,6 +888,16 @@ export default {
     }
   },
   methods: {
+    translatedUserType() {
+      switch (this.user.userType) {
+        case 'administrator':
+          return "Administrator";
+        case 'client':
+          return 'Opdrachtgever';
+        case 'programmer':
+          return 'Specialist';
+      }
+    },
     singOut(){
       sessionStorage.clear()
       this.$router.push("/");

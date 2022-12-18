@@ -1,16 +1,18 @@
 class Programmer {
-    id
+    id;
     firstName;
     lastName;
     email;
-    phoneNumber
+    file;
+    phoneNumber;
 
 
-    constructor(id, firstName, lastName, email, phoneNumber) {
+    constructor(id, firstName, lastName, email, file, phoneNumber) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
+        this.file = file;
         this.phoneNumber = phoneNumber;
     }
 
