@@ -99,9 +99,7 @@ export default {
 
     async editProgrammer(programmer) {
       this.editingProgrammer = false;
-      this.$emit('editProgrammer', this.editingProgrammer)
-
-      console.log("bi")
+      this.$emit('editProgrammer', this.editingProgrammer);
 
       await this.repository.updateUserById(programmer.id, programmer.email, programmer.firstName, programmer.lastName,
           programmer.phoneNumber, programmer.userType);
