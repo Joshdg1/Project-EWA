@@ -135,7 +135,7 @@ export default {
     },
 
     editProgrammer() {
-      this.editingClient = true;
+      this.editingProgrammer = true;
       this.$emit('editProgrammer', this.editingProgrammer)
     }
   }
