@@ -46,10 +46,12 @@ export default {
   emits: ['close-popup'],
   created() {
     this.newDate = this.selectedEvent;
+    this.userID = sessionStorage.getItem("id")
     console.log(this.newDate.start)
   },
   data() {
     return {
+      userID: null,
       popupStatus: null,
       newDate: null,
       repository: new AvailabilityRepository(),
@@ -70,13 +72,13 @@ export default {
       return new Date(numberOfMlSeconds + addMlSeconds);
     },
     async updateDate() {
-      const userID = sessionStorage.getItem("id")
-      const allAvailabilitys = await this.repository.getAvailabilityById(userID)
 
-      for (let i = 0; i < allAvailabilitys.length; i++) {
-        if ((allAvailabilitys[i].startDate).toString().substring(0, 10) === (this.selectedEvent.start)) {
-          if ((allAvailabilitys[i].endDate).toString().substring(0, 10) === (this.selectedEvent.end)) {
-            this.currentId = allAvailabilitys[i].id
+      const allAvailabilitys = await this.repository.getAvailabilityById(this.userID)
+
+      for (const element of allAvailabilitys) {
+        if ((element.startDate).toString().substring(0, 10) === (this.selectedEvent.start)) {
+          if ((element.endDate).toString().substring(0, 10) === (this.selectedEvent.end)) {
+            this.currentId = element.id
             console.log("Winnar")
             break;
           }
@@ -101,7 +103,7 @@ export default {
       const starting = new Date(startDate)
       const ending = new Date(endDate)
 
-      await this.repository.updateAvailabilityById(this.currentId, this.newDate.title, starting, ending, userID)
+      await this.repository.updateAvailabilityById(this.currentId, this.newDate.title, starting, ending, this.userID)
 
       this.popupStatus = false
       this.$emit('close-popup', this.popupStatus)
@@ -127,21 +129,22 @@ export default {
     async deleteAvail() {
 
       if (confirm("Wil je deze datum verwijderen?") === true) {
-        const allAvailabilitys = await this.repository.getAvailabilityById(20)
+        const allAvailabilitys = await this.repository.getAvailabilityById(this.userID)
 
         const start = new Date(this.selectedEvent.start).toLocaleDateString()
         const end = new Date(this.selectedEvent.end).toLocaleDateString()
 
-        for (let i = 0; i < allAvailabilitys.length; i++) {
-          if (new Date((allAvailabilitys[i].startDate)).toLocaleDateString() === (start)) {
-            if (new Date((allAvailabilitys[i].endDate)).toLocaleDateString() === (end)) {
-              this.currentId = allAvailabilitys[i].id
+        for (const element of allAvailabilitys) {
+          if (new Date((element.startDate)).toLocaleDateString() === (start)) {
+            if (new Date((element.endDate)).toLocaleDateString() === (end)) {
+              this.currentId = element.id
               break;
             }
           }
         }
         await this.repository.deleteAvailability(this.currentId)
       }
+      location.reload()
     }
   }
 }
