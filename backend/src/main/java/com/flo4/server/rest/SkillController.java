@@ -97,7 +97,8 @@ public class SkillController {
         }
         for (UserSkills userSkills: updatedList){
             if (userSkills.getId() == skillId){
-                this.SkillRepository2.updateProgrammerSkill(userSkills.getId(), userSkills.getLevel());
+               UserSkills userSkillsUpdated = this.SkillRepository2.updateProgrammerSkill(userSkills.getId(), userSkills.getLevel());
+              updatedList.set(updatedList.indexOf(userSkills), userSkillsUpdated);
             }
         }
 

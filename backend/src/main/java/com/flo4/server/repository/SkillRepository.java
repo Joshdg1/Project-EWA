@@ -1,6 +1,7 @@
 package com.flo4.server.repository;
 
 
+import com.flo4.server.models.UserAvailability;
 import com.flo4.server.models.UserSkills;
 import org.springframework.stereotype.Repository;
 
@@ -76,9 +77,20 @@ public class SkillRepository implements EntityRepository<UserSkills> {
     }
 
     public UserSkills updateProgrammerSkill(int skillsId, double skillLevel) {
-        return this.entityManager.createQuery
-                ("UPDATE UserSkills s SET level = ?1 WHERE s.id = ?2",
-                        UserSkills.class).setParameter(1, skillLevel).setParameter(2, skillsId).getSingleResult();
+//        return this.entityManager.createQuery
+//                ("UPDATE UserSkills s SET level = ?1 WHERE s.id = ?2",
+//                        UserSkills.class).setParameter(1, skillLevel).setParameter(2, skillsId).getSingleResult();
+        UserSkills updatedSkill = findById(skillsId);
+
+        if (updatedSkill == null) {
+            return null;
+        }
+
+        updatedSkill.setLevel(skillLevel);
+
+
+
+        return updatedSkill;
 
     }
 }

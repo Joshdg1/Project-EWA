@@ -10,7 +10,7 @@
       <div class="d-flex ms-3">
         <a @click="editSkill()" class="btn background-florijn btn-active-info editSkill" tooltip="New App"
            data-bs-toggle="modal"
-           data-bs-target="#kt_modal_create_app" id="kt_toolbar_primary_button">Edit skills</a>
+           data-bs-target="#kt_modal_create_app" id="kt_toolbar_primary_button">Save skills</a>
         <a @click="(event) => this.popupStatus = true" class="btn background-florijn btn-active-info editSkill"
            tooltip="New App"
            data-bs-toggle="modal"
@@ -92,6 +92,7 @@ export default {
     async editSkill(skill) {
       this.editingSkill = false;
       this.$emit('editSkill', this.editingSkill)
+      console.log(this.currentId)
       await this.repository.updateProgrammerSkillById(this.id, skill.id, skill.level);
     }
   }
