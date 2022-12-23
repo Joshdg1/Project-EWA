@@ -1,7 +1,4 @@
 // DEPRECIATED
-
-import API from "../scripts/API";
-
 export default class ProgrammerRepository {
     async findProgrammerById(programmerId){
         return await API.get(`/programmers/${programmerId}`);
