@@ -33,7 +33,7 @@
               <!--end::Table head-->
               <!--begin::Table body-->
               <tbody>
-              <tr v-for="programmer in programmers" v-bind:key="programmer">
+              <tr v-for="programmer in programmers" v-bind:key="programmer.id">
                 <div class="form-check form-check-sm form-check-custom form-check-solid">
                   <input class="form-check-input" type="checkbox" :value="programmer.id" data-kt-check="true"
                          data-kt-check-target=".widget-9-check"/>
@@ -68,7 +68,7 @@
 </template>
 
 <script>
-// import Programmer from '../../../models/programmer/programmer.js'
+// import User from '../../../models/programmer/user.js'
 import ProjectRepository from '../../../repository/ProjectRepository'
 import UserRepository from '../../../repository/UserRepository'
 

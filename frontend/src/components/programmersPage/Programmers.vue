@@ -5,7 +5,7 @@
         <!--begin::Header-->
         <div class="card-header border-0 pt-5">
           <h3 class="card-title align-items-start flex-column">
-            <span class="card-label fw-bolder fs-3 mb-1">Programmer</span>
+            <span class="card-label fw-bolder fs-3 mb-1">User</span>
           </h3>
           <div class="card-toolbar" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-trigger="hover"
                title="Click to add a user">
@@ -23,7 +23,7 @@
 														<rect x="4.36396" y="11.364" width="16" height="2" rx="1" fill="black"/>
 													</svg>
 												</span>
-              <!--end::Svg Icon-->New Programmer</a>
+              <!--end::Svg Icon-->New User</a>
           </div>
         </div>
         <!--end::Header-->
@@ -52,7 +52,7 @@
               <!--end::Table head-->
               <!--begin::Table body-->
               <tbody>
-              <tr v-for="programmer in programmers" v-bind:key="programmer">
+              <tr v-for="programmer in programmers" v-bind:key="programmer.id">
                 <td>{{ programmer.id }}</td>
                 <td>{{ programmer.firstName }}</td>
                 <td>{{ programmer.lastName }}</td>
@@ -119,7 +119,7 @@
 </template>
 
 <script>
-import ProgrammerRepository from "@/repository/ProgrammerService";
+import UserRepository from "../../repository/UserRepository";
 
 export default {
   name: "ProgrammersComp",
@@ -128,7 +128,7 @@ export default {
   data(){
     return{
       editStatus: null,
-      repository: new ProgrammerRepository()
+      repository: new UserRepository()
     }
   },
   methods:{
@@ -137,8 +137,7 @@ export default {
     },
     async deleteProgrammer(programmer){
       const wantedId = programmer.id
-      console.log(wantedId)
-      await this.repository.deleteProgrammerById(wantedId)
+      await this.repository.deleteUserById(wantedId)
       location.reload();
     },
     setEditStatus(){

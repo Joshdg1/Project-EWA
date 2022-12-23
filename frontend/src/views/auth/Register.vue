@@ -95,8 +95,7 @@ export default {
   },
   methods: {
     async saveUser() {
-      await this.userRepository.createProgrammers(this.email, this.first_name, this.last_name,
-          this.password, this.phoneNumber, this.userType)
+      await this.userRepository.createUser(this.email, this.first_name, this.last_name, this.password, this.phoneNumber, this.userType)
     }
   }
 }

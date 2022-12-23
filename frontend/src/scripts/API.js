@@ -46,8 +46,8 @@ export default class API {
         return await this.send(url, "GET");
     }
 
-    static async put(url){
-        return await this.send(url, "PUT");
+    static async put(url, body){
+        return await this.send(url, "PUT", body);
     }
 
     static async delete(url){

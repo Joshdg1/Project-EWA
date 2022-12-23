@@ -5,7 +5,7 @@
         <!--begin::Header-->
         <div class="card-header border-0 pt-5">
           <h3 class="card-title align-items-start flex-column">
-            <span class="card-label fw-bolder fs-3 mb-1">Programmer EDIT</span>
+            <span class="card-label fw-bolder fs-3 mb-1">User EDIT</span>
           </h3>
           <div class="card-toolbar" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-trigger="hover"
                title="Click to add a user">
@@ -23,7 +23,7 @@
 														<rect x="4.36396" y="11.364" width="16" height="2" rx="1" fill="black"/>
 													</svg>
 												</span>
-              <!--end::Svg Icon-->New Programmer</a>
+              <!--end::Svg Icon-->New User</a>
           </div>
         </div>
         <!--end::Header-->
@@ -52,7 +52,7 @@
               <!--end::Table head-->
               <!--begin::Table body-->
               <tbody>
-              <tr v-for="programmer in programmers" v-bind:key="programmer">
+              <tr v-for="programmer in programmers" v-bind:key="programmer.id">
                 <td> {{programmer.id}}</td>
                 <td> <input class="listInput" v-model="programmer.firstName"></td>
                 <td> <input class="listInput" v-model="programmer.lastName"></td>
@@ -135,19 +135,12 @@ export default {
     profilePage(){
       this.$router.push('/programmers/view');
     },
-    async deleteProgrammer(programmer){
-      const wantedId = programmer.id
-      console.log(wantedId)
-      await this.repository.deleteProgrammerById(wantedId)
-      location.reload();
-    },
+
      async setEditProfile(programmer){
       this.editingProfile = false
       this.$emit('edit-status' , this.editingProfile)
 
-      await this.repository.updateProgrammerById(programmer.id, programmer.firstName, programmer.lastName,
-          programmer.email, programmer.address, programmer.city, programmer.postcode, programmer.availability,
-          programmer.workPreference, programmer.projectType, programmer.skills)
+      await this.repository.updateUserById(programmer.id,  programmer.email, programmer.firstName, programmer.lastName, '')
     }
   }
 }

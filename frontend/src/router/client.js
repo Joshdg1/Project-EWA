@@ -7,7 +7,7 @@ const clientRoutes = [
     {
         name: "Mijn account",
         path: '/profile/view',
-        component: () => import(`../views/client/profile/View.vue`),
+        component: () => import(`../views/profile/View.vue`),
     },
 ]
 

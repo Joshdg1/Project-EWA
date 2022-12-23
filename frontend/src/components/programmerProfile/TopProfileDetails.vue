@@ -223,7 +223,9 @@ export default {
   created() {
     this.selectedTab = 1;
     const el = document.getElementById('Details');
-    el.classList.add("active")
+
+    if (el)
+        el.classList.add("active")
   },
   data() {
     return {

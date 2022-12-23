@@ -47,7 +47,7 @@
 <script>
 import Multiselect from 'vue-multiselect';
 import SkillRepository from "@/repository/SkillRepository";
-import {ProgrammerSkill} from "@/models/programmer/programmerSkill";
+import {UserSkill} from "../../models/userSkill";
 
 export default {
   components: {Multiselect},
@@ -73,7 +73,7 @@ export default {
 
       repository: new SkillRepository(),
       value: null,
-      newSkill: new ProgrammerSkill,
+      newSkill: new UserSkill(),
       userId: null,
     }
   },

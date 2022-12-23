@@ -17,13 +17,13 @@
 </template>
 
 <script>
-import {ProgrammerSkill} from "../../models/programmer/programmerSkill";
+import {UserSkill} from "../../models/userSkill";
 
 export default {
   name: "SkillCardPopUp",
   emits: ['close-popup', 'adding-skill'],
   created() {
-    this.newSkill = new ProgrammerSkill(1)
+    this.newSkill = new UserSkill(1)
   },
   data(){
     return {

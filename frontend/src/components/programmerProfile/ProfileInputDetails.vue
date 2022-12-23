@@ -78,43 +78,34 @@
 </template>
 
 <script>
-import Programmer from "@/models/programmer/programmer";
-import UserRepository from "@/repository/UserRepository";
+  import User from "@/models/user";
+  import UserRepository from "@/repository/UserRepository";
 
 
-export default {
-  name: "ProfileInputDetails",
-  props: ['sampleProgrammer'],
-  emits: ['edit-profile'],
-  created() {
-    this.editProfile = Programmer.copyConstructor(this.sampleProgrammer)
-  },
-  data(){
-    return{
-      editProfile: new Programmer,
-      editingProfile: null,
-      repository: new UserRepository()
-    }
-  },
-  methods: {
-
-  async  setEditProfile(){
-
-      this.editingProfile = false
-      this.$emit('edit-profile' , this.editingProfile)
-    // this.$emit('save-profile', this.editProfile)
-
-
-    console.log(this.editProfile)
-    const userID = sessionStorage.getItem("id")
-
-   await this.repository.updateProgrammerById(userID, this.editProfile.email, this.editProfile.firstName, this.editProfile.lastName,
-       this.editProfile.phoneNumber)
-    location.reload()
+  export default {
+    name: "ProfileInputDetails",
+    props: ['sampleProgrammer'],
+    emits: ['edit-profile'],
+    created() {
+      this.editProfile = User.copyConstructor(this.sampleProgrammer)
+    },
+    data() {
+      return {
+        editProfile: new User,
+        editingProfile: null,
+        repository: new UserRepository()
+      }
+    },
+    methods: {
+      async setEditProfile() {
+        this.editingProfile = false
+        this.$emit('edit-profile', this.editingProfile)
+        const userID = sessionStorage.getItem("id")
+        await this.repository.updateUserById(userID, this.editProfile.email, this.editProfile.firstName, this.editProfile.lastName, this.editProfile.phoneNumber)
+        location.reload()
+      }
     }
   }
-}
-
 </script>
 
 <style scoped>

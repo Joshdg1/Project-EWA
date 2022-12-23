@@ -34,14 +34,14 @@
                 <th>Hours worked</th>
                 <th>Start date
                 <th>End date</th>
-                <th>Programmer(s)</th>
+                <th>User(s)</th>
                 <th>Actions</th>
               </tr>
               </thead>
               <!--end::Table head-->
               <!--begin::Table body-->
               <tbody>
-              <tr v-for="project in projects" v-bind:key="project">
+              <tr v-for="project in projects" v-bind:key="project.id">
                 <div class="form-check form-check-sm form-check-custom form-check-solid">
                   <input class="form-check-input" type="checkbox" value="1" data-kt-check="true"
                          data-kt-check-target=".widget-9-check"/>

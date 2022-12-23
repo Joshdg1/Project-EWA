@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="row g-5 g-xl-10 mb-5 mb-xl-10" >
-            <div v-for="project in projects" v-bind:key="project" class="col-lg-6">
+            <div v-for="project in projects" v-bind:key="project.id" class="col-lg-6">
                 <!--begin::Card widget 18-->
                 <div class="card card-flush h-md-100">
                     <!--begin::Body-->

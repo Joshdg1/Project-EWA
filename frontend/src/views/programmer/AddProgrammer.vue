@@ -2,7 +2,7 @@
   <div>
     <form>
       <div class="text-center mb-10">
-        <h1 class="text-dark mb-3">Create a new Programmer</h1>
+        <h1 class="text-dark mb-3">Create a new User</h1>
       </div>
 
       <div class="fv-row mb-10 fv-plugins-icon-container">

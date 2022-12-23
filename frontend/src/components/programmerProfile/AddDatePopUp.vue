@@ -34,15 +34,15 @@
 
 <script>
 
-import programmerDate from "../../models/programmer/programmerDate";
 import AvailabilityRepository from "@/repository/AvailabilityRepository";
+import UserDate from "../../models/userDate";
 
 export default {
   name: "AddDatePopUp",
   props: ['selectedDate'],
   emits: ['close-popup'],
   created() {
-    this.newDate = new programmerDate()
+    this.newDate = new UserDate()
 
     this.newDate.start = new Date(this.selectedDate);
     console.log(this.newDate.start)

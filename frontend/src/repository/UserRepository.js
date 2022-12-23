@@ -2,7 +2,9 @@ import API from "../scripts/API";
 
 export default class UserRepository {
 
-    async findProgrammerById(userId) {
+    // todo use USER model in this file
+
+    async findUserById(userId) {
         return await API.get(`/users/${userId}`);
     }
 
