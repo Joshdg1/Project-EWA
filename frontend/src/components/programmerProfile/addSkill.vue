@@ -79,7 +79,7 @@ export default {
   },
   async created() {
     this.userId = sessionStorage.getItem("id")
-    const data = await this.repository.findSkillsById(this.userId);
+    const data = await this.repository.findSkillsByUserId(this.userId);
     for (let i = 0; i < data.length; i++) {
       console.log(data[i])
     }
@@ -90,7 +90,7 @@ export default {
       this.$emit('close-popup', this.popupStatus)
     },
     async addSkill() {
-      const currentSkill = await this.repository.getAllSkills(this.userId);
+      const currentSkill = await this.repository.findSkillsByUserId(this.userId);
       this.newSkill.skillName = this.value;
       this.newSkill.skillLevel = document.getElementsByClassName("levelSkill")[0].value;
       console.log(currentSkill)
