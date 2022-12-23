@@ -23,8 +23,8 @@
 
       </div>
       <div class="buttons">
-<!--        <button  class="btn background-florijn btn-active-info addSkill" @click="cancel">anuleren</button>-->
-        <button class="btn background-florijn btn-active-info addSkill" @click="addSkill">Voeg Datum toe</button>
+<!--        <button  class="btn bg-primary btn-active-info addSkill" @click="cancel">anuleren</button>-->
+        <button class="btn bg-primary btn-active-info addSkill" @click="addSkill">Voeg Datum toe</button>
       </div>
 
       <slot/>

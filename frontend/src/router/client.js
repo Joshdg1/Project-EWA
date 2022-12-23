@@ -9,11 +9,6 @@ const clientRoutes = [
         path: '/profile/view',
         component: () => import(`../views/client/profile/View.vue`),
     },
-    {
-        name: "404PageNotFound",
-        path: "*",
-        component: () => import('../404page.vue')
-    },
 ]
 
 export default clientRoutes;

@@ -65,12 +65,12 @@
     </div>
     <div class="d-flex flex-shrink-0">
       <div class="d-flex ms-3">
-        <router-link to="/createNewClient" class="btn background-florijn btn-active-info">
+        <router-link to="/createNewClient" class="btn bg-primary btn-active-info">
           Back
         </router-link>
       </div>
       <div class="d-flex ms-3">
-        <button class="btn background-florijn btn-active-info" @click="createClient">create</button>
+        <button class="btn bg-primary btn-active-info" @click="createClient">create</button>
       </div>
     </div>
 

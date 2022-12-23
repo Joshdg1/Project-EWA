@@ -57,11 +57,6 @@ const adminRoutes = [
         path: "/createNewClient2",
         component: () => import('../views/admin/client/CreateClient-2.vue')
     },
-    {
-        name: "404PageNotFound",
-        path: "*",
-        component: () => import('../404page.vue')
-    },
 ]
 
 export default adminRoutes;

@@ -899,7 +899,7 @@ export default {
       }
     },
     singOut(){
-      sessionStorage.clear()
+      sessionStorage.clear();
       this.$router.push("/");
     },
 

@@ -42,12 +42,12 @@
 
     <div class="d-flex flex-shrink-0">
       <div class="d-flex ms-3">
-        <router-link to="/projects" class="btn background-florijn btn-active-info">
+        <router-link to="/projects" class="btn bg-primary btn-active-info">
           Cancel
         </router-link>
       </div>
       <div class="d-flex ms-3">
-        <button class="btn background-florijn btn-active-info" @click="createProgrammer">Create</button>
+        <button class="btn bg-primary btn-active-info" @click="createProgrammer">Create</button>
       </div>
     </div>
   </div>

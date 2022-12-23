@@ -32,6 +32,11 @@ let routes = [
         path: "/users/login",
         component: () => import('../views/auth/Login.vue'),
     },
+    {
+        name: "404PageNotFound",
+        path: "*",
+        component: () => import('../404page.vue')
+    },
 ];
 
 if (user) {

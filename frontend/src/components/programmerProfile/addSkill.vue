@@ -36,7 +36,7 @@
           <label class="typo__label">Geef een cijfer van 1-5:</label> <br>
           <input type="number" class="levelSkill" v-model="this.newSkill.skillLevel">
         </div>
-        <button class="btn background-florijn btn-active-info addSkill" @click="addSkill">Add</button>
+        <button class="btn bg-primary btn-active-info addSkill" @click="addSkill">Add</button>
       </div>
       <!--end::Modal body-->
     </div>

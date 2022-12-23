@@ -112,7 +112,7 @@
       <!--end::Tables Widget 3-->
     </div>
     <div class="d-flex ms-3">
-      <a @click="profilePage()" class="btn background-florijn btn-active-info buttonFloatRight" tooltip="New App" data-bs-toggle="modal"
+      <a @click="profilePage()" class="btn bg-primary btn-active-info buttonFloatRight" tooltip="New App" data-bs-toggle="modal"
          data-bs-target="#kt_modal_create_app" id="kt_toolbar_primary_button">Edit profile-page</a>
     </div>
   </div>
