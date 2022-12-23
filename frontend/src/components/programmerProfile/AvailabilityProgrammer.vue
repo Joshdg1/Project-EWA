@@ -46,7 +46,6 @@ import FullCalendar from "@fullcalendar/vue"
 import timeGridPlugin from '@fullcalendar/timegrid'
 import interactionPlugin from '@fullcalendar/interaction'
 import AvailabilityRepository from "@/repository/AvailabilityRepository";
-import ProgrammerRepository from "@/repository/ProgrammerService";
 import EditDatePopUp from "@/components/programmerProfile/EditDatePopUp.vue";
 import programmerDate from "@/models/programmer/programmerDate";
 
@@ -61,14 +60,14 @@ export default {
 
     const availability = await this.availabilityRepository.getAvailabilityById(id)
 
-      for (let i = 0; i < availability.length; i++) {
+    for (let i = 0; i < availability.length; i++) {
       let calendarApi = this.$refs.calendar.getApi();
 
-      let start = new Date( availability[i].startDate).getTime()
-      let end = new Date( availability[i].endDate).getTime()
-     const time = ((end - start)/60/60/1000)
+      let start = new Date(availability[i].startDate).getTime()
+      let end = new Date(availability[i].endDate).getTime()
+      const time = ((end - start) / 60 / 60 / 1000)
       console.log(time)
-      this.totalHours+=time
+      this.totalHours += time
       calendarApi.addEvent({
         title: availability[i].title,
         start: availability[i].startDate,
@@ -87,7 +86,6 @@ export default {
       selectedDate: null,
       eventStart: null,
       eventEnd: null,
-      programmerRepository: new ProgrammerRepository(),
       availabilityRepository: new AvailabilityRepository(),
 
       calendarOptions: {
@@ -119,7 +117,6 @@ export default {
       const hoursStart = this.eventStart.toString().substring(16,21)
       const hoursEnd = this.eventEnd.toString().substring(16,21)
 
-      console.log(hoursStart)
       this.selectedDate = new programmerDate(info.event.title,this.eventStart,this.eventEnd,hoursStart,hoursEnd)
 
       this.popupStatusEdit = true

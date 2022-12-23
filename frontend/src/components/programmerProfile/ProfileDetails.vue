@@ -71,7 +71,8 @@
 </template>
 
 <script>
-import ProgrammerRepository from "@/repository/ProgrammerService";
+
+import UserRepository from "../../repository/UserRepository";
 
 export default {
   name: "ProfileDetails",
@@ -82,7 +83,7 @@ export default {
   data(){
     return {
       editingProfile: null,
-      repository: new ProgrammerRepository()
+      repository: new UserRepository()
     }
   },
   methods: {
