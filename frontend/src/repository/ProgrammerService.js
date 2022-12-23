@@ -1,17 +1,15 @@
+// DEPRECIATED
+
+import API from "../scripts/API";
 
 export default class ProgrammerRepository {
     async findProgrammerById(programmerId){
-        const response = await fetch("http://localhost:8081/programmers/" + programmerId, {
-            method: 'GET',
-        });
-        return await response.json()
+        return await API.get(`/programmers/${programmerId}`);
     }
 
     async getAllProgrammers() {
-        const response = await fetch('http://localhost:8081/programmers');
-        return await response.json();
+        return await API.get(`/programmers`);
     }
-
 
     async createProgrammers (firstname, lastname, email, address, city, postcode, availability, workPreference, projectType,skills) {
         const response = await fetch('http://localhost:8081/programmers/add', {
@@ -25,6 +23,7 @@ export default class ProgrammerRepository {
         });
         return await response.json();
     }
+
     async deleteProgrammerById(programmerId){
         const response = await fetch('http://localhost:8081/programmers/' + programmerId, {
             method: 'DELETE',
