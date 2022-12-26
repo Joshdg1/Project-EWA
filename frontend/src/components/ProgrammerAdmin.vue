@@ -13,14 +13,22 @@
 													<path d="M11 19C6.55556 19 3 15.4444 3 11C3 6.55556 6.55556 3 11 3C15.4444 3 19 6.55556 19 11C19 15.4444 15.4444 19 11 19ZM11 5C7.53333 5 5 7.53333 5 11C5 14.4667 7.53333 17 11 17C14.4667 17 17 14.4667 17 11C17 7.53333 14.4667 5 11 5Z" fill="currentColor"></path>
 												</svg>
 											</span>
-          <input type="text" data-kt-ecommerce-order-filter="search"  v-model="search" class="form-control form-control-solid w-250px ps-14" placeholder="Search Programmer">
-          <router-link to="/programmers/add">
-            <div class="card-toolbar" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-trigger="hover"
-                 title="Click to add a programmer">
-              <a href="#" class="btn btn-sm btn-light-primary" data-bs-toggle="modal"
-                 data-bs-target="#kt_modal_invite_friends">
-                <!--begin::Svg Icon | path: icons/duotune/arrows/arr075.svg-->
-                <span class="svg-icon svg-icon-3">
+          <input type="text" data-kt-ecommerce-order-filter="search"
+                 v-model="search"
+                 class="form-control form-control-solid w-250px ps-14"
+                 placeholder="Search Programmer">
+<div class="rightButtons">
+  <multiselect class="newSkill" v-model="value" @select="filterBySkill" :options="skills" :searchable="true" :close-on-select="true"
+               :show-labels="false"
+               placeholder="Search a skill"></multiselect>
+  <router-link to="/programmers/add">
+
+    <div class="card-toolbar" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-trigger="hover"
+         title="Click to add a programmer">
+      <a href="#" class="btn btn-sm btn-light-primary" data-bs-toggle="modal"
+         data-bs-target="#kt_modal_invite_friends">
+        <!--begin::Svg Icon | path: icons/duotune/arrows/arr075.svg-->
+        <span class="svg-icon svg-icon-3">
 													<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                fill="none">
 														<rect opacity="0.5" x="11.364" y="20.364" width="16" height="2" rx="1"
@@ -28,9 +36,12 @@
 														<rect x="4.36396" y="11.364" width="16" height="2" rx="1" fill="black"/>
 													</svg>
 												</span>
-                <!--end::Svg Icon-->New User</a>
-            </div>
-          </router-link>
+        <!--end::Svg Icon-->New User</a>
+    </div>
+  </router-link>
+</div>
+
+
         </div>
         <!--end::Header-->
         <!--begin::Body-->
@@ -122,9 +133,11 @@
 <script>
 
 import UserRepository from '../repository/UserRepository'
+import Multiselect from "vue-multiselect";
 
 
 export default {
+  components: {Multiselect},
   name: "ProgrammerAdmin.vue",
   props: ['programmers'],
   emits: ['deleteProgrammer', 'editProgrammer'],
@@ -134,6 +147,21 @@ export default {
       editingProgrammer: null,
       search: null,
       repository: new UserRepository(),
+      skills: ["MS Office Access | Front-end", "MS Office Excel | Front-end", "MS Office Access VBA | Front-end",
+        "MS Powerpivot | Front-end", "MS Office Word | Front-end", "MS Office Word VBA | Front-end", "MS Office Outlook | Front-end",
+        "MS Office Outlook VBA | Front-end", "MS Office VBA | Front-end", "MS SQL-Server | Back-end", "MS SQL-Server Stored Procedures | Back-end"
+        , "MS SQL-Server Views | Back-end", "MY SQL | Back-end", "MY SQL Workbench | Back-end", "MS Azure | Back-end", "Oracle | Back-end",
+        "Database Filemaker", "Database Filemaker Script", "Database Filemaker Server", "Database MS VB.NET", "Database MS Visual Basic",
+        "Database Microsoft Dynamics 365", "Database Microsoft Dynamics 365 for Operations", "Javascript | Web Based Front-end",
+        "Java| Web Based Front-end", "PhP | Web Based Front-end", "ASP.NET | Web Based Front-end", "Google Apps | Web Based Front-end"
+        , "Google Apps Script | Web Based Front-end", "PowerApps | Web Based Front-end", "Flow | Web Based Front-end", "HTML | Web Based Front-end"
+        , "CSS | Web Based Front-end", "Microsoft Dynamics AX | Web Based Front-end", "Database Microsoft Dynamics 365 for Business Applications"
+        , "Database Sharepoint", "C# | Web Based Front-end", "C++/CLI (Managed) | Web Based Front-end", "F# | Web Based Front-end"
+        , "Q# | Web Based Front-end", "Windows PowerShell (Core) | Web Based Front-end", ".NET Core | Web Based Front-end", "Angular/AngularJS | Web Based Front-end"
+        , ".NET Framework | Front-end", "XML - XAML | Front-end", "Bootstrap | Web Based Front-end", "Mendix | Web Based Front-end"
+        , "OutSystems | Web Based Front-end", "Power BI Overall", "Power BI DAX", "Power BI M Language", "Power BI Grafisch", "Power BI Power Query"
+        , "Power BI Power BI Beheer", "Power BI Datamodellering", "Power BI Data analyse"],
+      value: null,
     }
   },
   computed: {
@@ -161,13 +189,22 @@ export default {
       } else {
         return this.programmers;
       }
-    }
+    },
   },
 
 
   methods: {
-
-
+    filterBySkill(){
+      console.log("WERKT")
+      console.log(this.resultQuery)
+      if (this.value){
+        return  this.resultQuery.filter(item => {
+          return(this.value.every(v => item.skills.includes(v)))
+        })
+      }else{
+        return this.resultQuery
+      }
+    },
     async deleteProgrammer(programmer) {
       await this.repository.deleteUserById(programmer.id);
       location.reload();
@@ -180,9 +217,18 @@ export default {
   }
 }
 </script>
-
+<style src="vue-multiselect/dist/vue-multiselect.min.css"></style>
 <style scoped>
 .loop{
   margin-top: 1em;
+}
+.newSkill{
+  width: 15vw;
+}
+.rightButtons {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
 }
 </style>

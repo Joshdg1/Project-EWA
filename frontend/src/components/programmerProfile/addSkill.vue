@@ -80,8 +80,8 @@ export default {
   async created() {
     this.userId = sessionStorage.getItem("id")
     const data = await this.repository.findSkillsByUserId(this.userId);
-    for (let i = 0; i < data.length; i++) {
-      console.log(data[i])
+    for (const element of data) {
+      console.log(element)
     }
   },
   methods: {
@@ -94,8 +94,8 @@ export default {
       this.newSkill.skillName = this.value;
       this.newSkill.skillLevel = document.getElementsByClassName("levelSkill")[0].value;
       console.log(currentSkill)
-      for (let i = 0; i < currentSkill.length; i++) {
-        if (currentSkill[i].name === this.newSkill.skillName) {
+      for (const element of currentSkill) {
+        if (element.name === this.newSkill.skillName) {
           alert("Deze skill bezit u al.")
           return
         }
