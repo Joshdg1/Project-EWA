@@ -4,6 +4,7 @@ import com.flo4.server.Exceptions.NotFoundException;
 import com.flo4.server.models.GetUserAvailability;
 import com.flo4.server.models.User;
 
+import com.flo4.server.models.UserAvailability;
 import com.flo4.server.models.UserHours;
 import com.flo4.server.repository.EntityRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,10 +46,10 @@ public class HoursController {
     @PostMapping(path = "add", produces = "application/json")
     public ResponseEntity<UserHours> addAvailability(@RequestBody GetUserAvailability userAvailability) {
         UserHours userHours = new UserHours();
-        userHours.setTitle(userAvailability.getTitle());
-        userHours.setStart(userAvailability.getStartDate());
-        userHours.setEnd(userAvailability.getEndDate());
-        userHours.setUser(this.userEntityRepository.findById(userAvailability.getUserId()));
+//        userHours.setTitle(userAvailability.getTitle());
+//        userHours.setStart(userAvailability.getStartDate());
+//        userHours.setEnd(userAvailability.getEndDate());
+//        userHours.setUser(this.userEntityRepository.findById(userAvailability.getUserId()));
         UserHours newUserAvailability = this.availabilityRepository.save(userHours);
 
 
@@ -71,18 +72,18 @@ public class HoursController {
     @PutMapping(path = "{id}", produces = "application/json")
     public ResponseEntity<UserHours> updateAvailability(@PathVariable int id, @RequestBody GetUserAvailability userAvailability) {
 
-        UserAvailability userAvailability1 = new UserAvailability();
-        userAvailability1.setId(id);
-        userAvailability1.setTitle(userAvailability.getTitle());
-        userAvailability1.setStartDate(userAvailability.getStartDate());
-        userAvailability1.setEndDate(userAvailability.getEndDate());
-        userAvailability1.setUser(this.userEntityRepository.findById(userAvailability.getUserId()));
+        UserHours userAvailability1 = new UserHours();
+//        UserHours.setId(id);
+//        UserHours.setTitle(userAvailability.getTitle());
+//        UserHours.setStartDate(userAvailability.getStartDate());
+//        UserHours.setEndDate(userAvailability.getEndDate());
+//        UserHours.setUser(this.userEntityRepository.findById(userAvailability.getUserId()));
 
-        UserAvailability updatedUserAvailability = this.availabilityRepository.update(userAvailability1, id);
+        UserHours updatedUserAvailability = this.availabilityRepository.update(userAvailability1, id);
 
         if (updatedUserAvailability == null) {
             throw new NotFoundException(String.format(notFound, id));
         }
-        return ResponseEntity.ok().body(updatedUserAvailability);
+        return  ResponseEntity.ok().body(updatedUserAvailability);
     }
 }
