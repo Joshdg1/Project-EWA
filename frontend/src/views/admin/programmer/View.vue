@@ -1,16 +1,16 @@
 <template>
   <div>
-  <programmersList v-if="!this.programmerStatus" :programmers="this.programmers" @deleteProgrammer="deleteProgrammer"
-                   @editProgrammer="editProgrammerStatus"></programmersList>
-  <edit v-if="this.programmerStatus" :programmers="this.programmers" @deleteProgrammer="deleteProgrammer"
-        @editProgrammer="editProgrammerStatus"></edit>
+    <programmersList v-if="!this.programmerStatus" :programmers="this.programmers" @deleteProgrammer="deleteProgrammer"
+                     @editProgrammer="editProgrammerStatus"></programmersList>
+    <edit v-if="this.programmerStatus" :programmers="this.programmers" @deleteProgrammer="deleteProgrammer"
+          @editProgrammer="editProgrammerStatus"></edit>
   </div>
 </template>
 
 <script>
-import Programmer from '../../../models/programmer/programmer'
 import programmersList from '../../../components/ProgrammerAdmin'
 import edit from '../../../components/ProgrammerAdminEdit'
+import UserRepository from '../../../repository/UserRepository'
 
 export default {
   name: "AdminProgrammerView",
@@ -19,31 +19,30 @@ export default {
     edit
   },
 
-  created() {
-    for (let i = 0; i < 8; i++) {
-      this.programmers.push(Programmer.createProgrammer());
+  async created() {
+    const data = await this.repository.getAllProgrammers();
+
+    for (let i = 0; i < data.length; i++) {
+      this.programmers.push(data[i]);
     }
   },
 
   data() {
     return {
       programmers: [],
-      programmerStatus: null
+      programmerStatus: null,
+      repository: new UserRepository(),
     }
   },
 
   methods: {
-    deleteProgrammer(programmer) {
-      for (let i = 0; i < this.programmers.length; i++) {
-        if (programmer === this.programmers[i]) {
-          this.programmers.splice(i, 1);
-        }
-      }
+    async deleteProgrammer(programmer) {
+      await this.repository.deleteUserById(programmer.id);
+      location.reload();
     },
 
     editProgrammerStatus(programmerStatus) {
       this.programmerStatus = programmerStatus;
-      console.log(programmerStatus)
     }
   },
 }

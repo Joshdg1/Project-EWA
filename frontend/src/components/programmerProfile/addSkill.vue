@@ -36,7 +36,7 @@
           <label class="typo__label">Geef een cijfer van 1-5:</label> <br>
           <input type="number" class="levelSkill" v-model="this.newSkill.skillLevel">
         </div>
-        <button class="btn background-florijn btn-active-info addSkill" @click="addSkill">Add</button>
+        <button class="btn bg-primary btn-active-info addSkill" @click="addSkill">Add</button>
       </div>
       <!--end::Modal body-->
     </div>
@@ -47,7 +47,7 @@
 <script>
 import Multiselect from 'vue-multiselect';
 import SkillRepository from "@/repository/SkillRepository";
-import {ProgrammerSkill} from "@/models/programmer/programmerSkill";
+import {UserSkill} from "../../models/userSkill";
 
 export default {
   components: {Multiselect},
@@ -73,13 +73,13 @@ export default {
 
       repository: new SkillRepository(),
       value: null,
-      newSkill: new ProgrammerSkill,
+      newSkill: new UserSkill(),
       userId: null,
     }
   },
   async created() {
     this.userId = sessionStorage.getItem("id")
-    const data = await this.repository.findSkillsById(this.userId);
+    const data = await this.repository.findSkillsByUserId(this.userId);
     for (let i = 0; i < data.length; i++) {
       console.log(data[i])
     }
@@ -90,7 +90,7 @@ export default {
       this.$emit('close-popup', this.popupStatus)
     },
     async addSkill() {
-      const currentSkill = await this.repository.getAllSkills(this.userId);
+      const currentSkill = await this.repository.findSkillsByUserId(this.userId);
       this.newSkill.skillName = this.value;
       this.newSkill.skillLevel = document.getElementsByClassName("levelSkill")[0].value;
       console.log(currentSkill)

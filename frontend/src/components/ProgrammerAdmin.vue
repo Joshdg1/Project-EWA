@@ -28,7 +28,7 @@
 														<rect x="4.36396" y="11.364" width="16" height="2" rx="1" fill="black"/>
 													</svg>
 												</span>
-                <!--end::Svg Icon-->New Programmer</a>
+                <!--end::Svg Icon-->New User</a>
             </div>
           </router-link>
         </div>
@@ -174,7 +174,7 @@ export default {
     },
 
     editProgrammer() {
-      this.editingClient = true;
+      this.editingProgrammer = true;
       this.$emit('editProgrammer', this.editingProgrammer)
     }
   }

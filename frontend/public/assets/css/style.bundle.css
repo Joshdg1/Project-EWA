@@ -11122,14 +11122,6 @@ textarea.form-control-lg {
     color: rgba(var(--bs-dark-rgb), var(--bs-text-opacity)) !important;
 }
 
-.text-florijn{
-    --bs-text-opacity: 1;
-    color: rgba(var(--bs-florijn-rgb));
-}
-
-.background-florijn{
-    background-color: rgba(var(--bs-florijn-rgb));
-}
 
 .text-black {
     --bs-text-opacity: 1;
@@ -11189,7 +11181,7 @@ textarea.form-control-lg {
 
 .bg-primary {
     --bs-bg-opacity: 1;
-    background-color: rgba(var(--bs-primary-rgb), var(--bs-bg-opacity)) !important;
+    background-color: rgba(var(--bs-florijn-rgb), var(--bs-bg-opacity)) !important;
 }
 
 .bg-secondary {
@@ -32623,7 +32615,7 @@ textarea.form-control-lg {
 }
 
 .text-primary {
-    color: #7239EA !important;
+    color: rgb(var(--bs-florijn-rgb)) !important;
 }
 
 .text-inverse-primary {
@@ -48045,7 +48037,7 @@ code:not([class*=language-]) {
 
 .svg-icon.svg-icon-primary svg [fill]:not(.permanent):not(g) {
     transition: fill 0.3s ease;
-    fill: #7239EA;
+    fill: #ec5a29;
 }
 
 .svg-icon.svg-icon-primary svg:hover [fill]:not(.permanent):not(g) {
@@ -49272,13 +49264,13 @@ code:not([class*=language-]) {
 }
 
 .badge-primary {
-    color: #FFFFFF;
-    background-color: #7239EA;
+    color: white;
+    background-color: #ec5a29;
 }
 
 .badge-light-primary {
-    color: #7239EA;
-    background-color: #F8F5FF;
+    color: #ec5a29;
+    background-color: #ec5a292e;
 }
 
 .badge-secondary {

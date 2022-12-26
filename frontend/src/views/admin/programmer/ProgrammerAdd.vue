@@ -8,7 +8,7 @@
       <div class=" box-2 d-flex flex-column h-100">
         <div class="mt-5">
           <p class="mb-1 h-1">Register</p>
-          <p class="text-muted mb-2">Register a new Programmer.</p>
+          <p class="text-muted mb-2">Register a new User.</p>
           <div class="d-flex flex-column ">
             <p class="text-muted mb-2">Register with...</p>
             <div class="d-flex align-items-center">

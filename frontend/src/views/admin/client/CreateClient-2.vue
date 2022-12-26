@@ -31,13 +31,13 @@
                 <th>Hours worked</th>
                 <th>Start date</th>
                 <th>End date</th>
-                <th>Programmer(s)</th>
+                <th>User(s)</th>
               </tr>
               </thead>
               <!--end::Table head-->
               <!--begin::Table body-->
               <tbody>
-              <tr v-for="project in projects" v-bind:key="project">
+              <tr v-for="project in projects" v-bind:key="project.id">
                 <div class="form-check form-check-sm form-check-custom form-check-solid">
                   <input class="form-check-input" type="checkbox" value="1" data-kt-check="true"
                          data-kt-check-target=".widget-9-check"/>
@@ -65,12 +65,12 @@
     </div>
     <div class="d-flex flex-shrink-0">
       <div class="d-flex ms-3">
-        <router-link to="/createNewClient" class="btn background-florijn btn-active-info">
+        <router-link to="/createNewClient" class="btn bg-primary btn-active-info">
           Back
         </router-link>
       </div>
       <div class="d-flex ms-3">
-        <button class="btn background-florijn btn-active-info" @click="createClient">create</button>
+        <button class="btn bg-primary btn-active-info" @click="createClient">create</button>
       </div>
     </div>
 

@@ -1,50 +1,31 @@
+import API from "../scripts/API";
+
 export default class AvailabilityRepository {
 
-    async findAllAvailibilitys(){
-        const response = await fetch('http://localhost:8081/availability/', {
-            method: "GET"
-        });
-        return await response.json();
-    }
     async getAvailabilityById(id) {
-        const response = await fetch('http://localhost:8081/availability/' + id , {
-            method: "GET"
-        });
-        return await response.json();
+        return await API.get(`/availability/${id}`);
     }
 
     async createAvailability(title, startDate, endDate , userId) {
-        const response = await fetch('http://localhost:8081/availability/add', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                 title, startDate, endDate , userId
-            }),
-        });
-        return await response.json();
+        return await API.post(
+            `/availability/add`,
+            {
+                title, startDate, endDate , userId
+            }
+        );
     }
 
     async deleteAvailability(Id) {
-        const response = await fetch('http://localhost:8081/availability/' + Id, {
-            method: 'DELETE',
-        });
-        return await response.json();
+        return await API.delete(`/availability/${Id}`);
     }
 
     async updateAvailabilityById(Id,title,startDate, endDate, userId ) {
-        const response = await fetch('http://localhost:8081/availability/'  + Id, {
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
+        return await API.put(
+            `/availability/${Id}`,
+            {
                 title, startDate, endDate , userId
-            }),
-        });
-        return await response.json();
+            }
+        );
     }
-
 
 }

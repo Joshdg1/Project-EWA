@@ -10,7 +10,7 @@
       <!--begin::Action-->
       <div class="d-flex ms-3">
         <div style="margin-top: 20px">
-        <a @click="setEditProfile()" class="mb-2 btn btn-sm background-florijn btn-active-info" tooltip="New App" data-bs-toggle="modal"
+        <a @click="setEditProfile()" class="mb-2 btn btn-sm bg-primary btn-active-info" tooltip="New App" data-bs-toggle="modal"
            data-bs-target="#kt_modal_create_app" id="kt_toolbar_primary_button">Edit profile-page</a>
         </div>
       </div>
@@ -71,7 +71,8 @@
 </template>
 
 <script>
-import ProgrammerRepository from "@/repository/ProgrammerService";
+
+import UserRepository from "../../repository/UserRepository";
 
 export default {
   name: "ProfileDetails",
@@ -82,7 +83,7 @@ export default {
   data(){
     return {
       editingProfile: null,
-      repository: new ProgrammerRepository()
+      repository: new UserRepository()
     }
   },
   methods: {

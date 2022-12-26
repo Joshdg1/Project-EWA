@@ -10,20 +10,20 @@
           <img src="https://cdn.onlinewebfonts.com/svg/img_561899.png" class="skillStar">
         </div>
       </div>
-      <button class="btn background-florijn btn-active-info addSkill" @click="addSkill">Add Skill</button>
+      <button class="btn bg-primary btn-active-info addSkill" @click="addSkill">Add Skill</button>
       <slot/>
     </div>
   </div>
 </template>
 
 <script>
-import {ProgrammerSkill} from "../../models/programmer/programmerSkill";
+import {UserSkill} from "../../models/userSkill";
 
 export default {
   name: "SkillCardPopUp",
   emits: ['close-popup', 'adding-skill'],
   created() {
-    this.newSkill = new ProgrammerSkill(1)
+    this.newSkill = new UserSkill(1)
   },
   data(){
     return {

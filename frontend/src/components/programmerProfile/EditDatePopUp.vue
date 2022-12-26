@@ -25,9 +25,9 @@
 
       </div>
       <div class="buttons">
-        <!--        <button class="btn background-florijn btn-active-info addSkill" @click="cancel">anuleren</button>-->
-        <button class="btn background-florijn btn-active-info addSkill" @click="deleteAvail">Verwijderen</button>
-        <button class="btn background-florijn btn-active-info addSkill" @click="updateDate">Sla datum op</button>
+        <!--        <button class="btn bg-primary btn-active-info addSkill" @click="cancel">anuleren</button>-->
+        <button class="btn bg-primary btn-active-info addSkill" @click="deleteAvail">Verwijderen</button>
+        <button class="btn bg-primary btn-active-info addSkill" @click="updateDate">Sla datum op</button>
       </div>
 
       <slot/>
