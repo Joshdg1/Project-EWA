@@ -134,6 +134,8 @@
 
 import UserRepository from '../repository/UserRepository'
 import Multiselect from "vue-multiselect";
+import SkillRepository from "@/repository/SkillRepository";
+
 
 
 export default {
@@ -141,12 +143,17 @@ export default {
   name: "ProgrammerAdmin.vue",
   props: ['programmers'],
   emits: ['deleteProgrammer', 'editProgrammer'],
-
+async created() {
+ this.allUserSkills = await this.skillRepository.getAllSkills()
+  console.log(this.allUserSkills)
+    },
   data() {
     return {
       editingProgrammer: null,
       search: null,
       repository: new UserRepository(),
+      skillRepository: new SkillRepository(),
+      allUserSkills: [],
       skills: ["MS Office Access | Front-end", "MS Office Excel | Front-end", "MS Office Access VBA | Front-end",
         "MS Powerpivot | Front-end", "MS Office Word | Front-end", "MS Office Word VBA | Front-end", "MS Office Outlook | Front-end",
         "MS Office Outlook VBA | Front-end", "MS Office VBA | Front-end", "MS SQL-Server | Back-end", "MS SQL-Server Stored Procedures | Back-end"
@@ -195,15 +202,19 @@ export default {
 
   methods: {
     filterBySkill(){
+
       console.log("WERKT")
-      console.log(this.resultQuery)
+      console.log(this.resultQuery[0])
+      console.log(this.value)
       if (this.value){
-        return  this.resultQuery.filter(item => {
-          return(this.value.every(v => item.skills.includes(v)))
+        return this.resultQuery.filter( item => {
+              item.skills = ["MS Office Access | Front-end"]
+          console.log(item.skills)
+            return this.value.every(v => item.skills.includes(v))
+
         })
-      }else{
-        return this.resultQuery
       }
+
     },
     async deleteProgrammer(programmer) {
       await this.repository.deleteUserById(programmer.id);

@@ -13,7 +13,11 @@ export default class SkillRepository {
             }
         );
     }
-
+    async getAllSkills(){
+        return await API.get(
+            '/skills'
+        );
+    }
     async deleteSkillById(skillsId){
         return await API.delete(`/users/${skillsId}`);
     }
