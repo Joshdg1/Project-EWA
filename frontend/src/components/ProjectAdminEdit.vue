@@ -111,9 +111,17 @@ export default {
       this.editingProject = false;
       this.$emit('editProject', this.editingProject)
 
-      await this.repository.updateProjectById(project.id, project.title, project.description,
-          project.company, project.startDate, project.endDate, project.clients);
-
+      await this.$swal({
+        title: "Wil je dit project wijzigen?", text: "Weet je het zeker?",
+        type: "warning", showCancelButton: true, confirmButtonColor: "#3085d6",
+        confirmButtonText: "Ja, wijzigen!", cancelButtonText: "Annuleer"
+      }).then((result) => {
+        if (result.value) {
+          this.repository.updateProjectById(project.id, project.title, project.description,
+              project.company, project.startDate, project.endDate, project.clients);
+        }
+      });
+      location.reload();
     }
   }
 }

@@ -138,8 +138,16 @@ export default {
   methods: {
 
     async deleteProject(project) {
-      await this.repository.deleteProjectById(project.id);
-      location.reload();
+      await this.$swal({
+        title: "Wil je dit project verwijderen?", text: "Weet je het zeker?",
+        type: "warning", showCancelButton: true, confirmButtonColor: "#3085d6",
+        confirmButtonText: "Ja, verwijder!", cancelButtonText: "Annuleer"
+      }).then((result) => {
+        if (result.value) {
+          this.repository.deleteProjectById(project.id);
+          location.reload();
+        }
+      });
     },
 
     editProject() {

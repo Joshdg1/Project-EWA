@@ -49,7 +49,8 @@
                 <td><input type="text" v-model="programmer.userType"></td>
 
                 <div class="d-flex  flex-shrink-0">
-                  <a class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" @click="editProgrammer(programmer)">
+                  <a class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1"
+                     @click="editProgrammer(programmer)">
                     <!--begin::Svg Icon | path: icons/duotune/art/art005.svg-->
                     <span class="svg-icon svg-icon-3">
 																			<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
@@ -101,8 +102,18 @@ export default {
       this.editingProgrammer = false;
       this.$emit('editProgrammer', this.editingProgrammer);
 
-      await this.repository.updateUserById(programmer.id, programmer.email, programmer.firstName, programmer.lastName,
-          programmer.phoneNumber, programmer.userType);
+      await this.$swal({
+        title: "Wil je deze programmeur wijzigen?", text: "Weet je het zeker?",
+        type: "warning", showCancelButton: true, confirmButtonColor: "#3085d6",
+        confirmButtonText: "Ja, wijzig!", cancelButtonText: "Annuleer"
+      }).then((result) => {
+        if (result.value) {
+          this.repository.updateUserById(programmer.id, programmer.email, programmer.firstName, programmer.lastName,
+              programmer.phoneNumber, programmer.userType);
+        }
+      });
+
+      location.reload();
     }
   }
 }
