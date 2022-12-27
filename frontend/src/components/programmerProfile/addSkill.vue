@@ -24,19 +24,19 @@
         <!--begin::Heading-->
         <div class="text-center mb-13">
           <!--begin::Title-->
-          <h1 class="mb-3">Add a skill</h1>
+          <h1 class="mb-3">Voeg een vaardigheid toe</h1>
           <!--end::Title-->
         </div>
         <!--end::Heading-->
         <div class="addASkill">
-          <label class="typo__label">Selecteer een skill:</label>
+          <label class="typo__label">Selecteer een vaardigheid:</label>
           <multiselect class="newSkill" v-model="value" :options="skills" :searchable="true" :close-on-select="true"
                        :show-labels="false"
                        placeholder="Pick a value"></multiselect>
           <label class="typo__label">Geef een cijfer van 1-5:</label> <br>
           <input type="number" class="levelSkill" v-model="this.newSkill.skillLevel">
         </div>
-        <button class="btn bg-primary btn-active-info addSkill" @click="addSkill">Add</button>
+        <button class="btn bg-primary btn-active-info addSkill" @click="addSkill">Voeg toe</button>
       </div>
       <!--end::Modal body-->
     </div>

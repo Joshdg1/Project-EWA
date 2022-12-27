@@ -10,10 +10,10 @@
       <div class="d-flex ms-3">
         <a @click="setEditProfile()" class="btn bg-primary btn-active-info editSkill" tooltip="New App"
            data-bs-toggle="modal"
-           data-bs-target="#kt_modal_create_app" id="kt_toolbar_primary_button">Edit skills</a>
+           data-bs-target="#kt_modal_create_app" id="kt_toolbar_primary_button">Wijzig vaardigheden</a>
         <a @click="(event) => this.popupStatus = true" class="btn bg-primary btn-active-info editSkill" tooltip="New App"
            data-bs-toggle="modal"
-           data-bs-target="#kt_modal_create_app" id="kt_toolbar_primary_button">Add skill</a>
+           data-bs-target="#kt_modal_create_app" id="kt_toolbar_primary_button">Voeg vaardigheid toe</a>
       </div>
       <!--end::Action-->
     </div>

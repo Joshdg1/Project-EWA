@@ -3,7 +3,7 @@
     <div class="card-header cursor-pointer">
       <!--begin::Card title-->
       <div class="card-title m-0">
-        <h3 class="fw-bolder m-0">Availability</h3>
+        <h3 class="fw-bolder m-0">Beschikbaarheid</h3>
       </div>
       <!--end::Card title-->
       <!--begin::Action-->
@@ -13,7 +13,7 @@
     </div>
     <div class="card-body p-9">
       <div class="hours">
-        {{ totalHours }}  uren
+        {{ totalHours }}  Uren
       </div>
       <div class="availableInput">
         <FullCalendar

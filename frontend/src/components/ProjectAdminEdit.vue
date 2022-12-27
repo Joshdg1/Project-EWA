@@ -5,7 +5,7 @@
         <!--begin::Header-->
         <div class="card-header border-0 pt-5">
           <h3 class="card-title align-items-start flex-column">
-            <span class="card-label fw-bolder fs-3 mb-1">Projects Edit</span>
+            <span class="card-label fw-bolder fs-3 mb-1">Projecten wijzigen</span>
           </h3>
           <div class="card-toolbar" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-trigger="hover"
                title="Click to add a project">
@@ -28,14 +28,14 @@
                   </div>
                 </th>
                 <th>Id</th>
-                <th>Title</th>
-                <th>Description</th>
-                <th>Company</th>
-                <th>Hours worked</th>
-                <th>Start date
-                <th>End date</th>
-                <th>User(s)</th>
-                <th>Actions</th>
+                <th>Titel</th>
+                <th>Beschrijving</th>
+                <th>Bedrijf</th>
+                <th>Gewerkte uren</th>
+                <th>Startdatum</th>
+                <th>Einddatum</th>
+                <th>Gebruiker(s)</th>
+                <th>Acties</th>
               </tr>
               </thead>
               <!--end::Table head-->

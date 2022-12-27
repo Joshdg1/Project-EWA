@@ -109,7 +109,7 @@
                   </div>
                   <!--end::Number-->
                   <!--begin::Label-->
-                  <div class="fw-bold fs-6 text-gray-400">Total Projects</div>
+                  <div class="fw-bold fs-6 text-gray-400">Alle projecten</div>
                   <!--end::Label-->
                 </div>
                 <!--end::Stat-->
@@ -133,7 +133,7 @@
                   </div>
                   <!--end::Number-->
                   <!--begin::Label-->
-                  <div class="fw-bold fs-6 text-gray-400">Current Projects</div>
+                  <div class="fw-bold fs-6 text-gray-400">Huidige projecten</div>
                   <!--end::Label-->
                 </div>
                 <!--end::Stat-->
@@ -159,7 +159,7 @@
                   </div>
                   <!--end::Number-->
                   <!--begin::Label-->
-                  <div class="fw-bold fs-6 text-gray-400">Average time spent on Project</div>
+                  <div class="fw-bold fs-6 text-gray-400">Gemiddelde tijd gespendeerd aan een project</div>
                   <!--end::Label-->
                 </div>
                 <!--end::Stat-->
@@ -191,18 +191,18 @@
 
           <!--begin::Nav item-->
           <li class="nav-item">
-            <a class="nav-link text-active-primary me-6 " id="Details" @click="setSelectedTabDetails">General
-              Details</a>
+            <a class="nav-link text-active-primary me-6 " id="Details" @click="setSelectedTabDetails">Algemeene
+              details</a>
           </li>
           <!--end::Nav item-->
           <!--begin::Nav item-->
           <li class="nav-item">
-            <a class="nav-link text-active-primary me-6" id="availability" @click="setSelectedTabAvailability">Availability</a>
+            <a class="nav-link text-active-primary me-6" id="availability" @click="setSelectedTabAvailability">Beschikbaarheid</a>
           </li>
           <!--end::Nav item-->
           <!--begin::Nav item-->
           <li class="nav-item">
-            <a class="nav-link text-active-primary me-6" id="Skills" @click="setSelectedTabSkills">Skills</a>
+            <a class="nav-link text-active-primary me-6" id="Skills" @click="setSelectedTabSkills">Vaardigheden</a>
           </li>
           <!--end::Nav item-->
         </ul>

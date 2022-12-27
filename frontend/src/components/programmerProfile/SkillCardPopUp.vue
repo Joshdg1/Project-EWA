@@ -10,7 +10,7 @@
           <img src="https://cdn.onlinewebfonts.com/svg/img_561899.png" class="skillStar">
         </div>
       </div>
-      <button class="btn bg-primary btn-active-info addSkill" @click="addSkill">Add Skill</button>
+      <button class="btn bg-primary btn-active-info addSkill" @click="addSkill">Voeg vaardigheid toe</button>
       <slot/>
     </div>
   </div>

@@ -6,7 +6,7 @@
         <!--begin::Header-->
         <div class="card-header border-0 pt-5">
           <h3 class="card-title align-items-start flex-column">
-            <span class="card-label fw-bolder fs-3 mb-1">Add programmers to the project</span>
+            <span class="card-label fw-bolder fs-3 mb-1">Voeg programmeurs toe aan het project</span>
           </h3>
         </div>
         <!--end::Header-->
@@ -22,11 +22,11 @@
                 <th class="w-25px">
 
                 </th>
-                <th>Firstname</th>
-                <th>Lastname</th>
+                <th>Voornaam(en)</th>
+                <th>Achternaam</th>
                 <th>Email</th>
-                <th>Phone number</th>
-                <th>Skills
+                <th>Telefoonnummer</th>
+                <th>Vaardigheden
                 </th>
               </tr>
               </thead>
@@ -57,11 +57,11 @@
     <div class="d-flex flex-shrink-0">
       <div class="d-flex ms-3">
         <router-link to="/createNewProject" class="btn bg-primary btn-active-info">
-          Back
+          Terug
         </router-link>
       </div>
       <div class="d-flex ms-3">
-        <button class="btn bg-primary btn-active-info" @click="createProject">create</button>
+        <button class="btn bg-primary btn-active-info" @click="createProject">Creëer</button>
       </div>
     </div>
   </div>

@@ -5,7 +5,7 @@
         <!--begin::Header-->
         <div class="card-header border-0 pt-5">
           <h3 class="card-title align-items-start flex-column">
-            <span class="card-label fw-bolder fs-3 mb-1">Clients Edit</span>
+            <span class="card-label fw-bolder fs-3 mb-1">Cliënt(en) wijzigen</span>
           </h3>
           <div class="card-toolbar" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-trigger="hover"
                title="Click to add a client">
@@ -28,10 +28,10 @@
                   </div>
                 </th>
                 <th>Email</th>
-                <th>Firstname</th>
-                <th>Lastname</th>
-                <th>Phone number</th>
-                <th>Usertype</th>
+                <th>Voornaam(en)</th>
+                <th>Achternaam</th>
+                <th>Telefoonnummer</th>
+                <th>Type gebruiker</th>
               </tr>
               </thead>
               <!--end::Table head-->

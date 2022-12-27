@@ -8,7 +8,7 @@
         <!--begin::Top-->
         <div class="text-center mb-15">
           <!--begin::Title-->
-          <h3 class="fs-2hx text-dark mb-5">About Us</h3>
+          <h3 class="fs-2hx text-dark mb-5">Over ons</h3>
           <!--end::Title-->
 
           <!--begin::Text-->
@@ -43,13 +43,6 @@
         <!--begin::Text-->
         <p class="mb-8">Zolang jouw bedrijfsproces er maar baat bij heeft. Want dat bekijken we eerst.
           Of we wel echt jouw probleem gaan oplossen. Of dat er misschien nog een vraag onder ligt, waar we eerst nog naar moeten kijken.</p>
-        <!--end::Text-->
-        <!--begin::Text-->
-        <p class="mb-8">Before you do any of the following steps, be sure to pick a topic that actually interests you. Nothing – and
-          I mean NOTHING– will kill a blog post more effectively than a lack of enthusiasm from the writer. You can tell when a writer is bored by their subject, and it’s so cringe-worthy it’s a little embarrassing.</p>
-        <!--end::Text-->
-        <!--begin::Text-->
-        <p class="mb-17">I can hear your objections already. “But Dan, I have to blog for a cardboard box manufacturing company.” I feel your pain, I really do. During the course of my career, I’ve written content for dozens of clients in some less-than-thrilling industries (such as financial regulatory compliance and corporate housing), but the hallmark of a professional blogger is the ability to write well about any topic, no matter how dry it may be. Blogging is a lot easier, however, if you can muster at least a little enthusiasm for the topic at hand.</p>
         <!--end::Text-->
       </div>
       <!--end::Description-->

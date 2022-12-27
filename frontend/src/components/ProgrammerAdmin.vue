@@ -64,10 +64,10 @@
                   </div>
                 </th>
                 <th>Email</th>
-                <th>Firstname</th>
-                <th>Lastname</th>
-                <th>Phone number</th>
-                <th>Usertype</th>
+                <th>Voornaam(en)</th>
+                <th>Achternaam</th>
+                <th>Telefoonnummer</th>
+                <th>Type gebruiker</th>
               </tr>
               </thead>
               <!--end::Table head-->

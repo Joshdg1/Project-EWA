@@ -5,7 +5,7 @@
         <!--begin::Header-->
         <div class="card-header border-0 pt-5">
           <h3 class="card-title align-items-start flex-column">
-            <span class="card-label fw-bolder fs-3 mb-1">User</span>
+            <span class="card-label fw-bolder fs-3 mb-1">Programmeur</span>
           </h3>
           <div class="card-toolbar" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-trigger="hover"
                title="Click to add a user">
@@ -23,7 +23,7 @@
 														<rect x="4.36396" y="11.364" width="16" height="2" rx="1" fill="black"/>
 													</svg>
 												</span>
-              <!--end::Svg Icon-->New User</a>
+              <!--end::Svg Icon--> Nieuwe programmeur</a>
           </div>
         </div>
         <!--end::Header-->
@@ -37,16 +37,16 @@
               <thead>
               <tr class="fw-bolder text-muted">
                 <th>Id</th>
-                <th>FirstName</th>
-                <th>LastName</th>
-                <th>E-Mail</th>
-                <th>Address</th>
-                <th>City</th>
+                <th>Voornaam(en)</th>
+                <th>Achternaam</th>
+                <th>Email</th>
+                <th>Adres</th>
+                <th>Stad</th>
                 <th>Postcode</th>
-                <th>Availability</th>
-                <th>Work Preference</th>
-                <th>Project Type</th>
-                <th>Skills</th>
+                <th>Beschikbaarheid</th>
+                <th>Werk voorkeur</th>
+                <th>Project type</th>
+                <th>Vaardigheden</th>
               </tr>
               </thead>
               <!--end::Table head-->
@@ -113,7 +113,7 @@
     </div>
     <div class="d-flex ms-3">
       <a @click="profilePage()" class="btn bg-primary btn-active-info buttonFloatRight" tooltip="New App" data-bs-toggle="modal"
-         data-bs-target="#kt_modal_create_app" id="kt_toolbar_primary_button">Edit profile-page</a>
+         data-bs-target="#kt_modal_create_app" id="kt_toolbar_primary_button">Wijzig profiel-pagina</a>
     </div>
   </div>
 </template>

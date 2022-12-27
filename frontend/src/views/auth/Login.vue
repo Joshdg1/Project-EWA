@@ -1,14 +1,14 @@
 <template>
     <form class="form w-100" @submit="checkForm">
         <div class="text-center mb-10">
-            <h1 class="text-dark mb-3">Sign In to Florijn</h1>
-            <div class="text-gray-400 fw-semibold fs-4">New Here?
-                <router-link to="/users/register" class="link-primary fw-bold">Create an Account</router-link>
+            <h1 class="text-dark mb-3">Login bij Florijn</h1>
+            <div class="text-gray-400 fw-semibold fs-4">Nieuw hier?
+                <router-link to="/users/register" class="link-primary fw-bold">Maak een account</router-link>
             </div>
         </div>
 
         <div v-if="errors.length">
-            <b>Please correct the following error(s):</b>
+            <b>Corrigeer de volgende fout(en):</b>
             <ul>
                 <li v-for="error in errors" v-bind:key="error">{{ error }}</li>
             </ul>
@@ -22,8 +22,8 @@
         </div>
         <div class="fv-row mb-10 fv-plugins-icon-container">
             <div class="d-flex flex-stack mb-2">
-                <label class="form-label fw-bold text-dark fs-6 mb-0">Password</label>
-                <router-link to="/forgot" class="link-primary fs-6 fw-bold">Forgot Password ?</router-link>
+                <label class="form-label fw-bold text-dark fs-6 mb-0">Wachtwoord</label>
+                <router-link to="/forgot" class="link-primary fs-6 fw-bold">Wachtwoord vergeten?</router-link>
             </div>
             <input class="form-control form-control-lg form-control-solid" v-model="password" type="password"
                    name="password" autocomplete="off">
@@ -32,7 +32,7 @@
         <div class="text-center">
             <button type="submit" @click="login()" class="btn btn-lg btn-primary w-100 mb-5">
                 <span class="indicator-label">Login</span>
-                <span class="indicator-progress">Please wait...
+                <span class="indicator-progress">Wacht alsjeblieft...
 									<span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
             </button>
         </div>
