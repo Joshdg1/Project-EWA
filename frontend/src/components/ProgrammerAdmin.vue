@@ -7,28 +7,32 @@
           <span class="card-label fw-bolder fs-3 mb-1">Programmers</span>
         </h3>
         <div class="card-header border-0 pt-5">
-<span class="svg-icon svg-icon-1 position-absolute ms-4 loop" >
+<span class="svg-icon svg-icon-1 position-absolute ms-4 loop">
 												<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-													<rect opacity="0.5" x="17.0365" y="15.1223" width="8.15546" height="2" rx="1" transform="rotate(45 17.0365 15.1223)" fill="currentColor"></rect>
-													<path d="M11 19C6.55556 19 3 15.4444 3 11C3 6.55556 6.55556 3 11 3C15.4444 3 19 6.55556 19 11C19 15.4444 15.4444 19 11 19ZM11 5C7.53333 5 5 7.53333 5 11C5 14.4667 7.53333 17 11 17C14.4667 17 17 14.4667 17 11C17 7.53333 14.4667 5 11 5Z" fill="currentColor"></path>
+													<rect opacity="0.5" x="17.0365" y="15.1223" width="8.15546" height="2" rx="1"
+                                transform="rotate(45 17.0365 15.1223)" fill="currentColor"></rect>
+													<path
+                              d="M11 19C6.55556 19 3 15.4444 3 11C3 6.55556 6.55556 3 11 3C15.4444 3 19 6.55556 19 11C19 15.4444 15.4444 19 11 19ZM11 5C7.53333 5 5 7.53333 5 11C5 14.4667 7.53333 17 11 17C14.4667 17 17 14.4667 17 11C17 7.53333 14.4667 5 11 5Z"
+                              fill="currentColor"></path>
 												</svg>
 											</span>
           <input type="text" data-kt-ecommerce-order-filter="search"
                  v-model="search"
                  class="form-control form-control-solid w-250px ps-14"
                  placeholder="Search Programmer">
-<div class="rightButtons">
-  <multiselect class="newSkill" v-model="value" @select="filterBySkill" :options="skills" :searchable="true" :close-on-select="true"
-               :show-labels="false"
-               placeholder="Search a skill"></multiselect>
-  <router-link to="/programmers/add">
+          <div class="rightButtons">
+            <multiselect class="newSkill" v-model="value" :options="skills" :searchable="true"
+                         :close-on-select="true"
+                         :show-labels="false"
+                         placeholder="Pick a value"></multiselect>
+            <router-link to="/programmers/add">
 
-    <div class="card-toolbar" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-trigger="hover"
-         title="Click to add a programmer">
-      <a href="#" class="btn btn-sm btn-light-primary" data-bs-toggle="modal"
-         data-bs-target="#kt_modal_invite_friends">
-        <!--begin::Svg Icon | path: icons/duotune/arrows/arr075.svg-->
-        <span class="svg-icon svg-icon-3">
+              <div class="card-toolbar" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-trigger="hover"
+                   title="Click to add a programmer">
+                <a href="#" class="btn btn-sm btn-light-primary" data-bs-toggle="modal"
+                   data-bs-target="#kt_modal_invite_friends">
+                  <!--begin::Svg Icon | path: icons/duotune/arrows/arr075.svg-->
+                  <span class="svg-icon svg-icon-3">
 													<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                fill="none">
 														<rect opacity="0.5" x="11.364" y="20.364" width="16" height="2" rx="1"
@@ -36,10 +40,10 @@
 														<rect x="4.36396" y="11.364" width="16" height="2" rx="1" fill="black"/>
 													</svg>
 												</span>
-        <!--end::Svg Icon-->New User</a>
-    </div>
-  </router-link>
-</div>
+                  <!--end::Svg Icon-->New User</a>
+              </div>
+            </router-link>
+          </div>
 
 
         </div>
@@ -96,7 +100,8 @@
 																		</span>
                     <!--end::Svg Icon-->
                   </a>
-                  <a class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm" @click="deleteProgrammer(programmer)">
+                  <a class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm"
+                     @click="deleteProgrammer(programmer)">
                     <!--begin::Svg Icon | path: icons/duotune/general/gen027.svg-->
                     <span class="svg-icon svg-icon-3">
 																			<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
@@ -137,23 +142,23 @@ import Multiselect from "vue-multiselect";
 import SkillRepository from "@/repository/SkillRepository";
 
 
-
 export default {
   components: {Multiselect},
   name: "ProgrammerAdmin.vue",
   props: ['programmers'],
   emits: ['deleteProgrammer', 'editProgrammer'],
-async created() {
- this.allUserSkills = await this.skillRepository.getAllSkills()
-  console.log(this.allUserSkills)
-    },
+  async created() {
+    this.allSkills = await this.skillRepository.getAllSkills()
+    this.newProgrammers = this.programmers
+  },
   data() {
     return {
       editingProgrammer: null,
+      newProgrammers: [],
       search: null,
       repository: new UserRepository(),
       skillRepository: new SkillRepository(),
-      allUserSkills: [],
+      allSkills: [],
       skills: ["MS Office Access | Front-end", "MS Office Excel | Front-end", "MS Office Access VBA | Front-end",
         "MS Powerpivot | Front-end", "MS Office Word | Front-end", "MS Office Word VBA | Front-end", "MS Office Outlook | Front-end",
         "MS Office Outlook VBA | Front-end", "MS Office VBA | Front-end", "MS SQL-Server | Back-end", "MS SQL-Server Stored Procedures | Back-end"
@@ -169,73 +174,70 @@ async created() {
         , "OutSystems | Web Based Front-end", "Power BI Overall", "Power BI DAX", "Power BI M Language", "Power BI Grafisch", "Power BI Power Query"
         , "Power BI Power BI Beheer", "Power BI Datamodellering", "Power BI Data analyse"],
       value: null,
+
     }
   },
   computed: {
-    resultQuery() {
-      console.log("UPDATE")
+
+    resultQuery: function () {
       if (this.search) {
         return this.programmers.filter(item => {
-          if ( this.search
+          if (this.search
               .toLowerCase()
               .split(" ")
-              .every(v => item.firstName.toLowerCase().includes(v)))
-          {
+              .every(v => item.firstName.toLowerCase().includes(v))) {
             return this.search
                 .toLowerCase()
                 .split(" ")
                 .every(v => item.firstName.toLowerCase().includes(v));
-          }else {
+          } else {
             return this.search
                 .toLowerCase()
                 .split(" ")
                 .every(v => item.lastName.toLowerCase().includes(v));
           }
-
-        });
+        })
+      } else if (this.value) {
+        let skillArray = []
+        for (const element of this.programmers) {
+          for (const item of this.allSkills) {
+            if (element.id === item.user.id) {
+              skillArray.push(element)
+            }
+          }
+        }
+        return this.programmers.filter(p => skillArray.includes(p));
       } else {
         return this.programmers;
       }
     },
-  },
 
 
-  methods: {
-    filterBySkill(){
+    methods: {
 
-      console.log("WERKT")
-      console.log(this.resultQuery[0])
-      console.log(this.value)
-      if (this.value){
-        return this.resultQuery.filter( item => {
-              item.skills = ["MS Office Access | Front-end"]
-          console.log(item.skills)
-            return this.value.every(v => item.skills.includes(v))
+      async deleteProgrammer(programmer) {
+        await this.repository.deleteUserById(programmer.id);
+        location.reload();
+      },
 
-        })
+      editProgrammer() {
+        this.editingProgrammer = true;
+        this.$emit('editProgrammer', this.editingProgrammer)
       }
-
-    },
-    async deleteProgrammer(programmer) {
-      await this.repository.deleteUserById(programmer.id);
-      location.reload();
-    },
-
-    editProgrammer() {
-      this.editingProgrammer = true;
-      this.$emit('editProgrammer', this.editingProgrammer)
     }
   }
 }
 </script>
 <style src="vue-multiselect/dist/vue-multiselect.min.css"></style>
 <style scoped>
-.loop{
+.loop {
   margin-top: 1em;
 }
-.newSkill{
+
+.newSkill {
   width: 15vw;
 }
+
 .rightButtons {
   display: flex;
   flex-direction: row;
