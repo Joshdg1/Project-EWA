@@ -5,7 +5,7 @@
         <!--begin::Header-->
         <div class="card-header border-0 pt-5">
           <h3 class="card-title align-items-start flex-column">
-            <span class="card-label fw-bolder fs-3 mb-1">Programmers</span>
+            <span class="card-label fw-bolder fs-3 mb-1">Programmeurs</span>
           </h3>
           <router-link to="/programmers/add">
             <div class="card-toolbar" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-trigger="hover"
@@ -21,7 +21,7 @@
 														<rect x="4.36396" y="11.364" width="16" height="2" rx="1" fill="black"/>
 													</svg>
 												</span>
-                <!--end::Svg Icon-->New User</a>
+                <!--end::Svg Icon-->Nieuwe programmeur</a>
             </div>
           </router-link>
         </div>
@@ -42,10 +42,10 @@
                   </div>
                 </th>
                 <th>Email</th>
-                <th>Firstname</th>
-                <th>Lastname</th>
-                <th>Phone number</th>
-                <th>Usertype</th>
+                <th>Voornaam(en)</th>
+                <th>Achternaam</th>
+                <th>Telefoonnummer</th>
+                <th>Type gebruiker</th>
               </tr>
               </thead>
               <!--end::Table head-->

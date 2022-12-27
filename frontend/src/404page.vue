@@ -12,12 +12,12 @@
 
             <div class="contant_box_404">
               <h3 class="h2">
-                Look like you're lost
+                Het lijkt erop alsof u verdwaald bent
               </h3>
 
-              <p>the page you are looking for not available!</p>
+              <p>De pagina die u bezoekt is niet beschikbaar!</p>
 
-              <router-link to="/home"><a href="" class="link_404">Go to Home</a></router-link>
+              <router-link to="/home"><a href="" class="link_404">Ga naar de homepagina</a></router-link>
             </div>
           </div>
         </div>

@@ -7,34 +7,34 @@
       </div>
       <div class=" box-2 d-flex flex-column h-100">
         <div class="mt-5">
-          <p class="mb-1 h-1">Register</p>
-          <p class="text-muted mb-2">Register a new User.</p>
+          <p class="mb-1 h-1">Registreer</p>
+          <p class="text-muted mb-2">Registreer een nieuwe programmeur.</p>
           <div class="d-flex flex-column ">
-            <p class="text-muted mb-2">Register with...</p>
+            <p class="text-muted mb-2">Registreer met...</p>
             <div class="d-flex align-items-center">
               <form>
                 <!-- Email input -->
                 <div class="form-outline mb-4">
-                  <label class="form-label" for="form2Example1">Email address</label>
+                  <label class="form-label" for="form2Example1">Email-adres</label>
                   <input type="email" id="form2Example1" class="form-control" />
                 </div>
 
                 <!-- Password input -->
                 <div class="form-outline mb-4">
-                  <label class="form-label" for="form2Example2">Full name</label>
+                  <label class="form-label" for="form2Example2">Volledige naam</label>
                   <input type="password" id="form2Example2" class="form-control" />
                 </div>
 
                 <!-- Submit button -->
-                <button type="button" class="btn btn-primary btn-block mb-4">Register</button>
+                <button type="button" class="btn btn-primary btn-block mb-4">Registreer</button>
               </form>
             </div>
           </div>
         </div>
         <div class="mt-auto">
-          <p class="footer text-muted mb-0 mt-md-0 mt-4">By register you agree with our
-            <span class="p-color me-1">terms and conditions</span>and
-            <span class="p-color ms-1">privacy policy</span>
+          <p class="footer text-muted mb-0 mt-md-0 mt-4">Door te registreren gaat u akkoord met onze
+            <span class="p-color me-1">voorwaarden</span>en onze
+            <span class="p-color ms-1">privacybeleid</span>
           </p>
         </div>
       </div>

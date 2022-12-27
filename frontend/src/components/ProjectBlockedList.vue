@@ -55,7 +55,7 @@
                                         <span class="fs-6 text-gray-700 fw-bold">Feb 6, 2021</span>
                                         <!--end::Date-->
                                         <!--begin::Label-->
-                                        <div class="fw-semibold text-gray-400">Start datum</div>
+                                        <div class="fw-semibold text-gray-400">Startdatum</div>
                                         <!--end::Label-->
                                     </div>
                                     <!--end::Stat-->
