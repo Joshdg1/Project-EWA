@@ -24,19 +24,19 @@
         <!--begin::Heading-->
         <div class="text-center mb-13">
           <!--begin::Title-->
-          <h1 class="mb-3">Add a skill</h1>
+          <h1 class="mb-3">Voeg een vaardigheid toe</h1>
           <!--end::Title-->
         </div>
         <!--end::Heading-->
         <div class="addASkill">
-          <label class="typo__label">Selecteer een skill:</label>
+          <label class="typo__label">Selecteer een vaardigheid:</label>
           <multiselect class="newSkill" v-model="value" :options="skills" :searchable="true" :close-on-select="true"
                        :show-labels="false"
                        placeholder="Pick a value"></multiselect>
           <label class="typo__label">Geef een cijfer van 1-5:</label> <br>
           <input type="number" class="levelSkill" v-model="this.newSkill.skillLevel">
         </div>
-        <button class="btn background-florijn btn-active-info addSkill" @click="addSkill">Add</button>
+        <button class="btn bg-primary btn-active-info addSkill" @click="addSkill">Voeg toe</button>
       </div>
       <!--end::Modal body-->
     </div>
@@ -47,7 +47,7 @@
 <script>
 import Multiselect from 'vue-multiselect';
 import SkillRepository from "@/repository/SkillRepository";
-import {ProgrammerSkill} from "@/models/programmer/programmerSkill";
+import {UserSkill} from "../../models/userSkill";
 
 export default {
   components: {Multiselect},
@@ -73,15 +73,15 @@ export default {
 
       repository: new SkillRepository(),
       value: null,
-      newSkill: new ProgrammerSkill,
+      newSkill: new UserSkill(),
       userId: null,
     }
   },
   async created() {
     this.userId = sessionStorage.getItem("id")
-    const data = await this.repository.findSkillsById(this.userId);
-    for (let i = 0; i < data.length; i++) {
-      console.log(data[i])
+    const data = await this.repository.findSkillsByUserId(this.userId);
+    for (const element of data) {
+      console.log(element)
     }
   },
   methods: {
@@ -90,12 +90,12 @@ export default {
       this.$emit('close-popup', this.popupStatus)
     },
     async addSkill() {
-      const currentSkill = await this.repository.getAllSkills(this.userId);
+      const currentSkill = await this.repository.findSkillsByUserId(this.userId);
       this.newSkill.skillName = this.value;
       this.newSkill.skillLevel = document.getElementsByClassName("levelSkill")[0].value;
       console.log(currentSkill)
-      for (let i = 0; i < currentSkill.length; i++) {
-        if (currentSkill[i].name === this.newSkill.skillName) {
+      for (const element of currentSkill) {
+        if (element.name === this.newSkill.skillName) {
           alert("Deze skill bezit u al.")
           return
         }

@@ -6,7 +6,7 @@
         <!--begin::Header-->
         <div class="card-header border-0 pt-5">
           <h3 class="card-title align-items-start flex-column">
-            <span class="card-label fw-bolder fs-3 mb-1">Add programmers to the project</span>
+            <span class="card-label fw-bolder fs-3 mb-1">Voeg programmeurs toe aan het project</span>
           </h3>
         </div>
         <!--end::Header-->
@@ -22,18 +22,18 @@
                 <th class="w-25px">
 
                 </th>
-                <th>Firstname</th>
-                <th>Lastname</th>
+                <th>Voornaam(en)</th>
+                <th>Achternaam</th>
                 <th>Email</th>
-                <th>Phone number</th>
-                <th>Skills
+                <th>Telefoonnummer</th>
+                <th>Vaardigheden
                 </th>
               </tr>
               </thead>
               <!--end::Table head-->
               <!--begin::Table body-->
               <tbody>
-              <tr v-for="programmer in programmers" v-bind:key="programmer">
+              <tr v-for="programmer in programmers" v-bind:key="programmer.id">
                 <div class="form-check form-check-sm form-check-custom form-check-solid">
                   <input class="form-check-input" type="checkbox" :value="programmer.id" data-kt-check="true"
                          data-kt-check-target=".widget-9-check"/>
@@ -56,19 +56,19 @@
     </div>
     <div class="d-flex flex-shrink-0">
       <div class="d-flex ms-3">
-        <router-link to="/createNewProject" class="btn background-florijn btn-active-info">
-          Back
+        <router-link to="/createNewProject" class="btn bg-primary btn-active-info">
+          Terug
         </router-link>
       </div>
       <div class="d-flex ms-3">
-        <button class="btn background-florijn btn-active-info" @click="createProject">create</button>
+        <button class="btn bg-primary btn-active-info" @click="createProject">Creëer</button>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-// import Programmer from '../../../models/programmer/programmer.js'
+// import User from '../../../models/programmer/user.js'
 import ProjectRepository from '../../../repository/ProjectRepository'
 import UserRepository from '../../../repository/UserRepository'
 

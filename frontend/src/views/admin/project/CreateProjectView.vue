@@ -2,35 +2,35 @@
   <div>
     <form>
       <div class="text-center mb-10">
-        <h1 class="text-dark mb-3">Create a new Project</h1>
+        <h1 class="text-dark mb-3">Creëer een nieuw project</h1>
       </div>
 
 
       <div class="fv-row mb-10 fv-plugins-icon-container">
-        <label class="form-label fs-6 fw-bold text-dark">Project title</label>
+        <label class="form-label fs-6 fw-bold text-dark">Project titel</label>
         <input class="form-control form-control-lg form-control-solid" type="text" name="text"
                autocomplete="off" v-model="title">
       </div>
       <div class="fv-row mb-10 fv-plugins-icon-container">
         <div class="d-flex flex-stack mb-2">
-          <label class="form-label fw-bold text-dark fs-6 mb-0">Project description</label>
+          <label class="form-label fw-bold text-dark fs-6 mb-0">Project beschrijving</label>
         </div>
         <input class="form-control form-control-lg form-control-solid" type="text"
                name="Type of project" autocomplete="off" v-model="description">
       </div>
 
       <div class="fv-row mb-10 fv-plugins-icon-container">
-        <label class="form-label fs-6 fw-bold text-dark">Company name</label>
+        <label class="form-label fs-6 fw-bold text-dark">Bedrijfsnaam</label>
         <input class="form-control form-control-lg form-control-solid" type="text" name="text"
                autocomplete="off" v-model="company">
       </div>
       <div class="fv-row mb-10 fv-plugins-icon-container">
-        <label class="form-label fs-6 fw-bold text-dark">Begin date</label>
+        <label class="form-label fs-6 fw-bold text-dark">Begindatum</label>
         <input class="form-control form-control-lg form-control-solid" type="date"
                autocomplete="off" v-model="startDate">
       </div>
       <div class="fv-row mb-10 fv-plugins-icon-container">
-        <label class="form-label fs-6 fw-bold text-dark">End date</label>
+        <label class="form-label fs-6 fw-bold text-dark">Einddatum</label>
         <input class="form-control form-control-lg form-control-solid" type="date"
                autocomplete="off" v-model="endDate">
       </div>
@@ -38,12 +38,12 @@
 
     <div class="d-flex flex-shrink-0">
       <div class="d-flex ms-3">
-        <router-link to="/projects" class="btn background-florijn btn-active-info">
-          Cancel
+        <router-link to="/projects" class="btn bg-primary btn-active-info">
+          Annuleer
         </router-link>
       </div>
       <div class="d-flex ms-3">
-        <button class="btn background-florijn btn-active-info" @click="setSession">Next</button>
+        <button class="btn bg-primary btn-active-info" @click="setSession">Volgende</button>
       </div>
     </div>
   </div>

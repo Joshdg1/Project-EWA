@@ -12,7 +12,7 @@ const programmerRoutes = [
     {
         name: "Mijn account",
         path: '/profile/view',
-        component: () => import(`../views/programmer/profile/View.vue`),
+        component: () => import(`../views/profile/View.vue`),
     },
 ]
 

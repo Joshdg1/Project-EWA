@@ -6,14 +6,14 @@
       <!--begin::Page title-->
       <div class="page-title d-flex flex-column align-items-start justify-content-center flex-wrap me-lg-2 pb-5 pb-lg-0">
         <!--begin::Heading-->
-        <h1 class="text-florijn fw-bold my-0 fs-2">{{$route.name}}</h1>
+        <h1 class="text-primary fw-bold my-0 fs-2">{{$route.name}}</h1>
         <!--end::Heading-->
         <!--begin::Breadcrumb-->
         <ul class="breadcrumb breadcrumb-line text-muted fw-bold fs-base my-1">
           <li class="breadcrumb-item text-muted">
             <div class="text-muted">{{translatedUserType()}}</div>
           </li>
-          <li class="breadcrumb-item text-florijn">{{$route.name}}</li>
+          <li class="breadcrumb-item text-primary">{{$route.name}}</li>
         </ul>
         <!--end::Breadcrumb-->
       </div>
@@ -46,7 +46,7 @@
       <div class="d-flex flex-shrink-0">
 
 <!--        <div class="d-flex ms-3">-->
-<!--          <router-link to="/register" class="btn background-florijn btn-active-info" tooltip="New App">-->
+<!--          <router-link to="/register" class="btn bg-primary btn-active-info" tooltip="New App">-->
 <!--            Register</router-link>-->
 <!--        </div>-->
       </div>

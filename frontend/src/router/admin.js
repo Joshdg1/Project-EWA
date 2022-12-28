@@ -13,12 +13,12 @@ const adminRoutes = [
     {
         name: "Mijn account",
         path: '/profile/view',
-        component: () => import(`../views/admin/profile/View.vue`),
+        component: () => import(`../views/profile/View.vue`),
     },
     {
         name: "Specialist",
         path: '/programmers/view',
-        component: () => import(`../views/admin/profile/View.vue`),
+        component: () => import(`../views/profile/View.vue`),
     },
     {
         name: "Specialist aanmaken",

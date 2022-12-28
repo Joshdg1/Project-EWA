@@ -1,4 +1,4 @@
-export class ProgrammerSkill{
+export class UserSkill{
     programmerId;
     skillId
     skillName;

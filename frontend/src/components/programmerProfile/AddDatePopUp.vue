@@ -23,8 +23,8 @@
 
       </div>
       <div class="buttons">
-<!--        <button  class="btn background-florijn btn-active-info addSkill" @click="cancel">anuleren</button>-->
-        <button class="btn background-florijn btn-active-info addSkill" @click="addSkill">Voeg Datum toe</button>
+<!--        <button  class="btn bg-primary btn-active-info addSkill" @click="cancel">anuleren</button>-->
+        <button class="btn bg-primary btn-active-info addSkill" @click="addSkill">Voeg datum toe</button>
       </div>
 
       <slot/>
@@ -34,15 +34,15 @@
 
 <script>
 
-import programmerDate from "../../models/programmer/programmerDate";
 import AvailabilityRepository from "@/repository/AvailabilityRepository";
+import UserDate from "../../models/userDate";
 
 export default {
   name: "AddDatePopUp",
   props: ['selectedDate'],
   emits: ['close-popup'],
   created() {
-    this.newDate = new programmerDate()
+    this.newDate = new UserDate()
 
     this.newDate.start = new Date(this.selectedDate);
     console.log(this.newDate.start)

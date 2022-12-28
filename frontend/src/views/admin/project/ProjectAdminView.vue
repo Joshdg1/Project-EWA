@@ -29,7 +29,6 @@ export default {
     const data = await this.repository.getAllProjects();
 
     for (let i = 0; i < data.length; i++) {
-      console.log(data[i].description)
       this.projects.push(data[i]);
     }
 

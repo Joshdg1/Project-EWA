@@ -5,7 +5,7 @@
         <!--begin::Header-->
         <div class="card-header border-0 pt-5">
           <h3 class="card-title align-items-start flex-column">
-            <span class="card-label fw-bolder fs-3 mb-1">Projects</span>
+            <span class="card-label fw-bolder fs-3 mb-1">Projecten</span>
           </h3>
           <router-link to="/createNewProject">
             <div class="card-toolbar" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-trigger="hover"
@@ -21,7 +21,7 @@
 														<rect x="4.36396" y="11.364" width="16" height="2" rx="1" fill="black"/>
 													</svg>
 												</span>
-                <!--end::Svg Icon-->New Project</a>
+                <!--end::Svg Icon-->Nieuw project</a>
             </div>
           </router-link>
         </div>
@@ -42,20 +42,20 @@
                   </div>
                 </th>
                 <th>Id</th>
-                <th>Title</th>
-                <th>Description</th>
-                <th>Company</th>
-                <th>Hours worked</th>
-                <th>Start date</th>
-                <th>End date</th>
-                <th>Programmer(s)</th>
-                <th>Actions</th>
+                <th>Titel</th>
+                <th>Beschrijving</th>
+                <th>Bedrijf</th>
+                <th>Gewerkte uren</th>
+                <th>Startdatum</th>
+                <th>Einddatum</th>
+                <th>Gebruiker(s)</th>
+                <th>Acties</th>
               </tr>
               </thead>
               <!--end::Table head-->
               <!--begin::Table body-->
               <tbody>
-              <tr v-for="project in projects" v-bind:key="project">
+              <tr v-for="project in projects" v-bind:key="project.id">
                 <div class="form-check form-check-sm form-check-custom form-check-solid">
                   <input class="form-check-input" type="checkbox" value="1" data-kt-check="true"
                          data-kt-check-target=".widget-9-check"/>
@@ -155,7 +155,6 @@ export default {
     },
 
     getUserProjects(users) {
-      console.log(users)
       if (users.length === 0)
         return "";
 

@@ -5,7 +5,7 @@
         <!--begin::Header-->
         <div class="card-header border-0 pt-5">
           <h3 class="card-title align-items-start flex-column">
-            <span class="card-label fw-bolder fs-3 mb-1">Programmer EDIT</span>
+            <span class="card-label fw-bolder fs-3 mb-1">Programmeur wijzigen</span>
           </h3>
           <div class="card-toolbar" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-trigger="hover"
                title="Click to add a user">
@@ -23,7 +23,7 @@
 														<rect x="4.36396" y="11.364" width="16" height="2" rx="1" fill="black"/>
 													</svg>
 												</span>
-              <!--end::Svg Icon-->New Programmer</a>
+              <!--end::Svg Icon-->Nieuwe programmeur</a>
           </div>
         </div>
         <!--end::Header-->
@@ -37,22 +37,22 @@
               <thead>
               <tr class="fw-bolder text-muted">
                 <th>Id</th>
-                <th>FirstName</th>
-                <th>LastName</th>
-                <th>E-Mail</th>
-                <th>Address</th>
-                <th>City</th>
+                <th>Voornaam(en)</th>
+                <th>Achternaam</th>
+                <th>Email</th>
+                <th>Adres</th>
+                <th>Stad</th>
                 <th>Postcode</th>
-                <th>Availability</th>
-                <th>Work Preference</th>
-                <th>Project Type</th>
-                <th>Skills</th>
+                <th>Beschikbaarheid</th>
+                <th>Werk voorkeur</th>
+                <th>Project type</th>
+                <th>Vaardigheden</th>
               </tr>
               </thead>
               <!--end::Table head-->
               <!--begin::Table body-->
               <tbody>
-              <tr v-for="programmer in programmers" v-bind:key="programmer">
+              <tr v-for="programmer in programmers" v-bind:key="programmer.id">
                 <td> {{programmer.id}}</td>
                 <td> <input class="listInput" v-model="programmer.firstName"></td>
                 <td> <input class="listInput" v-model="programmer.lastName"></td>
@@ -112,8 +112,8 @@
       <!--end::Tables Widget 3-->
     </div>
     <div class="d-flex ms-3">
-      <a @click="profilePage()" class="btn background-florijn btn-active-info buttonFloatRight" tooltip="New App" data-bs-toggle="modal"
-         data-bs-target="#kt_modal_create_app" id="kt_toolbar_primary_button">Edit profile-page</a>
+      <a @click="profilePage()" class="btn bg-primary btn-active-info buttonFloatRight" tooltip="New App" data-bs-toggle="modal"
+         data-bs-target="#kt_modal_create_app" id="kt_toolbar_primary_button">Wijzig profiel-pagina</a>
     </div>
   </div>
 </template>
@@ -135,19 +135,12 @@ export default {
     profilePage(){
       this.$router.push('/programmers/view');
     },
-    async deleteProgrammer(programmer){
-      const wantedId = programmer.id
-      console.log(wantedId)
-      await this.repository.deleteProgrammerById(wantedId)
-      location.reload();
-    },
+
      async setEditProfile(programmer){
       this.editingProfile = false
       this.$emit('edit-status' , this.editingProfile)
 
-      await this.repository.updateProgrammerById(programmer.id, programmer.firstName, programmer.lastName,
-          programmer.email, programmer.address, programmer.city, programmer.postcode, programmer.availability,
-          programmer.workPreference, programmer.projectType, programmer.skills)
+      await this.repository.updateUserById(programmer.id,  programmer.email, programmer.firstName, programmer.lastName, '')
     }
   }
 }

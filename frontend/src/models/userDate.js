@@ -1,10 +1,9 @@
-class ProgrammerDate{
+class UserDate{
     title
     start
     end
     hoursPerDayStart
     hoursPerDayEnd
-
 
     constructor(title, start, end, hoursPerDayStart, hoursPerDayEnd) {
         this.title = title;
@@ -13,7 +12,5 @@ class ProgrammerDate{
         this.hoursPerDayStart = hoursPerDayStart;
         this.hoursPerDayEnd = hoursPerDayEnd;
     }
-
-
 }
-export default ProgrammerDate
+export default UserDate

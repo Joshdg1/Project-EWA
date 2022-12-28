@@ -42,7 +42,7 @@
                                     fill="black"/>
 															</svg>
 														</span>
-                  <!--end::Svg Icon-->Developer</a>
+                  <!--end::Svg Icon-->{{ translatedUserType() }}</a>
                 <a href="#" class="d-flex align-items-center text-gray-400 text-hover-primary me-5 mb-2">
                   <!--begin::Svg Icon | path: icons/duotune/general/gen018.svg-->
                   <span class="svg-icon svg-icon-4 me-1">
@@ -109,7 +109,7 @@
                   </div>
                   <!--end::Number-->
                   <!--begin::Label-->
-                  <div class="fw-bold fs-6 text-gray-400">Total Projects</div>
+                  <div class="fw-bold fs-6 text-gray-400">Alle projecten</div>
                   <!--end::Label-->
                 </div>
                 <!--end::Stat-->
@@ -133,7 +133,7 @@
                   </div>
                   <!--end::Number-->
                   <!--begin::Label-->
-                  <div class="fw-bold fs-6 text-gray-400">Current Projects</div>
+                  <div class="fw-bold fs-6 text-gray-400">Huidige projecten</div>
                   <!--end::Label-->
                 </div>
                 <!--end::Stat-->
@@ -159,7 +159,7 @@
                   </div>
                   <!--end::Number-->
                   <!--begin::Label-->
-                  <div class="fw-bold fs-6 text-gray-400">Average time spent on Project</div>
+                  <div class="fw-bold fs-6 text-gray-400">Gemiddelde tijd gespendeerd aan een project</div>
                   <!--end::Label-->
                 </div>
                 <!--end::Stat-->
@@ -191,18 +191,18 @@
 
           <!--begin::Nav item-->
           <li class="nav-item">
-            <a class="nav-link text-active-primary me-6 " id="Details" @click="setSelectedTabDetails">General
-              Details</a>
+            <a class="nav-link text-active-primary me-6 " id="Details" @click="setSelectedTabDetails">Algemeene
+              details</a>
           </li>
           <!--end::Nav item-->
           <!--begin::Nav item-->
           <li class="nav-item">
-            <a class="nav-link text-active-primary me-6" id="availability" @click="setSelectedTabAvailability">Availability</a>
+            <a class="nav-link text-active-primary me-6" id="availability" @click="setSelectedTabAvailability">Beschikbaarheid</a>
           </li>
           <!--end::Nav item-->
           <!--begin::Nav item-->
           <li class="nav-item">
-            <a class="nav-link text-active-primary me-6" id="Skills" @click="setSelectedTabSkills">Skills</a>
+            <a class="nav-link text-active-primary me-6" id="Skills" @click="setSelectedTabSkills">Vaardigheden</a>
           </li>
           <!--end::Nav item-->
         </ul>
@@ -223,7 +223,9 @@ export default {
   created() {
     this.selectedTab = 1;
     const el = document.getElementById('Details');
-    el.classList.add("active")
+
+    if (el)
+        el.classList.add("active")
   },
   data() {
     return {
@@ -247,6 +249,16 @@ export default {
       el.classList.add("active")
 
       this.$emit('selectedTab', this.selectedTab)
+    },
+    translatedUserType() {
+      switch (this.user.userType) {
+        case 'administrator':
+          return "Administrator";
+        case 'client':
+          return 'Opdrachtgever';
+        case 'programmer':
+          return 'Specialist';
+      }
     },
     setSelectedTabDetails() {
       const oldSelectedTab = this.selectedTab;

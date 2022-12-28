@@ -8,34 +8,34 @@
         <div class="SkillLevel">
           <input v-model="newSkill.skillLevel" placeholder="level" class="cardInput">
       </div>
-      <button class="btn background-florijn btn-active-info addSkill" @click="addSkill">Add Skill</button>
+      <button class="btn bg-primary btn-active-info addSkill" @click="addSkill">Voeg vaardigheid toe</button>
       <slot/>
     </div>
   </div>
 </template>
 
 <script>
-import {ProgrammerSkill} from "@/models/programmer/programmerSkill";
+import {UserSkill} from "../../models/userSkill";
 
 export default {
   name: "SkillCardPopUp",
   emits: ['close-popup', 'adding-skill'],
   created() {
-    this.newSkill = new ProgrammerSkill(1)
+    this.newSkill = new UserSkill(1)
   },
-  data() {
+  data(){
     return {
       popupStatus: null,
       newSkill: null
     }
   },
-  methods: {
-    closingPopup() {
+  methods:{
+    closingPopup(){
       this.popupStatus = false
       this.$emit('close-popup', this.popupStatus)
     },
-    addSkill() {
-      if (this.newSkill.skillName !== null && this.newSkill.skillLevel !== null) {
+    addSkill(){
+      if (this.newSkill.skillName !== null && this.newSkill.skillLevel !== null){
         this.$emit('adding-skill', this.newSkill)
         this.popupStatus = false
         this.$emit('close-popup', this.popupStatus)
@@ -72,8 +72,7 @@ export default {
   align-items: center;
   justify-content: center;
 }
-
-.popup-inner {
+.popup-inner{
   display: flex;
   justify-content: center;
   align-items: center;
@@ -82,16 +81,13 @@ export default {
   padding: 5em;
   border-radius: 20px;
 }
-
 .code-icon {
   height: 2em;
   margin: 2em;
 }
-
 .skillStar {
   height: 1em;
 }
-
 .CardText {
   display: flex;
   flex-direction: column;
@@ -99,7 +95,6 @@ export default {
   justify-content: center;
   align-items: center;
 }
-
 .cardInput {
   background: none;
   border-width: 0 0 1px 0;
@@ -108,18 +103,15 @@ export default {
   width: 5vw;
   text-align: center;
 }
-
 .SkillLevel {
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
 }
-
 input:focus {
   outline: none;
 }
-
 .addSkill {
   width: 5vw;
   margin: 1em;

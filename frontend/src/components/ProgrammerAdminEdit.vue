@@ -5,22 +5,10 @@
         <!--begin::Header-->
         <div class="card-header border-0 pt-5">
           <h3 class="card-title align-items-start flex-column">
-            <span class="card-label fw-bolder fs-3 mb-1">Programmers Edit</span>
+            <span class="card-label fw-bolder fs-3 mb-1">Programmeur wijzigen</span>
           </h3>
           <div class="card-toolbar" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-trigger="hover"
                title="Click to add a programmer">
-            <a href="#" class="btn btn-sm btn-light-primary" data-bs-toggle="modal"
-               data-bs-target="#kt_modal_invite_friends">
-              <!--begin::Svg Icon | path: icons/duotune/arrows/arr075.svg-->
-              <span class="svg-icon svg-icon-3">
-													<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                               fill="none">
-														<rect opacity="0.5" x="11.364" y="20.364" width="16" height="2" rx="1"
-                                  transform="rotate(-90 11.364 20.364)" fill="black"/>
-														<rect x="4.36396" y="11.364" width="16" height="2" rx="1" fill="black"/>
-													</svg>
-												</span>
-              <!--end::Svg Icon-->New Programmer</a>
           </div>
         </div>
         <!--end::Header-->
@@ -40,16 +28,16 @@
                   </div>
                 </th>
                 <th>Email</th>
-                <th>Firstname</th>
-                <th>Lastname</th>
-                <th>Phone number</th>
-                <th>Usertype</th>
+                <th>Voornaam(en)</th>
+                <th>Achternaam</th>
+                <th>Telefoonnummer</th>
+                <th>Type gebruiker</th>
               </tr>
               </thead>
               <!--end::Table head-->
               <!--begin::Table body-->
               <tbody>
-              <tr v-for="programmer in programmers" v-bind:key="programmer">
+              <tr v-for="programmer in programmers" v-bind:key="programmer.id">
                 <div class="form-check form-check-sm form-check-custom form-check-solid">
                   <input class="form-check-input" type="checkbox" value="1" data-kt-check="true"
                          data-kt-check-target=".widget-9-check"/>
@@ -111,7 +99,7 @@ export default {
 
     async editProgrammer(programmer) {
       this.editingProgrammer = false;
-      this.$emit('editProgrammer', this.editingProgrammer)
+      this.$emit('editProgrammer', this.editingProgrammer);
 
       await this.repository.updateUserById(programmer.id, programmer.email, programmer.firstName, programmer.lastName,
           programmer.phoneNumber, programmer.userType);
