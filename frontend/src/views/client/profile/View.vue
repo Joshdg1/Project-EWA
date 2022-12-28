@@ -10,7 +10,7 @@
     <AvailabilityProgrammer v-if="!this.editProfile && currentTab === 2 "></AvailabilityProgrammer>
 
     <programmer-skills v-if="!this.editProfile && currentTab === 3 " :skills="skills"
-                       @edit-profile="EditProfileStatus" @add-skill="addSkill"></programmer-skills>
+                       @edit-skill="EditProfileStatus" @add-skill="addSkill"></programmer-skills>
 
     <ProgrammerInputSkills v-if="this.editProfile && currentTab === 3 " :skills="skills"
                            @edit-profile="EditProfileStatus" @delete-skill="deleteSkill" @add-skill="addSkill"></ProgrammerInputSkills>
@@ -83,6 +83,7 @@ export default {
   },
   methods: {
     EditProfileStatus(profileEditStatus) {
+      console.log("test");
       this.editProfile = profileEditStatus
     },
     updateProfile(newProfile) {

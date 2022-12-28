@@ -2,15 +2,15 @@
   <div>
     <TopProfileDetails :sample-programmer="sampleProgrammer" @selectedTab="changeSelectedTab"></TopProfileDetails>
     <!--begin::details View-->
-    <ProfileInputDetails v-if="this.editProfile === true && currentTab === 1" :sample-programmer="sampleProgrammer"
+    <ProfileInputDetails v-if="editProfile === true && currentTab === 1" :sample-programmer="sampleProgrammer"
                          @edit-profile="EditProfileStatus" @save-profile="updateProfile"></ProfileInputDetails>
 
-    <ProfileDetails v-if="!this.editProfile && currentTab === 1" :sample-programmer="sampleProgrammer"
+    <ProfileDetails v-if="!editProfile && currentTab === 1" :sample-programmer="sampleProgrammer"
                     @edit-profile="EditProfileStatus"></ProfileDetails>
-    <AvailabilityProgrammer v-if="!this.editProfile && currentTab === 2 "></AvailabilityProgrammer>
-    <programmerSkillList v-if="!this.skillStatus" :skills="this.skills" @deleteSkill="deleteSkill"
-                         @editSkill="editSkillStatus"></programmerSkillList>
-    <edit v-if="this.skillStatus" :skills="this.skills" @deleteSkill="deleteSkill"
+    <AvailabilityProgrammer v-if="!editProfile && currentTab === 2 "></AvailabilityProgrammer>
+    <programmerSkillList v-if="!skillStatus" :skills="skills" @deleteSkill="deleteSkill"
+                         @edit-skill="editSkillStatus"></programmerSkillList>
+    <edit v-if="skillStatus" :skills="skills" @deleteSkill="deleteSkill"
           @editSkill="editSkillStatus"></edit>
   </div>
 </template>
@@ -59,7 +59,7 @@ export default {
       this.skills.push(databaseSkills[i]);
     }
 
-    this.sampleProgrammer = await this.repository.findUserById(userID)
+    // this.sampleProgrammer = await this.repository.findUserById(userID)
 
 
     this.currentTab = 1;
@@ -92,12 +92,13 @@ export default {
       this.skills.push(skill)
     },
     async deleteSkill(skills) {
+      console.log("test");
       await this.repositoryGood.deleteSkillsById(skills.id);
       location.reload();
     },
 
     editSkillStatus(skillStatus) {
-      console.log(skillStatus)
+      console.log("skillStatus")
       this.skillStatus = skillStatus;
     }
   }

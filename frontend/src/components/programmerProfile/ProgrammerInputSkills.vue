@@ -8,7 +8,7 @@
       <!--end::Card title-->
       <!--begin::Action-->
       <div class="d-flex ms-3">
-        <a @click="editSkill()" class="btn background-florijn btn-active-info editSkill" tooltip="New App"
+        <a @click="editSkill" class="btn background-florijn btn-active-info editSkill" tooltip="New App"
            data-bs-toggle="modal"
            data-bs-target="#kt_modal_create_app" id="kt_toolbar_primary_button">Save skills</a>
         <a @click="(event) => this.popupStatus = true" class="btn background-florijn btn-active-info editSkill"

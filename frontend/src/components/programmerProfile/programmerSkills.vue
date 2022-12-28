@@ -12,7 +12,7 @@
            tooltip="New App"
            data-bs-toggle="modal"
            data-bs-target="#kt_modal_create_app" id="kt_toolbar_primary_button">Add skill</a>
-        <a @click="editSkill()" class="btn background-florijn btn-active-info editSkill" tooltip="New App"
+        <a @click="editSkill" class="btn background-florijn btn-active-info editSkill" tooltip="New App"
            data-bs-toggle="modal"
            data-bs-target="#kt_modal_create_app" id="kt_toolbar_primary_button">Edit skills</a>
       </div>
@@ -77,7 +77,7 @@ export default {
   name: "programmerSkills",
   components: {addSkill},
   props: ['skills'],
-  emits: ['edit-profile', 'add-skill', 'editSkill', 'deleteSkill'],
+  emits: ['edit-profile', 'add-skill', 'edit-skill', 'deleteSkill'],
 
 
   data() {
@@ -109,7 +109,7 @@ export default {
 
     editSkill() {
       this.editingSkill = true;
-      this.$emit('editSkill', this.editingSkill)
+      this.$emit('edit-skill', this.editingSkill);
     }
   }
 
