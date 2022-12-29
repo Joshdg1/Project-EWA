@@ -21,12 +21,18 @@
                  class="form-control form-control-solid w-250px ps-14"
                  placeholder="Search Programmer">
           <div class="rightButtons">
+
             <multiselect class="newSkill" v-model="value" :options="skills" :searchable="true"
                          :close-on-select="true"
                          :show-labels="false"
-                         placeholder="Pick a value"></multiselect>
-            <router-link to="/programmers/add">
+                         placeholder="Pick a skill"></multiselect>
 
+            <multiselect class="newSkill" v-model="sortType" :options="sortTypes"
+                         :close-on-select="true"
+                         :allow-empty="false"
+                         :show-labels="false"
+                         placeholder="sorteer op hoeveelheid skills"></multiselect>
+            <router-link to="/programmers/add">
               <div class="card-toolbar" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-trigger="hover"
                    title="Click to add a programmer">
                 <a href="#" class="btn btn-sm btn-light-primary" data-bs-toggle="modal"
@@ -44,8 +50,6 @@
               </div>
             </router-link>
           </div>
-
-
         </div>
         <!--end::Header-->
         <!--begin::Body-->
@@ -119,7 +123,6 @@
 																		</span>
                   </a>
                 </div>
-
               </tr>
               </tbody>
               <!--end::Table body-->
@@ -141,24 +144,35 @@ import UserRepository from '../repository/UserRepository'
 import Multiselect from "vue-multiselect";
 import SkillRepository from "@/repository/SkillRepository";
 
-
 export default {
   components: {Multiselect},
   name: "ProgrammerAdmin.vue",
   props: ['programmers'],
   emits: ['deleteProgrammer', 'editProgrammer'],
   async created() {
+
     this.allSkills = await this.skillRepository.getAllSkills()
     this.newProgrammers = this.programmers
+    for (const element of this.programmers) {
+     if (element.amountOfSkills === undefined)  element.amountOfSkills =  0
+      for (const item of this.allSkills) {
+        if (element.id === item.user.id) {
+          element.amountOfSkills = element.amountOfSkills + 1
+        }
+      }
+    }
+
   },
   data() {
     return {
       editingProgrammer: null,
       newProgrammers: [],
       search: null,
+      sortType: null,
       repository: new UserRepository(),
       skillRepository: new SkillRepository(),
       allSkills: [],
+      sortTypes: ["increasing" , "decreasing"],
       skills: ["MS Office Access | Front-end", "MS Office Excel | Front-end", "MS Office Access VBA | Front-end",
         "MS Powerpivot | Front-end", "MS Office Word | Front-end", "MS Office Word VBA | Front-end", "MS Office Outlook | Front-end",
         "MS Office Outlook VBA | Front-end", "MS Office VBA | Front-end", "MS SQL-Server | Back-end", "MS SQL-Server Stored Procedures | Back-end"
@@ -177,8 +191,51 @@ export default {
 
     }
   },
-  computed: {
+  methods: {
+    async deleteProgrammer(programmer) {
+      await this.repository.deleteUserById(programmer.id);
+      location.reload();
+    },
 
+    editProgrammer() {
+      this.editingProgrammer = true;
+      this.$emit('editProgrammer', this.editingProgrammer)
+    },
+    amountOfSkillsIncreasing(){
+      const newList = this.programmers
+      console.log(newList)
+      const sortedList = newList.sort((b ,a) => {
+        return a.amountOfSkills - b.amountOfSkills
+      })
+      console.log(sortedList)
+    },
+    amountOfSkillsDecreasing(){
+      const newList = this.programmers
+      console.log(newList)
+      const sortedList = newList.sort((b ,a) => {
+        return b.amountOfSkills - a.amountOfSkills
+      })
+      console.log(sortedList)
+    },
+
+  },
+  watch: {
+    sortType: function (newValue){
+      console.log("NEWVAL" + newValue)
+      if (newValue === "increasing"){
+        console.log("WORKS")
+        this.amountOfSkillsIncreasing()
+      }else if (newValue === "decreasing"){
+        console.log("WORKS")
+        this.amountOfSkillsDecreasing()
+      }else {
+        const newList = this.programmers
+        console.log(newList)
+      }
+    }
+  },
+
+  computed: {
     resultQuery: function () {
       if (this.search) {
         return this.programmers.filter(item => {
@@ -213,18 +270,7 @@ export default {
     },
 
 
-    methods: {
 
-      async deleteProgrammer(programmer) {
-        await this.repository.deleteUserById(programmer.id);
-        location.reload();
-      },
-
-      editProgrammer() {
-        this.editingProgrammer = true;
-        this.$emit('editProgrammer', this.editingProgrammer)
-      }
-    }
   }
 }
 </script>
@@ -233,11 +279,9 @@ export default {
 .loop {
   margin-top: 1em;
 }
-
 .newSkill {
   width: 15vw;
 }
-
 .rightButtons {
   display: flex;
   flex-direction: row;
