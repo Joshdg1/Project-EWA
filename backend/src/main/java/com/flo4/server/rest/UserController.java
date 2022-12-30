@@ -6,7 +6,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.flo4.server.Exceptions.NotFoundException;
 import com.flo4.server.models.User;
 import com.flo4.server.repository.UserRepository;
-import com.flo4.server.service.UserService;
+import com.flo4.server.service.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +17,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
+import java.util.Objects;
 
 
 @RestController
@@ -25,8 +26,12 @@ import java.util.List;
 public class UserController {
     private final UserService userService;
 
+
     @Autowired
     private final UserRepository userRepository;
+
+    @Autowired
+    private final EmailService emailService;
 
     @GetMapping(path = "", produces = "application/json")
     public List<User> getAllUsers() {
@@ -130,9 +135,10 @@ public class UserController {
 
 
 
-    public UserController(UserService userService, UserRepository userRepository) {
+    public UserController(UserService userService, UserRepository userRepository, EmailService emailService) {
         this.userService = userService;
         this.userRepository = userRepository;
+        this.emailService = emailService;
     }
 
     record RegisterRequest(int id,
@@ -246,5 +252,22 @@ public class UserController {
 
         response.addCookie(cookie);
         return new LogoutResponse("Logout successful");
+    }
+
+
+    @PostMapping(value = "resetPassword")
+    public AccountResponse sendMail(@RequestBody PasswordReset passwordReset){
+
+        User result = this.userRepository.findByEmail(passwordReset.getEmail());
+        AccountResponse accountResponse = new AccountResponse();
+
+        if (Objects.equals(result.getEmail(), passwordReset.getEmail())){
+            Mail mail = new Mail(passwordReset.getEmail(), UserCode.getCode());
+            this.emailService.sendMessage(mail);
+            accountResponse.setResult(1);
+        }else {
+            accountResponse.setResult(0);
+        }
+        return accountResponse;
     }
 }
