@@ -1,7 +1,7 @@
 <template>
   <div>
     <clientsList v-if="!this.clientStatus" :clients="this.clients" @deleteClient="deleteClient"
-                  @editClient="editClientStatus"></clientsList>
+                 @editClient="editClientStatus"></clientsList>
     <edit v-if="this.clientStatus" :clients="this.clients" @deleteClient="deleteClient"
           @editClient="editClientStatus"></edit>
   </div>
@@ -35,10 +35,19 @@ export default {
     }
   },
 
-  methods:{
+  methods: {
     async deleteClient(client) {
-      await this.repository.deleteUserById(client.id);
-      location.reload();
+
+      await this.$swal({
+        title: "Wil je deze client verwijderen?", text: "Weet je het zeker?",
+        type: "warning", showCancelButton: true, confirmButtonColor: "#3085d6",
+        confirmButtonText: "Ja, verwijder!", cancelButtonText: "Annuleer"
+      }).then((result) => {
+        if (result.value) {
+          this.repository.deleteUserById(client.id);
+          location.reload();
+        }
+      });
     },
 
     editClientStatus(clientStatus) {

@@ -101,8 +101,18 @@ export default {
       this.editingClient = false;
       this.$emit('editClient', this.editingClient)
 
-      await this.repository.updateUserById(client.id, client.email, client.firstName, client.lastName,
-          client.phoneNumber, client.userType);
+      await this.$swal({
+        title: "Wil je deze client wijzigen?", text: "Weet je het zeker?",
+        type: "warning", showCancelButton: true, confirmButtonColor: "#3085d6",
+        confirmButtonText: "Ja, wijzig!", cancelButtonText: "Annuleer"
+      }).then((result) => {
+        if (result.value) {
+          this.repository.updateUserById(client.id, client.email, client.firstName, client.lastName,
+              client.phoneNumber, client.userType);
+        }
+      });
+
+      location.reload();
     }
   }
 }

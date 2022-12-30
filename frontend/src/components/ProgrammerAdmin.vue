@@ -193,8 +193,10 @@ export default {
   },
   methods: {
     async deleteProgrammer(programmer) {
-      await this.repository.deleteUserById(programmer.id);
-      location.reload();
+      await this.$swal({     title: "Wil je deze programmeur verwijderen?",     text: "Weet je het zeker?",
+        type: "warning",     showCancelButton: true,     confirmButtonColor: "#3085d6",
+        confirmButtonText: "Ja, verwijder!", cancelButtonText: "Annuleer" }).then((result) => { if (result.value) {
+          this.repository.deleteUserById(programmer.id); location.reload();} });
     },
 
     editProgrammer() {
