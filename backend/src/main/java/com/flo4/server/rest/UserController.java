@@ -8,7 +8,12 @@ import com.flo4.server.models.User;
 import com.flo4.server.repository.UserRepository;
 import com.flo4.server.service.*;
 
+import com.mailgun.api.v3.MailgunMessagesApi;
+import com.mailgun.client.MailgunClient;
+import com.mailgun.model.message.Message;
+import com.mailgun.model.message.MessageResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -26,12 +31,8 @@ import java.util.Objects;
 public class UserController {
     private final UserService userService;
 
-
     @Autowired
     private final UserRepository userRepository;
-
-    @Autowired
-    private final EmailService emailService;
 
     @GetMapping(path = "", produces = "application/json")
     public List<User> getAllUsers() {
@@ -135,10 +136,9 @@ public class UserController {
 
 
 
-    public UserController(UserService userService, UserRepository userRepository, EmailService emailService) {
+    public UserController(UserService userService, UserRepository userRepository) {
         this.userService = userService;
         this.userRepository = userRepository;
-        this.emailService = emailService;
     }
 
     record RegisterRequest(int id,
@@ -255,19 +255,29 @@ public class UserController {
     }
 
 
-    @PostMapping(value = "resetPassword")
-    public AccountResponse sendMail(@RequestBody PasswordReset passwordReset){
+    @Autowired
+    private Environment env;
 
-        User result = this.userRepository.findByEmail(passwordReset.getEmail());
-        AccountResponse accountResponse = new AccountResponse();
+    @PostMapping(path = "resetPassword")
+    public ResponseEntity<User> sendMail(@RequestBody PasswordReset passwordReset){
+        User user = this.userRepository.findByEmail(passwordReset.getEmail());
 
-        if (Objects.equals(result.getEmail(), passwordReset.getEmail())){
-            Mail mail = new Mail(passwordReset.getEmail(), UserCode.getCode());
-            this.emailService.sendMessage(mail);
-            accountResponse.setResult(1);
-        }else {
-            accountResponse.setResult(0);
+        if (user == null){
+            throw new NotFoundException("Unknown user");
         }
-        return accountResponse;
+
+        MailgunMessagesApi mailgunMessagesApi = MailgunClient.config(env.getProperty("mailgun.api.key"))
+                .createApi(MailgunMessagesApi.class);
+
+        Message message = Message.builder()
+                .from(env.getProperty("mailgun.email.from"))
+                .to(user.getEmail())
+                .subject("Wachtwoord vergeten")
+                .text("Klik hier voor een nieuw wachtwoord")
+                .build();
+
+        mailgunMessagesApi.sendMessage(env.getProperty("mailgun.api.domain"), message);
+
+        return ResponseEntity.ok().body(user);
     }
 }
