@@ -102,7 +102,6 @@
         this.$emit('edit-profile', this.editingProfile)
         const userID = sessionStorage.getItem("id")
         await this.repository.updateUserById(userID, this.editProfile.email, this.editProfile.firstName, this.editProfile.lastName, this.editProfile.phoneNumber)
-        location.reload()
       }
     }
   }

@@ -19,13 +19,13 @@
           <input type="text" data-kt-ecommerce-order-filter="search"
                  v-model="search"
                  class="form-control form-control-solid w-250px ps-14"
-                 placeholder="Search Programmer">
+                 placeholder="Zoeken...">
           <div class="rightButtons">
 
             <multiselect class="newSkill" v-model="value" :options="skills" :searchable="true"
                          :close-on-select="true"
                          :show-labels="false"
-                         placeholder="Pick a skill"></multiselect>
+                         placeholder="Selecteer een Skill"></multiselect>
 
             <multiselect class="newSkill" v-model="sortType" :options="sortTypes"
                          :close-on-select="true"
