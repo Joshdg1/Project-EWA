@@ -4,7 +4,7 @@
       <div class="card card-xl-stretch mb-5 mb-xl-8">
         <!--begin::Header-->
         <h3 class="card-title align-items-start flex-column">
-          <span class="card-label fw-bolder fs-3 mb-1">Cliënt(en)</span>
+          <span class="card-label fw-bolder fs-3 mb-1" style="margin: 1.5em; padding-left: 1em">Cliënt(en)</span>
         </h3>
         <div class="card-header border-0 pt-5">
 
@@ -22,11 +22,11 @@
                  class="form-control form-control-solid w-250px ps-14"
                  placeholder="Search Client">
           <div class="rightButtons">
-          <multiselect class="newSkill" v-model="sortType" :options="sortTypes"
-                       :close-on-select="true"
-                       :allow-empty="false"
-                       :show-labels="false"
-                       placeholder="sorteer op hoeveelheid specialisten"></multiselect>
+<!--          <multiselect class="newSkill" v-model="sortType" :options="sortTypes"-->
+<!--                       :close-on-select="true"-->
+<!--                       :allow-empty="false"-->
+<!--                       :show-labels="false"-->
+<!--                       placeholder="sorteer op hoeveelheid specialisten"></multiselect>-->
           <router-link to="/createNewClient">
             <div class="card-toolbar" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-trigger="hover"
                  title="Click to add a client">
@@ -136,10 +136,10 @@
 <script>
 
 import UserRepository from '../repository/UserRepository'
-import Multiselect from "vue-multiselect";
+
 
 export default {
-  components: {Multiselect},
+
 
   name: "ClientAdmin.vue",
   props: ['clients'],

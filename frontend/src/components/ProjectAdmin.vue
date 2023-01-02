@@ -5,7 +5,7 @@
         <!--begin::Header-->
 
         <h3 class="card-title align-items-start flex-column">
-          <span class="card-label fw-bolder fs-3 mb-1">Projecten</span>
+          <span class="card-label fw-bolder fs-3 mb-1" style="margin: 1.5em; padding-left: 1em">Projecten</span>
         </h3>
         <div class="card-header border-0 pt-5">
           <span class="svg-icon svg-icon-1 position-absolute ms-4 loop">
