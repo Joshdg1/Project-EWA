@@ -4,14 +4,16 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 
 import com.flo4.server.Exceptions.NotFoundException;
+import com.flo4.server.models.PasswordResetTokenEntity;
 import com.flo4.server.models.User;
+import com.flo4.server.repository.PasswordResetRepository;
 import com.flo4.server.repository.UserRepository;
 import com.flo4.server.service.*;
 
+import com.flo4.server.utils.PasswordResetUtil;
 import com.mailgun.api.v3.MailgunMessagesApi;
 import com.mailgun.client.MailgunClient;
 import com.mailgun.model.message.Message;
-import com.mailgun.model.message.MessageResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.http.ResponseEntity;
@@ -22,7 +24,6 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
-import java.util.Objects;
 
 
 @RestController
@@ -33,6 +34,9 @@ public class UserController {
 
     @Autowired
     private final UserRepository userRepository;
+
+    @Autowired
+    private final PasswordResetRepository passwordResetRepository;
 
     @GetMapping(path = "", produces = "application/json")
     public List<User> getAllUsers() {
@@ -136,9 +140,10 @@ public class UserController {
 
 
 
-    public UserController(UserService userService, UserRepository userRepository) {
+    public UserController(UserService userService, UserRepository userRepository, PasswordResetRepository passwordResetRepository) {
         this.userService = userService;
         this.userRepository = userRepository;
+        this.passwordResetRepository = passwordResetRepository;
     }
 
     record RegisterRequest(int id,
@@ -258,9 +263,18 @@ public class UserController {
     @Autowired
     private Environment env;
 
-    @PostMapping(path = "resetPassword")
+    @PostMapping(path = "forgotPassword")
     public ResponseEntity<User> sendMail(@RequestBody PasswordReset passwordReset){
         User user = this.userRepository.findByEmail(passwordReset.getEmail());
+
+        String token = new PasswordResetUtil().generateResetToken(String.valueOf(user.getId()));
+
+        PasswordResetTokenEntity passwordResetTokenEntity = new PasswordResetTokenEntity();
+        passwordResetTokenEntity.setToken(token);
+        passwordResetTokenEntity.setUser(user);
+
+        passwordResetRepository.save(passwordResetTokenEntity);
+
 
         if (user == null){
             throw new NotFoundException("Unknown user");
@@ -273,10 +287,13 @@ public class UserController {
                 .from(env.getProperty("mailgun.email.from"))
                 .to(user.getEmail())
                 .subject("Wachtwoord vergeten")
-                .text("Klik hier voor een nieuw wachtwoord")
+                .text(String.format("Hi %s, om je wachtwoord te veranderen klik op deze link http://localhost:8080/resetPassword/%s", user.getFirstName(), token))
                 .build();
 
         mailgunMessagesApi.sendMessage(env.getProperty("mailgun.api.domain"), message);
+
+        System.out.println("hiii");
+        System.out.println(message);
 
         return ResponseEntity.ok().body(user);
     }
