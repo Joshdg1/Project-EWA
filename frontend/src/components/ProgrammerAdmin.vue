@@ -7,7 +7,7 @@
           <span class="card-label fw-bolder fs-3 mb-1">Programmers</span>
         </h3>
         <div class="card-header border-0 pt-5">
-<span class="svg-icon svg-icon-1 position-absolute ms-4 loop">
+                      <span class="svg-icon svg-icon-1 position-absolute ms-4 loop">
 												<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
 													<rect opacity="0.5" x="17.0365" y="15.1223" width="8.15546" height="2" rx="1"
                                 transform="rotate(45 17.0365 15.1223)" fill="currentColor"></rect>
@@ -154,7 +154,7 @@ export default {
     this.allSkills = await this.skillRepository.getAllSkills()
     this.newProgrammers = this.programmers
     for (const element of this.programmers) {
-     if (element.amountOfSkills === undefined)  element.amountOfSkills =  0
+      if (element.amountOfSkills === undefined) element.amountOfSkills = 0
       for (const item of this.allSkills) {
         if (element.id === item.user.id) {
           element.amountOfSkills = element.amountOfSkills + 1
@@ -172,7 +172,7 @@ export default {
       repository: new UserRepository(),
       skillRepository: new SkillRepository(),
       allSkills: [],
-      sortTypes: ["increasing" , "decreasing"],
+      sortTypes: ["increasing", "decreasing"],
       skills: ["MS Office Access | Front-end", "MS Office Excel | Front-end", "MS Office Access VBA | Front-end",
         "MS Powerpivot | Front-end", "MS Office Word | Front-end", "MS Office Word VBA | Front-end", "MS Office Outlook | Front-end",
         "MS Office Outlook VBA | Front-end", "MS Office VBA | Front-end", "MS SQL-Server | Back-end", "MS SQL-Server Stored Procedures | Back-end"
@@ -193,28 +193,34 @@ export default {
   },
   methods: {
     async deleteProgrammer(programmer) {
-      await this.$swal({     title: "Wil je deze programmeur verwijderen?",     text: "Weet je het zeker?",
-        type: "warning",     showCancelButton: true,     confirmButtonColor: "#3085d6",
-        confirmButtonText: "Ja, verwijder!", cancelButtonText: "Annuleer" }).then((result) => { if (result.value) {
-          this.repository.deleteUserById(programmer.id); location.reload();} });
+      await this.$swal({
+        title: "Wil je deze programmeur verwijderen?", text: "Weet je het zeker?",
+        type: "warning", showCancelButton: true, confirmButtonColor: "#3085d6",
+        confirmButtonText: "Ja, verwijder!", cancelButtonText: "Annuleer"
+      }).then((result) => {
+        if (result.value) {
+          this.repository.deleteUserById(programmer.id);
+          location.reload();
+        }
+      });
     },
 
     editProgrammer() {
       this.editingProgrammer = true;
       this.$emit('editProgrammer', this.editingProgrammer)
     },
-    amountOfSkillsIncreasing(){
+    amountOfSkillsIncreasing() {
       const newList = this.programmers
       console.log(newList)
-      const sortedList = newList.sort((b ,a) => {
+      const sortedList = newList.sort((b, a) => {
         return a.amountOfSkills - b.amountOfSkills
       })
       console.log(sortedList)
     },
-    amountOfSkillsDecreasing(){
+    amountOfSkillsDecreasing() {
       const newList = this.programmers
       console.log(newList)
-      const sortedList = newList.sort((b ,a) => {
+      const sortedList = newList.sort((b, a) => {
         return b.amountOfSkills - a.amountOfSkills
       })
       console.log(sortedList)
@@ -222,15 +228,15 @@ export default {
 
   },
   watch: {
-    sortType: function (newValue){
+    sortType: function (newValue) {
       console.log("NEWVAL" + newValue)
-      if (newValue === "increasing"){
+      if (newValue === "increasing") {
         console.log("WORKS")
         this.amountOfSkillsIncreasing()
-      }else if (newValue === "decreasing"){
+      } else if (newValue === "decreasing") {
         console.log("WORKS")
         this.amountOfSkillsDecreasing()
-      }else {
+      } else {
         const newList = this.programmers
         console.log(newList)
       }
@@ -272,7 +278,6 @@ export default {
     },
 
 
-
   }
 }
 </script>
@@ -281,9 +286,11 @@ export default {
 .loop {
   margin-top: 1em;
 }
+
 .newSkill {
   width: 15vw;
 }
+
 .rightButtons {
   display: flex;
   flex-direction: row;

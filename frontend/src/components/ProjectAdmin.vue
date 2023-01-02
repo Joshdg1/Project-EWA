@@ -3,17 +3,37 @@
     <div class="col-lg-12">
       <div class="card card-xl-stretch mb-5 mb-xl-8">
         <!--begin::Header-->
+
+        <h3 class="card-title align-items-start flex-column">
+          <span class="card-label fw-bolder fs-3 mb-1">Projecten</span>
+        </h3>
         <div class="card-header border-0 pt-5">
-          <h3 class="card-title align-items-start flex-column">
-            <span class="card-label fw-bolder fs-3 mb-1">Projecten</span>
-          </h3>
-          <router-link to="/createNewProject">
-            <div class="card-toolbar" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-trigger="hover"
-                 title="Click to add a project">
-              <a href="#" class="btn btn-sm btn-light-primary" data-bs-toggle="modal"
-                 data-bs-target="#kt_modal_invite_friends">
-                <!--begin::Svg Icon | path: icons/duotune/arrows/arr075.svg-->
-                <span class="svg-icon svg-icon-3">
+          <span class="svg-icon svg-icon-1 position-absolute ms-4 loop">
+												<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+													<rect opacity="0.5" x="17.0365" y="15.1223" width="8.15546" height="2" rx="1"
+                                transform="rotate(45 17.0365 15.1223)" fill="currentColor"></rect>
+													<path
+                              d="M11 19C6.55556 19 3 15.4444 3 11C3 6.55556 6.55556 3 11 3C15.4444 3 19 6.55556 19 11C19 15.4444 15.4444 19 11 19ZM11 5C7.53333 5 5 7.53333 5 11C5 14.4667 7.53333 17 11 17C14.4667 17 17 14.4667 17 11C17 7.53333 14.4667 5 11 5Z"
+                              fill="currentColor"></path>
+												</svg>
+											</span>
+          <input type="text" data-kt-ecommerce-order-filter="search"
+                 v-model="search"
+                 class="form-control form-control-solid w-250px ps-14"
+                 placeholder="Search Programmer">
+          <div class="rightButtons">
+            <multiselect class="newSkill" v-model="sortType" :options="sortTypes"
+                         :close-on-select="true"
+                         :allow-empty="false"
+                         :show-labels="false"
+                         placeholder="sorteer op hoeveelheid specialisten"></multiselect>
+            <router-link to="/createNewProject">
+              <div class="card-toolbar" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-trigger="hover"
+                   title="Click to add a project">
+                <a href="#" class="btn btn-sm btn-light-primary" data-bs-toggle="modal"
+                   data-bs-target="#kt_modal_invite_friends">
+                  <!--begin::Svg Icon | path: icons/duotune/arrows/arr075.svg-->
+                  <span class="svg-icon svg-icon-3">
 													<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                fill="none">
 														<rect opacity="0.5" x="11.364" y="20.364" width="16" height="2" rx="1"
@@ -21,9 +41,10 @@
 														<rect x="4.36396" y="11.364" width="16" height="2" rx="1" fill="black"/>
 													</svg>
 												</span>
-                <!--end::Svg Icon-->Nieuw project</a>
-            </div>
-          </router-link>
+                  <!--end::Svg Icon-->Nieuw project</a>
+              </div>
+            </router-link>
+          </div>
         </div>
         <!--end::Header-->
         <!--begin::Body-->
@@ -55,7 +76,7 @@
               <!--end::Table head-->
               <!--begin::Table body-->
               <tbody>
-              <tr v-for="project in projects" v-bind:key="project.id">
+              <tr v-for="project in resultQuery" v-bind:key="project.id">
                 <div class="form-check form-check-sm form-check-custom form-check-solid">
                   <input class="form-check-input" type="checkbox" value="1" data-kt-check="true"
                          data-kt-check-target=".widget-9-check"/>
@@ -121,9 +142,10 @@
 
 <script>
 import ProjectRepository from '../repository/ProjectRepository.js'
+import Multiselect from "vue-multiselect";
 
 export default {
-
+  components: {Multiselect},
   name: "ProjectAdmin.vue",
   props: ['projects'],
   emits: ['deleteProject', 'editProject'],
@@ -131,8 +153,62 @@ export default {
   data() {
     return {
       editingProject: null,
+      sortType: "increasing",
+      search: null,
+      sortTypes: ["increasing", "decreasing"],
       repository: new ProjectRepository(),
     }
+  },
+  watch: {
+    sortType: function (newValue) {
+      console.log("NEWVAL" + newValue)
+      if (newValue === "increasing") {
+        console.log("WORKS")
+        this.amountOfProgrammersIncreasing()
+      } else if (newValue === "decreasing") {
+        console.log("WORKS")
+        this.amountOfProgrammersDecreasing()
+      } else {
+        const newList = this.projects
+        console.log(newList)
+      }
+    }
+  },
+  computed: {
+    resultQuery: function () {
+      if (this.search) {
+        return this.projects.filter(item => {
+          if (this.search
+              .toLowerCase()
+              .split(" ")
+              .every(v => item.title.toLowerCase().includes(v))) {
+            return this.search
+                .toLowerCase()
+                .split(" ")
+                .every(v => item.title.toLowerCase().includes(v));
+          } else {
+            return this.search
+                .toLowerCase()
+                .split(" ")
+                .every(v => item.company.toLowerCase().includes(v));
+          }
+        })
+      } else if (this.value) {
+        let skillArray = []
+        for (const element of this.projects) {
+          for (const item of this.allSkills) {
+            if (element.id === item.user.id) {
+              skillArray.push(element)
+            }
+          }
+        }
+        return this.projects.filter(p => skillArray.includes(p));
+      } else {
+        return this.projects;
+      }
+    },
+
+
   },
 
   methods: {
@@ -177,11 +253,40 @@ export default {
 
 
       return content
-    }
+    },
+    amountOfProgrammersIncreasing() {
+      const newList = this.projects
+      console.log(newList)
+      const sortedList = newList.sort((b, a) => {
+        return a.users.length - b.users.length
+      })
+      console.log(sortedList)
+    },
+    amountOfProgrammersDecreasing() {
+      const newList = this.projects
+      console.log(newList)
+      const sortedList = newList.sort((b, a) => {
+        return b.users.length - a.users.length
+      })
+      console.log(sortedList)
+    },
   }
 }
 </script>
-
+<style src="vue-multiselect/dist/vue-multiselect.min.css"></style>
 <style scoped>
+.loop {
+  margin-top: 1em;
+}
 
+.newSkill {
+  width: 15vw;
+}
+
+.rightButtons {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
 </style>
