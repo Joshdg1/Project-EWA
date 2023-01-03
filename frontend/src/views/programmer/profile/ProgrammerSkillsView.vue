@@ -42,7 +42,7 @@ export default {
     },
 
     editSkillStatus(skillStatus) {
-      console.log(skillStatus)
+      console.log("skill")
       this.skillStatus = skillStatus;
     }
   }

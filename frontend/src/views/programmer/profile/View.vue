@@ -1,11 +1,11 @@
 <template>
   <div>
-    <TopProfileDetails :sample-programmer="sampleProgrammer" @selectedTab="changeSelectedTab"></TopProfileDetails>
+    <TopProfileDetails :sample-programmer="sampleUser" @selectedTab="changeSelectedTab"></TopProfileDetails>
     <!--begin::details View-->
-    <ProfileInputDetails v-if="editProfile === true && currentTab === 1" :sample-programmer="sampleProgrammer"
+    <ProfileInputDetails v-if="editProfile === true && currentTab === 1" :sample-programmer="sampleUser"
                          @edit-profile="EditProfileStatus" @save-profile="updateProfile"></ProfileInputDetails>
 
-    <ProfileDetails v-if="!editProfile && currentTab === 1" :sample-programmer="sampleProgrammer"
+    <ProfileDetails v-if="!editProfile && currentTab === 1" :sample-programmer="sampleUser"
                     @edit-profile="EditProfileStatus"></ProfileDetails>
     <AvailabilityProgrammer v-if="!editProfile && currentTab === 2 "></AvailabilityProgrammer>
     <programmerSkillList v-if="!skillStatus" :skills="skills" @deleteSkill="deleteSkill"
@@ -20,7 +20,7 @@ import ProfileDetails from "@/components/programmerProfile/ProfileDetails";
 import ProfileInputDetails from "@/components/programmerProfile/ProfileInputDetails";
 import TopProfileDetails from "@/components/programmerProfile/TopProfileDetails";
 import AvailabilityProgrammer from "@/components/programmerProfile/AvailabilityProgrammer";
-import Programmer from "@/models/programmer/programmer";
+import User from "@/models/user.js";
 import UserRepository from "@/repository/UserRepository";
 import ProjectRepository from "@/repository/ProjectRepository";
 import SkillRepository from "@/repository/SkillRepository";
@@ -53,7 +53,7 @@ export default {
     // console.log(allProgrammers)
 
     const userID = sessionStorage.getItem("id")
-    this.sampleProgrammer = await this.repository.findProgrammerById(userID)
+    this.sampleProgrammer = await this.repository.findUserById(userID)
     const databaseSkills = await this.repositoryGood.findSkillsById(userID);
     for (let i = 0; i < databaseSkills.length; i++) {
       this.skills.push(databaseSkills[i]);
@@ -66,7 +66,7 @@ export default {
   },
   data() {
     return {
-      sampleProgrammer: new Programmer,
+      sampleUser: new User,
       editProfile: null,
       currentTab: null,
       skills: [],
@@ -83,7 +83,7 @@ export default {
       this.editProfile = profileEditStatus
     },
     updateProfile(newProfile) {
-      this.sampleProgrammer = newProfile
+      this.sampleUser = newProfile
     },
     changeSelectedTab(selectedTab) {
       this.currentTab = selectedTab;

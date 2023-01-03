@@ -47,7 +47,7 @@
 <script>
 import Multiselect from 'vue-multiselect';
 import SkillRepository from "@/repository/SkillRepository";
-import {UserSkill} from "../../models/userSkill";
+import {UserSkill} from "@/models/userSkill";
 
 export default {
   components: {Multiselect},
@@ -79,10 +79,7 @@ export default {
   },
   async created() {
     this.userId = sessionStorage.getItem("id")
-    const data = await this.repository.findSkillsByUserId(this.userId);
-    for (const element of data) {
-      console.log(element)
-    }
+    await this.repository.findSkillsById(this.userId);
   },
   methods: {
     closePopup() {
@@ -90,10 +87,9 @@ export default {
       this.$emit('close-popup', this.popupStatus)
     },
     async addSkill() {
-      const currentSkill = await this.repository.findSkillsByUserId(this.userId);
+      const currentSkill = await this.repository.findSkillsById(this.userId);
       this.newSkill.skillName = this.value;
       this.newSkill.skillLevel = document.getElementsByClassName("levelSkill")[0].value;
-      console.log(currentSkill)
       for (const element of currentSkill) {
         if (element.name === this.newSkill.skillName) {
           alert("Deze skill bezit u al.")

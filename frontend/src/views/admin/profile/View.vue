@@ -56,7 +56,7 @@ export default {
     // console.log(allProgrammers)
 
    const userID = sessionStorage.getItem("id")
-    this.sampleProgrammer = await this.repository.findProgrammerById(userID)
+    this.sampleProgrammer = await this.repository.findUserById(userID)
    const databaseSkills = await this.repositoryGood.findSkillsById(userID);
    for (let i = 0; i < databaseSkills.length; i++) {
      this.skills.push(databaseSkills[i]);

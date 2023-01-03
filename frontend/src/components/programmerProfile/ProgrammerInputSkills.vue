@@ -53,7 +53,7 @@ import SkillRepository from "@/repository/SkillRepository";
 export default {
   name: "programmerInputSkills",
   props: ['skills'],
-  emits: ['edit-profile', 'add-skill', 'editSkill', 'deleteSkill'],
+  emits: ['edit-profile', 'add-skill', 'edit-skill', 'deleteSkill'],
 
 
   data() {
@@ -91,7 +91,7 @@ export default {
 
     async editSkill(skill) {
       this.editingSkill = false;
-      this.$emit('editSkill', this.editingSkill)
+      this.$emit('edit-skill', this.editingSkill)
       console.log(this.currentId)
       await this.repository.updateProgrammerSkillById(this.id, skill.id, skill.level);
     }
