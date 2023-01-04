@@ -6,11 +6,11 @@ export default class ProjectRepository {
         return await API.get(`/projects`);
     }
 
-    async createProject(title, description, company, startDate, endDate, programmers) {
+    async createProject(name, description, client_id, start_date, end_date, programmer_ids) {
         return await API.post(
             `/projects/add`,
             {
-                title, description, company, startDate, endDate, programmers
+                name, description, client_id, start_date, end_date, programmer_ids
             }
         );
     }
