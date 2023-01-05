@@ -1,4 +1,4 @@
-// This class is meant as an wrapper for all API requests:
+// This class is meant as a wrapper for all API requests:
 // - Simplify repositories
 // - Add authentication to requests
 
@@ -29,7 +29,7 @@ export default class API {
         // TODO: get url from env (had a bug and didn't have the time to fix it)
         // Send request
         const response = await fetch(
-            `http://localhost:8081${url}`,
+            url,
             request
         );
 

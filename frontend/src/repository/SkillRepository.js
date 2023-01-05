@@ -1,49 +1,30 @@
-export default class SkillRepository {
-    async findSkillsById(userId){
-        const response = await fetch("http://localhost:8081/skills/" + userId, {
-            method: 'GET',
-        });
-        return await response.json()
-    }
+import API from "../scripts/API";
 
-    async getAllSkills(userId) {
-        const response = await fetch('http://localhost:8081/skills/' + userId);
-        return await response.json();
+export default class SkillRepository {
+    url;   // the URL of the endpoint
+    constructor() {
+        // eslint-disable-next-line no-undef
+        this.url = process.env.VUE_APP_API_URL + '/skills/';
+    }
+    async findSkillsByUserId(userId){
+        return await API.get(this.url + userId);
     }
 
     async createSkill (skillName, skillLevel, userId) {
-        const response = await fetch('http://localhost:8081/skills/add', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
+        return await API.post(
+            this.url + "add",
+            {
                 skillName, skillLevel, userId
-            }),
-        });
-        return await response.json();
+            }
+        );
     }
 
-    async deleteSkillsById(skillsId){
-        const response = await fetch('http://localhost:8081/skills/' + skillsId, {
-            method: 'DELETE',
-        });
-        
-        return await response.json();
+    async getAllSkills(){
+        return await API.get(
+            this.url
+        );
     }
-    
-    async updateSkillById(programmerId, skillId, level)
-    {
-        const response = await fetch('http://localhost:8081/skills/' + programmerId, {
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({programmerId, skillId, level}),
-        });
-        return await response.json();
+    async deleteSkillById(skillsId){
+        return await API.delete(this.url + skillsId);
     }
-
-
-
 }

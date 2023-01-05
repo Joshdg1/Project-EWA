@@ -18,6 +18,7 @@
     </div>
 </template>
 <script>
+
     import ProfileDetails from "@/components/programmerProfile/ProfileDetails";
     import ProfileInputDetails from "@/components/programmerProfile/ProfileInputDetails";
     import TopProfileDetails from "@/components/programmerProfile/TopProfileDetails";
@@ -28,7 +29,6 @@
     import UserRepository from "@/repository/UserRepository";
     import ProjectRepository from "@/repository/ProjectRepository";
     import SkillRepository from "@/repository/SkillRepository";
-
 
     export default {
         name: "AdminProfilePage",

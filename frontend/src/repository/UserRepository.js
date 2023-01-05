@@ -1,28 +1,34 @@
 import API from "../scripts/API";
 
 export default class UserRepository {
+    url;   // the URL of the endpoint
+    constructor() {
+        // eslint-disable-next-line no-undef
+        this.url = process.env.VUE_APP_API_URL + '/users/';
+    }
+
 
     // todo use USER model in this file
 
     async findUserById(userId) {
-        return await API.get(`/users/${userId}`);
+        return await API.get(this.url + userId);
     }
 
     async getAllUsers() {
-        return await API.get(`/users`);
+        return await API.get(this.url);
     }
 
     async getAllProgrammers() {
-        return await API.get(`/users/programmers`);
+        return await API.get(this.url + "programmers");
     }
 
     async getAllClients() {
-        return await API.get(`/users/clients`);
+        return await API.get(this.url + "clients");
     }
 
     async loginUser(email, password) {
         return await API.post(
-            `/users/login`,
+            this.url + "login",
             {
                 email, password
             }
@@ -31,7 +37,7 @@ export default class UserRepository {
 
     async createUser(email, firstName, lastName, password, phoneNumber, userType) {
         return await API.post(
-            `/users/add`,
+            this.url + "add",
             {
                 email, firstName, lastName, password, phoneNumber, userType
             }
@@ -40,7 +46,7 @@ export default class UserRepository {
 
     async updateUserById(userId, email, firstName, lastName, phoneNumber, userType) {
         return await API.put(
-            `/users/${userId}`,
+            this.url + userId,
             {
                 userId, email, firstName, lastName, phoneNumber, userType
             }
@@ -48,6 +54,6 @@ export default class UserRepository {
     }
 
     async deleteUserById(userId) {
-        return await API.delete(`/users/${userId}`);
+        return await API.delete(this.url + userId);
     }
 }
