@@ -24,7 +24,8 @@
         <!--begin::Heading-->
         <div class="text-center mb-13">
           <!--begin::Title-->
-          <h1 class="mb-3">Voeg een vaardigheid toe</h1>
+          <h1 v-if="!editSkill.id" class="mb-3">Voeg een vaardigheid toe</h1>
+          <h1 v-if="editSkill.id > 0" class="mb-3">Edit</h1>
           <!--end::Title-->
         </div>
         <!--end::Heading-->
@@ -92,17 +93,33 @@ export default {
     async addSkill() {
       const currentSkill = await this.repository.findSkillsById(this.userID);
 
+      console.log('CurrenSkill', currentSkill);
+
+      // check empty
+      if (!this.editSkill.level || !this.editSkill.name)
+        return alert("Vul de velden in")
+
       // check if user already has skill
       for (const element of currentSkill) {
+        if (element.id === this.editSkill.id)
+          continue;
+
         if (element.name === this.editSkill.name) {
           alert("Deze skill bezit u al.")
           return
         }
       }
 
-      await this.repository.createSkill(this.newSkill.skillName, this.newSkill.skillLevel, this.userID)
+      this.editSkill.user_id = this.userID;
+
+      if (this.editSkill.id > 0){
+        await this.repository.updateSkill(this.editSkill)
+      } else {
+        await this.repository.createSkill(this.editSkill)
+        location.reload();
+      }
+
       this.closePopup();
-      location.reload();
     }
   }
 }

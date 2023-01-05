@@ -50,16 +50,39 @@ public class SkillController {
     @Transactional
     @PostMapping(path = "add", produces = "application/json")
     public ResponseEntity<UserSkills> addSkill(@RequestBody GetUserSkills UserSkills) {
+        User user = this.userEntityRepository.findById(UserSkills.getUser_id());
 
-        UserSkills userSkills = new UserSkills();
-        userSkills.setName(UserSkills.getSkillName());
-        userSkills.setLevel(UserSkills.getSkillLevel());
-        userSkills.setUser(this.userEntityRepository.findById(UserSkills.getUserId()));
+        UserSkills userSkill = new UserSkills(
+               0,
+                UserSkills.getName(),
+                UserSkills.getLevel(),
+                user
+        );
 
-        UserSkills newUserSkills = this.SkillRepository.save(userSkills);
-
+        UserSkills newUserSkills = this.SkillRepository.save(userSkill);
 
         return ResponseEntity.ok().body(newUserSkills);
+    }
+
+    @Transactional
+    @PutMapping(path = "{id}", produces = "application/json")
+    public ResponseEntity<UserSkills> updateSkill(@PathVariable int id, @RequestBody GetUserSkills UserSkills) {
+        User user = this.userEntityRepository.findById(UserSkills.getUser_id());
+
+        UserSkills userSkill = new UserSkills(
+                id,
+                UserSkills.getName(),
+                UserSkills.getLevel(),
+                user
+        );
+
+        UserSkills updatedUserSkills = this.SkillRepository.update(userSkill, id);
+
+        if (updatedUserSkills == null) {
+            throw new NotFoundException(String.format(notFound, id));
+        }
+
+        return ResponseEntity.ok().body(updatedUserSkills);
     }
 
     @DeleteMapping(path = "{id}", produces = "application/json")
@@ -75,15 +98,7 @@ public class SkillController {
         return ResponseEntity.ok().body(UserSkills);
     }
 
-    @PutMapping(path = "{id}", produces = "application/json")
-    public ResponseEntity<UserSkills> updateSkill(@PathVariable int id, @RequestBody UserSkills UserSkills) {
-        UserSkills updatedUserSkills = this.SkillRepository.update(UserSkills, id);
 
-        if (updatedUserSkills == null) {
-            throw new NotFoundException(String.format(notFound, id));
-        }
-        return ResponseEntity.ok().body(updatedUserSkills);
-    }
 
     @PutMapping(path = "userSkills/{id}", produces = "application/json")
     public List<UserSkills> updateProgrammerSkill(@PathVariable() int id, int skillId) {

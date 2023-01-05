@@ -86,15 +86,17 @@ export default {
       this.editingProfile = true
       this.$emit('edit-profile', this.editingProfile)
     },
-    closePopup(newPopupStatus) {
-      this.popupStatus = newPopupStatus
+
+    closePopup() {
+      this.popupStatus = false
     },
+
     addSkill(skill) {
       this.$emit('add-skill', skill)
-
     },
+
     async deleteSkill(skill) {
-      await this.repository.deleteSkillsById(skill.id);
+      await this.repository.deleteSkillById(skill.id);
       location.reload();
     },
 

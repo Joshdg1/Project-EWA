@@ -6,14 +6,14 @@ import lombok.Setter;
 @Getter
 @Setter
 public class GetUserSkills {
+    private String name;
+    private double level;
+    private int user_id;
 
-    private String skillName;
-    private double skillLevel;
-    private int userId;
 
-    public GetUserSkills(String skillName, double skillLevel, int userId) {
-        this.skillName = skillName;
-        this.skillLevel = skillLevel;
-        this.userId = userId;
+    public GetUserSkills(String name, double level, int user_id) {
+        this.name = name;
+        this.level = level;
+        this.user_id = user_id;
     }
 }
