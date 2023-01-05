@@ -1,4 +1,4 @@
-// This class is meant as an wrapper for all API requests:
+// This class is meant as a wrapper for all API requests:
 // - Simplify repositories
 // - Add authentication to requests
 
