@@ -33,10 +33,17 @@ let routes = [
         component: () => import('../views/auth/Login.vue'),
     },
     {
+        meta: {
+            isPublic: true,
+        },
+        path: "/users/asd",
+        component: () => import('../views/auth/ForgotPassword.vue'),
+    },
+    {
         name: "404PageNotFound",
         path: "*",
         component: () => import('../404page.vue')
-    },
+    }
 ];
 
 if (user) {

@@ -23,7 +23,7 @@
         <div class="fv-row mb-10 fv-plugins-icon-container">
             <div class="d-flex flex-stack mb-2">
                 <label class="form-label fw-bold text-dark fs-6 mb-0">Wachtwoord</label>
-                <router-link to="/forgot" class="link-primary fs-6 fw-bold">Wachtwoord vergeten?</router-link>
+                <router-link to="/users/asd" class="link-primary fs-6 fw-bold">Wachtwoord vergeten?</router-link>
             </div>
             <input class="form-control form-control-lg form-control-solid" v-model="password" type="password"
                    name="password" autocomplete="off">
