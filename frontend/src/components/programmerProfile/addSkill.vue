@@ -25,7 +25,7 @@
         <div class="text-center mb-13">
           <!--begin::Title-->
           <h1 v-if="!editSkill.id" class="mb-3">Voeg een vaardigheid toe</h1>
-          <h1 v-if="editSkill.id > 0" class="mb-3">Edit</h1>
+          <h1 v-if="editSkill.id > 0" class="mb-3">Wijzig een skill</h1>
           <!--end::Title-->
         </div>
         <!--end::Heading-->
@@ -37,7 +37,8 @@
           <label class="typo__label">Geef een cijfer van 1-5:</label> <br>
           <input type="number" step="1" min="1" max="5" class="levelSkill" v-model="editSkill.level">
         </div>
-        <button class="btn bg-primary btn-active-info addSkill" @click="addSkill">Voeg toe</button>
+        <button v-if="!editSkill.id" class="btn bg-primary btn-active-info addSkill" @click="addSkill">Voeg toe</button>
+        <button v-if="editSkill.id > 0" class="btn bg-primary btn-active-info addSkill" @click="addSkill">Wijzig</button>
       </div>
       <!--end::Modal body-->
     </div>
