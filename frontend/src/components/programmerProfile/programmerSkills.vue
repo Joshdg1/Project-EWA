@@ -18,7 +18,9 @@
       </div>
       <!--end::Action-->
     </div>
-    <addSkill v-if="popupStatus" @close-popup="closePopup"></addSkill>
+
+    <addSkill :skill="selectedSkill" v-if="popupStatus" @close-popup="closePopup"></addSkill>
+
     <div class="card-body p-11">
       <div class="card"
            v-for="skill in this.skills"
@@ -28,23 +30,11 @@
           <div class="modal-content backgroundCard">
             <div class="d-flex justify-content-end flex-shrink-0">
               <a class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm" @click="deleteSkill(skill)">
-                <!--begin::Svg Icon | path: icons/duotune/general/gen027.svg-->
-                <span class="svg-icon svg-icon-3">
-																			<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                           fill="none">
-																				<path
-                                            d="M5 9C5 8.44772 5.44772 8 6 8H18C18.5523 8 19 8.44772 19 9V18C19 19.6569 17.6569 21 16 21H8C6.34315 21 5 19.6569 5 18V9Z"
-                                            fill="black"/>
-																				<path opacity="0.5"
-                                              d="M5 5C5 4.44772 5.44772 4 6 4H18C18.5523 4 19 4.44772 19 5V5C19 5.55228 18.5523 6 18 6H6C5.44772 6 5 5.55228 5 5V5Z"
-                                              fill="black"/>
-																				<path opacity="0.5"
-                                              d="M9 4C9 3.44772 9.44772 3 10 3H14C14.5523 3 15 3.44772 15 4V4H9V4Z"
-                                              fill="black"/>
-																			</svg>
-																		</span>
+                <delete-icon></delete-icon>
               </a>
-
+              <a class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm" @click="editSkill(skill)">
+                <edit-icon></edit-icon>
+              </a>
             </div>
             <!--begin::Modal header-->
             <div class="modal-header pb-0 border-0 justify-content-end">
@@ -72,22 +62,23 @@
 <script>
 import addSkill from "./addSkill";
 import SkillRepository from "@/repository/SkillRepository";
+import DeleteIcon from "@/components/icons/delete";
+import EditIcon from "@/components/icons/edit";
 
 export default {
   name: "programmerSkills",
-  components: {addSkill},
+  components: {EditIcon, DeleteIcon, addSkill},
   props: ['skills'],
   emits: ['edit-profile', 'add-skill', 'edit-skill', 'deleteSkill'],
 
 
   data() {
     return {
+      selectedSkill: null,
       editingProfile: null,
       programSkill: null,
       popupStatus: null,
-      editingSkill: null,
       repository: new SkillRepository(),
-
     }
   },
   methods: {
@@ -107,9 +98,9 @@ export default {
       location.reload();
     },
 
-    editSkill() {
-      this.editingSkill = true;
-      this.$emit('edit-skill', this.editingSkill);
+    editSkill(skill) {
+      this.popupStatus = true;
+      this.selectedSkill = skill;
     }
   }
 

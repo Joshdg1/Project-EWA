@@ -11,7 +11,6 @@ export default class SkillRepository {
         return await response.json();
     }
 
-
     async createSkill (skillName, skillLevel, userId) {
         const response = await fetch('http://localhost:8081/skills/add', {
             method: 'POST',
@@ -24,13 +23,16 @@ export default class SkillRepository {
         });
         return await response.json();
     }
+
     async deleteSkillsById(skillsId){
         const response = await fetch('http://localhost:8081/skills/' + skillsId, {
             method: 'DELETE',
         });
+        
         return await response.json();
     }
-    async  updateProgrammerSkillById(programmerId, skillId, level)
+    
+    async updateSkillById(programmerId, skillId, level)
     {
         const response = await fetch('http://localhost:8081/skills/' + programmerId, {
             method: 'PUT',

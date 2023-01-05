@@ -26,6 +26,7 @@ import ProjectRepository from "@/repository/ProjectRepository";
 import SkillRepository from "@/repository/SkillRepository";
 import programmerSkillList from '../../../components/programmerProfile/programmerSkills.vue'
 import edit from '../../../components/programmerProfile/ProgrammerInputSkills.vue'
+import {UserSkill} from "@/models/userSkill";
 
 
 export default {
@@ -56,7 +57,12 @@ export default {
     this.sampleProgrammer = await this.repository.findUserById(userID)
     const databaseSkills = await this.repositoryGood.findSkillsById(userID);
     for (let i = 0; i < databaseSkills.length; i++) {
-      this.skills.push(databaseSkills[i]);
+      this.skills.push(new UserSkill(
+          databaseSkills[i].id,
+          databaseSkills[i].level,
+          databaseSkills[i].name,
+          databaseSkills[i].user.id,
+      ));
     }
 
     // this.sampleProgrammer = await this.repository.findUserById(userID)
