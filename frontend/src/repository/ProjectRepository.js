@@ -1,14 +1,19 @@
 import API from "../scripts/API";
 
 export default class ProjectRepository {
+    url;   // the URL of the endpoint
+    constructor() {
+        // eslint-disable-next-line no-undef
+        this.url = process.env.VUE_APP_API_URL + '/projects/';
+    }
 
     async getAllProjects() {
-        return await API.get(`/projects`);
+        return await API.get(this.url);
     }
 
     async createProject(name, description, client_id, start_date, end_date, programmer_ids) {
         return await API.post(
-            `/projects/add`,
+            this.url + "add",
             {
                 name, description, client_id, start_date, end_date, programmer_ids
             }
@@ -17,7 +22,7 @@ export default class ProjectRepository {
 
     async updateProjectById(projectId, title, description, company, startDate, endDate, programmers) {
         return await API.put(
-            `/projects/${projectId}`,
+            this.url + projectId,
             {
                 projectId, title, description, company, startDate, endDate, programmers
             }
@@ -25,6 +30,6 @@ export default class ProjectRepository {
     }
 
     async deleteProjectById(projectId){
-        return await API.delete(`/projects/${projectId}`);
+        return await API.delete(this.url + projectId);
     }
 }
