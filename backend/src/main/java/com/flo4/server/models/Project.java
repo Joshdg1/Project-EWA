@@ -10,7 +10,6 @@ import java.util.List;
 
 @Entity
 public class Project {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -24,7 +23,8 @@ public class Project {
             joinColumns = @JoinColumn(name = "project_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id")
     )
-    private List<User> users;
+    private List<User> users = new ArrayList<>();
+
     private Date startDate;
     private Date endDate;
 
@@ -34,6 +34,10 @@ public class Project {
 
     public void setUsers(List<User> users) {
 //        this.users = users;
+    }
+
+    public void addUser(User user) {
+        this.users.add(user);
     }
 
     public Project() {
@@ -48,6 +52,13 @@ public class Project {
         this(id);
         this.setTitle(title);
         this.setDescription(description);
+    }
+
+    public Project(String title, String description, Date startDate, Date endDate) {
+        this.setTitle(title);
+        this.setDescription(description);
+        this.setStartDate(startDate);
+        this.setEndDate(endDate);
     }
 
     public int getId() {

@@ -8,18 +8,14 @@
       <!--end::Card title-->
       <!--begin::Action-->
       <div class="d-flex ms-3">
-        <a @click="setEditProfile()" class="btn bg-primary btn-active-info editSkill" tooltip="New App"
+        <a @click="editSkill" class="btn background-florijn btn-active-info editSkill" tooltip="New App"
            data-bs-toggle="modal"
-           data-bs-target="#kt_modal_create_app" id="kt_toolbar_primary_button">Wijzig vaardigheden</a>
-        <a @click="(event) => this.popupStatus = true" class="btn bg-primary btn-active-info editSkill"
+           data-bs-target="#kt_modal_create_app" id="kt_toolbar_primary_button">Save skills</a>
+        <a @click="(event) => this.popupStatus = true" class="btn background-florijn btn-active-info editSkill"
            tooltip="New App"
            data-bs-toggle="modal"
-           data-bs-target="#kt_modal_create_app" id="kt_toolbar_primary_button">Voeg vaardigheid toe</a>
-<!--        <a @click="saveSkill()" class="btn bg-primary btn-active-info editSkill" tooltip="New App"-->
-<!--           data-bs-toggle="modal"-->
-<!--           data-bs-target="#kt_modal_create_app" id="kt_toolbar_primary_button">Save skills</a>-->
+           data-bs-target="#kt_modal_create_app" id="kt_toolbar_primary_button">Add skill</a>
       </div>
-      <!--end::Action-->
     </div>
     <addSkill v-if="popupStatus" @close-popup="closePopup"></addSkill>
     <div class="card-body p-11">
@@ -39,7 +35,7 @@
             <!--begin::Modal header-->
             <!--begin::Modal body-->
             <div class="backgroundTextName">{{ skill.name }}</div>
-            <input class="backgroundText inputLevelSkill" v-model="skill.level">
+            <input type="number" class="backgroundText inputLevelSkill" v-model="skill.level">
             <img src="../../assets/florijnster.png" class="skillStar">
             <div class="modal-body scroll-y mx-5 mx-xl-18 pt-0 pb-15">
               <!--end::Modal body-->
@@ -52,12 +48,13 @@
 </template>
 
 <script>
-
+import SkillRepository from "@/repository/SkillRepository";
 
 export default {
   name: "programmerInputSkills",
   props: ['skills'],
-  emits: ['edit-profile', 'delete-skill', 'add-skill'],
+  emits: ['edit-profile', 'add-skill', 'edit-skill', 'deleteSkill'],
+
 
   data() {
     return {
@@ -66,6 +63,8 @@ export default {
       currentId: null,
       selectedSkill: null,
       popupStatus: null,
+      editingSkill: null,
+      repository: new SkillRepository(),
     }
   },
   methods: {
@@ -80,42 +79,24 @@ export default {
       } else {
         this.currentId = id;
       }
+
     },
 
-    // async saveSkill() {
-    //   for (let i = 0; i < this.skills.length; i++) {
-    //     console.log(this.skills)
-    //     if (this.skills[i].skillLevel <= 5 && this.skills[i].skillLevel >= 1) {
-    //       await this.repository.createSkill(this.skills.skillName, this.skills[i].skillLevel, this.userId)
-    //       this.closePopup();
-    //       location.reload();
-    //     } else alert("Getal moet tussen de 1-5 zijn & er moet een skill geselecteerd zijn.")
-    //   }
-    // }
+    closePopup(newPopupStatus) {
+      this.popupStatus = newPopupStatus
+    },
+    addSkill(skill) {
+      this.$emit('add-skill', skill)
+    },
 
-
-  },
-  selectSkill(skill) {
-    if (skill !== null) {
-      this.selectedSkill = skill
+    async editSkill(skill) {
+      this.editingSkill = false;
+      this.$emit('edit-skill', this.editingSkill)
+      console.log(this.currentId)
+      await this.repository.updateProgrammerSkillById(this.id, skill.id, skill.level);
     }
-  },
-  closePopup(newPopupStatus) {
-    this.popupStatus = newPopupStatus
-  },
-  DeleteSkill() {
-    if (this.selectedSkill === null) {
-      alert("There is no skill selected")
-    } else {
-      this.$emit('delete-skill', this.selectedSkill)
-      this.selectedSkill = null;
-    }
-  },
-  addSkill(skill) {
-    this.$emit('add-skill', skill)
   }
 }
-
 
 </script>
 
@@ -185,7 +166,6 @@ export default {
   font-size: 15px;
   text-align: center;
 }
-
 
 
 .skillStar {

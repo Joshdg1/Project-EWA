@@ -8,16 +8,19 @@
       <!--end::Card title-->
       <!--begin::Action-->
       <div class="d-flex ms-3">
-        <a @click="setEditProfile()" class="btn bg-primary btn-active-info editSkill" tooltip="New App"
+        <a @click="(event) => this.popupStatus = true" class="btn background-florijn btn-active-info editSkill"
+           tooltip="New App"
            data-bs-toggle="modal"
-           data-bs-target="#kt_modal_create_app" id="kt_toolbar_primary_button">Wijzig vaardigheden</a>
-        <a @click="(event) => this.popupStatus = true" class="btn bg-primary btn-active-info editSkill" tooltip="New App"
+           data-bs-target="#kt_modal_create_app" id="kt_toolbar_primary_button">Add skill</a>
+        <a @click="editSkill" class="btn background-florijn btn-active-info editSkill" tooltip="New App"
            data-bs-toggle="modal"
-           data-bs-target="#kt_modal_create_app" id="kt_toolbar_primary_button">Voeg vaardigheid toe</a>
+           data-bs-target="#kt_modal_create_app" id="kt_toolbar_primary_button">Edit skills</a>
       </div>
       <!--end::Action-->
     </div>
-    <addSkill v-if="popupStatus" @close-popup="closePopup"></addSkill>
+
+    <addSkill :skill="selectedSkill" v-if="popupStatus" @close-popup="closePopup"></addSkill>
+
     <div class="card-body p-11">
       <div class="card"
            v-for="skill in this.skills"
@@ -25,6 +28,14 @@
         <div class="modal-dialog mw-650px m-2">
           <!--begin::Modal content-->
           <div class="modal-content backgroundCard">
+            <div class="d-flex justify-content-end flex-shrink-0">
+              <a class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm" @click="deleteSkill(skill)">
+                <delete-icon></delete-icon>
+              </a>
+              <a class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm" @click="editSkill(skill)">
+                <edit-icon></edit-icon>
+              </a>
+            </div>
             <!--begin::Modal header-->
             <div class="modal-header pb-0 border-0 justify-content-end">
               <!--begin::Close-->
@@ -50,19 +61,24 @@
 
 <script>
 import addSkill from "./addSkill";
+import SkillRepository from "@/repository/SkillRepository";
+import DeleteIcon from "@/components/icons/delete";
+import EditIcon from "@/components/icons/edit";
 
 export default {
   name: "programmerSkills",
-  components: {addSkill},
+  components: {EditIcon, DeleteIcon, addSkill},
   props: ['skills'],
-  emits: ['edit-profile', 'add-skill'],
+  emits: ['edit-profile', 'add-skill', 'edit-skill', 'deleteSkill'],
+
 
   data() {
     return {
+      selectedSkill: null,
       editingProfile: null,
       programSkill: null,
       popupStatus: null,
-
+      repository: new SkillRepository(),
     }
   },
   methods: {
@@ -70,12 +86,23 @@ export default {
       this.editingProfile = true
       this.$emit('edit-profile', this.editingProfile)
     },
-    closePopup(newPopupStatus) {
-      this.popupStatus = newPopupStatus
+
+    closePopup() {
+      this.popupStatus = false
     },
+
     addSkill(skill) {
       this.$emit('add-skill', skill)
+    },
 
+    async deleteSkill(skill) {
+      await this.repository.deleteSkillById(skill.id);
+      location.reload();
+    },
+
+    editSkill(skill) {
+      this.popupStatus = true;
+      this.selectedSkill = skill;
     }
   }
 

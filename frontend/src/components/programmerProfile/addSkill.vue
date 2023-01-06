@@ -24,19 +24,21 @@
         <!--begin::Heading-->
         <div class="text-center mb-13">
           <!--begin::Title-->
-          <h1 class="mb-3">Voeg een vaardigheid toe</h1>
+          <h1 v-if="!editSkill.id" class="mb-3">Voeg een vaardigheid toe</h1>
+          <h1 v-if="editSkill.id > 0" class="mb-3">Wijzig een skill</h1>
           <!--end::Title-->
         </div>
         <!--end::Heading-->
         <div class="addASkill">
           <label class="typo__label">Selecteer een vaardigheid:</label>
-          <multiselect class="newSkill" v-model="value" :options="skills" :searchable="true" :close-on-select="true"
+          <multiselect class="newSkill" v-model="editSkill.name" :options="skills" :searchable="true" :close-on-select="true"
                        :show-labels="false"
                        placeholder="Pick a value"></multiselect>
           <label class="typo__label">Geef een cijfer van 1-5:</label> <br>
-          <input type="number" class="levelSkill" v-model="this.newSkill.skillLevel">
+          <input type="number" step="1" min="1" max="5" class="levelSkill" v-model="editSkill.level">
         </div>
-        <button class="btn bg-primary btn-active-info addSkill" @click="addSkill">Voeg toe</button>
+        <button v-if="!editSkill.id" class="btn bg-primary btn-active-info addSkill" @click="addSkill">Voeg toe</button>
+        <button v-if="editSkill.id > 0" class="btn bg-primary btn-active-info addSkill" @click="addSkill">Wijzig</button>
       </div>
       <!--end::Modal body-->
     </div>
@@ -47,15 +49,15 @@
 <script>
 import Multiselect from 'vue-multiselect';
 import SkillRepository from "@/repository/SkillRepository";
-import {UserSkill} from "../../models/userSkill";
+import {UserSkill} from "@/models/userSkill";
 
 export default {
   components: {Multiselect},
   name: "addSkill",
+  props: ["skill"],
   emits: ['close-popup'],
   data() {
     return {
-      popupStatus: null,
       skills: ["MS Office Access | Front-end", "MS Office Excel | Front-end", "MS Office Access VBA | Front-end",
         "MS Powerpivot | Front-end", "MS Office Word | Front-end", "MS Office Word VBA | Front-end", "MS Office Outlook | Front-end",
         "MS Office Outlook VBA | Front-end", "MS Office VBA | Front-end", "MS SQL-Server | Back-end", "MS SQL-Server Stored Procedures | Back-end"
@@ -70,45 +72,56 @@ export default {
         , ".NET Framework | Front-end", "XML - XAML | Front-end", "Bootstrap | Web Based Front-end", "Mendix | Web Based Front-end"
         , "OutSystems | Web Based Front-end", "Power BI Overall", "Power BI DAX", "Power BI M Language", "Power BI Grafisch", "Power BI Power Query"
         , "Power BI Power BI Beheer", "Power BI Datamodellering", "Power BI Data analyse"],
-
       repository: new SkillRepository(),
-      value: null,
-      newSkill: new UserSkill(),
-      userId: null,
+      editSkill: null,
+      userID: 0,
     }
   },
   async created() {
-    this.userId = sessionStorage.getItem("id")
-    const data = await this.repository.findSkillsByUserId(this.userId);
-    for (const element of data) {
-      console.log(element)
+    this.userID = sessionStorage.getItem("id")
+
+    if (this.skill){
+      this.editSkill = this.skill;
+    } else {
+      this.editSkill = new UserSkill();
     }
   },
   methods: {
     closePopup() {
-      this.popupStatus = false;
-      this.$emit('close-popup', this.popupStatus)
+      this.$emit('close-popup')
     },
+
     async addSkill() {
-      const currentSkill = await this.repository.findSkillsByUserId(this.userId);
-      this.newSkill.skillName = this.value;
-      this.newSkill.skillLevel = document.getElementsByClassName("levelSkill")[0].value;
-      console.log(currentSkill)
+      const currentSkill = await this.repository.findSkillsById(this.userID);
+
+      console.log('CurrenSkill', currentSkill);
+
+      // check empty
+      if (!this.editSkill.level || !this.editSkill.name)
+        return alert("Vul de velden in")
+
+      // check if user already has skill
       for (const element of currentSkill) {
-        if (element.name === this.newSkill.skillName) {
+        if (element.id === this.editSkill.id)
+          continue;
+
+        if (element.name === this.editSkill.name) {
           alert("Deze skill bezit u al.")
           return
         }
       }
 
-      if (this.newSkill.skillLevel <= 5 && this.newSkill.skillLevel >= 1 && this.newSkill.skillName != null) {
-        await this.repository.createSkill(this.newSkill.skillName, this.newSkill.skillLevel, this.userId)
-        this.closePopup();
+      this.editSkill.user_id = this.userID;
+
+      if (this.editSkill.id > 0){
+        await this.repository.updateSkill(this.editSkill)
+      } else {
+        await this.repository.createSkill(this.editSkill)
         location.reload();
-      } else alert("Getal moet tussen de 1-5 zijn & er moet een skill geselecteerd zijn.")
+      }
 
+      this.closePopup();
     }
-
   }
 }
 </script>

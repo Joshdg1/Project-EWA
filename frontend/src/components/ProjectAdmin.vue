@@ -27,7 +27,7 @@
                          :allow-empty="false"
                          :show-labels="false"
                          placeholder="sorteer op hoeveelheid specialisten"></multiselect>
-            <router-link to="/createNewProject">
+            <router-link to="/projects/create">
               <div class="card-toolbar" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-trigger="hover"
                    title="Click to add a project">
                 <a href="#" class="btn btn-sm btn-light-primary" data-bs-toggle="modal"

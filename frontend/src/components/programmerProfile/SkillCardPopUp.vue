@@ -6,9 +6,7 @@
       <div class="CardText">
         <input v-model="newSkill.skillName" placeholder="name" class="cardInput">
         <div class="SkillLevel">
-          <input v-model="newSkill.skillLevel" placeholder="level"  class="cardInput">
-          <img src="https://cdn.onlinewebfonts.com/svg/img_561899.png" class="skillStar">
-        </div>
+          <input v-model="newSkill.skillLevel" placeholder="level" class="cardInput">
       </div>
       <button class="btn bg-primary btn-active-info addSkill" @click="addSkill">Voeg vaardigheid toe</button>
       <slot/>
@@ -43,9 +41,20 @@ export default {
         this.$emit('close-popup', this.popupStatus)
       }
 
+    },
+
+    async deleteSkill(skill) {
+      await this.repository.deleteSkillsById(skill.id);
+      location.reload();
+    },
+
+    editSkill() {
+      this.editingSkill = true;
+      this.$emit('editSkill', this.editingSkill)
     }
   }
 }
+
 </script>
 
 <style scoped>
@@ -57,7 +66,7 @@ export default {
   right: 0;
   bottom: 0;
   z-index: 99;
-  background-color: rgba(0,0,0 ,0.2);
+  background-color: rgba(0, 0, 0, 0.2);
 
   display: flex;
   align-items: center;
