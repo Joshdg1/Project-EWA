@@ -29,7 +29,12 @@ const adminRoutes = [
     {
         name: "Projecten",
         path: '/projects',
-        component: () => import(`../views/admin/project/ProjectAdminView.vue`),
+        component: () => import(`../views/programmer/project/View`),
+    },
+    {
+        name: "Project :name",
+        path: '/projects/:id/view',
+        component: () => import(`../views/programmer/project/View`),
     },
 
     {

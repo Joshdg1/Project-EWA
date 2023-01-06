@@ -60,17 +60,17 @@ export default {
 
     const availability = await this.availabilityRepository.getAvailabilityById(id)
 
-    for (let i = 0; i < availability.length; i++) {
+    for (const element of availability) {
       let calendarApi = this.$refs.calendar.getApi();
 
-      let start = new Date(availability[i].startDate).getTime()
-      let end = new Date(availability[i].endDate).getTime()
+      let start = new Date(element.startDate).getTime()
+      let end = new Date(element.endDate).getTime()
       const time = ((end - start) / 60 / 60 / 1000)
       this.totalHours += time
       calendarApi.addEvent({
-        title: availability[i].title,
-        start: availability[i].startDate,
-        end: availability[i].endDate,
+        title: element.project.title,
+        start: element.startDate,
+        end: element.endDate,
       })
     }
   },
