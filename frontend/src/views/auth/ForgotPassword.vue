@@ -14,7 +14,7 @@
       <div class="fv-plugins-message-container invalid-feedback"></div>
     </div>
     <div class="text-center">
-      <button type="submit" @click="sendEmail()" class="btn btn-lg btn-primary w-100 mb-5">
+      <button type="submit" @click="sendEmailFunction()" class="btn btn-lg btn-primary w-100 mb-5">
         <span class="indicator-label">Stuur email</span>
         <span class="indicator-progress">Wacht alsjeblieft...
 									<span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
@@ -34,12 +34,13 @@ export default {
   data() {
     return {
       userRepository: new UserRepository(),
-      email: null,
+      email: null
     }
   },
   methods:{
-    async sendEmail(){
-      await this.userRepository.sendEmail({email: this.email});
+    async sendEmailFunction(){
+      await this.userRepository.sendEmail(this.email);
+      alert("Email is verstuurt")
     }
   }
 }

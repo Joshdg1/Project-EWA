@@ -275,10 +275,10 @@ public class UserController {
 
         passwordResetRepository.save(passwordResetTokenEntity);
 
-
-        if (user == null){
-            throw new NotFoundException("Unknown user");
-        }
+//
+//        if (user == null){
+//            throw new NotFoundException("Unknown user");
+//        }
 
         MailgunMessagesApi mailgunMessagesApi = MailgunClient.config(env.getProperty("mailgun.api.key"))
                 .createApi(MailgunMessagesApi.class);

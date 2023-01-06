@@ -64,7 +64,7 @@ export default class UserRepository {
         return await API.post(
             `/users/forgotPassword`,
             {
-               email
+               email: email
             }
         );
     }
