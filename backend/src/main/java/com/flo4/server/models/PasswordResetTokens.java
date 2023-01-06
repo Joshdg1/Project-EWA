@@ -10,7 +10,7 @@ import java.io.Serializable;
 @Getter
 @Setter
 @Entity(name = "password_reset_tokens")
-public class PasswordResetTokenEntity implements Serializable {
+public class PasswordResetTokens implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "id", nullable = false)
@@ -20,5 +20,5 @@ public class PasswordResetTokenEntity implements Serializable {
 
     @OneToOne
     @JoinColumn(name = "user_id")
-    private User user;
+    private User user_id;
 }

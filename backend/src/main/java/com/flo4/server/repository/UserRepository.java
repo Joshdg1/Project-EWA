@@ -1,8 +1,8 @@
 package com.flo4.server.repository;
 
 
+import com.flo4.server.models.PasswordResetTokens;
 import com.flo4.server.models.User;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
@@ -10,7 +10,6 @@ import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
-import java.time.LocalDateTime;
 import java.util.List;
 
 
@@ -93,6 +92,32 @@ public class UserRepository implements EntityRepository<User> {
         return query.getResultList();
     }
 
+
+    public User findUserByToken(String token) {
+        User user = this.entityManager
+                .createQuery("SELECT u FROM User u INNER JOIN password_reset_tokens p ON u.id = p.user_id WHERE p.token = ?1", User.class)
+                .setParameter(1, token)
+                .getSingleResult();
+
+        if (user == null) {
+            throw new NoResultException("No matching user");
+        }
+
+        return user;
+    }
+//
+//    public PasswordResetTokens findToken(String token) {
+//        return this.entityManager.createQuery("SELECT token FROM password_reset_tokens WHERE token = ?1", PasswordResetTokens.class)
+//                .setParameter(1, token)
+//                .getSingleResult();
+//
+//    }
+//
+//    public PasswordResetTokens deleteToken(String token) {
+//        return this.entityManager.createQuery("DELETE FROM password_reset_tokens WHERE token = ?1", PasswordResetTokens.class)
+//                .setParameter(1, token)
+//                .getSingleResult();
+//    }
 
 
 //public User findByIdAndTokenAndExpired(int id, String refresh_token, LocalDateTime expired_at){

@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 
 import com.flo4.server.Exceptions.NotFoundException;
-import com.flo4.server.models.PasswordResetTokenEntity;
+import com.flo4.server.models.PasswordResetTokens;
 import com.flo4.server.models.User;
 import com.flo4.server.repository.PasswordResetRepository;
 import com.flo4.server.repository.UserRepository;
@@ -264,16 +264,22 @@ public class UserController {
     private Environment env;
 
     @PostMapping(path = "forgotPassword")
-    public ResponseEntity<User> sendMail(@RequestBody PasswordReset passwordReset){
+    public ResponseEntity<User> sendMail(@RequestBody PasswordReset passwordReset, HttpServletRequest request){
         User user = this.userRepository.findByEmail(passwordReset.getEmail());
+
+
 
         String token = new PasswordResetUtil().generateResetToken(String.valueOf(user.getId()));
 
-        PasswordResetTokenEntity passwordResetTokenEntity = new PasswordResetTokenEntity();
-        passwordResetTokenEntity.setToken(token);
-        passwordResetTokenEntity.setUser(user);
 
-        passwordResetRepository.save(passwordResetTokenEntity);
+
+        PasswordResetTokens passwordResetTokens = new PasswordResetTokens();
+        passwordResetTokens.setToken(token);
+        passwordResetTokens.setUser_id(user);
+
+        String resetPasswordLink = "http://localhost:8080/users/resetPassword?token=" + token;
+
+        passwordResetRepository.save(passwordResetTokens);
 
 //
 //        if (user == null){
@@ -287,7 +293,7 @@ public class UserController {
                 .from(env.getProperty("mailgun.email.from"))
                 .to(user.getEmail())
                 .subject("Wachtwoord vergeten")
-                .text(String.format("Hi %s, om je wachtwoord te veranderen klik op deze link http://localhost:8080/resetPassword/%s", user.getFirstName(), token))
+                .text(String.format("Hi %s, om je wachtwoord te veranderen klik op deze link %s", user.getFirstName(), resetPasswordLink))
                 .build();
 
         mailgunMessagesApi.sendMessage(env.getProperty("mailgun.api.domain"), message);
@@ -297,4 +303,26 @@ public class UserController {
 
         return ResponseEntity.ok().body(user);
     }
+
+
+    record ResetRequest(String password){}
+    record ResetResponse(int id, String email){}
+
+    //resetPassword?{token}
+    //,@PathVariable(value = "token") String token
+
+    @PutMapping(path = "resetPassword")
+    public ResetResponse resetPassword(@RequestBody ResetRequest resetRequest){
+
+        String token = "ey123";
+
+        User userByToken = userRepository.findUserByToken(token);
+
+
+       userService.updatePassword(userByToken, resetRequest.password);
+
+        return new ResetResponse(userByToken.getId(), userByToken.getEmail());
+    }
+
+
 }

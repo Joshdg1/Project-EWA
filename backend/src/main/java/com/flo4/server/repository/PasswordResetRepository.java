@@ -1,6 +1,6 @@
 package com.flo4.server.repository;
 
-import com.flo4.server.models.PasswordResetTokenEntity;
+import com.flo4.server.models.PasswordResetTokens;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
@@ -11,53 +11,53 @@ import java.util.List;
 
 @Repository("PASSWORDRESET.JPA")
 @Transactional
-public class PasswordResetRepository implements EntityRepository<PasswordResetTokenEntity>{
+public class PasswordResetRepository implements EntityRepository<PasswordResetTokens>{
 
     @PersistenceContext
     protected EntityManager entityManager;
 
     @Override
-    public List<PasswordResetTokenEntity> findAll() {
-        TypedQuery<PasswordResetTokenEntity> query = this.entityManager.createQuery("select t from password_reset_tokens a", PasswordResetTokenEntity.class);
+    public List<PasswordResetTokens> findAll() {
+        TypedQuery<PasswordResetTokens> query = this.entityManager.createQuery("select t from password_reset_tokens a", PasswordResetTokens.class);
 
         return query.getResultList();
     }
 
     @Override
-    public PasswordResetTokenEntity findById(int id) {
-        return this.entityManager.find(PasswordResetTokenEntity.class, id);
+    public PasswordResetTokens findById(int id) {
+        return this.entityManager.find(PasswordResetTokens.class, id);
     }
 
     @Override
-    public PasswordResetTokenEntity save(PasswordResetTokenEntity entity) {
+    public PasswordResetTokens save(PasswordResetTokens entity) {
         return this.entityManager.merge(entity);
     }
 
     @Override
-    public PasswordResetTokenEntity update(PasswordResetTokenEntity entity, int id) {
-        PasswordResetTokenEntity updatedPasswordResetTokenEntity = findById(id);
+    public PasswordResetTokens update(PasswordResetTokens entity, int id) {
+        PasswordResetTokens updatedPasswordResetTokens = findById(id);
 
-        if (updatedPasswordResetTokenEntity == null) {
+        if (updatedPasswordResetTokens == null) {
             return null;
         }
 
-        updatedPasswordResetTokenEntity.setId(entity.getId());
-        updatedPasswordResetTokenEntity.setToken(entity.getToken());
-        updatedPasswordResetTokenEntity.setUser(entity.getUser());
+        updatedPasswordResetTokens.setId(entity.getId());
+        updatedPasswordResetTokens.setToken(entity.getToken());
+        updatedPasswordResetTokens.setUser_id(entity.getUser_id());
 
-        return updatedPasswordResetTokenEntity;
+        return updatedPasswordResetTokens;
     }
 
     @Override
-    public PasswordResetTokenEntity deleteById(int id) {
-        PasswordResetTokenEntity passwordResetTokenEntity = entityManager.find(PasswordResetTokenEntity.class, id);
-        entityManager.remove(passwordResetTokenEntity);
-        return passwordResetTokenEntity;
+    public PasswordResetTokens deleteById(int id) {
+        PasswordResetTokens passwordResetTokens = entityManager.find(PasswordResetTokens.class, id);
+        entityManager.remove(passwordResetTokens);
+        return passwordResetTokens;
     }
 
     @Override
-    public List<PasswordResetTokenEntity> findByQuery(String jpqlName, Object... params) {
-        TypedQuery<PasswordResetTokenEntity> query = this.entityManager.createNamedQuery(jpqlName, PasswordResetTokenEntity.class);
+    public List<PasswordResetTokens> findByQuery(String jpqlName, Object... params) {
+        TypedQuery<PasswordResetTokens> query = this.entityManager.createNamedQuery(jpqlName, PasswordResetTokens.class);
 
         //Put all params into the query.
         for (int i = 0; i < params.length; i++) {
