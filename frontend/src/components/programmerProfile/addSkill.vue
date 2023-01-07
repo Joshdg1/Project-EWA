@@ -94,8 +94,6 @@ export default {
     async addSkill() {
       const currentSkill = await this.repository.findSkillsById(this.userID);
 
-      console.log('CurrenSkill', currentSkill);
-
       // check empty
       if (!this.editSkill.level || !this.editSkill.name)
         return alert("Vul de velden in")

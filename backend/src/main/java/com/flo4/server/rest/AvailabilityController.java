@@ -16,7 +16,6 @@ import java.util.List;
 
 @RestController
 @RequestMapping("availability")
-@CrossOrigin(origins = "http://localhost:8080")
 public class AvailabilityController {
     private static final String notFound = "Availability with id %d was not found!";
     @Autowired

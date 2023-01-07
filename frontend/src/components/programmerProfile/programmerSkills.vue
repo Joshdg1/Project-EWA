@@ -12,9 +12,6 @@
            tooltip="New App"
            data-bs-toggle="modal"
            data-bs-target="#kt_modal_create_app" id="kt_toolbar_primary_button">Add skill</a>
-        <a @click="editSkill" class="btn background-florijn btn-active-info editSkill" tooltip="New App"
-           data-bs-toggle="modal"
-           data-bs-target="#kt_modal_create_app" id="kt_toolbar_primary_button">Edit skills</a>
       </div>
       <!--end::Action-->
     </div>
