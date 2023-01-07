@@ -7,9 +7,6 @@
 
 <script>
 
-
-//{project} import is for fake data.
-// import {project} from '../../../models/project.js'
 import ProjectRepository from '../../../repository/ProjectRepository'
 import projectsBlockedList from '../../../components/ProjectBlockedList.vue'
 import UserRepository from "@/repository/UserRepository";
@@ -22,36 +19,23 @@ export default {
   },
 
   async created() {
+
     this.userID = sessionStorage.getItem("id")
-    console.log(this.userID)
 
     const data = await this.repository.getAllProjects();
 
-    for (let i = 0; i < data.length; i++) {
-      this.projects.push(data[i]);
+    for (const element of data) {
+      this.projects.push(element);
     }
-    console.log("PROJECT "+this.projects)
-    for (let i = 0; i < this.projects.length; i++) {
-      console.log("ALLPROJECTS " + this.projects[i])
-      console.log("ALL USERS " + this.projects[i].users)
-      console.log("ALL USERS LENGTH" + this.projects[i].users.length)
-
-      for (let j = 0; j < this.projects[i].users.length; j++) {
-        console.log("USER ID " + typeof this.projects[i].users[j].id)
-
-          if ((this.projects[i].users[j].id).toString() === this.userID ){
-            console.log("ZIT IK AAN VAST")
-            this.programmerProjects.push(this.projects[i])
+    console.log("PROJECT "+this.projects.length)
+    for (const element of this.projects) {
+      for (let j = 0; j < element.users.length; j++) {
+        if ((element.users[j].id).toString() === this.userID) {
+          this.programmerProjects.push(element)
           }
       }
-      console.log()
     }
-
-
-    // for (const user in users){
-    //   console.log("EYO")
-    //   // console.log("User" + user.firstname)
-    // }
+    console.log("PROGRMMAAR PROJECTS" + this.programmerProjects.length)
   },
 
   data() {

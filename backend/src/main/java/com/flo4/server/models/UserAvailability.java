@@ -15,10 +15,13 @@ public class UserAvailability {
     @JoinColumn(name = "user_id")
     private User user;
 
-    private String title;
     private LocalDateTime startDate;
 
     private LocalDateTime endDate;
+
+    @ManyToOne
+    @JoinColumn(name = "project_id")
+    private Project project;
 
     public User getUser() {
         return user;
@@ -33,12 +36,12 @@ public class UserAvailability {
 
     public UserAvailability(int Id){this.Id = Id;}
 
-    public UserAvailability(Integer id, User user, String title, LocalDateTime startDate, LocalDateTime endDate) {
+    public UserAvailability(Integer id, User user, LocalDateTime startDate, LocalDateTime endDate, Project project) {
         Id = id;
         this.user = user;
-        this.title = title;
         this.startDate = startDate;
         this.endDate = endDate;
+        this.project = project;
     }
 
     public void setId(int Id) {
@@ -66,11 +69,12 @@ public class UserAvailability {
         this.endDate = endDate;
     }
 
-    public String getTitle() {
-        return title;
+
+    public Project getProject() {
+        return project;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setProject(Project project) {
+        this.project = project;
     }
 }
