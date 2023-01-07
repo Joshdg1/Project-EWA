@@ -314,17 +314,18 @@ public class UserController {
 
     @PutMapping(path = "resetPassword")
     public ResetResponse resetPassword(@RequestBody ResetRequest resetRequest, @RequestParam(value = "token") String token){
-        
 
-        System.out.println(token);
 
         User userByToken = userRepository.findUserByToken(token);
 
-
        userService.updatePassword(userByToken, resetRequest.password);
+
 
         return new ResetResponse(userByToken.getId(), userByToken.getEmail());
     }
+
+
+
 
 
 }

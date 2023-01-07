@@ -81,10 +81,9 @@ public class UserService {
         user.setPassword(passwordEncoder.encode(newPassword));
          return userRepository.save(user);
     }
-//
+
 //    public PasswordResetTokens deleteToken(String token){
 //
-//
-//       return userRepository.deleteToken(token);
+//       return userRepository.deleteByToken(token);
 //    }
 }

@@ -105,18 +105,24 @@ public class UserRepository implements EntityRepository<User> {
 
         return user;
     }
-//
-//    public PasswordResetTokens findToken(String token) {
-//        return this.entityManager.createQuery("SELECT token FROM password_reset_tokens WHERE token = ?1", PasswordResetTokens.class)
-//                .setParameter(1, token)
-//                .getSingleResult();
-//
-//    }
-//
+
+    public PasswordResetTokens findToken(String token) {
+        return this.entityManager.createQuery("SELECT token FROM password_reset_tokens WHERE token = ?1", PasswordResetTokens.class)
+                .setParameter(1, token)
+                .getSingleResult();
+
+    }
+
 //    public PasswordResetTokens deleteToken(String token) {
-//        return this.entityManager.createQuery("DELETE FROM password_reset_tokens WHERE token = ?1", PasswordResetTokens.class)
+//        return this.entityManager.createQuery("UPDATE password_reset_tokens SET token = NULL, user_id = NULL where token = ?1", PasswordResetTokens.class)
 //                .setParameter(1, token)
 //                .getSingleResult();
+//    }
+
+//    public PasswordResetTokens deleteByToken(String token) {
+//        PasswordResetTokens passwordResetTokens = this.findToken(token);
+//        entityManager.remove(passwordResetTokens);
+//        return passwordResetTokens;
 //    }
 
 
