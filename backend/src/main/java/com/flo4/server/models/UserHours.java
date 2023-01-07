@@ -12,9 +12,8 @@ public class UserHours {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     int id;
-    String start;
-    String end;
 
+    double hours;
     @ManyToOne
     @JoinColumn(name = "approvedById")
     private User approverdBy;

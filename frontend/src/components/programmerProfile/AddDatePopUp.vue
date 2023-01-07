@@ -38,18 +38,17 @@
 </template>
 
 <script>
-
 import AvailabilityRepository from "@/repository/AvailabilityRepository";
 import UserDate from "../../models/userDate";
 import Multiselect from "vue-multiselect";
 import ProjectRepository from "@/repository/ProjectRepository";
+import HourRepository from "@/repository/HourRepository";
 
 export default {
   components: {    Multiselect,
   },
-
   name: "AddDatePopUp",
-  props: ['selectedDate'],
+  props: ['selectedDate', 'userId'],
   emits: ['close-popup'],
   async created() {
     this.newDate = new UserDate()
@@ -63,7 +62,9 @@ export default {
       popupStatus: null,
       Projects: null,
       newDate: [],
+      totalHours: 0,
       allProjects: [],
+      hoursRepository: new HourRepository(),
       projectRepository: new ProjectRepository(),
       repository: new AvailabilityRepository()
     }
@@ -80,6 +81,10 @@ export default {
     },
   async  addSkill(){
      const allDates = this.betweenDates(this.newDate.start, this.newDate.end)
+
+    const hours = await this.hoursRepository.getHoursById(this.userId)
+    console.log("HOURS" + hours.length)
+
       for (const element of allDates) {
         element.setHours(0)
         element.setMinutes(0)
@@ -89,24 +94,47 @@ export default {
         const endHours = ((this.newDate.hoursPerDayEnd.substring(0, 2) * 1) + (this.newDate.hoursPerDayEnd.substring(3, 5) / 60))
 
         const startDate = this.addHoursToDate(element, startHours)
-        const endDate = this.addHoursToDate(element,endHours)
+        const endDate = this.addHoursToDate(element, endHours)
 
-        const userID = sessionStorage.getItem("id")
 
         let Project = null
         const currentProject = this.newDate.project
-        this.Projects.forEach( function (entry){
-          console.log(entry)
-          console.log(currentProject)
-            if (entry.title === currentProject){
-                Project = entry
-            }
+        this.Projects.forEach(function (entry) {
+          if (entry.title === currentProject) {
+            Project = entry
+          }
         })
-        await this.repository.createAvailability(Project ,startDate,endDate , userID)
+        await this.repository.createAvailability(Project, startDate, endDate, this.userId)
+
+        let start = new Date(startDate).getTime()
+        console.log("START " + start)
+        let end = new Date(endDate).getTime()
+        console.log("END " + end)
+
+        const time = ((end - start) / 60 / 60 / 1000)
+        console.log("TIME" + time)
+        this.totalHours += time
+
+
+      }
+
+    let Project = null
+    const currentProject = this.newDate.project
+    this.Projects.forEach(function (entry) {
+      if (entry.title === currentProject) {
+        Project = entry
+      }
+    })
+
+    if (hours.length === 0) {
+      await this.hoursRepository.createHours(Project, this.totalHours , this.userId)
+    } else {
+      await this.hoursRepository.updateHoursById()
+    }
         this.popupStatus = false
         this.$emit('close-popup', this.popupStatus)
-      }
-    },
+      },
+
     cancel(){
       this.popupStatus = false
       this.$emit('close-popup', this.popupStatus)

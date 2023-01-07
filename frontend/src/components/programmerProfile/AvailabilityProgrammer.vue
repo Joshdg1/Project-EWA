@@ -25,6 +25,7 @@
     <AddDatePopUp
         v-if="popupStatusAdd"
         :selectedDate="selectedDate"
+        :user-id="userId"
         @close-popup="closePopup">
 
     </AddDatePopUp>
@@ -56,9 +57,9 @@ export default {
     AddDatePopUp, FullCalendar // make the <FullCalendar> tag available
   },
   async created() {
-    const id = sessionStorage.getItem("id")
+     this.userId = sessionStorage.getItem("id")
 
-    const availability = await this.availabilityRepository.getAvailabilityById(id)
+    const availability = await this.availabilityRepository.getAvailabilityById(this.userId)
 
     for (const element of availability) {
       let calendarApi = this.$refs.calendar.getApi();
@@ -82,6 +83,7 @@ export default {
       popupStatusAdd: null,
       popupStatusEdit: null,
       totalHours: 0,
+      userId: null,
       selectedDate: null,
       eventStart: null,
       eventEnd: null,
