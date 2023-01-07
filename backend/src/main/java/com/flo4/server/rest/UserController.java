@@ -272,10 +272,11 @@ public class UserController {
         String token = new PasswordResetUtil().generateResetToken(String.valueOf(user.getId()));
 
 
-
         PasswordResetTokens passwordResetTokens = new PasswordResetTokens();
         passwordResetTokens.setToken(token);
         passwordResetTokens.setUser_id(user);
+
+
 
         String resetPasswordLink = "http://localhost:8080/users/resetPassword?token=" + token;
 
@@ -312,9 +313,10 @@ public class UserController {
     //,@PathVariable(value = "token") String token
 
     @PutMapping(path = "resetPassword")
-    public ResetResponse resetPassword(@RequestBody ResetRequest resetRequest){
+    public ResetResponse resetPassword(@RequestBody ResetRequest resetRequest, @RequestParam(value = "token") String token){
+        
 
-        String token = "ey123";
+        System.out.println(token);
 
         User userByToken = userRepository.findUserByToken(token);
 
