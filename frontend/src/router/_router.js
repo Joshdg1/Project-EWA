@@ -43,7 +43,7 @@ let routes = [
         meta: {
             isPublic: true,
         },
-        path: "/users/resetPassword*",
+        path: "/users/resetPassword",
         component: () => import('../views/auth/ResetPassword'),
     },
     {

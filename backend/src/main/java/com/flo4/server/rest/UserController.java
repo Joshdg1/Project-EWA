@@ -306,17 +306,16 @@ public class UserController {
     }
 
 
-    record ResetRequest(String password){}
+    record ResetRequest(String password, String token){}
     record ResetResponse(int id, String email){}
 
     //resetPassword?{token}
     //,@PathVariable(value = "token") String token
 
     @PutMapping(path = "resetPassword")
-    public ResetResponse resetPassword(@RequestBody ResetRequest resetRequest, @RequestParam(value = "token") String token){
+    public ResetResponse resetPassword(@RequestBody ResetRequest resetRequest){
 
-
-        User userByToken = userRepository.findUserByToken(token);
+        User userByToken = userRepository.findUserByToken(resetRequest.token);
 
        userService.updatePassword(userByToken, resetRequest.password);
 

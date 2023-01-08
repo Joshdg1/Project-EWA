@@ -74,4 +74,14 @@ export default class UserRepository {
             }
         );
     }
+
+    async resetPassword(password, token) {
+        return await API.put(
+            this.url + "resetPassword",
+            {
+                password: password,
+                token: token
+            }
+        );
+    }
 }

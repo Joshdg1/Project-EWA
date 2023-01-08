@@ -40,7 +40,6 @@ export default {
   methods:{
     async sendEmailFunction(){
       await this.userRepository.sendEmail(this.email);
-      alert("Email is verstuurt")
     }
   }
 }
