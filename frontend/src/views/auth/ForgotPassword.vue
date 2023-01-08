@@ -3,7 +3,7 @@
     <div class="text-center mb-10">
       <h1 class="text-dark mb-3">Wachtwoord vergeten?</h1>
 
-      <router-link to="/users/register" class="link-primary fw-bold">Vul hier je email in</router-link>
+      <h2  class="link-primary fw-bold">Vul hier je email in</h2>
     </div>
 
     <div class="fv-row mb-10 fv-plugins-icon-container">

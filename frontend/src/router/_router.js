@@ -36,8 +36,15 @@ let routes = [
         meta: {
             isPublic: true,
         },
-        path: "/users/asd",
+        path: "/users/ForgotPassword",
         component: () => import('../views/auth/ForgotPassword.vue'),
+    },
+    {
+        meta: {
+            isPublic: true,
+        },
+        path: "/users/resetPassword*",
+        component: () => import('../views/auth/ResetPassword'),
     },
     {
         name: "404PageNotFound",

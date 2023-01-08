@@ -1,7 +1,7 @@
 <!--<template>-->
 <!--  <form class="form w-100" @submit="checkForm">-->
 <!--    <div class="text-center mb-10">-->
-<!--      <h1 class="text-dark mb-3">Wachtwoord vergeten?</h1>-->
+<!--      <h1 class="text-dark mb-3">Stel je wachtwoord opnieuw in</h1>-->
 
 <!--      <router-link to="/users/register" class="link-primary fw-bold">Vul hier je nieuw wachtwoord in</router-link>-->
 <!--    </div>-->
