@@ -68,7 +68,7 @@ export default class UserRepository {
 
     async sendEmail(email) {
         return await API.post(
-            `/users/forgotPassword`,
+            this.url + "forgotPassword",
             {
                email: email
             }
