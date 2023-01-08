@@ -11,10 +11,6 @@
 
         <programmer-skills v-if="!this.editProfile && currentTab === 3 " :skills="skills"
                            @edit-profile="EditProfileStatus" @add-skill="addSkill"></programmer-skills>
-
-        <ProgrammerInputSkills v-if="this.editProfile && currentTab === 3 " :skills="skills"
-                               @edit-profile="EditProfileStatus" @delete-skill="deleteSkill"
-                               @add-skill="addSkill"></ProgrammerInputSkills>
     </div>
 </template>
 <script>
@@ -24,7 +20,6 @@
     import TopProfileDetails from "@/components/programmerProfile/TopProfileDetails";
     import AvailabilityProgrammer from "@/components/programmerProfile/AvailabilityProgrammer";
     import ProgrammerSkills from "@/components/programmerProfile/programmerSkills";
-    import ProgrammerInputSkills from "@/components/programmerProfile/ProgrammerInputSkills";
     import User from "@/models/user";
     import UserRepository from "@/repository/UserRepository";
     import ProjectRepository from "@/repository/ProjectRepository";
@@ -34,7 +29,6 @@
         name: "AdminProfilePage",
 
         components: {
-            ProgrammerInputSkills,
             ProgrammerSkills, AvailabilityProgrammer, TopProfileDetails, ProfileInputDetails, ProfileDetails
         },
 

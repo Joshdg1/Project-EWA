@@ -7,8 +7,8 @@
       </div>
       <!--end::Card title-->
       <!--begin::Action-->
-      <div class="d-flex ms-3">
-        <a @click="(event) => this.popupStatus = true" class="btn background-florijn btn-active-info editSkill"
+      <div class="d-flex ms-3" v-if="this.addCheck">
+        <a @click= "onAddSkillClick" class="btn background-florijn btn-active-info editSkill"
            tooltip="New App"
            data-bs-toggle="modal"
            data-bs-target="#kt_modal_create_app" id="kt_toolbar_primary_button">Add skill</a>
@@ -76,6 +76,7 @@ export default {
       programSkill: null,
       popupStatus: null,
       repository: new SkillRepository(),
+      addCheck: true,
     }
   },
   methods: {
@@ -86,10 +87,14 @@ export default {
 
     closePopup() {
       this.popupStatus = false
+      this.addCheck = true;
+      this.$emit('addCheck', this.addCheck)
     },
 
     addSkill(skill) {
       this.$emit('add-skill', skill)
+      this.addCheck = true;
+      this.$emit('addCheck', this.addCheck)
     },
 
     async deleteSkill(skill) {
@@ -98,9 +103,16 @@ export default {
     },
 
     editSkill(skill) {
+      this.addCheck = false;
+      this.$emit('addCheck', this.addCheck)
       this.popupStatus = true;
       this.selectedSkill = skill;
-    }
+    },
+
+    onAddSkillClick(){
+      this.popupStatus = true;
+      this.selectedSkill = null;
+    },
   }
 
 }

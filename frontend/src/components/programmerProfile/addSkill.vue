@@ -25,13 +25,14 @@
         <div class="text-center mb-13">
           <!--begin::Title-->
           <h1 v-if="!editSkill.id" class="mb-3">Voeg een vaardigheid toe</h1>
-          <h1 v-if="editSkill.id > 0" class="mb-3">Wijzig een skill</h1>
+          <h1 v-if="editSkill.id > 0" class="mb-3">Wijzig een vaardigheid</h1>
           <!--end::Title-->
         </div>
         <!--end::Heading-->
         <div class="addASkill">
           <label class="typo__label">Selecteer een vaardigheid:</label>
-          <multiselect class="newSkill" v-model="editSkill.name" :options="skills" :searchable="true" :close-on-select="true"
+          <multiselect class="newSkill" v-model="editSkill.name" :options="skills" :searchable="true"
+                       :close-on-select="true"
                        :show-labels="false"
                        placeholder="Pick a value"></multiselect>
           <label class="typo__label">Geef een cijfer van 1-5:</label> <br>
@@ -79,8 +80,7 @@ export default {
   },
   async created() {
     this.userID = sessionStorage.getItem("id")
-
-    if (this.skill){
+    if (this.skill) {
       this.editSkill = this.skill;
     } else {
       this.editSkill = new UserSkill();
@@ -93,6 +93,8 @@ export default {
 
     async addSkill() {
       const currentSkill = await this.repository.findSkillsById(this.userID);
+      this.addCheck = false;
+      this.$emit('addCheck', this.addCheck)
 
       // check empty
       if (!this.editSkill.level || !this.editSkill.name)
@@ -111,7 +113,7 @@ export default {
 
       this.editSkill.user_id = this.userID;
 
-      if (this.editSkill.id > 0){
+      if (this.editSkill.id > 0) {
         await this.repository.updateSkill(this.editSkill)
       } else {
         await this.repository.createSkill(this.editSkill)
