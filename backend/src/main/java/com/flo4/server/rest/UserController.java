@@ -1,15 +1,14 @@
 package com.flo4.server.rest;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-
-
 import com.flo4.server.Exceptions.NotFoundException;
 import com.flo4.server.models.PasswordResetTokens;
 import com.flo4.server.models.User;
 import com.flo4.server.repository.PasswordResetRepository;
 import com.flo4.server.repository.UserRepository;
-import com.flo4.server.service.*;
-
+import com.flo4.server.service.Login;
+import com.flo4.server.service.PasswordReset;
+import com.flo4.server.service.UserService;
 import com.flo4.server.utils.PasswordResetUtil;
 import com.mailgun.api.v3.MailgunMessagesApi;
 import com.mailgun.client.MailgunClient;
@@ -18,7 +17,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -139,7 +137,6 @@ public class UserController {
     }
 
 
-
     public UserController(UserService userService, UserRepository userRepository, PasswordResetRepository passwordResetRepository) {
         this.userService = userService;
         this.userRepository = userRepository;
@@ -204,8 +201,6 @@ public class UserController {
 
 
         return new RegisterResponse(user.getEmail(), user.getFirstName(), user.getLastName(), user.getPhoneNumber());
-
-
 
 
     }
@@ -292,9 +287,8 @@ public class UserController {
     private Environment env;
 
     @PostMapping(path = "forgotPassword")
-    public ResponseEntity<User> sendMail(@RequestBody PasswordReset passwordReset, HttpServletRequest request){
+    public ResponseEntity<User> sendMail(@RequestBody PasswordReset passwordReset, HttpServletRequest request) {
         User user = this.userRepository.findByEmail(passwordReset.getEmail());
-
 
 
         String token = new PasswordResetUtil().generateResetToken(String.valueOf(user.getId()));
@@ -303,7 +297,6 @@ public class UserController {
         PasswordResetTokens passwordResetTokens = new PasswordResetTokens();
         passwordResetTokens.setToken(token);
         passwordResetTokens.setUser_id(user);
-
 
 
         String resetPasswordLink = "http://localhost:8080/users/resetPassword?token=" + token;
@@ -332,25 +325,25 @@ public class UserController {
     }
 
 
-    record ResetRequest(String password, String token){}
-    record ResetResponse(int id, String email){}
+    record ResetRequest(String password, String token) {
+    }
+
+    record ResetResponse(int id, String email) {
+    }
 
     //resetPassword?{token}
     //,@PathVariable(value = "token") String token
 
     @PutMapping(path = "resetPassword")
-    public ResetResponse resetPassword(@RequestBody ResetRequest resetRequest){
+    public ResetResponse resetPassword(@RequestBody ResetRequest resetRequest) {
 
         User userByToken = userRepository.findUserByToken(resetRequest.token);
 
-       userService.updatePassword(userByToken, resetRequest.password);
+        userService.updatePassword(userByToken, resetRequest.password);
 
 
         return new ResetResponse(userByToken.getId(), userByToken.getEmail());
     }
-
-
-
 
 
 }
