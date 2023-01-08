@@ -11,6 +11,10 @@ export default class HourRepository {
         return await API.get(this.url + id);
     }
 
+    async getHoursByProject(project){
+        return await API.get(this.url +"project=" +  project.id)
+    }
+
     async createHours(project, hours , userID) {
         return await API.post(
             this.url + "add",

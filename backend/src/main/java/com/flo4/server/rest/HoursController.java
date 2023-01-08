@@ -19,6 +19,9 @@ public class HoursController {
     EntityRepository<UserHours> userHoursEntityRepository;
 
     @Autowired
+    EntityRepository<Project> projectEntityRepository;
+
+    @Autowired
     EntityRepository<User> userEntityRepository;
 
     @GetMapping(path = "", produces = "application/json")
@@ -37,6 +40,10 @@ public class HoursController {
             }
         }
         return updatedList;
+    }
+    @GetMapping(path = "project={project}", produces = "application/json")
+    public List<UserHours> findUserHourByProject(@PathVariable() int project){
+        return this.userHoursEntityRepository.findByQuery("Hours_find_by_Project", project);
     }
     @Transactional
     @PostMapping(path = "add", produces = "application/json")

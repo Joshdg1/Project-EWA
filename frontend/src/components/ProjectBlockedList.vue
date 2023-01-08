@@ -1,7 +1,23 @@
 <template>
   <div>
     <div class="row g-5 g-xl-10 mb-5 mb-xl-10">
-      <div v-for="project in projects" v-bind:key="project.id" class="col-lg-6">
+      <div>
+       <span class="svg-icon svg-icon-1 position-absolute ms-4 loop">
+												<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+													<rect opacity="0.5" x="17.0365" y="15.1223" width="8.15546" height="2" rx="1"
+                                transform="rotate(45 17.0365 15.1223)" fill="currentColor"></rect>
+													<path
+                              d="M11 19C6.55556 19 3 15.4444 3 11C3 6.55556 6.55556 3 11 3C15.4444 3 19 6.55556 19 11C19 15.4444 15.4444 19 11 19ZM11 5C7.53333 5 5 7.53333 5 11C5 14.4667 7.53333 17 11 17C14.4667 17 17 14.4667 17 11C17 7.53333 14.4667 5 11 5Z"
+                              fill="currentColor"></path>
+												</svg>
+											</span>
+      <input type="text" data-kt-ecommerce-order-filter="search"
+             style="width: 30vw!important;"
+             v-model="search"
+             class="form-control form-control-solid w-250px ps-14"
+             placeholder="Zoeken...">
+      </div>
+      <div v-for="project in resultQuery" v-bind:key="project.id" class="col-lg-6">
         <!--begin::Card widget 18-->
         <div class="card card-flush h-md-100">
           <!--begin::Body-->
@@ -53,7 +69,7 @@
                   <!--begin::Stat-->
                   <div class="border border-gray-300 border-dashed rounded min-w-100px w-100 py-2 px-4 me-6 mb-3">
                     <!--begin::Date-->
-                    <span class="fs-6 text-gray-700 fw-bold">Feb 6, 2021</span>
+                    <span class="fs-6 text-gray-700 fw-bold">{{  project.startDate.toString().substring(0,10) }}</span>
                     <!--end::Date-->
                     <!--begin::Label-->
                     <div class="fw-semibold text-gray-400">Start datum</div>
@@ -63,7 +79,7 @@
                   <!--begin::Stat-->
                   <div class="border border-gray-300 border-dashed rounded min-w-100px w-100 py-2 px-4 mb-3">
                     <!--begin::Number-->
-                    <span class="fs-6 text-gray-700 fw-bold">{{ project.hoursWorked }}</span>
+                    <span class="fs-6 text-gray-700 fw-bold">uren: {{project.hoursWorked }}</span>
                     <!--end::Number-->
                     <!--begin::Label-->
                     <div class="fw-semibold text-gray-400">uren gewerkt</div>
@@ -76,11 +92,13 @@
               <!--end::Body-->
               <!--begin::Footer-->
               <span class="fw-semibold text-gray-400 d-block fs-8 mb-2">Toegewezen specialist(en)</span>
-              <div class="symbol-group symbol-hover flex-nowrap" v-bind:key="user.id" v-for="user in project.users">
+              <div class="Specialists">
+              <div class="symbol-group symbol-hover flex-nowrap specialist" v-bind:key="user.id" v-for="user in project.users">
                 <div v-bind:title="user.firstName + user.lastName" class="symbol symbol-35px symbol-circle" data-bs-toggle="tooltip"
                      data-bs-original-title="Susan Redwood" data-kt-initialized="1">
-                  <span class="symbol-label bg-primary text-inverse-primary fw-bold">{{(user.firstName[0]).toUpperCase()}}</span>
+                  <span class="symbol-label bg-primary text-inverse-primary fw-bold ">{{(user.firstName[0]).toUpperCase()}}</span>
                 </div>
+              </div>
               </div>
               <!--end::Users group-->
               <!--begin::Actions-->
@@ -120,42 +138,82 @@
 
 <script>
 import ProjectRepository from '../repository/ProjectRepository.js'
+import HourRepository from "@/repository/HourRepository";
+import UserRepository from "@/repository/UserRepository";
+import {Project} from "@/models/project";
 
 export default {
 
   name: "ProjectAdmin.vue",
-  props: ['projects'],
-  emits: ['deleteProject', 'editProject'],
 
+  emits: ['deleteProject', 'editProject'],
+ async created() {
+
+
+   this.userID = sessionStorage.getItem("id")
+
+   const data = await this.repository.getAllProjects();
+
+   for (const element of data) {
+     this.projects.push(element);
+   }
+   for (const element of this.projects) {
+     for (let j = 0; j < element.users.length; j++) {
+       if ((element.users[j].id).toString() === this.userID) {
+         const ProjectHours  = await this.hourRepository.getHoursByProject(element)
+         element.hoursWorked = 0
+         ProjectHours.forEach(p => element.hoursWorked += p.hours)
+         const newProject  = new Project(element.id, element.title, element.description, element.company, element.startDate,element.users, element.hoursWorked)
+         this.programmerProjects.push(newProject)
+       }
+     }
+   }
+
+ },
   data() {
     return {
-      editingProject: null,
+      users: [],
+      programmerProjects: [],
+      projects: [],
+      newList: [],
+      search: null,
+      userRepository: new UserRepository(),
+      userID: null,
+      hourRepository: new HourRepository(),
       repository: new ProjectRepository(),
     }
   },
-
+  computed: {
+    resultQuery: function () {
+      if (this.search) {
+        return this.programmerProjects.filter(item => {
+          if (this.search
+              .toLowerCase()
+              .split(" ")
+              .every(v => item.title.toLowerCase().includes(v))) {
+            return this.search
+                .toLowerCase()
+                .split(" ")
+                .every(v => item.title.toLowerCase().includes(v));
+          } else {
+            return this.search
+                .toLowerCase()
+                .split(" ")
+                .every(v => item.company.toLowerCase().includes(v));
+          }
+        })
+      } else {
+        return this.programmerProjects;
+      }
+  },
+  },
   methods: {
 
     async deleteProject(project) {
       await this.repository.deleteProjectById(project.id);
       location.reload();
     },
-    getUserProjects(users) {
-      if (users.length === 0)
-        return "";
 
-      let content = `<div class="symbol-group symbol-hover flex-nowrap">`;
-      for (const user of users) {
-        content += `<div title="${user.firstName} ${user.lastName}" class="symbol symbol-35px symbol-circle" data-bs-toggle="tooltip"
-      data-bs-original-title="Susan Redwood" data-kt-initialized="1">
-              <span class="symbol-label bg-primary text-inverse-primary fw-bold">${(user.firstName[0]).toUpperCase()}</span>
-              </div>`;
-      }
-      content += `</div>`;
-
-
-      return content
-    },
 
     editProject() {
       this.editingProject = true;
@@ -166,5 +224,14 @@ export default {
 </script>
 
 <style scoped>
-
+.specialist {
+  display: flex;
+  width: 1.5vw;
+  margin: 0;
+  flex-direction: row!important;
+}
+.Specialists {
+  display: flex;
+  flex-direction: row!important;
+}
 </style>

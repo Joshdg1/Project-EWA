@@ -8,6 +8,10 @@ import javax.persistence.*;
 @Getter
 @Setter
 @Entity
+@NamedQuery(
+name = "Hours_find_by_Project",
+        query = "select h from UserHours h WHERE project_id = ?1"
+)
 public class UserHours {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
