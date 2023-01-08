@@ -3,7 +3,7 @@
         <TopProfileDetails :sample-programmer="sampleProgrammer" @selectedTab="changeSelectedTab"></TopProfileDetails>
         <!--begin::details View-->
         <ProfileInputDetails v-if="this.editProfile === true && currentTab === 1" :sample-programmer="sampleProgrammer"
-                             @edit-profile="EditProfileStatus" @save-profile="updateProfile"></ProfileInputDetails>
+                             @edit-profile="updateProfile" ></ProfileInputDetails>
 
         <ProfileDetails v-if="!this.editProfile && currentTab === 1" :sample-programmer="sampleProgrammer"
                         @edit-profile="EditProfileStatus"></ProfileDetails>
@@ -38,6 +38,7 @@
                 editProfile: null,
                 currentTab: null,
                 skills: [],
+              userID: null,
                 programmers: [],
                 projects: [],
                 repository: new UserRepository(),
@@ -47,14 +48,14 @@
         },
 
         async created() {
-            const userID = sessionStorage.getItem("id")
-            this.sampleProgrammer = await this.repository.findUserById(userID)
-            const databaseSkills = await this.repositoryGood.findSkillsById(userID);
+             this.userID = sessionStorage.getItem("id")
+            this.sampleProgrammer = await this.repository.findUserById(this.userID)
+            const databaseSkills = await this.repositoryGood.findSkillsById(this.userID);
             for (let i = 0; i < databaseSkills.length; i++) {
                 this.skills.push(databaseSkills[i]);
             }
 
-            this.sampleProgrammer = await this.repository.findUserById(userID)
+            this.sampleProgrammer = await this.repository.findUserById(this.userID)
 
             this.currentTab = 1;
         },
@@ -63,8 +64,9 @@
             EditProfileStatus(profileEditStatus) {
                 this.editProfile = profileEditStatus
             },
-            updateProfile(newProfile) {
-                this.sampleProgrammer = newProfile
+            async updateProfile(newProfile) {
+              this.editProfile = newProfile
+                this.sampleProgrammer = await this.repository.findUserById(this.userID)
             },
             changeSelectedTab(selectedTab) {
                 this.currentTab = selectedTab;
