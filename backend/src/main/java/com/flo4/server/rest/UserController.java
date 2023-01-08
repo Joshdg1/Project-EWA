@@ -179,7 +179,35 @@ public class UserController {
                 registerRequest.phoneNumber(),
                 registerRequest.userType()
         );
+
+        String tokenRegisterReset = new PasswordResetUtil().generateResetToken(String.valueOf(user.getId()));
+
+        PasswordResetTokens passwordResetTokens = new PasswordResetTokens();
+        passwordResetTokens.setToken(tokenRegisterReset);
+        passwordResetTokens.setUser_id(user);
+
+        String resetPasswordLink = "http://localhost:8080/users/resetPassword?token=" + tokenRegisterReset;
+
+        passwordResetRepository.save(passwordResetTokens);
+
+        MailgunMessagesApi mailgunMessagesApi = MailgunClient.config(env.getProperty("mailgun.api.key"))
+                .createApi(MailgunMessagesApi.class);
+
+        Message message = Message.builder()
+                .from(env.getProperty("mailgun.email.from"))
+                .to(user.getEmail())
+                .subject("Verander de wachtwoord van uw Florijn account")
+                .text(String.format("Hi %s, om je wachtwoord te veranderen klik op deze link %s", user.getFirstName(), resetPasswordLink))
+                .build();
+
+        mailgunMessagesApi.sendMessage(env.getProperty("mailgun.api.domain"), message);
+
+
         return new RegisterResponse(user.getEmail(), user.getFirstName(), user.getLastName(), user.getPhoneNumber());
+
+
+
+
     }
 
     record LoginRequest(String email, String password) {
@@ -299,8 +327,6 @@ public class UserController {
 
         mailgunMessagesApi.sendMessage(env.getProperty("mailgun.api.domain"), message);
 
-        System.out.println("hiii");
-        System.out.println(message);
 
         return ResponseEntity.ok().body(user);
     }
