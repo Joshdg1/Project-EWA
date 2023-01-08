@@ -47,7 +47,7 @@ public class AvailabilityController {
     @PostMapping(path = "add", produces = "application/json")
     public ResponseEntity<UserAvailability> addAvailability(@RequestBody GetUserAvailability userAvailability) {
         UserAvailability userAvailability1 = new UserAvailability();
-        userAvailability1.setTitle(userAvailability.getTitle());
+        userAvailability1.setProject(userAvailability.getProject());
         userAvailability1.setStartDate(userAvailability.getStartDate());
         userAvailability1.setEndDate(userAvailability.getEndDate());
         userAvailability1.setUser(this.userEntityRepository.findById(userAvailability.getUserId()));
@@ -75,7 +75,7 @@ public class AvailabilityController {
 
         UserAvailability userAvailability1 = new UserAvailability();
         userAvailability1.setId(id);
-        userAvailability1.setTitle(userAvailability.getTitle());
+        userAvailability1.setProject(userAvailability.getProject());
         userAvailability1.setStartDate(userAvailability.getStartDate());
         userAvailability1.setEndDate(userAvailability.getEndDate());
         userAvailability1.setUser(this.userEntityRepository.findById(userAvailability.getUserId()));

@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 
 public class GetUserAvailability {
 
-    private String title;
+    private Project project;
 
     private LocalDateTime startDate;
 
@@ -12,8 +12,8 @@ public class GetUserAvailability {
 
     private int userId;
 
-    public GetUserAvailability(String title, LocalDateTime startDate, LocalDateTime endDate, int userId) {
-        this.title = title;
+    public GetUserAvailability(Project project, LocalDateTime startDate, LocalDateTime endDate, int userId) {
+        this.project = project;
         this.startDate = startDate;
         this.endDate = endDate;
         this.userId = userId;
@@ -43,11 +43,11 @@ public class GetUserAvailability {
         this.userId = userId;
     }
 
-    public String getTitle() {
-        return title;
+    public Project getProject() {
+        return project;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setProject(Project project) {
+        this.project = project;
     }
 }

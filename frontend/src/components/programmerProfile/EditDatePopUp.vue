@@ -14,7 +14,13 @@
       </div>
       <img src="https://clipground.com/images/date-symbol-clipart.jpg" class="code-icon">
       <div class="CardText">
-        <input v-model="newDate.title" class="cardInput">
+        <multiselect class="projectsList"
+                     v-model=" newDate.project"
+                     :options="allProjects"
+                     :show-labels="false"
+                     placeholder="projecten"
+                     :close-on-select="true">
+        </multiselect>
         <input v-model="newDate.hoursPerDayStart" type="time" class="cardInput">
         <input v-model="newDate.hoursPerDayEnd" type="time" class="cardInput">
         <div class="SkillLevel">
@@ -38,22 +44,28 @@
 <script>
 
 import AvailabilityRepository from "@/repository/AvailabilityRepository";
+import ProjectRepository from "@/repository/ProjectRepository";
 
 
 export default {
   name: "EditDatePopUp",
   props: ['selectedEvent'],
   emits: ['close-popup'],
-  created() {
+ async created() {
     this.newDate = this.selectedEvent;
     this.userID = sessionStorage.getItem("id")
-    console.log(this.newDate.start)
+
+    const Projects = await this.projectRepository.getAllProjects()
+    Projects.forEach(p  => this.allProjects.push(p.title))
+    console.log(this.allProjects)
   },
   data() {
     return {
       userID: null,
       popupStatus: null,
       newDate: null,
+      allProjects: [],
+      projectRepository: new ProjectRepository(),
       repository: new AvailabilityRepository(),
       currentId: null,
     }
@@ -79,7 +91,6 @@ export default {
         if ((element.startDate).toString().substring(0, 10) === (this.selectedEvent.start)) {
           if ((element.endDate).toString().substring(0, 10) === (this.selectedEvent.end)) {
             this.currentId = element.id
-            console.log("Winnar")
             break;
           }
         }
@@ -103,7 +114,7 @@ export default {
       const starting = new Date(startDate)
       const ending = new Date(endDate)
 
-      await this.repository.updateAvailabilityById(this.currentId, this.newDate.title, starting, ending, this.userID)
+      await this.repository.updateAvailabilityById(this.currentId, this.newDate.project, starting, ending, this.userID)
 
       this.popupStatus = false
       this.$emit('close-popup', this.popupStatus)
