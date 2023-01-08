@@ -14,11 +14,6 @@ const programmerRoutes = [
         path: '/profile/view',
         component: () => import(`../views/profile/View.vue`),
     },
-    {
-        name: "Skills",
-        path: '/programmers/view',
-        component: () => import(`../views/programmer/profile/View`),
-    },
 ]
 
 export default programmerRoutes;
