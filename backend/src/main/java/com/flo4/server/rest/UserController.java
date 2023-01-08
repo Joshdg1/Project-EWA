@@ -170,7 +170,7 @@ public class UserController {
 //            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Wachtwoorden komen niet overeen");
 
 
-        var user = userService.registerUser(
+        User user = userService.registerUser(
                 registerRequest.id(),
                 registerRequest.email(),
                 registerRequest.first_name(),
@@ -190,7 +190,7 @@ public class UserController {
 
     @PostMapping(value = "login")
     public LoginResponse login(@RequestBody LoginRequest loginRequest, HttpServletResponse response) {
-        var login = userService.login(loginRequest.email(), loginRequest.password());
+        Login login = userService.login(loginRequest.email(), loginRequest.password());
 
         Cookie cookie = new Cookie("secretRefreshToken", login.getRefreshToken().getToken());
         cookie.setMaxAge(3600);

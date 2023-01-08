@@ -75,11 +75,7 @@ export default {
       const token = urlParams.get('token')
 
 
-      await this.userRepository.resetPassword(this.password, token).then((response) => {
-        if (response.status === 200){
-          alert("Wachtwoord is opnieuw ingesteld")
-        }
-      });
+      await this.userRepository.resetPassword(this.password, token);
     }
   }
 
