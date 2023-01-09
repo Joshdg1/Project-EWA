@@ -274,8 +274,7 @@ export default {
     },
     setStatus(startDate, endDate) {
       let date = new Date(endDate)
-      console.log(date)
-      if (Date.now() >= Date.parse(startDate) && Date.parse(date.setUTCHours(20,59,59,999)) >= Date.now()) {
+      if (Date.now() >= Date.parse(startDate) && Date.parse(endDate) >= Date.now()) {
         return "Actief"
       }
 
