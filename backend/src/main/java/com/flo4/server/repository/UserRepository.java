@@ -114,6 +114,12 @@ public class UserRepository implements EntityRepository<User> {
 
     }
 
+    public List<User> findAllCompanies() {
+        TypedQuery<User> query = this.entityManager.createQuery("SELECT company_name FROM User WHERE company_name IS NOT NULL", User.class);
+
+        return query.getResultList();
+    }
+
 //    public PasswordResetTokens deleteToken(String token) {
 //        return this.entityManager.createQuery("UPDATE password_reset_tokens SET token = NULL, user_id = NULL where token = ?1", PasswordResetTokens.class)
 //                .setParameter(1, token)
