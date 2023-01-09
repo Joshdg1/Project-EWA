@@ -15,9 +15,8 @@
     </div>
     <div class="mb-5">
       <label class="form-label mb-3">Bedrijf</label>
-      <multiselect class="optionCompany" :searchable="true"
-                    :close-on-select="true"
-                    :show-labels="false"></multiselect>
+      <table><td v-html="setCompanySelectbox">
+      </td></table>
       <!--            <input type="number" class="form-control form-control-lg form-control-solid" v-model="formData.client_id" placeholder="" value="1">-->
       <!--            <div v-if="errors.client" class="text-danger fs-7">{{errors.client}}</div>-->
     </div>
@@ -38,9 +37,11 @@
 
 <script>
 import Multiselect from 'vue-multiselect';
+import UserRepository from "@/repository/UserRepository";
 
 
 export default {
+  // eslint-disable-next-line vue/no-unused-components
   components: {Multiselect},
   name: 'FooterMenu',
   props: ['d'],
@@ -58,6 +59,7 @@ export default {
         client: false,
         start: false,
         end: false,
+        UserRepository: new UserRepository(),
       }
     }
   },
@@ -71,6 +73,21 @@ export default {
         start: false,
         end: false,
       };
+    },
+    async setCompanySelectbox(){
+      let companies = await this.UserRepository.getAllCompanies();
+      console.log(companies)
+      let content = `<multiselect class="optionCompany" :searchable="true"
+                    :close-on-select="true"
+                    :show-labels="false">`;
+      // eslint-disable-next-line no-unused-vars
+      for (const company of companies) {
+        content += `<options>company</options>`
+      }
+      content += `</multiselect>`;
+
+
+      return content
     },
     validate() {
       this.resetErrors();
