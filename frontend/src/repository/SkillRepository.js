@@ -6,17 +6,9 @@ export default class SkillRepository {
         // eslint-disable-next-line no-undef
         this.url = process.env.VUE_APP_API_URL + '/skills/';
     }
-    async findSkillsByUserId(userId){
-        return await API.get(this.url + userId);
-    }
 
-    async createSkill (skillName, skillLevel, userId) {
-        return await API.post(
-            this.url + "add",
-            {
-                skillName, skillLevel, userId
-            }
-        );
+    async findSkillsById(userId){
+        return await API.get(this.url + userId);
     }
 
     async getAllSkills(){
@@ -24,6 +16,27 @@ export default class SkillRepository {
             this.url
         );
     }
+
+    async createSkill (UserSkill) {
+        return await API.post(
+            this.url + "add",
+            {
+                ...UserSkill
+            }
+        );
+    }
+
+    async updateSkill (UserSkill) {
+        console.log('UpdateSKill', UserSkill);
+        return await API.put(
+            this.url + UserSkill.id,
+            {
+               ...UserSkill
+            }
+        );
+    }
+
+
     async deleteSkillById(skillsId){
         return await API.delete(this.url + skillsId);
     }

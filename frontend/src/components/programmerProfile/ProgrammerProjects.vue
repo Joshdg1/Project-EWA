@@ -42,11 +42,6 @@ export default {
   name: "ProgrammerProjects",
   created() {
 
-
-
-    let project1 = new Project(1, "COELE PROJECT", "DESC", "HVA", 0)
-    console.log(project1)
-    this.projects.push(project1)
   },
   data() {
     return {
