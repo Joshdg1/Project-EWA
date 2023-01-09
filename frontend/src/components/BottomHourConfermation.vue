@@ -40,8 +40,7 @@
           <tbody>
           <tr v-for="project in userHours" v-bind:key="project.id">
             <div class="form-check form-check-sm form-check-custom form-check-solid">
-              <input class="form-check-input" type="checkbox" value="1" data-kt-check="true"
-                     data-kt-check-target=".widget-9-check"/>
+            
             </div>
             <td>{{ project.user.firstName }}</td>
             <td>{{ project.project.title }}</td>
