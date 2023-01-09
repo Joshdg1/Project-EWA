@@ -22,7 +22,7 @@ public class PasswordResetRepository implements EntityRepository<PasswordResetTo
      */
     @Override
     public List<PasswordResetTokens> findAll() {
-        TypedQuery<PasswordResetTokens> query = this.entityManager.createQuery("select t from password_reset_tokens a", PasswordResetTokens.class);
+        TypedQuery<PasswordResetTokens> query = this.entityManager.createQuery("select t from password_reset_tokens t", PasswordResetTokens.class);
 
         return query.getResultList();
     }

@@ -34,6 +34,7 @@ public class User {
     @JsonIgnore()
     private List<Project> projects;
 
+
     public User() {
     }
 
