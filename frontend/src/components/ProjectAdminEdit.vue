@@ -34,7 +34,7 @@
                 <th>Gewerkte uren</th>
                 <th>Startdatum</th>
                 <th>Einddatum</th>
-                <th>Gebruiker(s)</th>
+                <th>Programmeur(s)</th>
                 <th>Acties</th>
               </tr>
               </thead>
