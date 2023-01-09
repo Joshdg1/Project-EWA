@@ -20,6 +20,10 @@ public class UserRepository implements EntityRepository<User> {
     @PersistenceContext
     protected EntityManager entityManager;
 
+    /**
+     *
+     * @return a list of all users
+     */
     @Override
     public List<User> findAll() {
         TypedQuery<User> query = this.entityManager.createQuery("select u from User u", User.class);
@@ -27,16 +31,30 @@ public class UserRepository implements EntityRepository<User> {
         return query.getResultList();
     }
 
+    /**
+     * @param id
+     * @return a user with a certain id
+     */
     @Override
     public User findById(int id) {
         return this.entityManager.find(User.class, id);
     }
 
+    /**
+     * Saves a user
+     * @param entity
+     */
     @Override
     public User save(User entity) {
         return this.entityManager.merge(entity);
     }
 
+    /**
+     * Updates the user with a certain id
+     * @param entity
+     * @param id
+     * @return
+     */
     @Override
     public User update(User entity, int id) {
         User updatedUser = findById(id);
@@ -53,6 +71,11 @@ public class UserRepository implements EntityRepository<User> {
         return updatedUser;
     }
 
+    /**
+     * Delete a user with a certain id
+     * @param id
+     * @return
+     */
     @Override
     public User deleteById(int id) {
         User user = entityManager.find(User.class, id);

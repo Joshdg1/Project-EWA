@@ -12,6 +12,9 @@ import java.util.List;
 @Setter
 @Entity
 public class User {
+    /**
+     * Entity class for user
+     */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
