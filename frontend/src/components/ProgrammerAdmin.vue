@@ -61,27 +61,18 @@
               <!--begin::Table head-->
               <thead>
               <tr class="fw-bolder text-muted">
-                <th class="w-25px">
-                  <div class="form-check form-check-sm form-check-custom form-check-solid">
-                    <input class="form-check-input" type="checkbox" value="1" data-kt-check="true"
-                           data-kt-check-target=".widget-9-check"/>
-                  </div>
-                </th>
                 <th>Email</th>
                 <th>Voornaam(en)</th>
                 <th>Achternaam</th>
                 <th>Telefoonnummer</th>
                 <th>Type gebruiker</th>
+                <th>Acties</th>
               </tr>
               </thead>
               <!--end::Table head-->
               <!--begin::Table body-->
               <tbody>
               <tr v-for="programmer in resultQuery" v-bind:key="programmer">
-                <div class="form-check form-check-sm form-check-custom form-check-solid">
-                  <input class="form-check-input" type="checkbox" value="1" data-kt-check="true"
-                         data-kt-check-target=".widget-9-check"/>
-                </div>
                 <td>{{ programmer.email }}</td>
                 <td>{{ programmer.firstName }}</td>
                 <td>{{ programmer.lastName }}</td>

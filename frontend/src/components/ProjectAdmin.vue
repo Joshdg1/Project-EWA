@@ -56,17 +56,10 @@
               <!--begin::Table head-->
               <thead>
               <tr class="fw-bolder text-muted">
-                <th class="w-25px">
-                  <div class="form-check form-check-sm form-check-custom form-check-solid">
-                    <input class="form-check-input" type="checkbox" value="1" data-kt-check="true"
-                           data-kt-check-target=".widget-9-check"/>
-                  </div>
-                </th>
                 <th>Id</th>
                 <th>Titel</th>
                 <th>Beschrijving</th>
                 <th>Bedrijf</th>
-                <th>Gewerkte uren</th>
                 <th>Startdatum</th>
                 <th>Einddatum</th>
                 <th>Status</th>
@@ -78,15 +71,10 @@
               <!--begin::Table body-->
               <tbody>
               <tr v-for="project in resultQuery" v-bind:key="project.id">
-                <div class="form-check form-check-sm form-check-custom form-check-solid">
-                  <input class="form-check-input" type="checkbox" value="1" data-kt-check="true"
-                         data-kt-check-target=".widget-9-check"/>
-                </div>
                 <td>{{ project.id }}</td>
                 <td>{{ project.title }}</td>
                 <td>{{ project.description }}</td>
                 <td>{{ project.company }}</td>
-                <td>{{ project.hoursWorked }}</td>
                 <td>{{ dateFormat(project.startDate) }}</td>
                 <td>{{ dateFormat(project.endDate) }}</td>
                 <td>{{ setStatus(project.startDate, project.endDate) }}</td>
