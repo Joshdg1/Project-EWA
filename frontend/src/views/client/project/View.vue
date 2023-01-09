@@ -2,7 +2,7 @@
   <div>
     <projectsBlockedList v-if="projectDetails === false" @selecting-project="selectProject"   ></projectsBlockedList>
     <projectClientDetails v-if="projectDetails === true" :project="selectedProject"
-                              @view-project ="setProjectDetails"></projectClientDetails>
+                              @view-project ="setProjectDetails" ></projectClientDetails>
   </div>
 </template>
 
@@ -26,10 +26,9 @@ export default {
   },
   methods: {
     setProjectDetails(projectStatus){
-
+      console.log("KOMT BINNEN")
+      console.log(projectStatus)
       this.projectDetails = projectStatus
-
-
     },
     selectProject(project){
 

@@ -225,8 +225,9 @@ export default {
     const el = document.getElementById('Details');
     if (el)
         el.classList.add("active")
-   const user = sessionStorage.getItem('user')
-    this.userType = user.userType
+
+    this.userType = this.user.userType
+    console.log(this.userType)
   },
   data() {
     return {
