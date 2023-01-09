@@ -293,7 +293,7 @@ export default {
 
     this.$emit('selectedTab', this.selectedTab)
   }
-}
+
 }
 </script>
 
