@@ -69,6 +69,7 @@
                 <th>Gewerkte uren</th>
                 <th>Startdatum</th>
                 <th>Einddatum</th>
+                <th>Status</th>
                 <th>Gebruiker(s)</th>
                 <th>Acties</th>
               </tr>
@@ -88,6 +89,7 @@
                 <td>{{ project.hoursWorked }}</td>
                 <td>{{ dateFormat(project.startDate) }}</td>
                 <td>{{ dateFormat(project.endDate) }}</td>
+                <td>{{ setStatus(project.startDate, project.endDate) }}</td>
                 <td v-html="getUserProjects(project.users)"></td>
 
                 <div class="d-flex justify-content-end flex-shrink-0">
@@ -270,6 +272,15 @@ export default {
       })
       console.log(sortedList)
     },
+    setStatus(startDate, endDate) {
+      let date = new Date(endDate)
+      console.log(date)
+      if (Date.now() >= Date.parse(startDate) && Date.parse(date.setUTCHours(20,59,59,999)) >= Date.now()) {
+        return "Actief"
+      }
+
+      return "Inactief"
+    }
   }
 }
 </script>
