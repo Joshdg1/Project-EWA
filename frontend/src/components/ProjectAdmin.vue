@@ -273,7 +273,6 @@ export default {
       console.log(sortedList)
     },
     setStatus(startDate, endDate) {
-      let date = new Date(endDate)
       if (Date.now() >= Date.parse(startDate) && Date.parse(endDate) >= Date.now()) {
         return "Actief"
       }
