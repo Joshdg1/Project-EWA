@@ -2,6 +2,7 @@
   <div>
     <div class="row g-5 g-xl-10 mb-5 mb-xl-10">
       <div>
+        false
        <span class="svg-icon svg-icon-1 position-absolute ms-4 loop">
 												<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
 													<rect opacity="0.5" x="17.0365" y="15.1223" width="8.15546" height="2" rx="1"
@@ -102,7 +103,7 @@
               </div>
               <!--end::Users group-->
               <!--begin::Actions-->
-              <a href="/seven-html-pro/?page=apps/projects/project"
+              <a @click=" setProjectDetails(project)"
                  class="text-dark opacity-75-hover fs-6 fw-semibold">Meer details
                 <!--begin::Svg Icon | path: icons/duotune/arrows/arr095.svg-->
                 <span class="svg-icon svg-icon-4 svg-icon-primary ms-1">
@@ -132,6 +133,7 @@
       </div>
       <!--end::Card widget 18-->
     </div>
+
   </div>
 
 </template>
@@ -142,11 +144,11 @@ import HourRepository from "@/repository/HourRepository";
 import UserRepository from "@/repository/UserRepository";
 import {Project} from "@/models/project";
 
+
 export default {
 
   name: "ProjectAdmin.vue",
-
-  emits: ['deleteProject', 'editProject'],
+  emits: ['selecting-project'],
  async created() {
 
 
@@ -163,7 +165,7 @@ export default {
          const ProjectHours  = await this.hourRepository.getHoursByProject(element)
          element.hoursWorked = 0
          ProjectHours.forEach(p => element.hoursWorked += p.hours)
-         const newProject  = new Project(element.id, element.title, element.description, element.company, element.startDate,element.users, element.hoursWorked)
+         const newProject  = new Project(element.id, element.title, element.description, element.company, element.startDate,element.endDate,element.users, element.hoursWorked)
          this.programmerProjects.push(newProject)
        }
      }
@@ -216,8 +218,12 @@ export default {
 
 
     editProject() {
-      this.editingProject = true;
-      this.$emit('editProject', this.editingProject)
+      this.$emit('editProject', true)
+    },
+    setProjectDetails(project){
+      console.log("WERKT")
+      this.$emit('selecting-project' , project)
+
     }
   }
 }

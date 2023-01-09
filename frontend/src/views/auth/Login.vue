@@ -84,7 +84,7 @@ import UserRepository from "@/repository/UserRepository";
                 let token = response["token"];
 
                 sessionStorage.setItem("token", token)
-
+                this.$router.go(this.$router.currentRoute)
                 this.$router.push("/home")
               }
             })

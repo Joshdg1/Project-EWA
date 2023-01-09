@@ -6,7 +6,9 @@
         <!--begin: Pic-->
         <div class="me-7 mb-4">
           <div class="symbol symbol-100px symbol-lg-160px symbol-fixed position-relative">
-            <span class="fs-1 symbol-label bg-primary text-inverse-primary fw-bold">{{ user.firstName[0] }}</span>
+            <span class="fs-1 symbol-label bg-primary text-inverse-primary fw-bold">{{
+                sampleProgrammer.title[0]
+              }}</span>
 
             <!--            <div class="position-absolute translate-middle bottom-0 start-100 mb-6 bg-success rounded-circle border border-4 border-white h-20px w-20px"></div>-->
           </div>
@@ -21,8 +23,7 @@
               <!--begin::Name-->
               <div class="d-flex align-items-center mb-2">
                 <a href="#"
-                   class="text-gray-800 text-hover-primary fs-2 fw-bolder me-1">{{ sampleProgrammer.firstName }}
-                  {{ sampleProgrammer.lastName }}</a>
+                   class="text-gray-800 text-hover-primary fs-2 fw-bolder me-1">{{ sampleProgrammer.title }}</a>
 
 
               </div>
@@ -42,7 +43,7 @@
                                     fill="black"/>
 															</svg>
 														</span>
-                  <!--end::Svg Icon-->{{ translatedUserType() }}</a>
+                  <!--end::Svg Icon-->{{ sampleProgrammer.company }}</a>
                 <a href="#" class="d-flex align-items-center text-gray-400 text-hover-primary me-5 mb-2">
                   <!--begin::Svg Icon | path: icons/duotune/general/gen018.svg-->
                   <span class="svg-icon svg-icon-4 me-1">
@@ -168,16 +169,16 @@
             </div>
             <!--end::Wrapper-->
             <!--begin::Progress-->
-<!--            <div class="d-flex align-items-center w-200px w-sm-300px flex-column mt-3">-->
-<!--              <div class="d-flex justify-content-between w-100 mt-auto mb-2">-->
-<!--                <span class="fw-bold fs-6 text-gray-400">Hours still available</span>-->
-<!--                <span class="fw-bolder fs-6">6 hours</span>-->
-<!--              </div>-->
-<!--              <div class="h-5px mx-3 w-100 bg-light mb-3">-->
-<!--                <div class="bg-success rounded h-5px" role="progressbar" style="width: 50%;" aria-valuenow="50"-->
-<!--                     aria-valuemin="0" aria-valuemax="100"></div>-->
-<!--              </div>-->
-<!--            </div>-->
+            <!--            <div class="d-flex align-items-center w-200px w-sm-300px flex-column mt-3">-->
+            <!--              <div class="d-flex justify-content-between w-100 mt-auto mb-2">-->
+            <!--                <span class="fw-bold fs-6 text-gray-400">Hours still available</span>-->
+            <!--                <span class="fw-bolder fs-6">6 hours</span>-->
+            <!--              </div>-->
+            <!--              <div class="h-5px mx-3 w-100 bg-light mb-3">-->
+            <!--                <div class="bg-success rounded h-5px" role="progressbar" style="width: 50%;" aria-valuenow="50"-->
+            <!--                     aria-valuemin="0" aria-valuemax="100"></div>-->
+            <!--              </div>-->
+            <!--            </div>-->
             <!--end::Progress-->
           </div>
           <!--end::Stats-->
@@ -216,6 +217,8 @@
 <script>
 
 
+import UserRepository from "@/repository/UserRepository";
+
 export default {
   name: "TopProfileDetails",
   props: ['sampleProgrammer'],
@@ -224,14 +227,15 @@ export default {
     this.selectedTab = 1;
     const el = document.getElementById('Details');
     if (el)
-        el.classList.add("active")
-   const user = sessionStorage.getItem('user')
+      el.classList.add("active")
+    const user = sessionStorage.getItem('user')
     this.userType = user.userType
   },
   data() {
     return {
       selectedTab: null,
       userType: null,
+      userRepository: new UserRepository(),
       user: JSON.parse(sessionStorage.user),
     }
   },
@@ -252,49 +256,44 @@ export default {
 
       this.$emit('selectedTab', this.selectedTab)
     },
-    translatedUserType() {
-      switch (this.user.userType) {
-        case 'administrator':
-          return "Administrator";
-        case 'client':
-          return 'Opdrachtgever';
-        case 'programmer':
-          return 'Specialist';
-      }
-    },
-    setSelectedTabDetails() {
-      const oldSelectedTab = this.selectedTab;
-      this.selectedTab = 1
-      const el = document.getElementById('Details');
-      if (oldSelectedTab === 2) {
-        const el2 = document.getElementById("availability")
-        el2.classList.remove("active")
-      }
-      if (oldSelectedTab === 3) {
-        const el3 = document.getElementById("Skills")
-        el3.classList.remove("active")
-      }
-      el.classList.add("active")
-
-      this.$emit('selectedTab', this.selectedTab)
-    },
-    setSelectedTabSkills() {
-      const oldSelectedTab = this.selectedTab;
-      this.selectedTab = 3
-      const el = document.getElementById('Skills');
-      if (oldSelectedTab === 1) {
-        const el2 = document.getElementById("Details")
-        el2.classList.remove("active")
-      }
-      if (oldSelectedTab === 2) {
-        const el3 = document.getElementById("availability")
-        el3.classList.remove("active")
-      }
-      el.classList.add("active")
-
-      this.$emit('selectedTab', this.selectedTab)
+    async translatedUserType() {
+      const getUser = await this.userRepository.findUserById(this.user.id)
+      return getUser.company.toString()
     }
+  },
+  setSelectedTabDetails() {
+    const oldSelectedTab = this.selectedTab;
+    this.selectedTab = 1
+    const el = document.getElementById('Details');
+    if (oldSelectedTab === 2) {
+      const el2 = document.getElementById("availability")
+      el2.classList.remove("active")
+    }
+    if (oldSelectedTab === 3) {
+      const el3 = document.getElementById("Skills")
+      el3.classList.remove("active")
+    }
+    el.classList.add("active")
+
+    this.$emit('selectedTab', this.selectedTab)
+  },
+  setSelectedTabSkills() {
+    const oldSelectedTab = this.selectedTab;
+    this.selectedTab = 3
+    const el = document.getElementById('Skills');
+    if (oldSelectedTab === 1) {
+      const el2 = document.getElementById("Details")
+      el2.classList.remove("active")
+    }
+    if (oldSelectedTab === 2) {
+      const el3 = document.getElementById("availability")
+      el3.classList.remove("active")
+    }
+    el.classList.add("active")
+
+    this.$emit('selectedTab', this.selectedTab)
   }
+}
 }
 </script>
 
