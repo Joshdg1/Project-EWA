@@ -20,7 +20,9 @@ public class User {
     private String lastName;
     private String password;
     private String phoneNumber;
+    private String companyName;
     private String userType;
+
 
     @ManyToMany
     @JoinTable(
@@ -38,17 +40,18 @@ public class User {
         this.id = id;
     }
 
-    public static User of(int id, String email, String firstName, String lastName, String password, String phoneNumber, String userType) {
-        return new User(id, email, firstName, lastName, password, phoneNumber, userType);
+    public static User of(int id, String email, String firstName, String lastName, String password, String phoneNumber, String companyName, String userType) {
+        return new User(id, email, firstName, lastName, password, phoneNumber, companyName, userType);
     }
 
-    public User(int id, String email, String firstName, String lastName, String password, String phoneNumber, String userType) {
+    public User(int id, String email, String firstName, String lastName, String password, String phoneNumber, String companyName, String userType) {
         this.id = id;
         this.email = email;
         this.firstName = firstName;
         this.lastName = lastName;
         this.password = password;
         this.phoneNumber = phoneNumber;
+        this.companyName = companyName;
         this.userType = userType;
     }
 }

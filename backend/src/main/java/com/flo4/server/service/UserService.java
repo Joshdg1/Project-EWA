@@ -25,21 +25,21 @@ public class UserService {
         this.secretRefreshToken = secretRefreshToken;
     }
 
-    public User registerUser(int id, String email, String first_name, String last_name, String password, String phoneNumber, String userType){
+    public User registerUser(int id, String email, String first_name, String last_name, String password, String phoneNumber, String companyName, String userType){
 //        if(!Objects.equals(password, passwordConfirmation))
 //            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Wachtwoorden komen niet overeen");
         
         return userRepository.save(
-                User.of(id, email, first_name, last_name, passwordEncoder.encode(password), phoneNumber, userType)
+                User.of(id, email, first_name, last_name, passwordEncoder.encode(password), phoneNumber, companyName, userType)
         );
     }
 
-    public User registerClient(int id, String email, String firstName, String lastName, String password, String phoneNumber, String userType){
+    public User registerClient(int id, String email, String firstName, String lastName, String password, String phoneNumber, String companyName, String userType){
 //        if(!Objects.equals(password, passwordConfirmation))
 //            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Wachtwoorden komen niet overeen");
 
         return userRepository.save(
-                User.of(id, email, firstName, lastName, passwordEncoder.encode(password), phoneNumber, userType)
+                User.of(id, email, firstName, lastName, passwordEncoder.encode(password), phoneNumber, companyName, userType)
         );
     }
 

@@ -43,13 +43,8 @@ public class ProjectController {
     @Transactional
     @PostMapping(path = "add", produces = "application/json")
     public ResponseEntity<Project> addNewProject(@RequestBody CreateProject createProject) {
-
-        Project newProject = new Project(createProject.getName(), createProject.getDescription(), createProject.getStart_date(), createProject.getEnd_date());
-
-        // set users
         User client = this.userRepository.findById(createProject.getClient_id());
-
-        newProject.addUser(client);
+        Project newProject = new Project(client, createProject.getName(), createProject.getDescription(), createProject.getStart_date(), createProject.getEnd_date());
 
         for (Integer programmer_id: createProject.getProgrammer_ids()) {
             User programmer = this.userRepository.findById(programmer_id);
