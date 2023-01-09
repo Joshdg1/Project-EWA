@@ -157,9 +157,6 @@ export default {
    const data = await this.repository.getAllProjects();
 
    for (const element of data) {
-     this.projects.push(element);
-   }
-   for (const element of this.projects) {
      for (let j = 0; j < element.users.length; j++) {
        if ((element.users[j].id).toString() === this.userID) {
          const ProjectHours  = await this.hourRepository.getHoursByProject(element)
@@ -221,9 +218,7 @@ export default {
       this.$emit('editProject', true)
     },
     setProjectDetails(project){
-      console.log("WERKT")
       this.$emit('selecting-project' , project)
-
     }
   }
 }

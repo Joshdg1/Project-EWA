@@ -26,7 +26,6 @@ export default {
   },
   methods: {
     setProjectDetails(projectStatus){
-      console.log("KOMT BINNEN")
       console.log(projectStatus)
       this.projectDetails = projectStatus
     },

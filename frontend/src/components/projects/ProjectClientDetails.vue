@@ -15,9 +15,7 @@ export default {
   components: {TopProfileDetails, BottomProjectDetails, BottomHourConformation},
   props: ['project'],
   emits:['view-project'],
-  created() {
-    console.log("MAAKT DIE ANDER AAN OFZO")
-  },
+
 
   methods: {
     setProjectDetails(project){
@@ -37,12 +35,5 @@ export default {
 </script>
 
 <style scoped>
-.startDate{
-  width: 40vw!important;
-  height: 9vh;
-}
-.hours {
-  width: 40vw!important;
-  height: 9vh;
-}
+
 </style>

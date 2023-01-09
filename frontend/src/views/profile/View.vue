@@ -51,8 +51,8 @@
              this.userID = sessionStorage.getItem("id")
             this.sampleProgrammer = await this.repository.findUserById(this.userID)
             const databaseSkills = await this.repositoryGood.findSkillsById(this.userID);
-            for (let i = 0; i < databaseSkills.length; i++) {
-                this.skills.push(databaseSkills[i]);
+            for (const element of databaseSkills) {
+              this.skills.push(element);
             }
 
             this.sampleProgrammer = await this.repository.findUserById(this.userID)

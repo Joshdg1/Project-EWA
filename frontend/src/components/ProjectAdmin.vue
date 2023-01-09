@@ -161,12 +161,9 @@ export default {
   },
   watch: {
     sortType: function (newValue) {
-      console.log("NEWVAL" + newValue)
       if (newValue === "increasing") {
-        console.log("WORKS")
         this.amountOfProgrammersIncreasing()
       } else if (newValue === "decreasing") {
-        console.log("WORKS")
         this.amountOfProgrammersDecreasing()
       } else {
         const newList = this.projects

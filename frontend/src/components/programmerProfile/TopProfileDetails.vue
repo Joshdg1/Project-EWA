@@ -8,7 +8,6 @@
           <div class="symbol symbol-100px symbol-lg-160px symbol-fixed position-relative">
             <span class="fs-1 symbol-label bg-primary text-inverse-primary fw-bold">{{ user.firstName[0] }}</span>
 
-            <!--            <div class="position-absolute translate-middle bottom-0 start-100 mb-6 bg-success rounded-circle border border-4 border-white h-20px w-20px"></div>-->
           </div>
         </div>
         <!--end::Pic-->
@@ -168,16 +167,7 @@
             </div>
             <!--end::Wrapper-->
             <!--begin::Progress-->
-<!--            <div class="d-flex align-items-center w-200px w-sm-300px flex-column mt-3">-->
-<!--              <div class="d-flex justify-content-between w-100 mt-auto mb-2">-->
-<!--                <span class="fw-bold fs-6 text-gray-400">Hours still available</span>-->
-<!--                <span class="fw-bolder fs-6">6 hours</span>-->
-<!--              </div>-->
-<!--              <div class="h-5px mx-3 w-100 bg-light mb-3">-->
-<!--                <div class="bg-success rounded h-5px" role="progressbar" style="width: 50%;" aria-valuenow="50"-->
-<!--                     aria-valuemin="0" aria-valuemax="100"></div>-->
-<!--              </div>-->
-<!--            </div>-->
+
             <!--end::Progress-->
           </div>
           <!--end::Stats-->

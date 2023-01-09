@@ -40,7 +40,7 @@
           <tbody>
           <tr v-for="project in userHours" v-bind:key="project.id">
             <div class="form-check form-check-sm form-check-custom form-check-solid">
-            
+
             </div>
             <td>{{ project.user.firstName }}</td>
             <td>{{ project.project.title }}</td>
