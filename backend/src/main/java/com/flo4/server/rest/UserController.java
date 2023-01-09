@@ -1,17 +1,22 @@
 package com.flo4.server.rest;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-
-
 import com.flo4.server.Exceptions.NotFoundException;
+import com.flo4.server.models.PasswordResetTokens;
 import com.flo4.server.models.User;
+import com.flo4.server.repository.PasswordResetRepository;
 import com.flo4.server.repository.UserRepository;
+import com.flo4.server.service.Login;
+import com.flo4.server.service.PasswordReset;
 import com.flo4.server.service.UserService;
-
+import com.flo4.server.utils.PasswordResetUtil;
+import com.mailgun.api.v3.MailgunMessagesApi;
+import com.mailgun.client.MailgunClient;
+import com.mailgun.model.message.Message;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -26,6 +31,9 @@ public class UserController {
 
     @Autowired
     private final UserRepository userRepository;
+
+    @Autowired
+    private final PasswordResetRepository passwordResetRepository;
 
     @GetMapping(path = "", produces = "application/json")
     public List<User> getAllUsers() {
@@ -124,14 +132,37 @@ public class UserController {
                 registerClientRequest.phoneNumber(),
                 registerClientRequest.userType()
         );
+
+        String tokenRegisterReset = new PasswordResetUtil().generateResetToken(String.valueOf(user.getId()));
+
+        PasswordResetTokens passwordResetTokens = new PasswordResetTokens();
+        passwordResetTokens.setToken(tokenRegisterReset);
+        passwordResetTokens.setUser_id(user);
+
+        String resetPasswordLink = "http://localhost:8080/users/resetPassword?token=" + tokenRegisterReset;
+
+        passwordResetRepository.save(passwordResetTokens);
+
+        MailgunMessagesApi mailgunMessagesApi = MailgunClient.config(env.getProperty("mailgun.api.key"))
+                .createApi(MailgunMessagesApi.class);
+
+        Message message = Message.builder()
+                .from(env.getProperty("mailgun.email.from"))
+                .to(user.getEmail())
+                .subject("Verander de wachtwoord van uw Florijn account")
+                .text(String.format("Hi %s, om je wachtwoord te veranderen klik op deze link %s", user.getFirstName(), resetPasswordLink))
+                .build();
+
+        mailgunMessagesApi.sendMessage(env.getProperty("mailgun.api.domain"), message);
+
         return new RegisterClientResponse(user.getEmail(), user.getFirstName(), user.getLastName(), user.getPhoneNumber());
     }
 
 
-
-    public UserController(UserService userService, UserRepository userRepository) {
+    public UserController(UserService userService, UserRepository userRepository, PasswordResetRepository passwordResetRepository) {
         this.userService = userService;
         this.userRepository = userRepository;
+        this.passwordResetRepository = passwordResetRepository;
     }
 
     record RegisterRequest(int id,
@@ -158,7 +189,7 @@ public class UserController {
 //            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Wachtwoorden komen niet overeen");
 
 
-        var user = userService.registerUser(
+        User user = userService.registerUser(
                 registerRequest.id(),
                 registerRequest.email(),
                 registerRequest.first_name(),
@@ -167,7 +198,11 @@ public class UserController {
                 registerRequest.phoneNumber(),
                 registerRequest.userType()
         );
+
+
         return new RegisterResponse(user.getEmail(), user.getFirstName(), user.getLastName(), user.getPhoneNumber());
+
+
     }
 
     record LoginRequest(String email, String password) {
@@ -178,7 +213,7 @@ public class UserController {
 
     @PostMapping(value = "login")
     public LoginResponse login(@RequestBody LoginRequest loginRequest, HttpServletResponse response) {
-        var login = userService.login(loginRequest.email(), loginRequest.password());
+        Login login = userService.login(loginRequest.email(), loginRequest.password());
 
         Cookie cookie = new Cookie("secretRefreshToken", login.getRefreshToken().getToken());
         cookie.setMaxAge(3600);
@@ -246,4 +281,69 @@ public class UserController {
         response.addCookie(cookie);
         return new LogoutResponse("Logout successful");
     }
+
+
+    @Autowired
+    private Environment env;
+
+    @PostMapping(path = "forgotPassword")
+    public ResponseEntity<User> sendMail(@RequestBody PasswordReset passwordReset, HttpServletRequest request) {
+        User user = this.userRepository.findByEmail(passwordReset.getEmail());
+
+
+        String token = new PasswordResetUtil().generateResetToken(String.valueOf(user.getId()));
+
+
+        PasswordResetTokens passwordResetTokens = new PasswordResetTokens();
+        passwordResetTokens.setToken(token);
+        passwordResetTokens.setUser_id(user);
+
+
+        String resetPasswordLink = "http://localhost:8080/users/resetPassword?token=" + token;
+
+        passwordResetRepository.save(passwordResetTokens);
+
+//
+//        if (user == null){
+//            throw new NotFoundException("Unknown user");
+//        }
+
+        MailgunMessagesApi mailgunMessagesApi = MailgunClient.config(env.getProperty("mailgun.api.key"))
+                .createApi(MailgunMessagesApi.class);
+
+        Message message = Message.builder()
+                .from(env.getProperty("mailgun.email.from"))
+                .to(user.getEmail())
+                .subject("Wachtwoord vergeten")
+                .text(String.format("Hi %s, om je wachtwoord te veranderen klik op deze link %s", user.getFirstName(), resetPasswordLink))
+                .build();
+
+        mailgunMessagesApi.sendMessage(env.getProperty("mailgun.api.domain"), message);
+
+
+        return ResponseEntity.ok().body(user);
+    }
+
+
+    record ResetRequest(String password, String token) {
+    }
+
+    record ResetResponse(int id, String email) {
+    }
+
+    //resetPassword?{token}
+    //,@PathVariable(value = "token") String token
+
+    @PutMapping(path = "resetPassword")
+    public ResetResponse resetPassword(@RequestBody ResetRequest resetRequest) {
+
+        User userByToken = userRepository.findUserByToken(resetRequest.token);
+
+        userService.updatePassword(userByToken, resetRequest.password);
+
+
+        return new ResetResponse(userByToken.getId(), userByToken.getEmail());
+    }
+
+
 }

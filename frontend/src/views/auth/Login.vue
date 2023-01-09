@@ -2,9 +2,6 @@
     <form class="form w-100" @submit="checkForm">
         <div class="text-center mb-10">
             <h1 class="text-dark mb-3">Login bij Florijn</h1>
-            <div class="text-gray-400 fw-semibold fs-4">Nieuw hier?
-                <router-link to="/users/register" class="link-primary fw-bold">Maak een account</router-link>
-            </div>
         </div>
 
         <div v-if="errors.length">
@@ -23,7 +20,7 @@
         <div class="fv-row mb-10 fv-plugins-icon-container">
             <div class="d-flex flex-stack mb-2">
                 <label class="form-label fw-bold text-dark fs-6 mb-0">Wachtwoord</label>
-                <router-link to="/forgot" class="link-primary fs-6 fw-bold">Wachtwoord vergeten?</router-link>
+                <router-link to="/users/ForgotPassword" class="link-primary fs-6 fw-bold">Wachtwoord vergeten?</router-link>
             </div>
             <input class="form-control form-control-lg form-control-solid" v-model="password" type="password"
                    name="password" autocomplete="off">

@@ -53,7 +53,35 @@ export default class UserRepository {
         );
     }
 
+
+
     async deleteUserById(userId) {
         return await API.delete(this.url + userId);
+    }
+
+
+    //body: JSON.stringify({
+    //     title:name,
+    //     body:body,
+    //
+    //   }),
+
+    async sendEmail(email) {
+        return await API.post(
+            this.url + "forgotPassword",
+            {
+               email: email
+            }
+        );
+    }
+
+    async resetPassword(password, token) {
+        return await API.put(
+            this.url + "resetPassword",
+            {
+                password: password,
+                token: token
+            }
+        );
     }
 }

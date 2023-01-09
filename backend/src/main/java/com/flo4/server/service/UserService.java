@@ -1,5 +1,6 @@
 package com.flo4.server.service;
 
+import com.flo4.server.models.PasswordResetTokens;
 import com.flo4.server.models.User;
 import com.flo4.server.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Value;
@@ -7,9 +8,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
-
-
-import java.util.Objects;
 
 @Service
 public class UserService {
@@ -48,7 +46,7 @@ public class UserService {
 
     public Login login(String email, String password) {
         //Find user by email
-        var user = userRepository.findByEmail(email);
+        User user = userRepository.findByEmail(email);
 
         System.out.println(userRepository.findByEmail(email));
         //see if passwords match
@@ -70,8 +68,22 @@ public class UserService {
     }
 
     public Login refreshAccess(String refreshToken) {
-        var id = Token.from(refreshToken, secretRefreshToken);
+        int id = Token.from(refreshToken, secretRefreshToken);
 
         return Login.of(id, secretAccessToken, Token.of(refreshToken), getUserFromToken(secretAccessToken));
     }
+
+//    public PasswordResetTokens getByToken(String token){
+//        return  userRepository.findToken(token);
+//    }
+
+    public User updatePassword(User user, String newPassword){
+        user.setPassword(passwordEncoder.encode(newPassword));
+         return userRepository.save(user);
+    }
+
+//    public PasswordResetTokens deleteToken(String token){
+//
+//       return userRepository.deleteByToken(token);
+//    }
 }
