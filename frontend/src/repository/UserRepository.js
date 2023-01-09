@@ -35,20 +35,20 @@ export default class UserRepository {
         );
     }
 
-    async createUser(email, firstName, lastName, password, phoneNumber, userType) {
+    async createUser(email, firstName, lastName, password, phoneNumber, companyName, userType) {
         return await API.post(
             this.url + "add",
             {
-                email, firstName, lastName, password, phoneNumber, userType
+                email, firstName, lastName, password, phoneNumber, companyName, userType
             }
         );
     }
 
-    async updateUserById(userId, email, firstName, lastName, phoneNumber, userType) {
+    async updateUserById(userId, email, firstName, lastName, phoneNumber, companyName, userType) {
         return await API.put(
             this.url + userId,
             {
-                userId, email, firstName, lastName, phoneNumber, userType
+                userId, email, firstName, lastName, phoneNumber, companyName, userType
             }
         );
     }

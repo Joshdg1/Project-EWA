@@ -13,7 +13,11 @@ public class Project {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private String company;
+
+    @OneToOne
+    @JoinColumn(name = "client_id", nullable = false)
+    private User client;
+
     private String description;
     private String title;
 
@@ -48,13 +52,8 @@ public class Project {
         this.id = id;
     }
 
-    public Project(int id, String title, String description, String company, int hoursWorked, Client client) {
-        this(id);
-        this.setTitle(title);
-        this.setDescription(description);
-    }
-
-    public Project(String title, String description, Date startDate, Date endDate) {
+    public Project(User client, String title, String description, Date startDate, Date endDate) {
+        this.setClient(client);
         this.setTitle(title);
         this.setDescription(description);
         this.setStartDate(startDate);
@@ -85,14 +84,6 @@ public class Project {
         this.description = description;
     }
 
-    public String getCompany() {
-        return company;
-    }
-
-    public void setCompany(String company) {
-        this.company = company;
-    }
-
     public Date getStartDate() {
         return startDate;
     }
@@ -108,4 +99,13 @@ public class Project {
     public void setEndDate(Date endDate) {
         this.endDate = endDate;
     }
+
+    public User getClient() {
+        return client;
+    }
+
+    public void setClient(User client) {
+        this.client = client;
+    }
+
 }

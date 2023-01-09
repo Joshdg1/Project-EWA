@@ -84,7 +84,7 @@
                 <td>{{ project.id }}</td>
                 <td>{{ project.title }}</td>
                 <td>{{ project.description }}</td>
-                <td>{{ project.company }}</td>
+                <td v-html="getCompanyNameClient(project.client)"></td>
                 <td>{{ project.hoursWorked }}</td>
                 <td>{{ dateFormat(project.startDate) }}</td>
                 <td>{{ dateFormat(project.endDate) }}</td>
@@ -270,6 +270,10 @@ export default {
       })
       console.log(sortedList)
     },
+
+    getCompanyNameClient(clients) {
+      return clients.companyName
+    }
   }
 }
 </script>

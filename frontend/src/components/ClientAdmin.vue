@@ -67,6 +67,7 @@
                 <th>Achternaam</th>
                 <th>Telefoonnummer</th>
                 <th>Type gebruiker</th>
+                <th>Bedrijf</th>
               </tr>
               </thead>
               <!--end::Table head-->
@@ -82,6 +83,7 @@
                 <td>{{ client.lastName }}</td>
                 <td>{{ client.phoneNumber }}</td>
                 <td>{{ client.userType }}</td>
+                <td>{{ client.companyName}}</td>
 
                 <div class="d-flex  flex-shrink-0">
                   <a class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" @click="editClient()">

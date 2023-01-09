@@ -49,6 +49,7 @@ public class UserRepository implements EntityRepository<User> {
         updatedUser.setFirstName(entity.getFirstName());
         updatedUser.setLastName(entity.getLastName());
         updatedUser.setPhoneNumber(entity.getPhoneNumber());
+        updatedUser.setCompanyName(entity.getCompanyName());
         updatedUser.setUserType(entity.getUserType());
         return updatedUser;
     }

@@ -114,10 +114,11 @@ export default {
       const lastname = localStorage.getItem('lastname');
       const password = localStorage.getItem('password');
       const phoneNumber = localStorage.getItem('phoneNumber');
+      const companyName = localStorage.getItem('companyName');
       const usertype = "client";
       console.log(firstname, password)
 
-      await this.UserRepository.createUser(email, firstname, lastname, password, phoneNumber, usertype);
+      await this.UserRepository.createUser(email, firstname, lastname, password, phoneNumber, companyName, usertype);
 
       this.$router.push("/clients");
     },

@@ -37,12 +37,19 @@
                autocomplete="off" v-model="phoneNumber">
       </div>
 
+      <div class="fv-row mb-10 fv-plugins-icon-container">
+      <label class="form-label fs-6 fw-bold text-dark">Bedrijf</label>
+      <input class="form-control form-control-lg form-control-solid" type="text" name="text"
+             autocomplete="off" v-model="companyName">
+    </div>
+
+
 
     </form>
 
     <div class="d-flex flex-shrink-0">
       <div class="d-flex ms-3">
-        <router-link to="/projects" class="btn bg-primary btn-active-info">
+        <router-link to="/clients" class="btn bg-primary btn-active-info">
           Annuleer
         </router-link>
       </div>
@@ -65,6 +72,7 @@ export default {
       lastname: "",
       password: "",
       phoneNumber: "",
+      companyName: "",
     }
   },
 
@@ -76,12 +84,14 @@ export default {
       localStorage.lastname = "";
       localStorage.password = "";
       localStorage.phoneNumber = "";
+      localStorage.companyName = "";
 
       localStorage.email = this.email;
       localStorage.firstname = this.firstname;
       localStorage.lastname = this.lastname;
       localStorage.password = this.password;
       localStorage.phoneNumber = this.phoneNumber;
+      localStorage.companyName = this.companyName;
 
       this.$router.push("/createNewClient2")
     }
