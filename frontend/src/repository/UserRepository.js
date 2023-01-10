@@ -84,4 +84,7 @@ export default class UserRepository {
             }
         );
     }
+    // async getAllCompanies() {
+    //     return await API.get(this.url + "companies");
+    // }
 }
