@@ -34,7 +34,7 @@ public class FileUploadController {
 //    }
 
     @PostMapping("uploadFile")
-    public FileUpload uploadFile(@RequestParam("file") MultipartFile multipartFile) throws IOException {
+    public FileUpload uploadFile(@RequestParam("file")  MultipartFile multipartFile) throws IOException {
      return fileUploadService.store(multipartFile);
     }
 }

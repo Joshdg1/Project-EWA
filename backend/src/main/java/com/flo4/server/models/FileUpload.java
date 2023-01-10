@@ -21,9 +21,9 @@ public class FileUpload {
     @Lob
     private byte[] data;
 
-//    @OneToOne
-//    @JoinColumn(name = "user_id")
-//    private User user_id;
+    @OneToOne
+    @JoinColumn(name = "user_id")
+    private User user_id;
 //
 //    public FileUpload(){}
 //

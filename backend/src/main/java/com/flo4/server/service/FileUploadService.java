@@ -31,6 +31,7 @@ public class FileUploadService {
         fileUpload.setName(fileName);
         fileUpload.setType(type);
         fileUpload.setData(data);
+//        fileUpload.setUser_id(userId);
 
          fileUploadRepository.save(fileUpload);
         return null;

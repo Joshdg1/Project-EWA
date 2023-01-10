@@ -2,9 +2,12 @@ import API from "../scripts/API";
 
 export default class UserRepository {
     url;   // the URL of the endpoint
+    upload;
+
     constructor() {
         // eslint-disable-next-line no-undef
         this.url = process.env.VUE_APP_API_URL + '/users/';
+        this.upload = 'http://localhost:8081/files/';
     }
 
 
@@ -54,7 +57,6 @@ export default class UserRepository {
     }
 
 
-
     async deleteUserById(userId) {
         return await API.delete(this.url + userId);
     }
@@ -70,7 +72,7 @@ export default class UserRepository {
         return await API.post(
             this.url + "forgotPassword",
             {
-               email: email
+                email: email
             }
         );
     }
@@ -84,4 +86,12 @@ export default class UserRepository {
             }
         );
     }
+
+    // async sendFile(formData) {
+    //     return await API.post(
+    //         this.upload + "uploadFile",
+    //         formData,
+    //         false
+    //     );
+    // }
 }
