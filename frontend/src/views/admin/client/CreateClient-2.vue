@@ -65,7 +65,7 @@
     </div>
     <div class="d-flex flex-shrink-0">
       <div class="d-flex ms-3">
-        <router-link to="/createNewClient" class="btn bg-primary btn-active-info">
+        <router-link to="/clients/create" class="btn bg-primary btn-active-info">
           Terug
         </router-link>
       </div>
@@ -114,10 +114,11 @@ export default {
       const lastname = localStorage.getItem('lastname');
       const password = localStorage.getItem('password');
       const phoneNumber = localStorage.getItem('phoneNumber');
+      const companyName = localStorage.getItem('companyName');
       const usertype = "client";
       console.log(firstname, password)
 
-      await this.UserRepository.createUser(email, firstname, lastname, password, phoneNumber, usertype);
+      await this.UserRepository.createUser(email, firstname, lastname, password, phoneNumber, companyName, usertype);
 
       this.$router.push("/clients");
     },

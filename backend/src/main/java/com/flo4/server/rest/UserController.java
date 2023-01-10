@@ -76,6 +76,10 @@ public class UserController {
 
         return ResponseEntity.ok().body(user);
     }
+//    @GetMapping(path = "companies", produces = "application/json")
+//    public List<User> getAllCompanies() {
+//        return this.userRepository.findAllCompanies();
+//    }
 
 //    @Transactional
 //    @PostMapping(path = "add", produces = "application/json")
@@ -133,6 +137,8 @@ public class UserController {
                                  String lastName,
                                  String password,
                                  String phoneNumber,
+
+                                 String companyName,
                                  String userType
     ) {
     }
@@ -162,6 +168,7 @@ public class UserController {
                 registerClientRequest.lastName(),
                 registerClientRequest.password(),
                 registerClientRequest.phoneNumber(),
+                registerClientRequest.companyName(),
                 registerClientRequest.userType()
         );
 
@@ -197,45 +204,45 @@ public class UserController {
         this.passwordResetRepository = passwordResetRepository;
     }
 
-    record RegisterRequest(int id,
-                           String email,
-                           @JsonProperty("first_name") String first_name,
-                           @JsonProperty("last_name") String last_name,
-                           String password,
-                           @JsonProperty("password_confirm") String passwordConfirmation,
-                           @JsonProperty("phone_number") String phoneNumber,
+//    record RegisterRequest(int id,
+//                           String email,
+//                           @JsonProperty("first_name") String first_name,
+//                           @JsonProperty("last_name") String last_name,
+//                           String password,
+//                           @JsonProperty("password_confirm") String passwordConfirmation,
+//                           @JsonProperty("phone_number") String phoneNumber,
+//
+//                           @JsonProperty("user_type") String userType
+//    ) {
+//    }
+//
+//    record RegisterResponse(String email,
+//                            @JsonProperty("first_name") String firstName,
+//                            @JsonProperty("last_name") String lastName,
+//                            @JsonProperty("phone_number") String phoneNumber) {
+//    }
 
-                           @JsonProperty("user_type") String userType
-    ) {
-    }
-
-    record RegisterResponse(String email,
-                            @JsonProperty("first_name") String firstName,
-                            @JsonProperty("last_name") String lastName,
-                            @JsonProperty("phone_number") String phoneNumber) {
-    }
-
-    @PostMapping("register")
-    public RegisterResponse registerUser(@RequestBody RegisterRequest registerRequest) {
-//        if (!Objects.equals(registerRequest.password(), registerRequest.passwordConfirmation()))
-//            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Wachtwoorden komen niet overeen");
-
-
-        User user = userService.registerUser(
-                registerRequest.id(),
-                registerRequest.email(),
-                registerRequest.first_name(),
-                registerRequest.last_name(),
-                registerRequest.password(),
-                registerRequest.phoneNumber(),
-                registerRequest.userType()
-        );
-
-
-        return new RegisterResponse(user.getEmail(), user.getFirstName(), user.getLastName(), user.getPhoneNumber());
-
-
-    }
+//    @PostMapping("register")
+//    public RegisterResponse registerUser(@RequestBody RegisterRequest registerRequest) {
+////        if (!Objects.equals(registerRequest.password(), registerRequest.passwordConfirmation()))
+////            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Wachtwoorden komen niet overeen");
+//
+//
+//        User user = userService.registerUser(
+//                registerRequest.id(),
+//                registerRequest.email(),
+//                registerRequest.first_name(),
+//                registerRequest.last_name(),
+//                registerRequest.password(),
+//                registerRequest.phoneNumber(),
+//                registerRequest.userType()
+//        );
+//
+//
+//        return new RegisterResponse(user.getEmail(), user.getFirstName(), user.getLastName(), user.getPhoneNumber());
+//
+//
+//    }
 
 
     /**

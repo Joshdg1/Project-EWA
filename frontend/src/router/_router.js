@@ -7,8 +7,6 @@ import programmerRoutes from "@/router/programmer";
 
 Vue.use(VueRouter)
 
-const user = sessionStorage.user ? JSON.parse(sessionStorage.user) : false;
-
 let routes = [
     {
         meta: {
@@ -46,26 +44,34 @@ let routes = [
         path: "/users/resetPassword",
         component: () => import('../views/auth/ResetPassword'),
     },
+
+
+    // all user types
     {
         name: "404PageNotFound",
         path: "*",
         component: () => import('../404page.vue')
-    }
+    },
+    {
+        path: "/home",
+        name: "Home",
+        component: () => import('../views/LoginHome.vue'),
+    },
+    {
+        name: "Mijn account",
+        path: '/profile/view',
+        component: () => import(`../views/profile/View.vue`),
+    },
+    {
+        name: "Projecten",
+        path: '/projects',
+        component: () => import(`../views/ProjectView`),
+    },
 ];
 
-if (user) {
-    switch (user.userType) {
-        case 'administrator':
-            routes = routes.concat(adminRoutes);
-            break;
-        case 'client':
-            routes = routes.concat(clientRoutes);
-            break;
-        case 'programmer':
-            routes = routes.concat(programmerRoutes);
-            break;
-    }
-}
+routes = routes.concat(setType(adminRoutes, 'administrator'));
+routes = routes.concat(setType(clientRoutes, 'client'));
+routes = routes.concat(setType(programmerRoutes, 'programmer'));
 
 const router = new VueRouter({
     mode: 'history',
@@ -76,6 +82,7 @@ const router = new VueRouter({
 
 router.beforeEach((to, from, next) => {
     const loggedIn = sessionStorage.getItem('token');
+const user = sessionStorage.user ? JSON.parse(sessionStorage.user) : false;
 
     // trying to access a restricted page + not logged in
     // redirect to auth page
@@ -84,8 +91,22 @@ router.beforeEach((to, from, next) => {
     } else if (loggedIn && to.meta.isPublic) {
         next('/home');
     } else {
-        next();
+        if (to.meta.type && to.meta.type !== user.userType) {
+            next('/404');
+        } else {
+            next();
+        }
     }
 });
 
+function setType(routes, type) {
+    for (const route of routes) {
+        if (!route.meta)
+            route.meta = {};
+
+        route.meta.type = type;
+    }
+
+    return routes;
+}
 export default router;

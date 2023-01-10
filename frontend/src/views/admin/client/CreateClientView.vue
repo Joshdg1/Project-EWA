@@ -37,23 +37,32 @@
                autocomplete="off" v-model="phoneNumber">
       </div>
 
+      <div class="fv-row mb-10 fv-plugins-icon-container">
+      <label class="form-label fs-6 fw-bold text-dark">Bedrijf</label>
+      <input class="form-control form-control-lg form-control-solid" type="text" name="text"
+             autocomplete="off" v-model="companyName">
+    </div>
+
+
 
     </form>
 
     <div class="d-flex flex-shrink-0">
       <div class="d-flex ms-3">
-        <router-link to="/projects" class="btn bg-primary btn-active-info">
+        <router-link to="/clients" class="btn bg-primary btn-active-info">
           Annuleer
         </router-link>
       </div>
       <div class="d-flex ms-3">
-        <button class="btn bg-primary btn-active-info" @click="setSession">Volgende</button>
+        <button class="btn bg-primary btn-active-info" @click="createClient">Creëer</button>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import UserRepository from '../../../repository/UserRepository'
+
 export default {
   // eslint-disable-next-line
   name: "CreateClientProjectView",
@@ -65,26 +74,19 @@ export default {
       lastname: "",
       password: "",
       phoneNumber: "",
+      companyName: "",
+      UserRepository: new UserRepository(),
     }
   },
 
   methods: {
-    setSession() {
-      //clear the session without clearing the user login details.
-      localStorage.email = "";
-      localStorage.firstname = "";
-      localStorage.lastname = "";
-      localStorage.password = "";
-      localStorage.phoneNumber = "";
+    async createClient() {
+      const usertype = "client";
 
-      localStorage.email = this.email;
-      localStorage.firstname = this.firstname;
-      localStorage.lastname = this.lastname;
-      localStorage.password = this.password;
-      localStorage.phoneNumber = this.phoneNumber;
+      await this.UserRepository.createUser(this.email, this.firstname, this.lastname, this.password, this.phoneNumber, this.companyName, usertype);
 
-      this.$router.push("/createNewClient2")
-    }
+      this.$router.push("/clients");
+    },
   }
 }
 </script>

@@ -67,6 +67,7 @@ public class UserRepository implements EntityRepository<User> {
         updatedUser.setFirstName(entity.getFirstName());
         updatedUser.setLastName(entity.getLastName());
         updatedUser.setPhoneNumber(entity.getPhoneNumber());
+        updatedUser.setCompanyName(entity.getCompanyName());
         updatedUser.setUserType(entity.getUserType());
         return updatedUser;
     }
@@ -135,6 +136,12 @@ public class UserRepository implements EntityRepository<User> {
                 .getSingleResult();
 
     }
+
+//    public List<User> findAllCompanies() {
+//        TypedQuery<User> query = this.entityManager.createQuery("SELECT company_name from user WHERE company_name IS NOT NULL", User.class);
+//
+//        return query.getResultList();
+//    }
 
 //    public PasswordResetTokens deleteToken(String token) {
 //        return this.entityManager.createQuery("UPDATE password_reset_tokens SET token = NULL, user_id = NULL where token = ?1", PasswordResetTokens.class)

@@ -11,6 +11,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.transaction.Transactional;
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -43,15 +47,10 @@ public class ProjectController {
     @Transactional
     @PostMapping(path = "add", produces = "application/json")
     public ResponseEntity<Project> addNewProject(@RequestBody CreateProject createProject) {
-
-        Project newProject = new Project(createProject.getName(), createProject.getDescription(), createProject.getStart_date(), createProject.getEnd_date());
-
-        // set users
         User client = this.userRepository.findById(createProject.getClient_id());
+        Project newProject = new Project(client, createProject.getName(), createProject.getDescription(), createProject.getStart_date(), createProject.getEnd_date());
 
-        newProject.addUser(client);
-
-        for (Integer programmer_id: createProject.getProgrammer_ids()) {
+        for (Integer programmer_id : createProject.getProgrammer_ids()) {
             User programmer = this.userRepository.findById(programmer_id);
             newProject.addUser(programmer);
         }

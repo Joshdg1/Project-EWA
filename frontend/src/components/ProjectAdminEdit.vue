@@ -21,20 +21,12 @@
               <!--begin::Table head-->
               <thead>
               <tr class="fw-bolder text-muted">
-                <th class="w-25px">
-                  <div class="form-check form-check-sm form-check-custom form-check-solid">
-                    <input class="form-check-input" type="checkbox" value="1" data-kt-check="true"
-                           data-kt-check-target=".widget-9-check"/>
-                  </div>
-                </th>
                 <th>Id</th>
                 <th>Titel</th>
                 <th>Beschrijving</th>
-                <th>Bedrijf</th>
-                <th>Gewerkte uren</th>
                 <th>Startdatum</th>
                 <th>Einddatum</th>
-                <th>Gebruiker(s)</th>
+                <th>Specialist(en)</th>
                 <th>Acties</th>
               </tr>
               </thead>
@@ -42,18 +34,12 @@
               <!--begin::Table body-->
               <tbody>
               <tr v-for="project in projects" v-bind:key="project.id">
-                <div class="form-check form-check-sm form-check-custom form-check-solid">
-                  <input class="form-check-input" type="checkbox" value="1" data-kt-check="true"
-                         data-kt-check-target=".widget-9-check"/>
-                </div>
                 <td>{{ project.id }}</td>
-                <td><input type="text" v-model="project.title"></td>
-                <td><input type="text" v-model="project.description"></td>
-                <td><input type="text" v-model="project.company"></td>
-                <td><input type="text" v-model="project.hoursWorked"></td>
-                <td><input type="date" v-model="project.startDate"></td>
-                <td><input type="date" v-model="project.endDate"></td>
-                <td><input type="text" v-model="project.clients"></td>
+                <td><input type="text" class="form-control form-control-lg form-control-solid" v-model="project.title"></td>
+                <td><input type="text" class="form-control form-control-lg form-control-solid" v-model="project.description"></td>
+                <td><input type="date" class="form-control form-control-lg form-control-solid" v-model="project.startDate"></td>
+                <td><input type="date" class="form-control form-control-lg form-control-solid" v-model="project.endDate"></td>
+                <td><input type="text" class="form-control form-control-lg form-control-solid" v-model="project.clients"></td>
 
 
                 <div class="d-flex justify-content-end flex-shrink-0">
@@ -118,11 +104,11 @@ export default {
       }).then((result) => {
         if (result.value) {
           this.repository.updateProjectById(project.id, project.title, project.description,
-              project.company, project.startDate, project.endDate, project.clients);
+              project.companyName, project.startDate, project.endDate, project.clients);
         }
       });
       location.reload();
-    }
+    },
   }
 }
 </script>
