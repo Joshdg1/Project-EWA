@@ -1,57 +1,61 @@
 <template>
-  <div class="row">
-    <div class="col-lg-12">
-      <div class="card card-xl-stretch mb-5 mb-xl-8">
-        <!--begin::Body-->
-        <div class="card-body py-3">
-          <!--begin::Table container-->
-          <div class="table-responsive">
-            <!--begin::Table-->
-            <table class="table table-row-dashed table-row-gray-300 align-middle gs-0 gy-4">
-              <!--begin::Table head-->
-              <thead>
-              <tr class="fw-bolder text-muted">
-                <th>Email</th>
-                <th>Voornaam(en)</th>
-                <th>Achternaam</th>
-                <th>Telefoonnummer</th>
-                <th>
-                  Type gebruiker
-                </th>
-              </tr>
-              </thead>
-              <tbody>
-              <tr v-for="programmer in programmers" v-bind:key="programmer.id">
-                <td><input type="text" class="form-control  form-control-sm form-control-solid" v-model="programmer.email"></td>
-                <td><input type="text" class="form-control  form-control-sm form-control-solid" v-model="programmer.firstName"></td>
-                <td><input type="text" class="form-control  form-control-sm form-control-solid" v-model="programmer.lastName"></td>
-                <td><input type="text" class="form-control  form-control-sm form-control-solid" v-model="programmer.phoneNumber"></td>
-                <td><select class="form-control form-control-sm  form-control-solid" v-model="programmer.userType">
-                  <option value="client">Cliënt</option>
-                  <option value="programmer">Specialist</option>
-                  <option value="administrator">Administrator</option>
-                </select>
-                </td>
-              </tr>
-              </tbody>
-            </table>
+  <div>
+    <div class="card-body py-3">
+      <!--begin::Table container-->
+      <div class="table-responsive">
+        <!--begin::Table-->
+        <table class="table table-row-dashed table-row-gray-300 align-middle gs-0 gy-4">
+          <!--begin::Table head-->
+          <thead>
+          <tr class="fw-bolder text-muted">
+            <th>Email</th>
+            <th>Voornaam(en)</th>
+            <th>Achternaam</th>
+            <th>Telefoonnummer</th>
+            <th>
+              Type gebruiker
+            </th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr v-if="this.programmers.length === 0">
+            <td class="text-center text-muted fs-4 p-10" colspan="6">
+              Geen resultaten
+            </td>
+          </tr>
+          <tr v-else v-for="programmer in programmers" v-bind:key="programmer.id">
+            <td><input type="text" class="form-control  form-control-sm form-control-solid" v-model="programmer.email">
+            </td>
+            <td><input type="text" class="form-control  form-control-sm form-control-solid"
+                       v-model="programmer.firstName"></td>
+            <td><input type="text" class="form-control  form-control-sm form-control-solid"
+                       v-model="programmer.lastName"></td>
+            <td><input type="text" class="form-control  form-control-sm form-control-solid"
+                       v-model="programmer.phoneNumber"></td>
+            <td><select class="form-control form-control-sm  form-control-solid" v-model="programmer.userType">
+              <option value="client">Cliënt</option>
+              <option value="programmer">Specialist</option>
+              <option value="administrator">Administrator</option>
+            </select>
+            </td>
+          </tr>
+          </tbody>
+        </table>
 
 
-          </div>
+      </div>
+    </div>
+    <div class="card-footer">
+      <div class="d-flex flex-stack">
+        <div class="mr-2">
+          <button @click="cancel()" type="button" class="btn btn-sm btn-light-primary me-3">
+            Annuleren
+          </button>
         </div>
-        <div class="card-footer">
-          <div class="d-flex flex-stack">
-            <div class="mr-2">
-              <button @click="cancel()" type="button" class="btn btn-sm btn-light-primary me-3">
-                Annuleren
-              </button>
-            </div>
-            <div>
-              <button @click="confirm()" type="button" class="btn btn-sm btn-primary">
-                Opslaan
-              </button>
-            </div>
-          </div>
+        <div>
+          <button @click="confirm()" type="button" class="btn btn-sm btn-primary">
+            Opslaan
+          </button>
         </div>
       </div>
     </div>

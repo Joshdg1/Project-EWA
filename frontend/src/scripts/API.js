@@ -4,7 +4,7 @@
 
 export default class API {
     //General function to send request
-    static async send(url, method, body = false){
+    static async send(url, method, body = false, headers = true) {
 
         // Prepare request parameters
         let request = {
@@ -18,11 +18,12 @@ export default class API {
         // }
 
         // Insert body if given
-        if (body){
-            request.headers = {
-                'Content-Type': 'application/json',
-            };
-
+        if (body) {
+            if (headers) {
+                request.headers = {
+                    'Content-Type': 'application/json',
+                };
+            }
             request.body = JSON.stringify(body);
         }
 
@@ -38,19 +39,19 @@ export default class API {
         return await response.json();
     }
 
-    static async post(url, body){
-        return await this.send(url, "POST", body);
+    static async post(url, body, headers) {
+        return await this.send(url, "POST", body, headers);
     }
 
-    static async get(url){
+    static async get(url) {
         return await this.send(url, "GET");
     }
 
-    static async put(url, body){
+    static async put(url, body) {
         return await this.send(url, "PUT", body);
     }
 
-    static async delete(url){
+    static async delete(url) {
         return await this.send(url, "DELETE");
     }
 }

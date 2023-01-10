@@ -27,12 +27,12 @@ const adminRoutes = [
     {
         name: "Cliënten",
         path: '/clients',
-        component: () => import(`../views/admin/client/ClientAdminView.vue`),
+        component: () => import(`../views/admin/client/View.vue`),
     },
     {
         name: "Cliënt aanmaken",
         path: "/clients/create",
-        component: () => import('../views/admin/client/CreateClientView.vue')
+        component: () => import('../views/admin/client/Create.vue')
     },
 ]
 

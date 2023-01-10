@@ -1,16 +1,18 @@
 package com.flo4.server.models;
 
-import com.flo4.server.models.User;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.io.Serializable;
 
 @Getter
 @Setter
 @Entity(name = "password_reset_tokens")
-public class PasswordResetTokens implements Serializable {
+public class PasswordResetTokens {
+    /**
+     * Entity class for making a connection between password reset tokens and users
+     */
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "id", nullable = false)
@@ -18,7 +20,7 @@ public class PasswordResetTokens implements Serializable {
 
     private String token;
 
-    @OneToOne
-    @JoinColumn(name = "user_id")
+    @JsonIgnore
+    @ManyToOne
     private User user_id;
 }

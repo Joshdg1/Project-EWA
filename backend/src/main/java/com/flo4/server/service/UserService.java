@@ -38,12 +38,25 @@ public class UserService {
 //        if(!Objects.equals(password, passwordConfirmation))
 //            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Wachtwoorden komen niet overeen");
 
-        return userRepository.save(
-                User.of(id, email, firstName, lastName, passwordEncoder.encode(password), phoneNumber, companyName, userType)
-        );
+        if (password.equals("false")){
+            return userRepository.save(
+                    User.of(id, email, firstName, lastName, phoneNumber, companyName, userType)
+            );
+        } else {
+            return userRepository.save(
+                    User.of(id, email, firstName, lastName, passwordEncoder.encode(password), phoneNumber, companyName, userType)
+            );
+        }
     }
 
 
+    /**
+     * Login logic takes a user's email and password, finds the email, then checks if the password matches with
+     * the encoded password
+     * @param email
+     * @param password
+     * @return
+     */
     public Login login(String email, String password) {
         //Find user by email
         User user = userRepository.findByEmail(email);
@@ -63,6 +76,11 @@ public class UserService {
     }
 
 
+    /**
+     * Gets the user from a token
+     * @param token
+     * @return
+     */
     public User getUserFromToken(String token) {
         return userRepository.findById(Token.from(token, secretAccessToken));
     }
@@ -77,6 +95,12 @@ public class UserService {
 //        return  userRepository.findToken(token);
 //    }
 
+    /**
+     * Updates the user with a new password
+     * @param user
+     * @param newPassword
+     * @return
+     */
     public User updatePassword(User user, String newPassword){
         user.setPassword(passwordEncoder.encode(newPassword));
          return userRepository.save(user);
