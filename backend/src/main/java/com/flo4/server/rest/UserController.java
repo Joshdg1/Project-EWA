@@ -63,10 +63,10 @@ public class UserController {
 
         return ResponseEntity.ok().body(user);
     }
-    @GetMapping(path = "companies", produces = "application/json")
-    public List<User> getAllCompanies() {
-        return this.userRepository.findAllCompanies();
-    }
+//    @GetMapping(path = "companies", produces = "application/json")
+//    public List<User> getAllCompanies() {
+//        return this.userRepository.findAllCompanies();
+//    }
 
 //    @Transactional
 //    @PostMapping(path = "add", produces = "application/json")
