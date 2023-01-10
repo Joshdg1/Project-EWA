@@ -13,7 +13,7 @@ const adminRoutes = [
     {
         name: "Specialist aanmaken",
         path: '/programmers/create',
-        component: () => import('../views/programmer/AddProgrammer.vue'),
+        component: () => import('../views/admin/programmer/Create.vue'),
     },
 
     // === PROJECTS ===

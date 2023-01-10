@@ -26,6 +26,8 @@
             <select class="form-select form-select-sm form-select-solid  me-5 w-200px" v-model="sortType">
               <option value="skill-asc">Meeste vaardigheden</option>
               <option value="skill-desc">Minste vaardigheden</option>
+              <option value="name-asc">Naam (A-Z)</option>
+              <option value="name-desc">Naam (Z-A)</option>
             </select>
             <router-link to="/programmers/create" class="btn btn-sm btn-light-primary">
               <plus-icon></plus-icon>Nieuwe specialist
@@ -68,7 +70,7 @@ export default {
 
   data() {
     return {
-      sortType: "skill-asc",
+      sortType: "",
       searchQ: null,
       searchSkill: null,
       programmers: [],
@@ -94,7 +96,9 @@ export default {
   methods: {
     async loadProgrammers(){
       console.log('loadProgrammers');
+      this.sortType = '';
       this.programmers = await this.repository.getAllProgrammers();
+      this.sortType = 'skill-asc';
     },
 
     async deleteProgrammer(programmer) {
@@ -121,6 +125,28 @@ export default {
         return b.skills.length - a.skills.length
       });
     },
+    nameAsc() {
+      this.programmers = this.programmers.sort((b, a) => {
+        if (a.firstName < b.firstName) {
+          return -1;
+        }
+        if (a.firstName > b.firstName) {
+          return 1;
+        }
+        return 0;
+      });
+    },
+    nameDesc() {
+      this.programmers = this.programmers.sort((b, a) => {
+        if (b.firstName < a.firstName) {
+          return -1;
+        }
+        if (b.firstName > a.firstName) {
+          return 1;
+        }
+        return 0;
+      });
+    },
 
   },
   watch: {
@@ -131,6 +157,12 @@ export default {
           break;
         case "skill-desc":
           this.amountOfSkillsDecreasing()
+          break;
+        case "name-asc":
+          this.nameAsc()
+          break;
+        case "name-desc":
+          this.nameDesc()
           break;
       }
     }
