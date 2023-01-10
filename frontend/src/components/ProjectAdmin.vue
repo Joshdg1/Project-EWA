@@ -46,6 +46,7 @@
                 <th>Einddatum</th>
                 <th>Status</th>
                 <th>Programmeur(s)</th>
+                <th>Acties</th>
               </tr>
               </thead>
               <!--end::Table head-->
@@ -55,13 +56,12 @@
                 <td>{{ project.title }}</td>
                 <td>{{ project.description }}</td>
                 <td v-html="getCompanyNameClient(project.client)"></td>
-                <td>{{ project.hoursWorked }}</td>
                 <td>{{ dateFormat(project.startDate) }}</td>
                 <td>{{ dateFormat(project.endDate) }}</td>
                 <td>{{ setStatus(project.startDate, project.endDate) }}</td>
                 <td v-html="getUserProjects(project.users)"></td>
 
-                <div class="d-flex justify-content-end flex-shrink-0">
+                <div class="d-flex justify-content-start flex-shrink-0">
                   <a class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" @click="editProject()">
                       <edit-icon></edit-icon>
                   </a>
