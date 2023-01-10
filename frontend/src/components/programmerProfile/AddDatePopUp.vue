@@ -129,8 +129,6 @@ export default {
 
     if (hours.length === 0) {
       await this.hoursRepository.createHours(Project, this.totalHours , this.userId)
-    } else {
-      await this.hoursRepository.updateHoursById()
     }
         this.popupStatus = false
         this.$emit('close-popup', this.popupStatus)
