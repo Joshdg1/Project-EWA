@@ -24,10 +24,9 @@
                 <th>Id</th>
                 <th>Titel</th>
                 <th>Beschrijving</th>
-                <th>Bedrijf</th>
                 <th>Startdatum</th>
                 <th>Einddatum</th>
-                <th>Programmeur(s)</th>
+                <th>Specialist(en)</th>
                 <th>Acties</th>
               </tr>
               </thead>
@@ -38,7 +37,6 @@
                 <td>{{ project.id }}</td>
                 <td><input type="text" class="form-control form-control-lg form-control-solid" v-model="project.title"></td>
                 <td><input type="text" class="form-control form-control-lg form-control-solid" v-model="project.description"></td>
-                <td><input type="text" class="form-control form-control-lg form-control-solid" v-model="project.company"></td>
                 <td><input type="date" class="form-control form-control-lg form-control-solid" v-model="project.startDate"></td>
                 <td><input type="date" class="form-control form-control-lg form-control-solid" v-model="project.endDate"></td>
                 <td><input type="text" class="form-control form-control-lg form-control-solid" v-model="project.clients"></td>
@@ -106,11 +104,11 @@ export default {
       }).then((result) => {
         if (result.value) {
           this.repository.updateProjectById(project.id, project.title, project.description,
-              project.company, project.startDate, project.endDate, project.clients);
+              project.companyName, project.startDate, project.endDate, project.clients);
         }
       });
       location.reload();
-    }
+    },
   }
 }
 </script>

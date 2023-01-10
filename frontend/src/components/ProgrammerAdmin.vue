@@ -17,7 +17,7 @@
               <multiselect class="newSkill" v-model="value" :options="skills" :searchable="true"
                            :close-on-select="true"
                            :show-labels="false"
-                           placeholder="Selecteer een Skill"></multiselect>
+                           placeholder="Selecteer een vaardigheid"></multiselect>
             </div>
           </div>
 
@@ -25,8 +25,8 @@
             <label class="me-3 fs-6">Sorteren: </label>
 
             <select class="form-select form-select-sm form-select-solid  me-5 w-200px" v-model="sortType">
-              <option value="skill-asc">Meeste skills eerst</option>
-              <option value="skill-desc">Minste skills eerst</option>
+              <option value="skill-asc">Meeste vaardigheden</option>
+              <option value="skill-desc">Minste vaardigheden</option>
               <!--                    <option value="programmer-asc">Meeste sepcialisten eerst</option>-->
               <!--                    <option value="programmer-desc">Minste sepcialisten eerst</option>-->
             </select>
@@ -45,6 +45,7 @@
               <th>Voornaam(en)</th>
               <th>Achternaam</th>
               <th>Telefoonnummer</th>
+              <th>Type gebruiker</th>
               <th>Acties</th>
             </tr>
             </thead>
@@ -54,6 +55,7 @@
               <td>{{ programmer.firstName }}</td>
               <td>{{ programmer.lastName }}</td>
               <td>{{ programmer.phoneNumber }}</td>
+              <td>{{ programmer.userType }}</td>
               <div class="d-flex justify-content-start flex-shrink-0">
               <td>
                 <a class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1"

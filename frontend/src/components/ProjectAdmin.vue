@@ -17,8 +17,8 @@
                 <label class="me-3 fs-6">Sorteren: </label>
 
                 <select class="form-select form-select-sm form-select-solid  me-5 w-200px" v-model="sortType">
-                    <option value="skill-asc">Meeste skills eerst</option>
-                    <option value="skill-desc">Minste skills eerst</option>
+                    <option value="skill-asc">Meeste vaardigheden</option>
+                    <option value="skill-desc">Minste vaardigheden</option>
 <!--                    <option value="programmer-asc">Meeste sepcialisten eerst</option>-->
 <!--                    <option value="programmer-desc">Minste sepcialisten eerst</option>-->
                 </select>
@@ -45,7 +45,7 @@
                 <th>Startdatum</th>
                 <th>Einddatum</th>
                 <th>Status</th>
-                <th>Programmeur(s)</th>
+                <th>Specialist(en)</th>
                 <th>Acties</th>
               </tr>
               </thead>
