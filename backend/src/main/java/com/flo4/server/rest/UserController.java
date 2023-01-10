@@ -172,28 +172,29 @@ public class UserController {
                 registerClientRequest.userType()
         );
 
-        String tokenRegisterReset = new PasswordResetUtil().generateResetToken(String.valueOf(user.getId()));
+        if (registerClientRequest.password().equals("false")) {
+            String tokenRegisterReset = new PasswordResetUtil().generateResetToken(String.valueOf(user.getId()));
 
-        PasswordResetTokens passwordResetTokens = new PasswordResetTokens();
-        passwordResetTokens.setToken(tokenRegisterReset);
-        passwordResetTokens.setUser_id(user);
+            PasswordResetTokens passwordResetTokens = new PasswordResetTokens();
+            passwordResetTokens.setToken(tokenRegisterReset);
+            passwordResetTokens.setUser_id(user);
 
-        String resetPasswordLink = "http://localhost:8080/users/resetPassword?token=" + tokenRegisterReset;
+            String resetPasswordLink = "http://localhost:8080/users/resetPassword?token=" + tokenRegisterReset;
 
-        passwordResetRepository.save(passwordResetTokens);
+            passwordResetRepository.save(passwordResetTokens);
 
-        MailgunMessagesApi mailgunMessagesApi = MailgunClient.config(env.getProperty("mailgun.api.key"))
-                .createApi(MailgunMessagesApi.class);
+            MailgunMessagesApi mailgunMessagesApi = MailgunClient.config(env.getProperty("mailgun.api.key"))
+                    .createApi(MailgunMessagesApi.class);
 
-        Message message = Message.builder()
-                .from(env.getProperty("mailgun.email.from"))
-                .to(user.getEmail())
-                .subject("Verander de wachtwoord van uw Florijn account")
-                .text(String.format("Hi %s, om je wachtwoord te veranderen klik op deze link %s", user.getFirstName(), resetPasswordLink))
-                .build();
+            Message message = Message.builder()
+                    .from(env.getProperty("mailgun.email.from"))
+                    .to(user.getEmail())
+                    .subject("Verander de wachtwoord van uw Florijn account")
+                    .text(String.format("Hi %s, om je wachtwoord te veranderen klik op deze link %s", user.getFirstName(), resetPasswordLink))
+                    .build();
 
-        mailgunMessagesApi.sendMessage(env.getProperty("mailgun.api.domain"), message);
-
+            mailgunMessagesApi.sendMessage(env.getProperty("mailgun.api.domain"), message);
+        }
         return new RegisterClientResponse(user.getEmail(), user.getFirstName(), user.getLastName(), user.getPhoneNumber());
     }
 

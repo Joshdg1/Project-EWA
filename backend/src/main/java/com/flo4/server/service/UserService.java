@@ -38,9 +38,15 @@ public class UserService {
 //        if(!Objects.equals(password, passwordConfirmation))
 //            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Wachtwoorden komen niet overeen");
 
-        return userRepository.save(
-                User.of(id, email, firstName, lastName, passwordEncoder.encode(password), phoneNumber, companyName, userType)
-        );
+        if (password.equals("false")){
+            return userRepository.save(
+                    User.of(id, email, firstName, lastName, phoneNumber, companyName, userType)
+            );
+        } else {
+            return userRepository.save(
+                    User.of(id, email, firstName, lastName, passwordEncoder.encode(password), phoneNumber, companyName, userType)
+            );
+        }
     }
 
 
