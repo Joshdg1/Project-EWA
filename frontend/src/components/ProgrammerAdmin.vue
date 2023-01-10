@@ -1,76 +1,78 @@
 <template>
-    <div class="row">
-        <div class="col-lg-12">
-            <div class="card card-xl-stretch mb-5 mb-xl-8">
-                <div class="card-header border-0 pt-5">
-                    <div class="row">
-                        <div class="col">
-                            <div class="position-relative mb-5 mb-lg-0">
-                                <search-icon></search-icon>
-                                <input type="text" data-kt-ecommerce-order-filter="search"
-                                       v-model="search"
-                                       class="form-control form-control-solid w-250px ps-14"
-                                       placeholder="Zoeken...">
-                            </div>
-                        </div>
-                        <div class="col">
-                            <multiselect class="newSkill" v-model="value" :options="skills" :searchable="true"
-                                         :close-on-select="true"
-                                         :show-labels="false"
-                                         placeholder="Selecteer een Skill"></multiselect>
-                        </div>
-                    </div>
-
-                    <div class="card-toolbar">
-                        <label class="me-3 fs-6">Sorteren: </label>
-
-                        <select class="form-select form-select-sm form-select-solid  me-5 w-200px" v-model="sortType">
-                            <option value="skill-asc">Meeste skills eerst</option>
-                            <option value="skill-desc">Minste skills eerst</option>
-                            <!--                    <option value="programmer-asc">Meeste sepcialisten eerst</option>-->
-                            <!--                    <option value="programmer-desc">Minste sepcialisten eerst</option>-->
-                        </select>
-
-                        <router-link to="/programmers/create" class="btn btn-sm btn-light-primary">
-                            <plus-icon></plus-icon>Nieuwe specialist
-                        </router-link>
-                    </div>
-                </div>
-                <div class="card-body py-3">
-                    <table class="table table-row-dashed table-row-gray-300 align-middle gs-0 gy-4">
-                        <thead>
-                        <tr class="fw-bolder text-muted">
-                            <th>Email</th>
-                            <th>Voornaam(en)</th>
-                            <th>Achternaam</th>
-                            <th>Telefoonnummer</th>
-                            <th>
-                                <a class="float-end btn btn-icon btn-bg-light btn-active-color-primary btn-sm"
-                                   @click="editProgrammer()">
-                                    <edit-icon></edit-icon>
-                                </a>
-                            </th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr v-for="programmer in resultQuery" v-bind:key="programmer.id">
-                            <td>{{ programmer.email }}</td>
-                            <td>{{ programmer.firstName }}</td>
-                            <td>{{ programmer.lastName }}</td>
-                            <td>{{ programmer.phoneNumber }}</td>
-                            <td>
-                                <a class="float-end btn btn-icon btn-bg-light btn-active-color-primary btn-sm"
-                                   @click="deleteProgrammer(programmer)">
-                                    <delete-icon></delete-icon>
-                                </a>
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="card card-xl-stretch mb-5 mb-xl-8">
+        <div class="card-header border-0 pt-5">
+          <div class="row">
+            <div class="col">
+              <div class="position-relative mb-5 mb-lg-0">
+                <search-icon></search-icon>
+                <input type="text" data-kt-ecommerce-order-filter="search"
+                       v-model="search"
+                       class="form-control form-control-solid w-250px ps-14"
+                       placeholder="Zoeken...">
+              </div>
             </div>
+            <div class="col">
+              <multiselect class="newSkill" v-model="value" :options="skills" :searchable="true"
+                           :close-on-select="true"
+                           :show-labels="false"
+                           placeholder="Selecteer een Skill"></multiselect>
+            </div>
+          </div>
+
+          <div class="card-toolbar">
+            <label class="me-3 fs-6">Sorteren: </label>
+
+            <select class="form-select form-select-sm form-select-solid  me-5 w-200px" v-model="sortType">
+              <option value="skill-asc">Meeste skills eerst</option>
+              <option value="skill-desc">Minste skills eerst</option>
+              <!--                    <option value="programmer-asc">Meeste sepcialisten eerst</option>-->
+              <!--                    <option value="programmer-desc">Minste sepcialisten eerst</option>-->
+            </select>
+
+            <router-link to="/programmers/create" class="btn btn-sm btn-light-primary">
+              <plus-icon></plus-icon>
+              Nieuwe specialist
+            </router-link>
+          </div>
         </div>
+        <div class="card-body py-3">
+          <table class="table table-row-dashed table-row-gray-300 align-middle gs-0 gy-4">
+            <thead>
+            <tr class="fw-bolder text-muted">
+              <th>Email</th>
+              <th>Voornaam(en)</th>
+              <th>Achternaam</th>
+              <th>Telefoonnummer</th>
+              <th>Acties</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr v-for="programmer in resultQuery" v-bind:key="programmer.id">
+              <td>{{ programmer.email }}</td>
+              <td>{{ programmer.firstName }}</td>
+              <td>{{ programmer.lastName }}</td>
+              <td>{{ programmer.phoneNumber }}</td>
+              <div class="d-flex justify-content-start flex-shrink-0">
+              <td>
+                <a class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1"
+                   @click="editProgrammer()">
+                  <edit-icon></edit-icon>
+                </a>
+                <a class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm"
+                   @click="deleteProgrammer(programmer)">
+                  <delete-icon></delete-icon>
+                </a>
+              </td>
+                </div>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
     </div>
+  </div>
 </template>
 
 <script>
@@ -138,14 +140,14 @@ export default {
         confirmButtonText: "Ja, verwijder!", cancelButtonText: "Annuleer"
       }).then((result) => {
         if (result.value) {
-            this.repository.deleteUserById(programmer.id);
-            this.$emit('loadProgrammers');
+          this.repository.deleteUserById(programmer.id);
+          this.$emit('loadProgrammers');
         }
       });
     },
 
     editProgrammer() {
-        this.editingProgrammer = true;
+      this.editingProgrammer = true;
       this.$emit('editProgrammer', this.editingProgrammer)
     },
 
@@ -168,16 +170,16 @@ export default {
 
   },
   watch: {
-      sortType: function (newValue) {
-          switch (newValue) {
-              case "skill-asc":
-                  this.amountOfSkillsIncreasing()
-                  break;
-              case "skill-desc":
-                  this.amountOfSkillsDecreasing()
-                  break;
-          }
+    sortType: function (newValue) {
+      switch (newValue) {
+        case "skill-asc":
+          this.amountOfSkillsIncreasing()
+          break;
+        case "skill-desc":
+          this.amountOfSkillsDecreasing()
+          break;
       }
+    }
   },
 
   computed: {

@@ -28,7 +28,7 @@
                 <th>Telefoonnummer</th>
                 <th>Type gebruiker</th>
                 <th>Bedrijf</th>
-                <th></th>
+                <th>Acties</th>
               </tr>
               </thead>
 
