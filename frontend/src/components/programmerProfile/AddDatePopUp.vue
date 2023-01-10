@@ -49,7 +49,7 @@ export default {
   },
   name: "AddDatePopUp",
   props: ['selectedDate', 'userId'],
-  emits: ['close-popup'],
+  emits: ['close-popup', 'response-list'],
   async created() {
     this.newDate = new UserDate()
     this.newDate.start = new Date(this.selectedDate);
@@ -64,6 +64,7 @@ export default {
       newDate: [],
       totalHours: 0,
       allProjects: [],
+      responseList:[],
       hoursRepository: new HourRepository(),
       projectRepository: new ProjectRepository(),
       repository: new AvailabilityRepository()
@@ -105,8 +106,12 @@ export default {
             Project = entry
           }
         })
-        await this.repository.createAvailability(Project, startDate, endDate, this.userId)
 
+       const response  = await this.repository.createAvailability(Project, startDate, endDate, this.userId)
+        this.responseList.push(response)
+
+        console.log("RESPONSE")
+        console.log(response)
         // calculating time between dates
         let start = new Date(startDate).getTime()
         let end = new Date(endDate).getTime()
@@ -131,6 +136,7 @@ export default {
     }
         this.popupStatus = false
         this.$emit('close-popup', this.popupStatus)
+        this.$emit('response-list', this.responseList)
       },
 
     cancel(){

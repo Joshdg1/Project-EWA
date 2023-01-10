@@ -73,17 +73,17 @@
                     <span class="fs-6 text-gray-700 fw-bold">{{  project.startDate.toString().substring(0,10) }}</span>
                     <!--end::Date-->
                     <!--begin::Label-->
-                    <div class="fw-semibold text-gray-400">Start datum</div>
+                    <div class="fw-semibold text-gray-400">Startdatum</div>
                     <!--end::Label-->
                   </div>
                   <!--end::Stat-->
                   <!--begin::Stat-->
                   <div class="border border-gray-300 border-dashed rounded min-w-100px w-100 py-2 px-4 mb-3">
                     <!--begin::Number-->
-                    <span class="fs-6 text-gray-700 fw-bold">uren: {{project.hoursWorked }}</span>
+                    <span class="fs-6 text-gray-700 fw-bold">{{project.hoursWorked }}</span>
                     <!--end::Number-->
                     <!--begin::Label-->
-                    <div class="fw-semibold text-gray-400">uren gewerkt</div>
+                    <div class="fw-semibold text-gray-400">Uren gewerkt</div>
                     <!--end::Label-->
                   </div>
                   <!--end::Stat-->
@@ -150,13 +150,12 @@ export default {
   name: "ProjectAdmin.vue",
   emits: ['selecting-project'],
  async created() {
-
-
    this.userID = sessionStorage.getItem("id")
 
    const data = await this.repository.getAllProjects();
 
    for (const element of data) {
+
      for (let j = 0; j < element.users.length; j++) {
        if ((element.users[j].id).toString() === this.userID) {
          const ProjectHours  = await this.hourRepository.getHoursByProject(element)
@@ -167,6 +166,7 @@ export default {
        }
      }
    }
+
 
  },
   data() {

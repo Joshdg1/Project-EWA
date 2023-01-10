@@ -3,7 +3,7 @@
     <div class="card-header cursor-pointer">
       <!--begin::Card title-->
       <div class="card-title m-0">
-        <h3 class="fw-bolder m-0">Skills</h3>
+        <h3 class="fw-bolder m-0">Vaardigheden</h3>
       </div>
       <!--end::Card title-->
       <!--begin::Action-->
@@ -11,7 +11,7 @@
         <a @click= "onAddSkillClick" class="btn background-florijn btn-active-info editSkill"
            tooltip="New App"
            data-bs-toggle="modal"
-           data-bs-target="#kt_modal_create_app" id="kt_toolbar_primary_button">Add skill</a>
+           data-bs-target="#kt_modal_create_app" id="kt_toolbar_primary_button">Voeg een vaardigheid toe</a>
       </div>
       <!--end::Action-->
     </div>

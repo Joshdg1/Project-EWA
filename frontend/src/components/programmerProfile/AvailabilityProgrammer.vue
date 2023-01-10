@@ -26,7 +26,9 @@
         v-if="popupStatusAdd"
         :selectedDate="selectedDate"
         :user-id="userId"
+        @response-list="addDates"
         @close-popup="closePopup">
+
 
     </AddDatePopUp>
     <EditDatePopUp
@@ -121,6 +123,18 @@ export default {
       this.selectedDate = new UserDate(info.event.title,this.eventStart,this.eventEnd,hoursStart,hoursEnd)
 
       this.popupStatusEdit = true
+    },
+    addDates(dateList){
+      console.log(dateList)
+      for (const responseDate in dateList){
+        console.log("PROJECT OF DATEOBJECT THINGY" + responseDate.project)
+        let calendarApi = this.$refs.calendar.getApi();
+        calendarApi.addEvent({
+          title: responseDate.project.title,
+          start: responseDate.startDate,
+          end: responseDate.endDate,
+        })
+      }
     }
   }
 }

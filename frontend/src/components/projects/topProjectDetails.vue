@@ -150,13 +150,12 @@
 
           <!--begin::Nav item-->
           <li class="nav-item">
-            <a class="nav-link text-active-primary me-6 " id="Details" @click="setSelectedTabDetails">info
-              details</a>
+            <a class="nav-link text-active-primary me-6 " id="Details" @click="setSelectedTabDetails">Informatie</a>
           </li>
           <!--end::Nav item-->
           <!--begin::Nav item-->
           <li class="nav-item" >
-            <a class="nav-link text-active-primary me-6" id="hours" @click="setSelectedTabAvailability">uren</a>
+            <a class="nav-link text-active-primary me-6" v-if="userType === 'client'" id="hours" @click="setSelectedTabAvailability">Uren</a>
           </li>
           <!--end::Nav item-->
 
