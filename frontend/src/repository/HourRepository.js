@@ -28,11 +28,11 @@ export default class HourRepository {
         return await API.delete(this.url + Id);
     }
 
-    async updateHoursById(Id,project,hours, userID, isApproved ) {
+    async updateHoursById(Id,project,hours, userID ) {
         return await API.put(
             this.url + Id,
             {
-                project, hours, userID,isApproved
+                project, hours, userID
             }
         );
     }

@@ -31,7 +31,7 @@
 
       </div>
       <div class="buttons">
-        <!--        <button class="btn bg-primary btn-active-info addSkill" @click="cancel">anuleren</button>-->
+
         <button class="btn bg-primary btn-active-info addSkill" @click="deleteAvail">Verwijderen</button>
         <button class="btn bg-primary btn-active-info addSkill" @click="updateDate">Sla datum op</button>
       </div>
@@ -47,6 +47,7 @@ import AvailabilityRepository from "@/repository/AvailabilityRepository";
 import ProjectRepository from "@/repository/ProjectRepository";
 
 
+
 export default {
   name: "EditDatePopUp",
   props: ['selectedEvent'],
@@ -55,8 +56,8 @@ export default {
     this.newDate = this.selectedEvent;
     this.userID = sessionStorage.getItem("id")
 
-    const Projects = await this.projectRepository.getAllProjects()
-    Projects.forEach(p  => this.allProjects.push(p.title))
+    this.Projects = await this.projectRepository.getAllProjects()
+   this.Projects.forEach(p  => this.allProjects.push(p.title))
     console.log(this.allProjects)
   },
   data() {
@@ -65,22 +66,22 @@ export default {
       popupStatus: null,
       newDate: null,
       allProjects: [],
+      Projects: [],
       projectRepository: new ProjectRepository(),
       repository: new AvailabilityRepository(),
       currentId: null,
+
     }
   },
   methods: {
+
     closingPopup() {
       this.popupStatus = false
       this.$emit('close-popup', this.popupStatus)
     },
     addHoursToDate(objDate, intHours) {
-      console.log(intHours)
       const numberOfMlSeconds = objDate.getTime();
-      console.log("time" + numberOfMlSeconds)
       const addMlSeconds = (intHours * 60) * 60 * 1000;
-
       return new Date(numberOfMlSeconds + addMlSeconds);
     },
     async updateDate() {
@@ -105,8 +106,8 @@ export default {
       newEndDate.setMinutes(0)
       newEndDate.setMilliseconds(0)
 
-      const startHours = ((this.newDate.hoursPerDayStart.substring(0, 2) * 1) + (this.newDate.hoursPerDayStart.substring(3, 5) / 60))
-      const endHours = ((this.newDate.hoursPerDayEnd.substring(0, 2) * 1) + (this.newDate.hoursPerDayEnd.substring(3, 5) / 60))
+      const startHours = ((this.newDate.hoursPerDayStart.substring(0, 2) * 1) + (this.newDate.hoursPerDayStart.substring(3, 5) / 60) + 1)
+      const endHours = ((this.newDate.hoursPerDayEnd.substring(0, 2) * 1) + (this.newDate.hoursPerDayEnd.substring(3, 5) / 60) + 1)
 
       const startDate = this.addHoursToDate(newStartDate, startHours)
       const endDate = this.addHoursToDate(newEndDate, endHours)
@@ -114,11 +115,19 @@ export default {
       const starting = new Date(startDate)
       const ending = new Date(endDate)
 
-      await this.repository.updateAvailabilityById(this.currentId, this.newDate.project, starting, ending, this.userID)
+      let selectedProject;
+      const ourTitle = this.newDate.title
+      this.Projects.forEach( function (entry){
+        if (entry.title === ourTitle){
+          selectedProject = entry;
+      }
+      })
+      console.log(this.currentId, selectedProject, starting, ending, this.userID)
+      await this.repository.updateAvailabilityById(this.currentId, selectedProject, starting, ending, this.userID)
+
 
       this.popupStatus = false
       this.$emit('close-popup', this.popupStatus)
-      location.reload()
     },
     cancel() {
       this.popupStatus = false
@@ -156,7 +165,8 @@ export default {
         await this.repository.deleteAvailability(this.currentId)
       }
       location.reload()
-    }
+    },
+
   }
 }
 </script>

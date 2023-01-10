@@ -61,8 +61,9 @@
         },
 
         methods: {
-            EditProfileStatus(profileEditStatus) {
+          async  EditProfileStatus(profileEditStatus) {
                 this.editProfile = profileEditStatus
+              this.sampleProgrammer = await this.repository.findUserById(this.userID)
             },
             async updateProfile(newProfile) {
               this.editProfile = newProfile

@@ -26,12 +26,15 @@
         v-if="popupStatusAdd"
         :selectedDate="selectedDate"
         :user-id="userId"
+        @response-list="addDates"
         @close-popup="closePopup">
+
 
     </AddDatePopUp>
     <EditDatePopUp
     v-if="popupStatusEdit"
     :selected-event="selectedDate"
+    :current-hours="totalHours"
     @close-popup="closeEditPopup"
     >
 
@@ -49,6 +52,7 @@ import interactionPlugin from '@fullcalendar/interaction'
 import AvailabilityRepository from "@/repository/AvailabilityRepository";
 import EditDatePopUp from "@/components/programmerProfile/EditDatePopUp.vue";
 import UserDate from "../../models/userDate";
+import HourRepository from "@/repository/HourRepository";
 
 export default {
 
@@ -56,6 +60,7 @@ export default {
     EditDatePopUp,
     AddDatePopUp, FullCalendar // make the <FullCalendar> tag available
   },
+
   async created() {
      this.userId = sessionStorage.getItem("id")
 
@@ -64,10 +69,24 @@ export default {
     for (const element of availability) {
       let calendarApi = this.$refs.calendar.getApi();
 
-      let start = new Date(element.startDate).getTime()
-      let end = new Date(element.endDate).getTime()
-      const time = ((end - start) / 60 / 60 / 1000)
-      this.totalHours += time
+      // let start = new Date(element.startDate).getTime()
+      // let end = new Date(element.endDate).getTime()
+      // const time = ((end - start) / 60 / 60 / 1000)
+      // this.totalHours += time
+      const hours = await this.hoursRepository.getHoursByProject(element.project)
+      const ourUserId = this.userId
+      let totalHours = 0;
+      hours.forEach(function (entry){
+        console.log(typeof entry.user.id)
+        console.log(typeof ourUserId)
+        if (entry.user.id.toString() === ourUserId){
+          totalHours += entry.hours
+        }
+      })
+
+      this.totalHours = totalHours
+
+
       calendarApi.addEvent({
         title: element.project.title,
         start: element.startDate,
@@ -80,6 +99,7 @@ export default {
   emits: ['add-date'],
   data() {
     return {
+      hoursRepository: new HourRepository(),
       popupStatusAdd: null,
       popupStatusEdit: null,
       totalHours: 0,
@@ -121,6 +141,16 @@ export default {
       this.selectedDate = new UserDate(info.event.title,this.eventStart,this.eventEnd,hoursStart,hoursEnd)
 
       this.popupStatusEdit = true
+    },
+    addDates(dateList){
+      for (const responseDate in dateList){
+        let calendarApi = this.$refs.calendar.getApi();
+        calendarApi.addEvent({
+          title: responseDate.project.title,
+          start: responseDate.startDate,
+          end: responseDate.endDate,
+        })
+      }
     }
   }
 }
