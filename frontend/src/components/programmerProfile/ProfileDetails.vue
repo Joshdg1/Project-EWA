@@ -1,4 +1,5 @@
 <template>
+
   <div  class="card mb-5 mb-xl-10" id="kt_profile_details_view">
     <!--begin::Card header-->
     <div class="card-header cursor-pointer">
@@ -6,6 +7,10 @@
       <div class="card-title m-0">
         <h3 class="fw-bolder m-0">Profiel details</h3>
       </div>
+      <form ref="uploadForm" @submit.prevent="submit">
+        <input type="file" ref="uploadFile" @change="onFileUpload()" class="form-control" required>
+        <input type="button" @click="startUpload()" name="Upload" value="Upload">
+      </form>
       <!--end::Card title-->
       <!--begin::Action-->
       <div class="d-flex ms-3">
@@ -16,6 +21,7 @@
       </div>
       <!--end::Action-->
     </div>
+
     <!--begin::Card header-->
     <!--begin::Card body-->
     <div class="card-body p-9">
