@@ -5,8 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-@Getter
-@Setter
+
 @Entity
 @NamedQuery(
 name = "Hours_find_by_Project",
@@ -22,6 +21,8 @@ public class UserHours {
     @JoinColumn(name = "approvedById")
     private User approverdBy;
 
+    private String isApproved;
+
     @ManyToOne
     @JoinColumn(name = "userId", nullable = true)
     private User user;
@@ -34,9 +35,7 @@ public class UserHours {
         return approverdBy;
     }
 
-    public UserHours() {
-
-    }
+    public UserHours() {}
 
     public UserHours(int id) {
         this.id = id;
@@ -45,6 +44,48 @@ public class UserHours {
     public UserHours(int id, Project project, User user) {
         this(id);
         this.user = user;
+        this.project = project;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+
+
+    public double getHours() {
+        return hours;
+    }
+
+    public void setHours(double hours) {
+        this.hours = hours;
+    }
+
+    public void setApproverdBy(User approverdBy) {
+        this.approverdBy = approverdBy;
+    }
+
+    public String getIsApproved() {
+        return isApproved;
+    }
+
+    public void setIsApproved(String isApproved) {
+        this.isApproved = isApproved;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public Project getProject() {
+        return project;
+    }
+
+    public void setProject(Project project) {
         this.project = project;
     }
 }

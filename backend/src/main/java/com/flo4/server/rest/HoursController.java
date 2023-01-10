@@ -76,7 +76,8 @@ public class HoursController {
         userHours.setHours(userHours1.getHours());
         userHours.setProject(userHours1.getProject());
         userHours.setUser(this.userEntityRepository.findById(userHours1.getUserID()));
-
+        userHours.setIsApproved(userHours1.getIsApproved());
+        System.out.println(id);
         UserHours updatedUserAvailability = this.userHoursEntityRepository.update(userHours, id);
 
         if (updatedUserAvailability == null) {

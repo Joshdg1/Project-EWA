@@ -1,42 +1,45 @@
 <template>
   <div>
-    <projectsBlockedList  ></projectsBlockedList>
+    <projectsBlockedList v-if="projectDetails === false" @selecting-project="selectProject"   ></projectsBlockedList>
+    <ProjectProgrammerDetails v-if="projectDetails === true" :project="selectedProject"
+                              @view-project ="setProjectDetails"></ProjectProgrammerDetails>
   </div>
 </template>
 
 
 <script>
 
-import ProjectRepository from '../../../repository/ProjectRepository'
-import projectsBlockedList from '../../../components/ProjectBlockedList.vue'
-import UserRepository from "@/repository/UserRepository";
-import HourRepository from "@/repository/HourRepository";
+import projectsBlockedList from '../../../components/ProjectBlockedList.vue';
+import ProjectProgrammerDetails from "@/components/projects/ProjectProgrammerDetails";
 
 
 export default {
   name: "ProjectProgrammerView",
   components: {
-    projectsBlockedList,
+    projectsBlockedList, ProjectProgrammerDetails
   },
-
-  async created() {
-
-  },
-
-  data() {
-    return {
-      users: [],
-      programmerProjects: [],
-      projects: [
-
-      ],
-      userRepository: new UserRepository(),
-      userID: null,
-      hourRepository: new HourRepository(),
-      repository: new ProjectRepository(),
+  data(){
+    return{
+      projectDetails: false,
+      selectedProject: null
     }
   },
+  methods: {
+    setProjectDetails(projectStatus){
+
+      this.projectDetails = projectStatus
+
+
+    },
+    selectProject(project){
+
+        console.log("KOMT ER IN")
+        this.selectedProject = project
+      this.projectDetails = true
+    }
+  }
 }
+
 </script>
 
 <style scoped>

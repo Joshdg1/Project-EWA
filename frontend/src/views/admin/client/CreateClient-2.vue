@@ -65,7 +65,7 @@
     </div>
     <div class="d-flex flex-shrink-0">
       <div class="d-flex ms-3">
-        <router-link to="/createNewClient" class="btn bg-primary btn-active-info">
+        <router-link to="/clients/create" class="btn bg-primary btn-active-info">
           Terug
         </router-link>
       </div>

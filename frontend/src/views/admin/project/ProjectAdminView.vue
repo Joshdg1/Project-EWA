@@ -11,8 +11,7 @@
 <script>
 
 
-//{project} import is for fake data.
-// import {project} from '../../../models/project.js'
+
 import ProjectRepository from '../../../repository/ProjectRepository'
 import projectsList from '../../../components/ProjectAdmin.vue'
 import edit from '../../../components/ProjectAdminEdit.vue'
@@ -28,8 +27,8 @@ export default {
   async created() {
     const data = await this.repository.getAllProjects();
 
-    for (let i = 0; i < data.length; i++) {
-      this.projects.push(data[i]);
+    for (const element of data) {
+      this.projects.push(element);
     }
 
   },

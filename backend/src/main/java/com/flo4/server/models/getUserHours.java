@@ -8,10 +8,13 @@ public class getUserHours {
 
     private Project project;
 
-    public getUserHours(double hours, int userID, Project project) {
+    private String isApproved;
+
+    public getUserHours(double hours, int userID, Project project, String isApproved) {
         this.hours = hours;
         this.userID = userID;
         this.project = project;
+        this.isApproved = isApproved;
     }
 
     public double getHours() {
@@ -38,5 +41,13 @@ public class getUserHours {
 
     public void setProject(Project project) {
         this.project = project;
+    }
+
+    public String getIsApproved() {
+        return isApproved;
+    }
+
+    public void setIsApproved(String isApproved) {
+        this.isApproved = isApproved;
     }
 }

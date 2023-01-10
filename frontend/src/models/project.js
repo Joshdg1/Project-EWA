@@ -4,15 +4,17 @@ export class Project {
     description;
     company;
     startDate
+    endDate
     users
     hoursWorked;
 
-    constructor(id, title, description, company, startDate, users, hoursWorked) {
+    constructor(id, title, description, company, startDate,endDate, users, hoursWorked) {
         this.id = id;
         this.title = title;
         this.description = description;
         this.company = company;
         this.startDate = startDate
+        this.endDate = endDate
         this.users = users
         this.hoursWorked = hoursWorked;
     }

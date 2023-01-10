@@ -20,11 +20,7 @@ export default {
   },
 
   async created() {
-    const data = await this.repository.getAllProgrammers();
-
-    for (let i = 0; i < data.length; i++) {
-      this.programmers.push(data[i]);
-    }
+    await this.loadProgrammers();
   },
 
   data() {
@@ -36,8 +32,12 @@ export default {
   },
 
   methods: {
-    async deleteProgrammer(programmer) {
+    async loadProgrammers(){
+      console.log('loadProgrammers');
+      this.programmers = await this.repository.getAllProgrammers();
+    },
 
+    async deleteProgrammer(programmer) {
       await this.$swal({     title: "Wil je deze programmeur verwijderen?",     text: "Weet je het zeker?",
         type: "warning",     showCancelButton: true,     confirmButtonColor: "#3085d6",
         confirmButtonText: "Ja, verwijder!", cancelButtonText: "Annuleer" }).then((result) => { if (result.value) {
@@ -46,6 +46,9 @@ export default {
 
     editProgrammerStatus(programmerStatus) {
       this.programmerStatus = programmerStatus;
+
+      if (!programmerStatus)
+        this.loadProgrammers();
     }
   },
 }
