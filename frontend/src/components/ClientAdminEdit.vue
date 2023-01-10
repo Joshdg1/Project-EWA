@@ -21,32 +21,27 @@
               <!--begin::Table head-->
               <thead>
               <tr class="fw-bolder text-muted">
-                <th class="w-25px">
-                  <div class="form-check form-check-sm form-check-custom form-check-solid">
-                    <input class="form-check-input" type="checkbox" value="1" data-kt-check="true"
-                           data-kt-check-target=".widget-9-check"/>
-                  </div>
-                </th>
                 <th>Email</th>
                 <th>Voornaam(en)</th>
                 <th>Achternaam</th>
                 <th>Telefoonnummer</th>
                 <th>Type gebruiker</th>
+                <th>Acties</th>
               </tr>
               </thead>
               <!--end::Table head-->
               <!--begin::Table body-->
               <tbody>
               <tr v-for="client in clients" v-bind:key="client.id">
-                <div class="form-check form-check-sm form-check-custom form-check-solid">
-                  <input class="form-check-input" type="checkbox" value="1" data-kt-check="true"
-                         data-kt-check-target=".widget-9-check"/>
-                </div>
-                <td><input type="text" v-model="client.email"></td>
-                <td><input type="text" v-model="client.firstName"></td>
-                <td><input type="text" v-model="client.lastName"></td>
-                <td><input type="text" v-model="client.phoneNumber"></td>
-                <td><input type="text" v-model="client.userType"></td>
+                <td><input type="text" class="form-control form-control-lg form-control-solid" v-model="client.email"></td>
+                <td><input type="text" class="form-control form-control-lg form-control-solid" v-model="client.firstName"></td>
+                <td><input type="text" class="form-control form-control-lg form-control-solid" v-model="client.lastName"></td>
+                <td><input type="text" class="form-control form-control-lg form-control-solid" v-model="client.phoneNumber"></td>
+                <td><select class="form-control form-control-lg form-control-solid" v-model="client.userType">
+                <option value="client">client</option>
+                <option value="programmer">programmeur</option>
+                <option value="administrator">administrator</option>
+                </select></td>
 
                 <div class="d-flex  flex-shrink-0">
                   <a class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" @click="editClient(client)">

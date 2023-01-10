@@ -42,10 +42,10 @@
                 <th>Titel</th>
                 <th>Beschrijving</th>
                 <th>Bedrijf</th>
-                <th>Gewerkte uren</th>
                 <th>Startdatum</th>
                 <th>Einddatum</th>
-                <th>Gebruiker(s)</th>
+                <th>Status</th>
+                <th>Programmeur(s)</th>
               </tr>
               </thead>
               <!--end::Table head-->
@@ -58,6 +58,7 @@
                 <td>{{ project.hoursWorked }}</td>
                 <td>{{ dateFormat(project.startDate) }}</td>
                 <td>{{ dateFormat(project.endDate) }}</td>
+                <td>{{ setStatus(project.startDate, project.endDate) }}</td>
                 <td v-html="getUserProjects(project.users)"></td>
 
                 <div class="d-flex justify-content-end flex-shrink-0">
@@ -210,6 +211,14 @@ export default {
 
     getCompanyNameClient(clients) {
       return clients.companyName
+    },
+
+    setStatus(startDate, endDate) {
+      if (Date.now() >= Date.parse(startDate) && Date.parse(endDate) >= Date.now()) {
+        return "Actief"
+      }
+
+      return "Inactief"
     }
   }
 }

@@ -21,34 +21,27 @@
               <!--begin::Table head-->
               <thead>
               <tr class="fw-bolder text-muted">
-                <th class="w-25px">
-                  <div class="form-check form-check-sm form-check-custom form-check-solid">
-                    <input class="form-check-input" type="checkbox" value="1" data-kt-check="true"
-                           data-kt-check-target=".widget-9-check"/>
-                  </div>
-                </th>
                 <th>Email</th>
                 <th>Voornaam(en)</th>
                 <th>Achternaam</th>
                 <th>Telefoonnummer</th>
                 <th>Type gebruiker</th>
+                <th>Acties</th>
               </tr>
               </thead>
               <!--end::Table head-->
               <!--begin::Table body-->
               <tbody>
               <tr v-for="programmer in programmers" v-bind:key="programmer.id">
-                <div class="form-check form-check-sm form-check-custom form-check-solid">
-                  <input class="form-check-input" type="checkbox" value="1" data-kt-check="true"
-                         data-kt-check-target=".widget-9-check"/>
-                </div>
-                <td><input type="text" v-model="programmer.email"></td>
-                <td><input type="text" v-model="programmer.firstName"></td>
-                <td><input type="text" v-model="programmer.lastName"></td>
-                <td><input type="text" v-model="programmer.phoneNumber"></td>
-                <td><input type="text" v-model="programmer.userType"></td>
-
-                <div class="d-flex  flex-shrink-0">
+                <td><input type="text" class="form-control form-control-lg form-control-solid" v-model="programmer.email"></td>
+                <td><input type="text" class="form-control form-control-lg form-control-solid" v-model="programmer.firstName"></td>
+                <td><input type="text" class="form-control form-control-lg form-control-solid" v-model="programmer.lastName"></td>
+                <td><input type="text" class="form-control form-control-lg form-control-solid" v-model="programmer.phoneNumber"></td>
+                <td><select class="form-control form-control-lg form-control-solid" v-model="programmer.userType">
+                  <option value="client">client</option>
+                  <option value="programmer">programmeur</option>
+                  <option value="administrator">administrator</option>
+                </select></td>                <div class="d-flex  flex-shrink-0">
                   <a class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1"
                      @click="editProgrammer(programmer)">
                     <!--begin::Svg Icon | path: icons/duotune/art/art005.svg-->
