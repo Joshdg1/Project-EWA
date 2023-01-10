@@ -12,6 +12,9 @@ import java.util.Base64;
 import java.util.Date;
 
 public class Token {
+    /**
+     * Class to generate a token
+     */
     @Getter
     private final String token;
 

@@ -7,6 +7,10 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
 public class WebMvcConfig implements WebMvcConfigurer {
+
+    /**
+     * Class to initialize the interceptor and add the paterns
+     */
     private final AuthInterceptor authInterceptor;
 
     public WebMvcConfig(AuthInterceptor authInterceptor) {

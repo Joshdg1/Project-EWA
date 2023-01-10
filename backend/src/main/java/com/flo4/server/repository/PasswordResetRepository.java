@@ -16,23 +16,42 @@ public class PasswordResetRepository implements EntityRepository<PasswordResetTo
     @PersistenceContext
     protected EntityManager entityManager;
 
+    /**
+     * Query for returning a list of all reset tokens
+     * @return a list of tokens
+     */
     @Override
     public List<PasswordResetTokens> findAll() {
-        TypedQuery<PasswordResetTokens> query = this.entityManager.createQuery("select t from password_reset_tokens a", PasswordResetTokens.class);
+        TypedQuery<PasswordResetTokens> query = this.entityManager.createQuery("select t from password_reset_tokens t", PasswordResetTokens.class);
 
         return query.getResultList();
     }
 
+    /**
+     * Find the token by id
+     * @param id
+     * @return a token with a certain id
+     */
     @Override
     public PasswordResetTokens findById(int id) {
         return this.entityManager.find(PasswordResetTokens.class, id);
     }
 
+    /**
+     * Save the token
+     * @param entity
+     */
     @Override
     public PasswordResetTokens save(PasswordResetTokens entity) {
         return this.entityManager.merge(entity);
     }
 
+    /**
+     * finds the a token by id, and sets the id, token and userID
+     * @param entity
+     * @param id
+     * @return
+     */
     @Override
     public PasswordResetTokens update(PasswordResetTokens entity, int id) {
         PasswordResetTokens updatedPasswordResetTokens = findById(id);
@@ -48,6 +67,10 @@ public class PasswordResetRepository implements EntityRepository<PasswordResetTo
         return updatedPasswordResetTokens;
     }
 
+    /**
+     * Deletes a token with the id
+     * @param id
+     */
     @Override
     public PasswordResetTokens deleteById(int id) {
         PasswordResetTokens passwordResetTokens = entityManager.find(PasswordResetTokens.class, id);

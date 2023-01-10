@@ -9,6 +9,9 @@ import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 import java.util.Date;
 
+/**
+ * Class for generating a reset password token
+ */
 public class PasswordResetUtil {
     public String generateResetToken(String id){
         String token = Jwts.builder()

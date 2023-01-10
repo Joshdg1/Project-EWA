@@ -11,6 +11,9 @@ import java.io.Serializable;
 @Setter
 @Entity(name = "password_reset_tokens")
 public class PasswordResetTokens implements Serializable {
+    /**
+     * Entity class for making a connection between password reset tokens and users
+     */
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "id", nullable = false)

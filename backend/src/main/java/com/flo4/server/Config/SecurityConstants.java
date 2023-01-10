@@ -5,6 +5,9 @@ import org.springframework.beans.factory.annotation.Value;
 
 @Getter
 public class SecurityConstants {
+    /**
+     * Security constants like expiration dates and secret tokens
+     */
 
     public static final long resetExp = 3600000;
 

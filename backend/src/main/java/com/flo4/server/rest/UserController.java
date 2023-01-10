@@ -35,24 +35,37 @@ public class UserController {
     @Autowired
     private final PasswordResetRepository passwordResetRepository;
 
+    /**
+     * @return a list of all the users
+     */
     @GetMapping(path = "", produces = "application/json")
     public List<User> getAllUsers() {
 
         return this.userRepository.findAll();
     }
 
+    /**
+     * @return a list of all the users with the usertype "programmer"
+     */
     @GetMapping(path = "programmers", produces = "application/json")
     public List<User> getAllProgrammers() {
 
         return this.userRepository.findAllProgrammers();
     }
 
+    /**
+     * @return a list of all the users with the usertype "client"
+     */
     @GetMapping(path = "clients", produces = "application/json")
     public List<User> getAllClients() {
 
         return this.userRepository.findAllClients();
     }
 
+    /**
+     * @param id
+     * @return a user with a specific ID
+     */
     @GetMapping(path = "{id}", produces = "application/json")
     public ResponseEntity<User> getOneProject(@PathVariable() int id) {
         User user = this.userRepository.findById(id);
@@ -78,6 +91,10 @@ public class UserController {
 //        return ResponseEntity.ok().body(savedUser);
 //    }
 
+    /**
+     * @param id
+     * @delete a user with a specific ID
+     */
     @DeleteMapping(path = "{id}", produces = "application/json")
     public ResponseEntity<User> deleteUser(@PathVariable() int id) {
         User user = this.userRepository.findById(id);
@@ -91,6 +108,12 @@ public class UserController {
         return ResponseEntity.ok().body(user);
     }
 
+    /**
+     * Updates a user
+     * @param id
+     * @param user
+     * @return
+     */
     @PutMapping(path = "{id}", produces = "application/json")
     public ResponseEntity<User> updateProject(@PathVariable() int id, @RequestBody User user) {
 
@@ -105,6 +128,9 @@ public class UserController {
     }
 
 
+    /**
+     * Record for registering a user
+     */
     record RegisterClientRequest(int id,
                                  String email,
                                  String firstName,
@@ -123,6 +149,12 @@ public class UserController {
                                   @JsonProperty("phone_number") String phoneNumber) {
     }
 
+    /**
+     * Takes the user info, and registers a user, when that user is registered it sends an email out
+     * to the user's email adress to reset their password
+     * @param registerClientRequest
+     * @return
+     */
     @PostMapping("add")
     public RegisterClientResponse registerClient(@RequestBody RegisterClientRequest registerClientRequest) {
 //        if (!Objects.equals(registerRequest.password(), registerRequest.passwordConfirmation()))
@@ -212,12 +244,23 @@ public class UserController {
 //
 //    }
 
+
+    /**
+     * records for loging in as a user
+     */
     record LoginRequest(String email, String password) {
     }
 
     record LoginResponse(User user, String token) {
     }
 
+    /**
+     * takes the info and sends it to the service class where the logic is
+     * Sets a refresh token as a cookie
+     * @param loginRequest
+     * @param response
+     * @return the user and token as a response
+     */
     @PostMapping(value = "login")
     public LoginResponse login(@RequestBody LoginRequest loginRequest, HttpServletResponse response) {
         Login login = userService.login(loginRequest.email(), loginRequest.password());
@@ -279,6 +322,12 @@ public class UserController {
     record LogoutResponse(String msg) {
     }
 
+    /**
+     * sets the token to null when the user logs out
+     * @param refreshToken
+     * @param response
+     * @return
+     */
     @PostMapping(value = "logout")
     public LogoutResponse logout(@CookieValue("secretRefreshToken") String refreshToken, HttpServletResponse response) {
         Cookie cookie = new Cookie("secretRefreshToken", null);
@@ -293,6 +342,13 @@ public class UserController {
     @Autowired
     private Environment env;
 
+    /**
+     * finds the user by email and sets a reset token to the user, generates a link with the token and sends an email
+     * to the user with a link to reset their password
+     * @param passwordReset
+     * @param request
+     * @return
+     */
     @PostMapping(path = "forgotPassword")
     public ResponseEntity<User> sendMail(@RequestBody PasswordReset passwordReset, HttpServletRequest request) {
         User user = this.userRepository.findByEmail(passwordReset.getEmail());
@@ -341,6 +397,11 @@ public class UserController {
     //resetPassword?{token}
     //,@PathVariable(value = "token") String token
 
+    /**
+     * uses the userService class to update the password
+     * @param resetRequest
+     * @return
+     */
     @PutMapping(path = "resetPassword")
     public ResetResponse resetPassword(@RequestBody ResetRequest resetRequest) {
 
