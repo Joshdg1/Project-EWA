@@ -54,13 +54,15 @@
         </router-link>
       </div>
       <div class="d-flex ms-3">
-        <button class="btn bg-primary btn-active-info" @click="setSession">Volgende</button>
+        <button class="btn bg-primary btn-active-info" @click="createClient">Creëer</button>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import UserRepository from '../../../repository/UserRepository'
+
 export default {
   // eslint-disable-next-line
   name: "CreateClientProjectView",
@@ -73,28 +75,18 @@ export default {
       password: "",
       phoneNumber: "",
       companyName: "",
+      UserRepository: new UserRepository(),
     }
   },
 
   methods: {
-    setSession() {
-      //clear the session without clearing the user login details.
-      localStorage.email = "";
-      localStorage.firstname = "";
-      localStorage.lastname = "";
-      localStorage.password = "";
-      localStorage.phoneNumber = "";
-      localStorage.companyName = "";
+    async createClient() {
+      const usertype = "client";
 
-      localStorage.email = this.email;
-      localStorage.firstname = this.firstname;
-      localStorage.lastname = this.lastname;
-      localStorage.password = this.password;
-      localStorage.phoneNumber = this.phoneNumber;
-      localStorage.companyName = this.companyName;
+      await this.UserRepository.createUser(this.email, this.firstname, this.lastname, this.password, this.phoneNumber, this.companyName, usertype);
 
-      this.$router.push("/clients/create2")
-    }
+      this.$router.push("/clients");
+    },
   }
 }
 </script>
