@@ -42,11 +42,10 @@ public class HourRepository implements EntityRepository<UserHours>{
             return null;
         }
 
-        updatedUserAvailability.setId(entity.getId());
         updatedUserAvailability.setHours(entity.getHours());
         updatedUserAvailability.setUser(entity.getUser());
+        updatedUserAvailability.setIsApproved(entity.getIsApproved());
         updatedUserAvailability.setProject(entity.getProject());
-
 
         return updatedUserAvailability;
     }

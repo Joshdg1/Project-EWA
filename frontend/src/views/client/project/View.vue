@@ -1,8 +1,8 @@
 <template>
   <div>
     <projectsBlockedList v-if="projectDetails === false" @selecting-project="selectProject"   ></projectsBlockedList>
-    <ProjectProgrammerDetails v-if="projectDetails === true" :project="selectedProject"
-                              @view-project ="setProjectDetails"></ProjectProgrammerDetails>
+    <projectClientDetails v-if="projectDetails === true" :project="selectedProject"
+                              @view-project ="setProjectDetails" ></projectClientDetails>
   </div>
 </template>
 
@@ -10,13 +10,13 @@
 <script>
 
 import projectsBlockedList from '../../../components/ProjectBlockedList.vue';
-import ProjectProgrammerDetails from "@/components/projects/ProjectProgrammerDetails";
+import projectClientDetails from "@/components/projects/ProjectClientDetails";
 
 
 export default {
-  name: "ProjectProgrammerView",
+  name: "Client-view",
   components: {
-    projectsBlockedList, ProjectProgrammerDetails
+    projectsBlockedList, projectClientDetails
   },
   data(){
     return{
@@ -26,15 +26,13 @@ export default {
   },
   methods: {
     setProjectDetails(projectStatus){
-
+      console.log(projectStatus)
       this.projectDetails = projectStatus
-
-
     },
     selectProject(project){
 
-        console.log("KOMT ER IN")
-        this.selectedProject = project
+
+      this.selectedProject = project
       this.projectDetails = true
     }
   }

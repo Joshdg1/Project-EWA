@@ -83,20 +83,21 @@ export default {
      const allDates = this.betweenDates(this.newDate.start, this.newDate.end)
 
     const hours = await this.hoursRepository.getHoursById(this.userId)
-    console.log("HOURS" + hours.length)
 
       for (const element of allDates) {
+        //setting the hours, seconds and minutes to null so we can set them later
         element.setHours(0)
         element.setMinutes(0)
         element.setMilliseconds(0)
 
-        const startHours = ((this.newDate.hoursPerDayStart.substring(0, 2) * 1) + (this.newDate.hoursPerDayStart.substring(3, 5) / 60))
-        const endHours = ((this.newDate.hoursPerDayEnd.substring(0, 2) * 1) + (this.newDate.hoursPerDayEnd.substring(3, 5) / 60))
-
+        //calculating the hours and minutes of the input
+        const startHours = ((this.newDate.hoursPerDayStart.substring(0, 2) * 1) + (this.newDate.hoursPerDayStart.substring(3, 5) / 60)  + 1)
+        const endHours = ((this.newDate.hoursPerDayEnd.substring(0, 2) * 1) + (this.newDate.hoursPerDayEnd.substring(3, 5) / 60) + 1)
+        //setting the hours and minutes
         const startDate = this.addHoursToDate(element, startHours)
         const endDate = this.addHoursToDate(element, endHours)
 
-
+        //selecting the project
         let Project = null
         const currentProject = this.newDate.project
         this.Projects.forEach(function (entry) {
@@ -106,16 +107,13 @@ export default {
         })
         await this.repository.createAvailability(Project, startDate, endDate, this.userId)
 
+        // calculating time between dates
         let start = new Date(startDate).getTime()
-        console.log("START " + start)
         let end = new Date(endDate).getTime()
-        console.log("END " + end)
 
         const time = ((end - start) / 60 / 60 / 1000)
-        console.log("TIME" + time)
+
         this.totalHours += time
-
-
       }
 
     let Project = null

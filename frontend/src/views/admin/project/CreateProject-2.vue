@@ -79,8 +79,8 @@ export default {
 
     const data = await this.userRepository.getAllProgrammers();
 
-    for (let i = 0; i < data.length; i++) {
-      this.programmers.push(data[i]);
+    for (const element of data) {
+      this.programmers.push(element);
     }
   },
 
