@@ -1,98 +1,140 @@
 <template>
-  <div>
-    <form>
-      <div class="text-center mb-10">
-        <h1 class="text-dark mb-3">Creëer een nieuwe programmeur</h1>
-      </div>
-
-      <div class="fv-row mb-10 fv-plugins-icon-container">
-        <div class="d-flex flex-stack mb-2">
-          <label class="form-label fw-bold text-dark fs-6 mb-0">Email</label>
+    <div>
+        <div class="card">
+            <div class="card-body">
+              <div class="mb-5">
+                <div class="notice d-flex bg-light-primary rounded border-primary border border-dashed p-6">
+                  <div class="d-flex flex-stack flex-grow-1">
+                    <div class="fw-semibold">
+                      <div class="fs-6 text-gray-700">Na het opslaan van de specialist wordt er automatisch een email verstuurd naar het ingevulde adres. In deze email krijgt de specialist de mogelijkheid om een wachtwoord in te stellen.</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="mb-5">
+                <label class="form-label mb-3">Email adres</label>
+                <input type="email" class="form-control" v-model="formData.email" placeholder="example@example.com">
+                <div v-if="errors.email" class="text-danger fs-7">{{ errors.email }}</div>
+              </div>
+              <div class="mb-5">
+                <label class="form-label mb-3">Voornaam(en)</label>
+                <input type="text" class="form-control" v-model="formData.firstname">
+                <div v-if="errors.firstname" class="text-danger fs-7">{{ errors.firstname }}</div>
+              </div>
+              <div class="mb-5">
+                <label class="form-label mb-3">Achternaam</label>
+                <input type="text" class="form-control" v-model="formData.lastname">
+                <div v-if="errors.lastname" class="text-danger fs-7">{{ errors.lastname }}</div>
+              </div>
+              <div class="mb-5">
+                <label class="form-label mb-3">Telefoonnummer</label>
+                <input type="text" class="form-control" v-model="formData.phoneNumber">
+                <div v-if="errors.phoneNumber" class="text-danger fs-7">{{ errors.phoneNumber }}</div>
+              </div>
+            </div>
+          <div class="card-footer">
+            <div class="d-flex flex-stack">
+              <div class="mr-2">
+                <router-link to="/programmers" type="button" class="btn btn-lg btn-light-primary">
+                  <back-icon></back-icon>Terug
+                </router-link>
+              </div>
+              <div>
+                <button class="btn btn-primary" @click="createProgrammer">Aanmaken</button>
+              </div>
+            </div>
+          </div>
         </div>
-        <input class="form-control form-control-lg form-control-solid" type="text"
-               name="Email" autocomplete="off" v-model="email">
-      </div>
-
-      <div class="fv-row mb-10 fv-plugins-icon-container">
-        <label class="form-label fs-6 fw-bold text-dark">Voornaam(en)</label>
-        <input class="form-control form-control-lg form-control-solid" type="text" name="text"
-               autocomplete="off" v-model="firstname">
-      </div>
-
-      <div class="fv-row mb-10 fv-plugins-icon-container">
-        <label class="form-label fs-6 fw-bold text-dark">Achternaam</label>
-        <input class="form-control form-control-lg form-control-solid" type="text" name="text"
-               autocomplete="off" v-model="lastname">
-      </div>
-
-      <div class="fv-row mb-10 fv-plugins-icon-container">
-        <label class="form-label fs-6 fw-bold text-dark">Wachtwoord</label>
-        <input class="form-control form-control-lg form-control-solid" type="password" name="text"
-               autocomplete="off" v-model="password">
-      </div>
-
-      <div class="fv-row mb-10 fv-plugins-icon-container">
-        <label class="form-label fs-6 fw-bold text-dark">Telefoonnummer</label>
-        <input class="form-control form-control-lg form-control-solid" type="text" name="text"
-               autocomplete="off" v-model="phoneNumber">
-      </div>
-
-
-    </form>
-
-    <div class="d-flex flex-shrink-0">
-      <div class="d-flex ms-3">
-        <router-link to="/projects" class="btn bg-primary btn-active-info">
-          Cancel
-        </router-link>
-      </div>
-      <div class="d-flex ms-3">
-        <button class="btn bg-primary btn-active-info" @click="createProgrammer">Creëer</button>
-      </div>
     </div>
-  </div>
 </template>
 
 <script>
+    import UserRepository from '../../repository/UserRepository'
+    import BackIcon from "../../components/icons/back";
 
-import UserRepository from '../../repository/UserRepository'
-export default {
-  // eslint-disable-next-line
-  name: "CreateProgrammerProjectView",
+    export default {
+      // eslint-disable-next-line
+      name: "CreateProgrammerProjectView",
+      components: {BackIcon},
+      data() {
+        return {
+          UserRepository: new UserRepository(),
+          errors: {
+            email: false,
+            firstname: false,
+            lastname: false,
+            phoneNumber: false,
+          },
+          formData: {
+            email: "",
+            firstname: "",
+            lastname: "",
+            phoneNumber: "",
+          },
+        }
+      },
 
-  data() {
-    return {
-      UserRepository: new UserRepository(),
-      email: "",
-      firstname: "",
-      lastname: "",
-      password: "",
-      phoneNumber: "",
+      methods: {
+        resetErrors() {
+          this.errors = {
+            name: false,
+            description: false,
+            client: false,
+            start: false,
+            end: false,
+          };
+        },
+
+        validate(){
+          this.resetErrors();
+          let isError = false;
+
+          if (this.formData.email === "" || !this.formData.email.includes('@')) {
+            isError = true;
+            this.errors.email = "Vul een email adres in";
+          }
+
+          if (this.formData.firstname === "") {
+            isError = true;
+            this.errors.firstname = "Vul een voornaam in";
+          }
+
+          if (this.formData.lastname === "") {
+            isError = true;
+            this.errors.lastname = "Vul een achternaam in";
+          }
+
+          if (this.formData.phoneNumber === "") {
+            isError = true;
+            this.errors.phoneNumber = "Vul een telefoonnummer in";
+          }
+
+          return !isError;
+        },
+
+        async createProgrammer() {
+          if (!this.validate())
+            return;
+
+          const usertype = "programmer";
+
+          await this.UserRepository.createUser(this.formData.email, this.formData.firstname, this.formData.lastname, false, this.formData.phoneNumber, '', usertype);
+
+          this.$router.push("/programmers");
+        },
+      }
     }
-  },
-
-  methods: {
-    async createProgrammer() {
-
-      const usertype = "programmer";
-
-      await this.UserRepository.createUser(this.email, this.firstname, this.lastname, this.password, this.phoneNumber, usertype);
-
-      this.$router.push("/programmers");
-    },
-  }
-}
 </script>
 
 <style scoped>
-.descriptionHeight {
-  height: auto;
-}
+    .descriptionHeight {
+        height: auto;
+    }
 
-.form-control.form-control-solid {
-  background-color: lightgray;
-  border-color: #F5F8FA;
-  color: #5E6278;
-  transition: color 0.2s ease, background-color 0.2s ease;
-}
+    .form-control.form-control-solid {
+        background-color: lightgray;
+        border-color: #F5F8FA;
+        color: #5E6278;
+        transition: color 0.2s ease, background-color 0.2s ease;
+    }
 </style>

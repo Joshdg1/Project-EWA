@@ -79,7 +79,7 @@ public class UserController {
 //    }
 
     @DeleteMapping(path = "{id}", produces = "application/json")
-    public ResponseEntity<User> deleteProject(@PathVariable() int id) {
+    public ResponseEntity<User> deleteUser(@PathVariable() int id) {
         User user = this.userRepository.findById(id);
 
         if (user == null) {

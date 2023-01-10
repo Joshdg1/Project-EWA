@@ -31,14 +31,22 @@ public class User {
     @JsonIgnore()
     private List<Project> projects;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<UserSkills> skills;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "user_id", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<PasswordResetTokens> resetTokens;
 
     public User() {
     }
 
     public User(int id) {
         this.id = id;
+    }
+
+    public static User of(int id, String email, String firstName, String lastName, String phoneNumber, String companyName, String userType) {
+        return new User(id, email, firstName, lastName, phoneNumber, companyName, userType);
     }
 
     public static User of(int id, String email, String firstName, String lastName, String password, String phoneNumber, String companyName, String userType) {
@@ -51,6 +59,16 @@ public class User {
         this.firstName = firstName;
         this.lastName = lastName;
         this.password = password;
+        this.phoneNumber = phoneNumber;
+        this.companyName = companyName;
+        this.userType = userType;
+    }
+
+    public User(int id, String email, String firstName, String lastName, String phoneNumber, String companyName, String userType) {
+        this.id = id;
+        this.email = email;
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.phoneNumber = phoneNumber;
         this.companyName = companyName;
         this.userType = userType;

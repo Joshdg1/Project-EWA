@@ -97,7 +97,6 @@ export default {
       this.programmers = await this.repository.getAllProgrammers();
     },
 
-
     async deleteProgrammer(programmer) {
       await this.$swal({     title: "Wil je deze programmeur verwijderen?",     text: "Weet je het zeker?",
         type: "warning",     showCancelButton: true,     confirmButtonColor: "#3085d6",
@@ -139,10 +138,6 @@ export default {
 
   computed: {
     resultQuery: function () {
-      console.log('search', this.searchQ);
-      console.log('value', this.searchSkill);
-      console.log('value', this.programmers);
-
       if (this.searchQ) {
         return this.programmers.filter(item => {
           if (this.searchQ
