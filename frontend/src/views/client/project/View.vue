@@ -1,8 +1,7 @@
 <template>
   <div>
-    <projectsBlockedList v-if="projectDetails === false" @selecting-project="selectProject"   ></projectsBlockedList>
-    <projectClientDetails v-if="projectDetails === true" :project="selectedProject"
-                              @view-project ="setProjectDetails" ></projectClientDetails>
+    <projectsBlockedList v-if="projectDetails === false" @selecting-project="selectProject"></projectsBlockedList>
+    <projectClientDetails v-if="projectDetails === true" :project="selectedProject" @view-project ="setProjectDetails" ></projectClientDetails>
   </div>
 </template>
 
@@ -11,7 +10,6 @@
 
 import projectsBlockedList from '../../../components/ProjectBlockedList.vue';
 import projectClientDetails from "@/components/projects/ProjectClientDetails";
-
 
 export default {
   name: "Client-view",

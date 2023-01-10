@@ -1,19 +1,9 @@
 const adminRoutes = [
-    {
-        path: "/home",
-        name: "Home",
-        component: () => import('../views/admin/Home.vue'),
-    },
+    // === PROGRAMMERS ===
     {
         name: "Specialisten",
         path: '/programmers',
         component: () => import(`../views/admin/programmer/View.vue`),
-    },
-
-    {
-        name: "Mijn account",
-        path: '/profile/view',
-        component: () => import(`../views/profile/View.vue`),
     },
     {
         name: "Specialist",
@@ -22,40 +12,27 @@ const adminRoutes = [
     },
     {
         name: "Specialist aanmaken",
-        path: '/programmers/add',
+        path: '/programmers/create',
         component: () => import('../views/programmer/AddProgrammer.vue'),
     },
 
-    {
-        name: "Projecten",
-        path: '/projects',
-        component: () => import(`../views/admin/project/ProjectAdminView`),
-    },
-    {
-        name: "Project :name",
-        path: '/projects/:id/view',
-        component: () => import(`../views/programmer/project/View`),
-    },
-
+    // === PROJECTS ===
     {
         name: "Project aanmaken",
         path: "/projects/create",
         component: () => import('../views/admin/project/Create.vue')
     },
+
+    // === CLIENTS ===
     {
         name: "Cliënten",
         path: '/clients',
         component: () => import(`../views/admin/client/ClientAdminView.vue`),
     },
     {
-        name: "createNewClient",
-        path: "/createNewClient",
+        name: "Cliënt aanmaken",
+        path: "/clients/create",
         component: () => import('../views/admin/client/CreateClientView.vue')
-    },
-    {
-        name: "CreateClient-2",
-        path: "/createNewClient2",
-        component: () => import('../views/admin/client/CreateClient-2.vue')
     },
 ]
 

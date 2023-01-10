@@ -11,7 +11,7 @@
                    placeholder="Zoeken...">
           </div>
           <div class="card-toolbar">
-            <router-link to="/createNewClient" class="btn btn-sm btn-light-primary">
+            <router-link to="/clients/create" class="btn btn-sm btn-light-primary">
               <plus-icon></plus-icon>
               Nieuwe cliënt
             </router-link>

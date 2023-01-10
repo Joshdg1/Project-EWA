@@ -31,7 +31,7 @@
                             <!--                    <option value="programmer-desc">Minste sepcialisten eerst</option>-->
                         </select>
 
-                        <router-link to="/programmers/add" class="btn btn-sm btn-light-primary">
+                        <router-link to="/programmers/create" class="btn btn-sm btn-light-primary">
                             <plus-icon></plus-icon>Nieuwe specialist
                         </router-link>
                     </div>

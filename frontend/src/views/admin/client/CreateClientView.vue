@@ -93,7 +93,7 @@ export default {
       localStorage.phoneNumber = this.phoneNumber;
       localStorage.companyName = this.companyName;
 
-      this.$router.push("/createNewClient2")
+      this.$router.push("/clients/create2")
     }
   }
 }
