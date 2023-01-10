@@ -74,7 +74,7 @@ routes = routes.concat(setType(clientRoutes, 'client'));
 routes = routes.concat(setType(programmerRoutes, 'programmer'));
 
 const router = new VueRouter({
-    mode: 'history',
+    mode: 'hash',
     // eslint-disable-next-line no-undef
     base: process.env.BASE_URL,
     routes
