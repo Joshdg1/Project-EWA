@@ -43,12 +43,7 @@ const adminRoutes = [
         component: () => import('../views/admin/project/CreateProjectView.vue')
     },
     {
-        name: "CreateProject-2",
-        path: "/createNewProject2",
-        component: () => import('../views/admin/project/CreateProject-2.vue')
-    },
-    {
-        name: "Opdrachtgevers",
+        name: "Cliënten",
         path: '/clients',
         component: () => import(`../views/admin/client/ClientAdminView.vue`),
     },
