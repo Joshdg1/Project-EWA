@@ -12,7 +12,13 @@
 
       <img src="https://clipground.com/images/date-symbol-clipart.jpg" class="code-icon">
       <div class="CardText">
-        <input v-model="newDate.title" placeholder="title" class="cardInput">
+        <multiselect class="projectsList"
+                     v-model=" newDate.project"
+                     :options="allProjects"
+                     :show-labels="false"
+                     placeholder="projecten"
+                     :close-on-select="true">
+        </multiselect>
         <input v-model="newDate.hoursPerDayStart" type="time"  placeholder="hours per day"  class="cardInput">
         <input v-model="newDate.hoursPerDayEnd" type="time"  placeholder="hours per day"  class="cardInput">
         <div class="SkillLevel">
@@ -23,7 +29,6 @@
 
       </div>
       <div class="buttons">
-<!--        <button  class="btn bg-primary btn-active-info addSkill" @click="cancel">anuleren</button>-->
         <button class="btn bg-primary btn-active-info addSkill" @click="addSkill">Voeg datum toe</button>
       </div>
 
@@ -33,24 +38,34 @@
 </template>
 
 <script>
-
 import AvailabilityRepository from "@/repository/AvailabilityRepository";
 import UserDate from "../../models/userDate";
+import Multiselect from "vue-multiselect";
+import ProjectRepository from "@/repository/ProjectRepository";
+import HourRepository from "@/repository/HourRepository";
 
 export default {
+  components: {    Multiselect,
+  },
   name: "AddDatePopUp",
-  props: ['selectedDate'],
+  props: ['selectedDate', 'userId'],
   emits: ['close-popup'],
-  created() {
+  async created() {
     this.newDate = new UserDate()
-
     this.newDate.start = new Date(this.selectedDate);
-    console.log(this.newDate.start)
+
+     this.Projects = await this.projectRepository.getAllProjects()
+    this.Projects.forEach(p  => this.allProjects.push(p.title))
   },
   data(){
     return {
       popupStatus: null,
+      Projects: null,
       newDate: [],
+      totalHours: 0,
+      allProjects: [],
+      hoursRepository: new HourRepository(),
+      projectRepository: new ProjectRepository(),
       repository: new AvailabilityRepository()
     }
   },
@@ -60,40 +75,66 @@ export default {
       this.$emit('close-popup', this.popupStatus)
     },
     addHoursToDate(objDate, intHours) {
-      console.log(intHours)
       const numberOfMlSeconds = objDate.getTime();
-      console.log("time" + numberOfMlSeconds)
       const addMlSeconds = (intHours * 60) * 60 * 1000;
-
       return new Date(numberOfMlSeconds + addMlSeconds);
     },
   async  addSkill(){
-      // if (!(this.newDate.start).type === DateTime || !isNaN(this.newDate.end)) {
-
      const allDates = this.betweenDates(this.newDate.start, this.newDate.end)
 
-      for (let i = 0; i < allDates.length; i++) {
-        allDates[i].setHours(0)
-        allDates[i].setMinutes(0)
-        allDates[i].setMilliseconds(0)
+    const hours = await this.hoursRepository.getHoursById(this.userId)
+    console.log("HOURS" + hours.length)
 
-        const startHours = ((this.newDate.hoursPerDayStart.substring(0,2) * 1)  + (this.newDate.hoursPerDayStart.substring(3,5) / 60))
-        const endHours = ((this.newDate.hoursPerDayEnd.substring(0,2) * 1)  + (this.newDate.hoursPerDayEnd.substring(3,5) / 60))
+      for (const element of allDates) {
+        element.setHours(0)
+        element.setMinutes(0)
+        element.setMilliseconds(0)
 
-        const startDate = this.addHoursToDate(allDates[i],startHours)
-        const endDate = this.addHoursToDate(allDates[i],endHours)
+        const startHours = ((this.newDate.hoursPerDayStart.substring(0, 2) * 1) + (this.newDate.hoursPerDayStart.substring(3, 5) / 60))
+        const endHours = ((this.newDate.hoursPerDayEnd.substring(0, 2) * 1) + (this.newDate.hoursPerDayEnd.substring(3, 5) / 60))
 
-        const userID = sessionStorage.getItem("id")
-       await this.repository.createAvailability(this.newDate.title,startDate,endDate , userID)
+        const startDate = this.addHoursToDate(element, startHours)
+        const endDate = this.addHoursToDate(element, endHours)
+
+
+        let Project = null
+        const currentProject = this.newDate.project
+        this.Projects.forEach(function (entry) {
+          if (entry.title === currentProject) {
+            Project = entry
+          }
+        })
+        await this.repository.createAvailability(Project, startDate, endDate, this.userId)
+
+        let start = new Date(startDate).getTime()
+        console.log("START " + start)
+        let end = new Date(endDate).getTime()
+        console.log("END " + end)
+
+        const time = ((end - start) / 60 / 60 / 1000)
+        console.log("TIME" + time)
+        this.totalHours += time
+
 
       }
 
-        // this.$emit('adding-date', this.newDate)
+    let Project = null
+    const currentProject = this.newDate.project
+    this.Projects.forEach(function (entry) {
+      if (entry.title === currentProject) {
+        Project = entry
+      }
+    })
+
+    if (hours.length === 0) {
+      await this.hoursRepository.createHours(Project, this.totalHours , this.userId)
+    } else {
+      await this.hoursRepository.updateHoursById()
+    }
         this.popupStatus = false
         this.$emit('close-popup', this.popupStatus)
-      location.reload()
+      },
 
-    },
     cancel(){
       this.popupStatus = false
       this.$emit('close-popup', this.popupStatus)
@@ -115,13 +156,13 @@ export default {
   }
 }
 </script>
-
+<style src="vue-multiselect/dist/vue-multiselect.min.css"></style>
 <style scoped>
 .close{
   display: flex;
   justify-content: right;
   width: 100%;
-
+  cursor: pointer;
 }
 .popup {
   position: fixed;
@@ -149,8 +190,9 @@ export default {
   height: 2em;
   margin: 2em;
 }
-.skillStar {
-  height: 1em;
+.projectsList{
+  width: 8.5vw;
+  background: none!important;
 }
 .CardText {
   display: flex;

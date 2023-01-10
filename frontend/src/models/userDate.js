@@ -1,5 +1,5 @@
 class UserDate{
-    title
+    project
     start
     end
     hoursPerDayStart

@@ -1,13 +1,13 @@
 export class UserSkill{
-    programmerId;
-    skillId
-    skillName;
-    skillLevel;
+    id;
+    level
+    name;
+    user_id;
 
-    constructor(programmerId, skillId, skillName, skillLevel) {
-        this.programmerId = programmerId;
-        this.skillId = skillId
-        this.skillName = skillName;
-        this.skillLevel = skillLevel;
+    constructor(id, level, name, user_id) {
+        this.id = id
+        this.level = level;
+        this.name = name;
+        this.user_id = user_id;
     }
 }
