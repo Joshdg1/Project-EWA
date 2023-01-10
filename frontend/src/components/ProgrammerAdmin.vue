@@ -32,7 +32,7 @@
                         </select>
 
                         <router-link to="/programmers/add" class="btn btn-sm btn-light-primary">
-                            <plus-icon></plus-icon>New User
+                            <plus-icon></plus-icon>Nieuwe specialist
                         </router-link>
                     </div>
                 </div>
@@ -44,22 +44,22 @@
                             <th>Voornaam(en)</th>
                             <th>Achternaam</th>
                             <th>Telefoonnummer</th>
-                            <th>Type gebruiker</th>
+                            <th>
+                                <a class="float-end btn btn-icon btn-bg-light btn-active-color-primary btn-sm"
+                                   @click="editProgrammer()">
+                                    <edit-icon></edit-icon>
+                                </a>
+                            </th>
                         </tr>
                         </thead>
                         <tbody>
-                        <tr v-for="programmer in resultQuery" v-bind:key="programmer">
+                        <tr v-for="programmer in resultQuery" v-bind:key="programmer.id">
                             <td>{{ programmer.email }}</td>
                             <td>{{ programmer.firstName }}</td>
                             <td>{{ programmer.lastName }}</td>
                             <td>{{ programmer.phoneNumber }}</td>
-                            <td>{{ programmer.userType }}</td>
-                            <td class="d-flex flex-shrink-0">
-                                <a class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1"
-                                   @click="editProgrammer()">
-                                    <edit-icon></edit-icon>
-                                </a>
-                                <a class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm"
+                            <td>
+                                <a class="float-end btn btn-icon btn-bg-light btn-active-color-primary btn-sm"
                                    @click="deleteProgrammer(programmer)">
                                     <delete-icon></delete-icon>
                                 </a>
@@ -87,9 +87,8 @@ export default {
   components: {DeleteIcon, EditIcon, PlusIcon, SearchIcon, Multiselect},
   name: "ProgrammerAdmin.vue",
   props: ['programmers'],
-  emits: ['deleteProgrammer', 'editProgrammer'],
+  emits: ['deleteProgrammer', 'editProgrammer', 'loadProgrammers'],
   async created() {
-
     this.allSkills = await this.skillRepository.getAllSkills()
     this.newProgrammers = this.programmers
     for (const element of this.programmers) {
@@ -131,6 +130,7 @@ export default {
     }
   },
   methods: {
+
     async deleteProgrammer(programmer) {
       await this.$swal({
         title: "Wil je deze programmeur verwijderen?", text: "Weet je het zeker?",
@@ -138,16 +138,17 @@ export default {
         confirmButtonText: "Ja, verwijder!", cancelButtonText: "Annuleer"
       }).then((result) => {
         if (result.value) {
-          this.repository.deleteUserById(programmer.id);
-          location.reload();
+            this.repository.deleteUserById(programmer.id);
+            this.$emit('loadProgrammers');
         }
       });
     },
 
     editProgrammer() {
-      this.editingProgrammer = true;
+        this.editingProgrammer = true;
       this.$emit('editProgrammer', this.editingProgrammer)
     },
+
     amountOfSkillsIncreasing() {
       const newList = this.programmers
       console.log(newList)

@@ -5,20 +5,19 @@
             <table class="table table-row-dashed table-row-gray-300 align-middle gs-0 gy-4">
               <thead>
               <tr class="fw-bolder text-muted">
-                <th class="w-25px">X</th>
+                <th class="w-25px"></th>
                 <th>Email</th>
                 <th>Voornaam(en)</th>
                 <th>Achternaam</th>
-                <th>Telefoonnummer</th>
-                <th>Type gebruiker</th>
               </tr>
               </thead>
               <tbody>
               <tr v-for="programmer in programmers" v-bind:key="programmer.id">
+                <td>
                 <div class="form-check form-check-sm form-check-custom form-check-solid">
-                  <input class="form-check-input" type="checkbox" v-bind:value="programmer.id" v-model="selectedIds" @change="onSelect" data-kt-check="true"
-                         data-kt-check-target=".widget-9-check"/>
+                  <input class="form-check-input" type="checkbox" v-bind:value="programmer.id" v-model="selectedIds" @change="onSelect"/>
                 </div>
+                </td>
                 <td>{{ programmer.email }}</td>
                 <td>{{ programmer.firstName }}</td>
                 <td>{{ programmer.lastName }}</td>
@@ -50,11 +49,10 @@ export default {
       selectedIds: [],
     }
   },
+
   methods: {
     onSelect(){
-      if (this.selectedIds.length > 0){
-        this.$emit('on-select', this.selectedIds);
-      }
+      this.$emit('on-select', this.selectedIds);
     },
   },
 }

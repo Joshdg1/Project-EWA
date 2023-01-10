@@ -40,7 +40,7 @@ const adminRoutes = [
     {
         name: "Project aanmaken",
         path: "/projects/create",
-        component: () => import('../views/admin/project/CreateProjectView.vue')
+        component: () => import('../views/admin/project/Create.vue')
     },
     {
         name: "Cliënten",
