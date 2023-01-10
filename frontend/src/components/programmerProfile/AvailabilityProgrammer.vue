@@ -125,9 +125,7 @@ export default {
       this.popupStatusEdit = true
     },
     addDates(dateList){
-      console.log(dateList)
       for (const responseDate in dateList){
-        console.log("PROJECT OF DATEOBJECT THINGY" + responseDate.project)
         let calendarApi = this.$refs.calendar.getApi();
         calendarApi.addEvent({
           title: responseDate.project.title,

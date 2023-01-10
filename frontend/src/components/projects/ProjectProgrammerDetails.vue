@@ -14,13 +14,10 @@ export default {
   name: "ProjectProgrammerId",
   props: ['project'],
   emits:['view-project'],
-  created() {
-    console.log("MAAKT DIE ANDER AAN OFZO")
-  },
+
   methods: {
     setProjectDetails(project){
-      console.log(project)
-      this.$emit('view-project' , false)
+      this.$emit('view-project' , project)
     },
     setSelectedTab(tabId){
       this.displayTypo = tabId

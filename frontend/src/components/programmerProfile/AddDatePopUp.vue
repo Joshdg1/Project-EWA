@@ -110,8 +110,6 @@ export default {
        const response  = await this.repository.createAvailability(Project, startDate, endDate, this.userId)
         this.responseList.push(response)
 
-        console.log("RESPONSE")
-        console.log(response)
         // calculating time between dates
         let start = new Date(startDate).getTime()
         let end = new Date(endDate).getTime()
