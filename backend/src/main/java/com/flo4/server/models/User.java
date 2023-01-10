@@ -1,7 +1,6 @@
 package com.flo4.server.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -23,7 +22,6 @@ public class User {
     private String companyName;
     private String userType;
 
-
     @ManyToMany
     @JoinTable(
             name = "user_project",
@@ -32,6 +30,9 @@ public class User {
     )
     @JsonIgnore()
     private List<Project> projects;
+
+    @OneToMany(mappedBy = "user")
+    private List<UserSkills> skills;
 
     public User() {
     }

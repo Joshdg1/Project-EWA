@@ -1,6 +1,8 @@
 package com.flo4.server.models;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 
 @Entity
@@ -13,6 +15,7 @@ public class UserSkills {
 
     double level;
 
+    @JsonIgnore
     @ManyToOne
     private User user;
 
