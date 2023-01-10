@@ -9,37 +9,37 @@
         <div class="d-flex flex-stack mb-2">
           <label class="form-label fw-bold text-dark fs-6 mb-0">Email</label>
         </div>
-        <input class="form-control form-control-lg form-control-solid" required type="text"
+        <input class="form-control form-control-lg form-control-solid" type="text"
                name="Email" autocomplete="off" v-model="email">
       </div>
 
       <div class="fv-row mb-10 fv-plugins-icon-container">
         <label class="form-label fs-6 fw-bold text-dark">Voornaam(en)</label>
-        <input class="form-control form-control-lg form-control-solid" required type="text" name="text"
+        <input class="form-control form-control-lg form-control-solid" type="text" name="text"
                autocomplete="off" v-model="firstname">
       </div>
 
       <div class="fv-row mb-10 fv-plugins-icon-container">
         <label class="form-label fs-6 fw-bold text-dark">Achternaam</label>
-        <input class="form-control form-control-lg form-control-solid" required type="text" name="text"
+        <input class="form-control form-control-lg form-control-solid" type="text" name="text"
                autocomplete="off" v-model="lastname">
       </div>
 
       <div class="fv-row mb-10 fv-plugins-icon-container">
         <label class="form-label fs-6 fw-bold text-dark">Wachtwoord</label>
-        <input class="form-control form-control-lg form-control-solid" required type="password" name="text"
+        <input class="form-control form-control-lg form-control-solid" type="password" name="text"
                autocomplete="off" v-model="password">
       </div>
 
       <div class="fv-row mb-10 fv-plugins-icon-container">
         <label class="form-label fs-6 fw-bold text-dark">Telefoonnummer</label>
-        <input class="form-control form-control-lg form-control-solid" required type="text" name="text"
+        <input class="form-control form-control-lg form-control-solid" type="text" name="text"
                autocomplete="off" v-model="phoneNumber">
       </div>
 
       <div class="fv-row mb-10 fv-plugins-icon-container">
       <label class="form-label fs-6 fw-bold text-dark">Bedrijf</label>
-      <input class="form-control form-control-lg form-control-solid" required type="text" name="text"
+      <input class="form-control form-control-lg form-control-solid" type="text" name="text"
              autocomplete="off" v-model="companyName">
     </div>
 

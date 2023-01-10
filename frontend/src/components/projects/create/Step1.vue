@@ -16,9 +16,11 @@
 
     <div class="mb-5">
       <label class="form-label mb-3">Bedrijf</label>
-      <select class="form-select form-select-lg form-control-solid" v-model="formData.client_id">
+      <select class="form-select form-select-lg form-select-solid" v-model="formData.client_id">
         <option value="0">Selecteer een bedrijf</option>
-        <option v-for="client in this.clients" v-bind:key="client.id" v-bind:value="client.id">{{client.companyName}}</option>
+        <option v-for="client in this.clients" v-bind:key="client.id" v-bind:value="client.id">
+          {{ client.companyName }}
+        </option>
       </select>
       <div v-if="errors.client" class="text-danger fs-7">{{ errors.client }}</div>
     </div>
@@ -43,14 +45,13 @@ import UserRepository from "@/repository/UserRepository";
 
 
 export default {
-  // eslint-disable-next-line vue/no-unused-components
   name: 'FooterMenu',
   props: ['d'],
 
   async created() {
     this.formData = this.d;
     this.clients = await this.userRepository.getAllClients();
-
+    this.clients = this.clients.filter(client => client.companyName)
   },
 
   data() {
@@ -113,7 +114,6 @@ export default {
   }
 }
 </script>
-<style src="vue-multiselect/dist/vue-multiselect.min.css"></style>
 <style scoped>
 
 
