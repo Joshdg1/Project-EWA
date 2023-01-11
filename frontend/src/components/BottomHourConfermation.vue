@@ -122,8 +122,7 @@ export default {
       this.$emit('edit-profile', this.editingProfile)
     },
     checkForApproved(project) {
-      console.log("KOMT BINNEN")
-      console.log(project.isApproved)
+
       let content = null
       if (project.isApproved === null) {
         content = '<span class="badge badge-light-warning">Lopend</span>'
@@ -132,7 +131,7 @@ export default {
       } else if (project.isApproved === "approved") {
         content = '<span class="badge badge-light-success">Goedgekeurd</span>'
       }
-      console.log(content)
+
       return content
     },
     async rejectHours(project) {
@@ -142,6 +141,7 @@ export default {
     },
     async approveHours(projectsr) {
       projectsr.isApproved = "approved"
+      console.log(projectsr)
       await this.hoursRepository.updateHoursById(projectsr.id, projectsr.project, projectsr.hours, projectsr.user.id, projectsr.isApproved)
       this.userHours = await this.hoursRepository.getHoursByProject(this.sampleProgrammer)
     }

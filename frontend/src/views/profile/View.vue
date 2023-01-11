@@ -55,7 +55,6 @@
               this.skills.push(element);
             }
 
-            this.sampleProgrammer = await this.repository.findUserById(this.userID)
 
             this.currentTab = 1;
         },
