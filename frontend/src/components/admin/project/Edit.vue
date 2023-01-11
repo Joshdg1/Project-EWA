@@ -24,8 +24,8 @@
               </option>
             </select>
           </td>
-          <td><input type="date" class="form-control form-control-lg form-control-solid" v-model="project.startDate"></td>
-          <td><input type="date" class="form-control form-control-lg form-control-solid" v-model="project.endDate"></td>
+          <td><input type="date" class="form-control form-control-sm form-control-solid" v-model="project.startDate"></td>
+          <td><input type="date" class="form-control form-control-sm form-control-solid" v-model="project.endDate"></td>
           <td>
             <select style="max-height: 100px" multiple class="form-select form-select-sm form-select-solid" v-model="project.user_ids">
               <option v-for="programmer in programmers" v-bind:key="programmer.id" v-bind:value="programmer.id">

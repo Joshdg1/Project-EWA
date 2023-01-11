@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>
+    <h1 class="ms-8 mb-5">
       Welkom {{ this.user.firstName }} {{ this.user.lastName }}
     </h1>
     <div class="row">
@@ -24,7 +24,7 @@
               <br>
               <br>
               <br>
-              <p>Wij als Florijn hopen dat u een fijne ervaring zult beleven op onze website!</p>
+              <p class="mb-10">Wij als Florijn hopen dat u een fijne ervaring zult beleven op onze website!</p>
             </div>
             <div v-else-if="this.user.userType === 'client'">
               <br>
@@ -42,7 +42,7 @@
               <br>
               <br>
               <br>
-              <p>Wij als Florijn hopen dat u een fijne ervaring zult beleven op onze website!</p>
+              <p class="mb-10">Wij als Florijn hopen dat u een fijne ervaring zult beleven op onze website!</p>
             </div>
             <div v-else-if="this.user.userType === 'administrator'">
               <br>
@@ -69,7 +69,7 @@
               <br>
               <br>
               <br>
-              <p>Wij als Florijn hopen dat u een fijne ervaring zult beleven op onze website!</p>
+              <p class="mb-10">Wij als Florijn hopen dat u een fijne ervaring zult beleven op onze website!</p>
             </div>
           </div>
         </div>

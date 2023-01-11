@@ -9,6 +9,7 @@
                 <th>Email</th>
                 <th>Voornaam(en)</th>
                 <th>Achternaam</th>
+                <th>Skills</th>
               </tr>
               </thead>
               <tbody>
@@ -21,7 +22,7 @@
                 <td>{{ programmer.email }}</td>
                 <td>{{ programmer.firstName }}</td>
                 <td>{{ programmer.lastName }}</td>
-                <td>{{ programmer.phoneNumber }}</td>
+                <td class="mw-300px" v-html="renderSkills(programmer.skills)"></td>
               </tr>
               </tbody>
             </table>
@@ -51,6 +52,19 @@ export default {
   },
 
   methods: {
+    renderSkills(skills) {
+      if (!skills || skills.length === 0)
+        return "";
+
+      let content = ``;
+      for (const skill of skills) {
+        content += `<span class='badge fs-7 badge-light-primary m-1'>${skill.name} </span><span class="badge badge-primary fs-7">${skill.level}⭐</span><br>`;
+      }
+      content += ``;
+
+
+      return content
+    },
     onSelect(){
       this.$emit('on-select', this.selectedIds);
     },

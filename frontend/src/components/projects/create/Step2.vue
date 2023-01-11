@@ -1,6 +1,14 @@
 <template>
     <div>
-        <h4>Selecteer sepecialist(en)</h4>
+        <div class="mb-5">
+            <div class="notice d-flex bg-light-primary rounded border-primary border border-dashed p-6">
+                <div class="d-flex flex-stack flex-grow-1">
+                    <div class="fw-semibold">
+                        <div class="fs-6 text-gray-700">Selecteer sepecialist(en)</div>
+                    </div>
+                </div>
+            </div>
+        </div>
         <programmer-select @on-select="onSelect"></programmer-select>
     </div>
 </template>
