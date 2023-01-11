@@ -20,11 +20,11 @@ export default class ProjectRepository {
         );
     }
 
-    async updateProjectById(projectId, title, description, company, startDate, endDate, programmers) {
+    async updateProjectById(projectId, name, description, client_id, start_date, end_date, programmer_ids) {
         return await API.put(
             this.url + projectId,
             {
-                projectId, title, description, company, startDate, endDate, programmers
+                projectId, name, description, client_id, start_date, end_date, programmer_ids
             }
         );
     }

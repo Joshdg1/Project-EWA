@@ -63,7 +63,7 @@
 </template>
 
 <script>
-import UserRepository from '../repository/UserRepository'
+import UserRepository from '../../../repository/UserRepository'
 
 export default {
   name: "ProgrammerAdminEdit.vue",
