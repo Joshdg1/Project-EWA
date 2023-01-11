@@ -15,6 +15,7 @@
         <input class="form-control form-control-lg form-control-solid" id="password" v-model="password" type="password"
                name="password"
                autocomplete="off">
+        <div v-if="errors.passwordError" class="text-danger fs-7">{{ errors.passwordError }}</div>
         <div class="fv-plugins-message-container invalid-feedback"></div>
       </div>
       <div class="fv-row mb-10 fv-plugins-icon-container">
@@ -23,15 +24,16 @@
                type="password"
                name="password"
                autocomplete="off">
+        <div v-if="errors.passwordRepeatError" class="text-danger fs-7">{{ errors.passwordRepeatError }}</div>
         <div class="fv-plugins-message-container invalid-feedback"></div>
       </div>
       <div class="text-center">
         <router-link to="/users/login">
-        <button type="submit" @click="changePassword()" class="btn btn-lg btn-primary w-100 mb-5">
-          <span class="indicator-label">Verander</span>
-          <span class="indicator-progress">Wacht alsjeblieft...
+          <button type="submit" @click="changePassword()" class="btn btn-lg btn-primary w-100 mb-5">
+            <span class="indicator-label">Verander</span>
+            <span class="indicator-progress">Wacht alsjeblieft...
 									<span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
-        </button>
+          </button>
         </router-link>
       </div>
     </div>
@@ -48,26 +50,44 @@ export default {
       userRepository: new UserRepository(),
       password: null,
       passwordRepeat: null,
-      errors: []
+      errors: {
+        passwordError: false,
+        passwordRepeatError: false,
+      }
     }
   },
+
   methods: {
-    checkForm: function (e) {
-      e.preventDefault();
 
-      this.errors = [];
-
-      if (!this.password) {
-        this.errors.push('Wachtwoord invoeren is verplicht');
-      }
-      if (!this.passwordRepeat) {
-        this.errors.push('Wachtwoord herhalen is verplicht');
-      }
-      if (this.password !== this.passwordRepeat) {
-        this.errors.push('Wachtwoord en herhaal wachtwoord zijn niet hetzelfde')
-      }
+    resetErrors() {
+      this.errors = {
+        passwordError: false,
+        passwordRepeatError: false,
+      };
     },
-    async changePassword(){
+
+    validate() {
+      this.resetErrors();
+      let isError = false;
+
+      if (this.password === "") {
+        isError = true;
+        this.errors.passwordError = "Voer je nieuwe wachtwoord in!";
+      }
+
+      if (this.passwordRepeat === "") {
+        isError = true;
+        this.errors.passwordRepeatError = "Herhaal je wachtwoord!";
+      }
+
+      else if (this.password !== this.passwordRepeat){
+        isError = true;
+        this.errors.passwordRepeatError = "Wachtwoorden zijn niet hetzelfde!"
+      }
+
+      return !isError;
+    },
+    async changePassword() {
       const queryString = window.location.search;
 
       const urlParams = new URLSearchParams(queryString);

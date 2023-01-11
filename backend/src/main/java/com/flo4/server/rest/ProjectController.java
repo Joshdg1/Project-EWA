@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.transaction.Transactional;
 import java.time.Instant;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -83,6 +84,13 @@ public class ProjectController {
         project.setDescription(createProject.getDescription());
         project.setStartDate(createProject.getStart_date());
         project.setEndDate(createProject.getEnd_date());
+
+        project.setUsers(new ArrayList<>());
+        for (Integer programmer_id : createProject.getProgrammer_ids()) {
+            User programmer = this.userRepository.findById(programmer_id);
+            project.addUser(programmer);
+        }
+
         Project updatedProject = this.projectRepository.update(project, id);
 
         if (updatedProject == null) {
