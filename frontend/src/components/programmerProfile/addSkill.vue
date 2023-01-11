@@ -1,5 +1,5 @@
 <template>
-  <div class="modal-dialog mw-650px">
+  <div class="modal-dialog mw-650px " >
     <!--begin::Modal content-->
     <div class="modal-content">
       <!--begin::Modal header-->
@@ -127,6 +127,7 @@ export default {
 </script>
 <style src="vue-multiselect/dist/vue-multiselect.min.css"></style>
 <style scoped>
+
 .addASkill {
   width: 400px;
   height: 300px;

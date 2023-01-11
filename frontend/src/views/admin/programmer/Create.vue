@@ -6,7 +6,7 @@
                 <div class="notice d-flex bg-light-primary rounded border-primary border border-dashed p-6">
                   <div class="d-flex flex-stack flex-grow-1">
                     <div class="fw-semibold">
-                      <div class="fs-6 text-gray-700">Na het opslaan van de specialist wordt er automatisch een email verstuurd naar het ingevulde adres. In deze email krijgt de specialist de mogelijkheid om een wachtwoord in te stellen.</div>
+                      <div class="fs-6 text-gray-700">Na het opslaan van de specialist wordt er automatisch een email verstuurd naar het ingevulde adres. Via deze email krijgt de specialist de mogelijkheid om een wachtwoord in te stellen.</div>
                     </div>
                   </div>
                 </div>
@@ -49,8 +49,8 @@
 </template>
 
 <script>
-    import UserRepository from '../../repository/UserRepository'
-    import BackIcon from "../../components/icons/back";
+    import UserRepository from '../../../repository/UserRepository'
+    import BackIcon from "../../../components/icons/back";
 
     export default {
       // eslint-disable-next-line
@@ -77,11 +77,10 @@
       methods: {
         resetErrors() {
           this.errors = {
-            name: false,
-            description: false,
-            client: false,
-            start: false,
-            end: false,
+            email: false,
+            firstname: false,
+            lastname: false,
+            phoneNumber: false,
           };
         },
 

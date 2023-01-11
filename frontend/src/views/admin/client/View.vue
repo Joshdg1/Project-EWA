@@ -1,20 +1,52 @@
 <template>
-  <div>
-    <clientsList v-if="!this.clientStatus" :clients="this.clients" @deleteClient="deleteClient"
-                 @editClient="editClientStatus"></clientsList>
-    <edit v-if="this.clientStatus" :clients="this.clients" @deleteClient="deleteClient"
-          @editClient="editClientStatus"></edit>
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="card ">
+        <div class="card-header border-0 pt-5">
+          <div class="row">
+            <div class="col">
+              <div class="position-relative mb-5 mb-lg-0">
+                <search-icon></search-icon>
+                <input type="text" data-kt-ecommerce-order-filter="search"
+                       v-model="searchQ"
+                       class="form-control form-control-solid w-250px ps-14"
+                       placeholder="Zoeken...">
+              </div>
+            </div>
+          </div>
+
+          <div class="card-toolbar">
+            <label class="me-3 fs-6">Sorteren op: </label>
+            <select class="form-select form-select-sm form-select-solid  me-5 w-200px" v-model="sortType">
+              <option value="name-asc">Naam (A-Z)</option>
+              <option value="name-desc">Naam (Z-A)</option>
+            </select>
+            <router-link to="/clients/create" class="btn btn-sm btn-light-primary">
+              <plus-icon></plus-icon>Nieuwe Cliënt
+            </router-link>
+          </div>
+        </div>
+
+        <clientsList v-if="!this.clientStatus" :clients="resultQuery" @editClient="editClientStatus"></clientsList>
+        <edit v-if="this.clientStatus" :clients="resultQuery" @editClient="editClientStatus"></edit>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
-import clientsList from '../../../components/ClientAdmin.vue'
-import edit from '../../../components/ClientAdminEdit.vue'
+import clientsList from '../../../components/admin/client/Table.vue'
+import edit from '../../../components/admin/client/Edit.vue'
+
 import UserRepository from '../../../repository/UserRepository'
+import SearchIcon from "../../../components/icons/search";
+import PlusIcon from "../../../components/icons/plus";
 
 export default {
   name: "ClientAdminView",
   components: {
+    PlusIcon,
+    SearchIcon,
     clientsList,
     edit
   },
@@ -23,38 +55,93 @@ export default {
     return {
       clients: [],
       clientStatus: null,
-      repository: new UserRepository()
+      searchQ: "",
+      sortType: "",
+      repository: new UserRepository(),
     }
   },
 
   async created() {
-    const data = await this.repository.getAllClients();
-
-    for (let i = 0; i < data.length; i++) {
-      this.clients.push(data[i]);
-    }
+    await this.loadClients();
   },
 
   methods: {
-    async deleteClient(client) {
-
-      await this.$swal({
-        title: "Wil je deze client verwijderen?", text: "Weet je het zeker?",
-        type: "warning", showCancelButton: true, confirmButtonColor: "#3085d6",
-        confirmButtonText: "Ja, verwijder!", cancelButtonText: "Annuleer"
-      }).then((result) => {
-        if (result.value) {
-          this.repository.deleteUserById(client.id);
-          location.reload();
-        }
-      });
+    async loadClients(){
+      console.log('loadClients');
+      this.sortType = '';
+      this.clients = await this.repository.getAllClients();
+      this.sortType = 'name-asc';
     },
 
     editClientStatus(clientStatus) {
       this.clientStatus = clientStatus;
-    }
-  }
 
+      if (!clientStatus)
+       this.loadClients();
+    },
+
+
+    nameAsc() {
+      this.clients = this.clients.sort((b, a) => {
+        if (a.firstName < b.firstName) {
+          return -1;
+        }
+        if (a.firstName > b.firstName) {
+          return 1;
+        }
+        return 0;
+      });
+    },
+    nameDesc() {
+      this.clients = this.clients.sort((b, a) => {
+        if (b.firstName < a.firstName) {
+          return -1;
+        }
+        if (b.firstName > a.firstName) {
+          return 1;
+        }
+        return 0;
+      });
+    },
+  },
+
+  watch: {
+    sortType: function (newValue) {
+      switch (newValue) {
+        case "name-asc":
+          this.nameAsc()
+          break;
+        case "name-desc":
+          this.nameDesc()
+          break;
+      }
+    }
+  },
+
+  computed: {
+    resultQuery: function () {
+      if (this.searchQ) {
+        return this.clients.filter(item => {
+          if (this.searchQ
+                  .toLowerCase()
+                  .split(" ")
+                  .every(v => item.firstName.toLowerCase().includes(v))) {
+            return this.searchQ
+                    .toLowerCase()
+                    .split(" ")
+                    .every(v => item.firstName.toLowerCase().includes(v));
+          } else {
+            return this.searchQ
+                    .toLowerCase()
+                    .split(" ")
+                    .every(v => item.lastName.toLowerCase().includes(v));
+          }
+        })
+      } else {
+        return this.clients;
+      }
+    },
+  },
 }
 </script>
 
