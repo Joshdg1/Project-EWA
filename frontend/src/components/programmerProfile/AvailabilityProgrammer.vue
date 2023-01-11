@@ -69,10 +69,7 @@ export default {
     for (const element of availability) {
       let calendarApi = this.$refs.calendar.getApi();
 
-      // let start = new Date(element.startDate).getTime()
-      // let end = new Date(element.endDate).getTime()
-      // const time = ((end - start) / 60 / 60 / 1000)
-      // this.totalHours += time
+
       const hours = await this.hoursRepository.getHoursByProject(element.project)
       const ourUserId = this.userId
       let totalHours = 0;
@@ -103,7 +100,7 @@ export default {
       popupStatusAdd: null,
       popupStatusEdit: null,
       totalHours: 0,
-      userId: null,
+      user: JSON.parse(sessionStorage.user),
       selectedDate: null,
       eventStart: null,
       eventEnd: null,
@@ -142,15 +139,44 @@ export default {
 
       this.popupStatusEdit = true
     },
-    addDates(dateList){
-      for (const responseDate in dateList){
-        let calendarApi = this.$refs.calendar.getApi();
-        calendarApi.addEvent({
-          title: responseDate.project.title,
-          start: responseDate.startDate,
-          end: responseDate.endDate,
-        })
-      }
+   async addDates(){
+
+     let calendarApi = this.$refs.calendar.getApi();
+     let eventSources = calendarApi.getEventSources();
+     let len = eventSources.length;
+     for (let i = 0; i < len; i++) {
+       eventSources[i].remove();
+     }
+
+
+      const dates = await this.availabilityRepository.getAllAvials()
+     let ourDates = []
+     const ourUser =  JSON.parse(sessionStorage.user)
+     dates.forEach( function (entry){
+       if (entry.user.id === ourUser.id){
+
+         ourDates.push(entry)
+       }
+     })
+      let totalHours = 0
+     ourDates.forEach( function (responseDate){
+       let start = new Date(responseDate.startDate).getTime()
+       let end = new Date(responseDate.endDate).getTime()
+
+       const time = ((end - start) / 60 / 60 / 1000)
+
+       totalHours += time
+
+
+       calendarApi.addEvent({
+         title: responseDate.project.title,
+         start: responseDate.startDate,
+         end: responseDate.endDate,
+       })
+     })
+
+    this.totalHours =totalHours
+
     }
   }
 }
