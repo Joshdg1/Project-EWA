@@ -1,11 +1,9 @@
 package com.flo4.server.repository;
 
 import com.flo4.server.models.PasswordResetTokens;
-import com.flo4.server.models.User;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
-import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
@@ -13,14 +11,13 @@ import java.util.List;
 
 @Repository("PASSWORDRESET.JPA")
 @Transactional
-public class PasswordResetRepository implements EntityRepository<PasswordResetTokens> {
+public class PasswordResetRepository implements EntityRepository<PasswordResetTokens>{
 
     @PersistenceContext
     protected EntityManager entityManager;
 
     /**
      * Query for returning a list of all reset tokens
-     *
      * @return a list of tokens
      */
     @Override
@@ -32,7 +29,6 @@ public class PasswordResetRepository implements EntityRepository<PasswordResetTo
 
     /**
      * Find the token by id
-     *
      * @param id
      * @return a token with a certain id
      */
@@ -43,7 +39,6 @@ public class PasswordResetRepository implements EntityRepository<PasswordResetTo
 
     /**
      * Save the token
-     *
      * @param entity
      */
     @Override
@@ -53,7 +48,6 @@ public class PasswordResetRepository implements EntityRepository<PasswordResetTo
 
     /**
      * finds the a token by id, and sets the id, token and userID
-     *
      * @param entity
      * @param id
      * @return
@@ -68,14 +62,13 @@ public class PasswordResetRepository implements EntityRepository<PasswordResetTo
 
         updatedPasswordResetTokens.setId(entity.getId());
         updatedPasswordResetTokens.setToken(entity.getToken());
-        updatedPasswordResetTokens.setUser(entity.getUser());
+        updatedPasswordResetTokens.setUser_id(entity.getUser_id());
 
         return updatedPasswordResetTokens;
     }
 
     /**
      * Deletes a token with the id
-     *
      * @param id
      */
     @Override
@@ -98,17 +91,5 @@ public class PasswordResetRepository implements EntityRepository<PasswordResetTo
         return query.getResultList();
     }
 
-    public PasswordResetTokens findByToken(String token) {
-        PasswordResetTokens passwordResetTokens = this.entityManager
-                .createQuery("SELECT token from password_reset_tokens p WHERE  p.token = ?1", PasswordResetTokens.class)
-                .setParameter(1, token)
-                .getSingleResult();
-
-        if (passwordResetTokens == null) {
-            throw new NoResultException("No toke found!");
-        }
-
-        return passwordResetTokens;
-    }
 
 }

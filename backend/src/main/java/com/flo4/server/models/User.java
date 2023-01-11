@@ -38,7 +38,7 @@ public class User {
     private List<UserSkills> skills;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "user_id", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<PasswordResetTokens> resetTokens;
 
     public User() {

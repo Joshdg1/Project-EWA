@@ -177,9 +177,9 @@ public class UserController {
 
             PasswordResetTokens passwordResetTokens = new PasswordResetTokens();
             passwordResetTokens.setToken(tokenRegisterReset);
-            passwordResetTokens.setUser(user);
+            passwordResetTokens.setUser_id(user);
 
-            String resetPasswordLink = "http://localhost:8080/#/users/resetPassword?token=" + tokenRegisterReset;
+            String resetPasswordLink = "http://localhost:8080/users/resetPassword?token=" + tokenRegisterReset;
 
             passwordResetRepository.save(passwordResetTokens);
 
@@ -360,10 +360,10 @@ public class UserController {
 
         PasswordResetTokens passwordResetTokens = new PasswordResetTokens();
         passwordResetTokens.setToken(token);
-        passwordResetTokens.setUser(user);
+        passwordResetTokens.setUser_id(user);
 
 
-        String resetPasswordLink = "http://localhost:8080/#/users/resetPassword?token=" + token;
+        String resetPasswordLink = "http://localhost:8080/users/resetPassword?token=" + token;
 
         passwordResetRepository.save(passwordResetTokens);
 
@@ -404,16 +404,14 @@ public class UserController {
      * @return
      */
     @PutMapping(path = "resetPassword")
-    public PasswordResetTokens resetPassword(@RequestBody ResetRequest resetRequest) {
+    public ResetResponse resetPassword(@RequestBody ResetRequest resetRequest) {
 
-//        User userByToken = userRepository.findUserByToken(resetRequest.token);
+        User userByToken = userRepository.findUserByToken(resetRequest.token);
 
-        PasswordResetTokens passwordResetToken = passwordResetRepository.findByToken(resetRequest.token);
+        userService.updatePassword(userByToken, resetRequest.password);
 
-//        userService.updatePassword(userByToken, resetRequest.password);
-        System.out.println(passwordResetToken);
 
-        return passwordResetToken;
+        return new ResetResponse(userByToken.getId(), userByToken.getEmail());
     }
 
 
