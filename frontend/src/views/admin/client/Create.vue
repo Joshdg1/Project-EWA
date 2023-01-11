@@ -131,7 +131,11 @@
         const usertype = "client";
 
         await this.UserRepository.createUser(this.formData.email, this.formData.firstname, this.formData.lastname, false, this.formData.phoneNumber,  this.formData.companyName, usertype);
-
+        this.$toasted.show("Client aangemaakt", {
+          theme: "bubble",
+          position: "bottom-right",
+          duration : 1000
+        });
         this.$router.push("/clients");
       },
     }

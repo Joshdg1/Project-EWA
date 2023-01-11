@@ -44,6 +44,7 @@ import Multiselect from "vue-multiselect";
 import ProjectRepository from "@/repository/ProjectRepository";
 import HourRepository from "@/repository/HourRepository";
 
+
 export default {
   components: {    Multiselect,
   },
@@ -55,7 +56,15 @@ export default {
     this.newDate.start = new Date(this.selectedDate);
 
      this.Projects = await this.projectRepository.getAllProjects()
-    this.Projects.forEach(p  => this.allProjects.push(p.title))
+    for (const element of this.Projects) {
+
+      for (let j = 0; j < element.users.length; j++) {
+        if ((element.users[j].id) === this.user.id) {
+          this.allProjects.push(element.title)
+        }
+      }
+    }
+
   },
   data(){
     return {
@@ -63,6 +72,7 @@ export default {
       Projects: null,
       newDate: [],
       totalHours: 0,
+      user: JSON.parse(sessionStorage.user),
       allProjects: [],
       responseList:[],
       hoursRepository: new HourRepository(),

@@ -52,6 +52,7 @@
     import UserRepository from '../../../repository/UserRepository'
     import BackIcon from "../../../components/icons/back";
 
+
     export default {
       // eslint-disable-next-line
       name: "CreateProgrammerProjectView",
@@ -119,7 +120,12 @@
 
           await this.UserRepository.createUser(this.formData.email, this.formData.firstname, this.formData.lastname, false, this.formData.phoneNumber, '', usertype);
 
-          this.$router.push("/programmers");
+          this.$toasted.show("Specialist aangemaakt", {
+            theme: "bubble",
+            position: "bottom-right",
+            duration : 1000
+          });
+          this.$router.push("/programmers", );
         },
       }
     }

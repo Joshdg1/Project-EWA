@@ -91,7 +91,11 @@
       },
       async submit() {
         const result = await this.repository.createProject(this.formData.name, this.formData.description, this.formData.client_id, this.formData.start, this.formData.end, this.programmer_ids);
-
+        this.$toasted.show("Project aangemaakt", {
+          theme: "bubble",
+          position: "bottom-right",
+          duration : 1000
+        });
         if (result){
           this.$router.push("/projects");
         } else {

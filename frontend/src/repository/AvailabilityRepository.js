@@ -6,6 +6,9 @@ export default class AvailabilityRepository {
         // eslint-disable-next-line no-undef
         this.url = process.env.VUE_APP_API_URL + '/availability/';
     }
+    async getAllAvials (){
+        return await API.get(this.url);
+    }
 
     async getAvailabilityById(id) {
         return await API.get(this.url + id);
