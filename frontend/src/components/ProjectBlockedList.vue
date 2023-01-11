@@ -150,12 +150,19 @@ export default {
   name: "ProjectAdmin.vue",
   emits: ['selecting-project'],
  async created() {
-   this.userID = sessionStorage.getItem("id")
+   this.userID = parseInt(sessionStorage.getItem("id"))
 
    const data = await this.repository.getAllProjects();
-
+   console.log(typeof this.userID)
    for (const element of data) {
-
+     if (element.client.id === this.userID){
+       const ProjectHours  = await this.hourRepository.getHoursByProject(element)
+       element.hoursWorked = 0
+       ProjectHours.forEach(p => element.hoursWorked += p.hours)
+       const newProject  = new Project(element.id, element.title, element.description, element.company, element.startDate,element.endDate,element.users, element.hoursWorked)
+       this.programmerProjects.push(newProject)
+       continue
+     }
      for (let j = 0; j < element.users.length; j++) {
        if ((element.users[j].id).toString() === this.userID) {
          const ProjectHours  = await this.hourRepository.getHoursByProject(element)
@@ -163,6 +170,7 @@ export default {
          ProjectHours.forEach(p => element.hoursWorked += p.hours)
          const newProject  = new Project(element.id, element.title, element.description, element.company, element.startDate,element.endDate,element.users, element.hoursWorked)
          this.programmerProjects.push(newProject)
+         continue
        }
      }
    }
