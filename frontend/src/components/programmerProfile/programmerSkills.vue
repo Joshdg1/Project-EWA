@@ -8,7 +8,7 @@
       <!--end::Card title-->
       <!--begin::Action-->
       <div class="d-flex ms-3" v-if="this.addCheck">
-        <a @click= "onAddSkillClick" class="btn background-florijn btn-active-info editSkill"
+        <a @click= "onAddSkillClick" class="mb-2 btn btn-sm bg-primary btn-active-info editSkill"
            tooltip="New App"
            data-bs-toggle="modal"
            data-bs-target="#kt_modal_create_app" id="kt_toolbar_primary_button">Voeg een vaardigheid toe</a>
@@ -25,16 +25,16 @@
         <div class="modal-dialog mw-650px m-2">
           <!--begin::Modal content-->
           <div class="modal-content backgroundCard">
-            <div class="d-flex justify-content-end flex-shrink-0">
+            <div id="editDeleteSkill" class="d-flex justify-content-end flex-shrink-0">
+              <a class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" @click="editSkill(skill)">
+                <edit-icon></edit-icon>
+              </a>
               <a class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm" @click="deleteSkill(skill)">
                 <delete-icon></delete-icon>
               </a>
-              <a class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm" @click="editSkill(skill)">
-                <edit-icon></edit-icon>
-              </a>
             </div>
             <!--begin::Modal header-->
-            <div class="modal-header pb-0 border-0 justify-content-end">
+            <div id="removeSpace" class="modal-header pb-0 border-0 justify-content-end">
               <!--begin::Close-->
               <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
               </div>
@@ -46,7 +46,7 @@
             <div class="backgroundText"> {{ skill.level }}
               <img src="../../assets/florijnster.png" class="skillStar">
             </div>
-            <div class="modal-body scroll-y mx-5 mx-xl-18 pt-0 pb-15">
+            <div id="removeSpace" class="modal-body scroll-y mx-5 mx-xl-18 pt-0 pb-15">
               <!--end::Modal body-->
             </div>
           </div>
@@ -141,7 +141,6 @@ export default {
 
 .card-body {
   display: flex;
-
   flex-direction: row;
   justify-content: center;
   align-items: center;
@@ -164,7 +163,11 @@ export default {
 }
 
 .backgroundCard {
-  background-color: #192440 !important;
+  background-color: #192440;
+}
+
+.backgroundCard:hover {
+  background-color: #ec5a29;
 }
 
 .backgroundText {
@@ -174,10 +177,23 @@ export default {
   font-family: Poppins, Helvetica, "sans-serif";
   font-size: 15px;
   text-align: center;
+  padding-bottom: 12px;
 }
 
 .skillStar {
   color: #ec5a29;
   align-content: center;
+  padding-bottom: 3px;
 }
+
+#editDeleteSkill {
+  padding-right: 4px;
+  padding-top: 4px;
+  padding-bottom: 15px;
+}
+
+#removeSpace {
+  display:none;
+}
+
 </style>
