@@ -1,7 +1,6 @@
 <template>
-  <form class="form w-100" @submit="checkForm">
-    <div class="text-center mb-10">
-      <h1 class="text-dark mb-3">Stel je wachtwoord opnieuw in</h1>
+    <div class="text-center">
+      <h1 class="text-dark mb-5">Stel je wachtwoord opnieuw in</h1>
 
       <div v-if="errors.length">
         <b>Corrigeer de volgende fout(en):</b>
@@ -26,16 +25,11 @@
         <div class="fv-plugins-message-container invalid-feedback"></div>
       </div>
       <div class="text-center">
-        <router-link to="/users/login">
         <button type="submit" @click="changePassword()" class="btn btn-lg btn-primary w-100 mb-5">
-          <span class="indicator-label">Verander</span>
-          <span class="indicator-progress">Wacht alsjeblieft...
-									<span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+          Verander
         </button>
-        </router-link>
       </div>
     </div>
-  </form>
 </template>
 
 <script>
@@ -52,9 +46,7 @@ export default {
     }
   },
   methods: {
-    checkForm: function (e) {
-      e.preventDefault();
-
+    checkForm: function () {
       this.errors = [];
 
       if (!this.password) {
@@ -66,11 +58,17 @@ export default {
       if (this.password !== this.passwordRepeat) {
         this.errors.push('Wachtwoord en herhaal wachtwoord zijn niet hetzelfde')
       }
+
+      return this.errors.length === 0;
     },
     async changePassword(){
-      const queryString = this.$route.query.token
+      console.log('check');
+      if (this.checkForm()) {
+        const queryString = this.$route.query.token
 
-      await this.userRepository.resetPassword(this.password, queryString);
+        await this.userRepository.resetPassword(this.password, queryString);
+        this.$router.push("/users/login")
+      }
     }
   }
 
