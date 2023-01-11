@@ -164,7 +164,7 @@ export default {
        continue
      }
      for (let j = 0; j < element.users.length; j++) {
-       if ((element.users[j].id).toString() === this.userID) {
+       if ((element.users[j].id) === this.userID) {
          const ProjectHours  = await this.hourRepository.getHoursByProject(element)
          element.hoursWorked = 0
          ProjectHours.forEach(p => element.hoursWorked += p.hours)
