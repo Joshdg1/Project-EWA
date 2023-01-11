@@ -79,6 +79,11 @@
 
       async postDeleteClient(client){
         await this.repository.deleteUserById(client.id);
+        this.$toasted.show("Administrator verwijderd", {
+          theme: "bubble",
+          position: "bottom-right",
+          duration : 5000
+        });
         this.$emit('editClient', false);
       },
 

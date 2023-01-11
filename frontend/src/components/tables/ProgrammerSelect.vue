@@ -58,7 +58,7 @@ export default {
 
       let content = ``;
       for (const skill of skills) {
-        content += `<span class='badge fs-7 badge-light-primary m-1'>${skill.name} </span><span class="badge badge-primary fs-7">${skill.level}⭐</span><br>`;
+        content += `<span class='badge badge-light-primary m-1'>${skill.name} </span><span class="badge badge-primary">${skill.level}⭐</span><br>`;
       }
       content += ``;
 

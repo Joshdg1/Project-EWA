@@ -92,6 +92,12 @@ export default {
                   client.userType
           );
         }
+
+        this.$toasted.show("Cliënten opgeslagen", {
+          theme: "bubble",
+          position: "bottom-right",
+          duration : 5000
+        });
       }
 
       this.cancel();

@@ -90,6 +90,11 @@ export default {
 
     async postDeleteProgrammer(programmer){
       await this.repository.deleteUserById(programmer.id);
+      this.$toasted.show("Programmeur verwijderd", {
+        theme: "bubble",
+        position: "bottom-right",
+        duration : 5000
+      });
       this.$emit('editProgrammer', false)
     },
 

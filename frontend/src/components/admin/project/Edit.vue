@@ -114,6 +114,12 @@ export default {
                   project.user_ids,
           );
         }
+
+        this.$toasted.show("Projecten opgeslagen", {
+          theme: "bubble",
+          position: "bottom-right",
+          duration : 5000
+        });
       }
 
       this.cancel();

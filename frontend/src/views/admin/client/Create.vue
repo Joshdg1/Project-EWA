@@ -134,7 +134,7 @@
         this.$toasted.show("Client aangemaakt", {
           theme: "bubble",
           position: "bottom-right",
-          duration : 1000
+          duration : 5000
         });
         this.$router.push("/clients");
       },

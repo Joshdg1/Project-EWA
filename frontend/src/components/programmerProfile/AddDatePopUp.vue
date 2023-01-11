@@ -145,7 +145,7 @@ export default {
       this.$toasted.show("Beschikbaarheid aangemaakt", {
         theme: "bubble",
         position: "bottom-right",
-        duration: 1000
+        duration: 5000
       });
       this.popupStatus = false
       this.$emit('close-popup', this.popupStatus)

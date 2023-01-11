@@ -98,6 +98,12 @@ export default {
         for (const programmer of this.programmers) {
           await this.repository.updateUserById(programmer.id, programmer.email, programmer.firstName, programmer.lastName, programmer.phoneNumber, "", programmer.userType);
         }
+
+        this.$toasted.show("Programmeurs opgeslagen", {
+          theme: "bubble",
+          position: "bottom-right",
+          duration : 5000
+        });
       }
 
       this.cancel();

@@ -119,6 +119,11 @@ export default {
 
       async postDeleteProject(project){
           await this.repository.deleteProjectById(project.id);
+          this.$toasted.show("Project verwijderd", {
+              theme: "bubble",
+              position: "bottom-right",
+              duration : 5000
+          });
           this.$emit('editProject', false)
       },
 

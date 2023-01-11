@@ -94,7 +94,7 @@
         this.$toasted.show("Project aangemaakt", {
           theme: "bubble",
           position: "bottom-right",
-          duration : 1000
+          duration : 5000
         });
         if (result){
           this.$router.push("/projects");
