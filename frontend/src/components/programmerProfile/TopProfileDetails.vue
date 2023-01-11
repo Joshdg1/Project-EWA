@@ -200,13 +200,15 @@ export default {
     this.datap = await this.ProjectRepository.getAllProjects();
 
     for (const element of this.datap) {
-
+      if (element.client.id === this.user.id){
+        this.programmerProjects++
+        continue
+      }
       for (let j = 0; j < element.users.length; j++) {
-        console.log(typeof element.users[j].id)
-        console.log(typeof this.user.id)
         if ((element.users[j].id) === this.user.id) {
 
           this.programmerProjects++
+          continue
         }
       }
     }
