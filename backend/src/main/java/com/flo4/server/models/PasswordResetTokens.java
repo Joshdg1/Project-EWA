@@ -22,5 +22,5 @@ public class PasswordResetTokens {
 
     @JsonIgnore
     @ManyToOne
-    private User user_id;
+    private User user;
 }
