@@ -43,9 +43,9 @@
 
 <script>
 
-import UserRepository from '../repository/UserRepository'
-import EditIcon from "./icons/edit";
-import DeleteIcon from "./icons/delete";
+import UserRepository from '../../../repository/UserRepository'
+import EditIcon from "../../icons/edit";
+import DeleteIcon from "../../icons/delete";
 
 export default {
   components: {DeleteIcon, EditIcon},

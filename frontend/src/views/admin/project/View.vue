@@ -7,7 +7,7 @@
             <div class="col">
               <div class="position-relative mb-5 mb-lg-0">
                 <search-icon></search-icon>
-                <input type="text" data-kt-ecommerce-order-filter="search"
+                <input type="text"
                        v-model="searchQ"
                        class="form-control form-control-solid w-250px ps-14"
                        placeholder="Zoeken...">
@@ -20,90 +20,101 @@
               <option value="name-asc">Naam (A-Z)</option>
               <option value="name-desc">Naam (Z-A)</option>
             </select>
-            <router-link to="/clients/create" class="btn btn-sm btn-light-primary">
-              <plus-icon></plus-icon>Nieuwe Cliënt
+            <router-link to="/projects/create" class="btn btn-sm btn-light-primary">
+              <plus-icon></plus-icon>Nieuw Project
             </router-link>
           </div>
         </div>
-
-        <clientsList v-if="!this.clientStatus" :clients="resultQuery" @editClient="editClientStatus"></clientsList>
-        <edit v-if="this.clientStatus" :clients="resultQuery" @editClient="editClientStatus"></edit>
+        <projectsList v-if="!this.projectStatus" :projects="this.resultQuery" @editProject="editProjectStatus"></projectsList>
+        <edit v-if="this.projectStatus" :projects="this.resultQuery" @editProject="editProjectStatus"></edit>
       </div>
     </div>
   </div>
 </template>
-
 <script>
-import clientsList from '../../../components/admin/client/Table.vue'
-import edit from '../../../components/admin/client/Edit.vue'
 
-import UserRepository from '../../../repository/UserRepository'
-import SearchIcon from "../../../components/icons/search";
+
+import ProjectRepository from '../../../repository/ProjectRepository'
+
+import projectsList from '../../../components/admin/project/Table.vue'
+import edit from '../../../components/admin/project/Edit.vue'
 import PlusIcon from "../../../components/icons/plus";
+import SearchIcon from "../../../components/icons/search";
+
 
 export default {
-  name: "ClientAdminView",
+  name: "ProjectAdminView",
   components: {
-    PlusIcon,
     SearchIcon,
-    clientsList,
+    PlusIcon,
+    projectsList,
     edit
+  },
+
+  async created() {
+    await this.loadProjects();
   },
 
   data() {
     return {
-      clients: [],
-      clientStatus: null,
       searchQ: "",
       sortType: "",
-      repository: new UserRepository(),
+      projects: [],
+      projectStatus: null,
+      repository: new ProjectRepository(),
     }
   },
 
-  async created() {
-    await this.loadClients();
-  },
-
   methods: {
-    async loadClients(){
-      console.log('loadClients');
+    async loadProjects(){
+      console.log('loadProjects');
       this.sortType = '';
-      this.clients = await this.repository.getAllClients();
+      this.projects = [];
+      for (const project of await this.repository.getAllProjects()) {
+        project.startDate = this.dateFormat(project.startDate);
+        project.endDate = this.dateFormat(project.endDate);
+        this.projects.push(project);
+      }
       this.sortType = 'name-asc';
     },
 
-    editClientStatus(clientStatus) {
-      this.clientStatus = clientStatus;
+    dateFormat(date) {
+      if (date == null) {
+        return null;
+      }
+      return new Date(date).toISOString().slice(0, 10);
+    },
+    editProjectStatus(projectStatus) {
+      this.projectStatus = projectStatus;
 
-      if (!clientStatus)
-       this.loadClients();
+      if (!projectStatus)
+        this.loadProjects();
     },
 
-
     nameAsc() {
-      this.clients = this.clients.sort((b, a) => {
-        if (a.firstName < b.firstName) {
+      this.projects = this.projects.sort((b, a) => {
+        if (a.title < b.title) {
           return -1;
         }
-        if (a.firstName > b.firstName) {
+        if (a.title > b.title) {
           return 1;
         }
         return 0;
       });
     },
     nameDesc() {
-      this.clients = this.clients.sort((b, a) => {
-        if (b.firstName < a.firstName) {
+      this.projects = this.projects.sort((b, a) => {
+        if (b.title < a.title) {
           return -1;
         }
-        if (b.firstName > a.firstName) {
+        if (b.title > a.title) {
           return 1;
         }
         return 0;
       });
     },
-  },
 
+  },
   watch: {
     sortType: function (newValue) {
       switch (newValue) {
@@ -120,27 +131,17 @@ export default {
   computed: {
     resultQuery: function () {
       if (this.searchQ) {
-        return this.clients.filter(item => {
-          if (this.searchQ
-                  .toLowerCase()
-                  .split(" ")
-                  .every(v => item.firstName.toLowerCase().includes(v))) {
+        return this.projects.filter(item => {
             return this.searchQ
                     .toLowerCase()
                     .split(" ")
-                    .every(v => item.firstName.toLowerCase().includes(v));
-          } else {
-            return this.searchQ
-                    .toLowerCase()
-                    .split(" ")
-                    .every(v => item.lastName.toLowerCase().includes(v));
-          }
+                    .every(v => item.title.toLowerCase().includes(v));
         })
       } else {
-        return this.clients;
+        return this.projects;
       }
     },
-  },
+  }
 }
 </script>
 

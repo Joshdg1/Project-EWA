@@ -48,8 +48,8 @@
 
 <script>
   import Multiselect from "vue-multiselect";
-import programmersList from '../../../components/ProgrammerAdmin'
-import edit from '../../../components/ProgrammerAdminEdit'
+import programmersList from '../../../components/admin/programmer/Table'
+import edit from '../../../components/admin/programmer/Edit'
 import UserRepository from '../../../repository/UserRepository'
 import PlusIcon from "../../../components/icons/plus";
 import SearchIcon from "../../../components/icons/search";
@@ -99,13 +99,6 @@ export default {
       this.sortType = '';
       this.programmers = await this.repository.getAllProgrammers();
       this.sortType = 'skill-asc';
-    },
-
-    async deleteProgrammer(programmer) {
-      await this.$swal({     title: "Wil je deze programmeur verwijderen?",     text: "Weet je het zeker?",
-        type: "warning",     showCancelButton: true,     confirmButtonColor: "#3085d6",
-        confirmButtonText: "Ja, verwijder!", cancelButtonText: "Annuleer" }).then((result) => { if (result.value) {
-          this.repository.deleteUserById(programmer.id); location.reload();} });
     },
 
     editProgrammerStatus(programmerStatus) {

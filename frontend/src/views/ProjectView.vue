@@ -6,7 +6,7 @@
 
 <script>
 
-import ProjectAdminView from "./admin/project/ProjectAdminView";
+import ProjectAdminView from "./admin/project/View";
 import ClientView from "./client/project/View";
 import ProjectProgrammerView from "./programmer/project/View";
 export default {

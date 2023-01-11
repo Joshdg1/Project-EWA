@@ -75,8 +75,14 @@ public class ProjectController {
     }
 
     @PutMapping(path = "{id}", produces = "application/json")
-    public ResponseEntity<Project> updateProject(@PathVariable() int id, @RequestBody Project project) {
-
+    public ResponseEntity<Project> updateProject(@PathVariable() int id, @RequestBody CreateProject createProject) {
+        Project project = this.projectRepository.findById(id);
+        User client = this.userRepository.findById(createProject.getClient_id());
+        project.setClient(client);
+        project.setTitle(createProject.getName());
+        project.setDescription(createProject.getDescription());
+        project.setStartDate(createProject.getStart_date());
+        project.setEndDate(createProject.getEnd_date());
         Project updatedProject = this.projectRepository.update(project, id);
 
         if (updatedProject == null) {
