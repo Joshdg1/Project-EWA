@@ -65,23 +65,23 @@ export default {
      this.userId = sessionStorage.getItem("id")
 
     const availability = await this.availabilityRepository.getAvailabilityById(this.userId)
-
+    let currentProject = null
     for (const element of availability) {
       let calendarApi = this.$refs.calendar.getApi();
 
 
-      const hours = await this.hoursRepository.getHoursByProject(element.project)
-      const ourUserId = this.userId
-      let totalHours = 0;
-      hours.forEach(function (entry){
-        console.log(typeof entry.user.id)
-        console.log(typeof ourUserId)
-        if (entry.user.id.toString() === ourUserId){
-          totalHours += entry.hours
-        }
-      })
 
-      this.totalHours = totalHours
+      // calculating time between dates
+      currentProject = element.project
+
+
+      let start = new Date(element.startDate).getTime()
+      let end = new Date(element.endDate).getTime()
+
+      const time = ((end - start) / 60 / 60 / 1000)
+
+      this.totalHours += time
+
 
 
       calendarApi.addEvent({
@@ -90,6 +90,10 @@ export default {
         end: element.endDate,
       })
     }
+
+    const hours = await this.hoursRepository.getHoursByProject(currentProject)
+    console.log(this.totalHours)
+    await  this.hoursRepository.updateHoursById(hours[0].id,currentProject, this.totalHours,this.userId,hours[0].isApproved)
   },
 
   name: 'availabilityProgrammer',

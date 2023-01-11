@@ -23,25 +23,25 @@
       <div class="row mb-7">
         <label class="col-lg-4 fw-bold text-muted">Voornaam(en)</label>
         <div class="col-lg-8 fv-row">
-          <span class="fw-bolder fs-6 text-gray-800">{{sampleProgrammer.firstName}} </span>
+          <span class="fw-bolder fs-6 text-gray-800">{{getUser.firstName}} </span>
         </div>
       </div>
       <div class="row mb-7">
         <label class="col-lg-4 fw-bold text-muted">Achternaam</label>
         <div class="col-lg-8 fv-row">
-          <span class="fw-bold fs-6 text-gray-800">{{sampleProgrammer.lastName}}</span>
+          <span class="fw-bold fs-6 text-gray-800">{{getUser.lastName}}</span>
         </div>
       </div>
       <div class="row mb-7">
         <label class="col-lg-4 fw-bold text-muted">Email-adres</label>
         <div class="col-lg-8 fv-row">
-          <span class="fw-bold fs-6 text-gray-800">{{ sampleProgrammer.email }}</span>
+          <span class="fw-bold fs-6 text-gray-800">{{ getUser.email }}</span>
         </div>
       </div>
       <div class="row mb-7">
         <label class="col-lg-4 fw-bold text-muted">Telefoonnummer</label>
         <div class="col-lg-8 fv-row">
-          <span class="fw-bold fs-6 text-gray-800">{{ sampleProgrammer.phoneNumber }}</span>
+          <span class="fw-bold fs-6 text-gray-800">{{ getUser.phoneNumber }}</span>
         </div>
       </div>
     </div>
@@ -52,18 +52,23 @@
 
 import UserRepository from "../../repository/UserRepository";
 import axios from 'axios';
+import User from "@/models/user";
 
 export default {
   name: "ProfileDetails",
   props: ['sampleProgrammer'],
   emits: ['edit-profile'],
 
-
+ async created() {
+   this.getUser = await this.repository.findUserById(this.sampleProgrammer.id)
+    console.log(this.getUser)
+  },
   data() {
     return {
       editingProfile: null,
       repository: new UserRepository(),
       formData: null,
+      getUser: new User,
       user: JSON.parse(sessionStorage.getItem('user'))
     }
   },
