@@ -179,7 +179,7 @@ public class UserController {
             passwordResetTokens.setToken(tokenRegisterReset);
             passwordResetTokens.setUser_id(user);
 
-            String resetPasswordLink = "http://localhost:8080/#/users/resetPassword?token=" + tokenRegisterReset;
+            String resetPasswordLink = "https://ewa-be-app-production-6e5c.up.railway.app/#/users/resetPassword?token=" + tokenRegisterReset;
 
             passwordResetRepository.save(passwordResetTokens);
 
@@ -363,7 +363,7 @@ public class UserController {
         passwordResetTokens.setUser_id(user);
 
 
-        String resetPasswordLink = "http://localhost:8080/#/users/resetPassword?token=" + token;
+        String resetPasswordLink = "https://ewa-be-app-production-6e5c.up.railway.app/#/users/resetPassword?token=" + token;
 
         passwordResetRepository.save(passwordResetTokens);
 
