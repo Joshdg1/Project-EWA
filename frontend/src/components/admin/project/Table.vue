@@ -32,7 +32,7 @@
                     <td v-html="getCompanyNameClient(project.client)"></td>
                     <td>{{ dateFormat(project.startDate) }}</td>
                     <td>{{ dateFormat(project.endDate) }}</td>
-                    <td>{{ setStatus(project.startDate, project.endDate) }}</td>
+                    <td v-html="setStatus(project.startDate, project.endDate)"></td>
                     <td v-html="getUserProjects(project.users)"></td>
                     <td>
                         <a class="float-end btn btn-icon btn-bg-light btn-active-color-primary btn-sm"
@@ -94,11 +94,15 @@ export default {
       },
 
       setStatus(startDate, endDate) {
-          if (Date.now() >= Date.parse(startDate) && Date.parse(endDate) >= Date.now()) {
-              return "Actief"
+          let now = new Date().toISOString().slice(0, 10);
+          let start = new Date(startDate).toISOString().slice(0, 10);
+          let end = new Date(endDate).toISOString().slice(0, 10);
+
+          if (now >= start && end >= now) {
+              return "<span class='badge badge-light-primary'>Actief</span>"
           }
 
-          return "Inactief"
+          return  "<span class='badge badge-light'>Inactief</span>"
       },
 
       async deleteProject(project) {
