@@ -5,7 +5,7 @@
       <div class="card-title m-0">
         <h3 class="fw-bolder m-0">Algemeen</h3>
       </div>
-      <form ref="uploadForm" @submit.prevent="submit">
+      <form ref="uploadForm" v-if="user.userType === 'programmer'" @submit.prevent="submit">
         <input type="file" ref="uploadFile" @change="onFileUpload()" class="form-control" required>
         <input type="button" @click="startUpload()" name="Upload" value="Upload">
       </form>
@@ -63,7 +63,8 @@ export default {
     return {
       editingProfile: null,
       repository: new UserRepository(),
-      formData: null
+      formData: null,
+      user: JSON.parse(sessionStorage.getItem('user'))
     }
   },
   methods: {

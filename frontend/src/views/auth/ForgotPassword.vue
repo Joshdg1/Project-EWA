@@ -26,7 +26,7 @@
 									<span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
       </button>
 
-      <router-link to="/users/login" class="link-primary fs-6 fw-bold">terug naar login</router-link>
+      <router-link to="/users/login" class="link-primary fs-6 fw-bold">Terug naar login</router-link>
     </div>
 
   </form>
