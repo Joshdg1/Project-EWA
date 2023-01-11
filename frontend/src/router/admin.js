@@ -34,6 +34,18 @@ const adminRoutes = [
         path: "/clients/create",
         component: () => import('../views/admin/client/Create.vue')
     },
+
+    // === CLIENTS ===
+    {
+        name: "Administratoren",
+        path: '/admins',
+        component: () => import(`../views/admin/administrator/View.vue`),
+    },
+    {
+        name: "Administrator aanmaken",
+        path: "/admins/create",
+        component: () => import('../views/admin/administrator/Create.vue')
+    },
 ]
 
 export default adminRoutes;

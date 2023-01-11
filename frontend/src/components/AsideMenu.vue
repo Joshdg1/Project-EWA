@@ -138,16 +138,15 @@ m-3120 -960 c108 -33 161 -106 161 -226 0 -120 -48 -187 -158 -224 -63 -21
             <!--begin::Nav item-->
 
             <!--end::Nav item-->
-            <!--begin::Nav item-->
             <li class="nav-item mb-2" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="right"
-                data-bs-dismiss="click" title="Programmers">
+                data-bs-dismiss="click" title="Specialisten">
               <!--begin::Nav link-->
               <div v-if="translatedUserType() === 'Administrator'" @click="goToProgrammers()" class="nav-link btn btn-custom btn-icon" data-bs-toggle="tab" >
                 <!--begin::Svg Icon | path: icons/duotune/finance/fin006.svg-->
                 <span class="svg-icon svg-icon-2x">
 											<svg  version="1.0" xmlns="http://www.w3.org/2000/svg"
-                           width="200.000000pt" height="200.000000pt" viewBox="0 0 200.000000 200.000000"
-                           preserveAspectRatio="xMidYMid meet">
+                                                  width="200.000000pt" height="200.000000pt" viewBox="0 0 200.000000 200.000000"
+                                                  preserveAspectRatio="xMidYMid meet">
 
 <g transform="translate(0.000000,200.000000) scale(0.100000,-0.100000)"
    fill="#EF5722" stroke="none">
@@ -171,6 +170,25 @@ l47 37 -47 42 c-43 40 -55 62 -39 77 14 14 32 5 89 -44z"/>
 </g>
 </svg>
 											</span>
+                <!--end::Svg Icon-->
+              </div>
+              <!--end::Nav link-->
+            </li>
+
+            <!--begin::Nav item-->
+            <li class="nav-item mb-2" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="right"
+                data-bs-dismiss="click" title="Administartoren">
+              <!--begin::Nav link-->
+              <div v-if="translatedUserType() === 'Administrator'" @click="goToAdmins()" class="nav-link btn btn-custom btn-icon" data-bs-toggle="tab" >
+                <!--begin::Svg Icon | path: icons/duotune/finance/fin006.svg-->
+                <span class="svg-icon svg-icon-2x svg-icon-primary">
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M3 2H10C10.6 2 11 2.4 11 3V10C11 10.6 10.6 11 10 11H3C2.4 11 2 10.6 2 10V3C2 2.4 2.4 2 3 2Z" fill="currentColor"/>
+<path opacity="0.3" d="M14 2H21C21.6 2 22 2.4 22 3V10C22 10.6 21.6 11 21 11H14C13.4 11 13 10.6 13 10V3C13 2.4 13.4 2 14 2Z" fill="currentColor"/>
+<path opacity="0.3" d="M3 13H10C10.6 13 11 13.4 11 14V21C11 21.6 10.6 22 10 22H3C2.4 22 2 21.6 2 21V14C2 13.4 2.4 13 3 13Z" fill="currentColor"/>
+<path opacity="0.3" d="M14 13H21C21.6 13 22 13.4 22 14V21C22 21.6 21.6 22 21 22H14C13.4 22 13 21.6 13 21V14C13 13.4 13.4 13 14 13Z" fill="currentColor"/>
+</svg>
+                </span>
                 <!--end::Svg Icon-->
               </div>
               <!--end::Nav link-->
@@ -909,6 +927,10 @@ export default {
 
     goToProgrammers() {
       this.$router.push("/programmers");
+    },
+
+    goToAdmins() {
+      this.$router.push("/admins");
     },
 
     goToProfile() {
