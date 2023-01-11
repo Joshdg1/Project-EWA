@@ -7,7 +7,6 @@
         <div class="me-7 mb-4">
           <div class="symbol symbol-100px symbol-lg-160px symbol-fixed position-relative">
             <span class="fs-1 symbol-label bg-primary text-inverse-primary fw-bold">{{ user.firstName[0] }}</span>
-
           </div>
         </div>
         <!--end::Pic-->
@@ -22,7 +21,6 @@
                 <a href="#"
                    class="text-gray-800 text-hover-primary fs-2 fw-bolder me-1">{{ sampleProgrammer.firstName }}
                   {{ sampleProgrammer.lastName }}</a>
-
 
               </div>
               <!--end::Name-->
@@ -103,7 +101,7 @@
 																</span>
                     <!--end::Svg Icon-->
                     <div class="fs-2 fw-bolder" data-kt-countup="true" data-kt-countup-value="56"
-                         data-kt-countup-prefix="">{{datap.length}}
+                         data-kt-countup-prefix="">{{ datap.length }}
                     </div>
                   </div>
                   <!--end::Number-->
@@ -128,7 +126,10 @@
 																	</svg>
 																</span>
                     <!--end::Svg Icon-->
-                    <div class="fs-2 fw-bolder" data-kt-countup="true" data-kt-countup-value="2">{{ programmerProjects }}</div>
+                    <div class="fs-2 fw-bolder" data-kt-countup="true" data-kt-countup-value="2">{{
+                        programmerProjects
+                      }}
+                    </div>
                   </div>
                   <!--end::Number-->
                   <!--begin::Label-->
@@ -182,9 +183,7 @@
 
 <script>
 
-
 import ProjectRepository from "@/repository/ProjectRepository";
-
 
 export default {
   name: "TopProfileDetails",
@@ -194,19 +193,18 @@ export default {
     this.selectedTab = 1;
     const el = document.getElementById('Details');
     if (el)
-        el.classList.add("active")
+      el.classList.add("active")
 
 
     this.datap = await this.ProjectRepository.getAllProjects();
 
     for (const element of this.datap) {
-      if (element.client.id === this.user.id){
+      if (element.client.id === this.user.id) {
         this.programmerProjects++
         continue
       }
       for (let j = 0; j < element.users.length; j++) {
         if ((element.users[j].id) === this.user.id) {
-
           this.programmerProjects++
           continue
         }

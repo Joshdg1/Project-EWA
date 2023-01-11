@@ -4,8 +4,9 @@
       <div class="close">
         <span class="svg-icon svg-icon-1 " @click="cancel">
 								<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-									<rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="black" />
-									<rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="black" />
+									<rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)"
+                        fill="black"/>
+									<rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="black"/>
 								</svg>
 							</span>
       </div>
@@ -19,13 +20,13 @@
                      placeholder="projecten"
                      :close-on-select="true">
         </multiselect>
-        <input v-model="newDate.hoursPerDayStart" type="time"  placeholder="hours per day"  class="cardInput">
-        <input v-model="newDate.hoursPerDayEnd" type="time"  placeholder="hours per day"  class="cardInput">
+        <input v-model="newDate.hoursPerDayStart" type="time" placeholder="hours per day" class="cardInput">
+        <input v-model="newDate.hoursPerDayEnd" type="time" placeholder="hours per day" class="cardInput">
         <div class="SkillLevel">
-          <input v-model="newDate.start" type="date"  class="cardInput">
+          <input v-model="newDate.start" type="date" class="cardInput">
         </div>
 
-        <input v-model="newDate.end" type="date"   class="cardInput">
+        <input v-model="newDate.end" type="date" class="cardInput">
 
       </div>
       <div class="buttons">
@@ -46,7 +47,8 @@ import HourRepository from "@/repository/HourRepository";
 
 
 export default {
-  components: {    Multiselect,
+  components: {
+    Multiselect,
   },
   name: "AddDatePopUp",
   props: ['selectedDate', 'userId'],
@@ -55,7 +57,7 @@ export default {
     this.newDate = new UserDate()
     this.newDate.start = new Date(this.selectedDate);
 
-     this.Projects = await this.projectRepository.getAllProjects()
+    this.Projects = await this.projectRepository.getAllProjects()
     for (const element of this.Projects) {
 
       for (let j = 0; j < element.users.length; j++) {
@@ -66,7 +68,7 @@ export default {
     }
 
   },
-  data(){
+  data() {
     return {
       popupStatus: null,
       Projects: null,
@@ -74,14 +76,14 @@ export default {
       totalHours: 0,
       user: JSON.parse(sessionStorage.user),
       allProjects: [],
-      responseList:[],
+      responseList: [],
       hoursRepository: new HourRepository(),
       projectRepository: new ProjectRepository(),
       repository: new AvailabilityRepository()
     }
   },
-  methods:{
-    closingPopup(){
+  methods: {
+    closingPopup() {
       this.popupStatus = false
       this.$emit('close-popup', this.popupStatus)
     },
@@ -90,10 +92,10 @@ export default {
       const addMlSeconds = (intHours * 60) * 60 * 1000;
       return new Date(numberOfMlSeconds + addMlSeconds);
     },
-  async  addSkill(){
-     const allDates = this.betweenDates(this.newDate.start, this.newDate.end)
+    async addSkill() {
+      const allDates = this.betweenDates(this.newDate.start, this.newDate.end)
 
-    const hours = await this.hoursRepository.getHoursById(this.userId)
+      const hours = await this.hoursRepository.getHoursById(this.userId)
 
       for (const element of allDates) {
         //setting the hours, seconds and minutes to null so we can set them later
@@ -102,7 +104,7 @@ export default {
         element.setMilliseconds(0)
 
         //calculating the hours and minutes of the input
-        const startHours = ((this.newDate.hoursPerDayStart.substring(0, 2) * 1) + (this.newDate.hoursPerDayStart.substring(3, 5) / 60)  + 1)
+        const startHours = ((this.newDate.hoursPerDayStart.substring(0, 2) * 1) + (this.newDate.hoursPerDayStart.substring(3, 5) / 60) + 1)
         const endHours = ((this.newDate.hoursPerDayEnd.substring(0, 2) * 1) + (this.newDate.hoursPerDayEnd.substring(3, 5) / 60) + 1)
         //setting the hours and minutes
         const startDate = this.addHoursToDate(element, startHours)
@@ -117,7 +119,7 @@ export default {
           }
         })
 
-       const response  = await this.repository.createAvailability(Project, startDate, endDate, this.userId)
+        const response = await this.repository.createAvailability(Project, startDate, endDate, this.userId)
         this.responseList.push(response)
 
         // calculating time between dates
@@ -129,23 +131,28 @@ export default {
         this.totalHours += time
       }
 
-    let Project = null
-    const currentProject = this.newDate.project
-    this.Projects.forEach(function (entry) {
-      if (entry.title === currentProject) {
-        Project = entry
+      let Project = null
+      const currentProject = this.newDate.project
+      this.Projects.forEach(function (entry) {
+        if (entry.title === currentProject) {
+          Project = entry
+        }
+      })
+
+      if (hours.length === 0) {
+        await this.hoursRepository.createHours(Project, this.totalHours, this.userId)
       }
-    })
+      this.$toasted.show("Beschikbaarheid aangemaakt", {
+        theme: "bubble",
+        position: "bottom-right",
+        duration: 1000
+      });
+      this.popupStatus = false
+      this.$emit('close-popup', this.popupStatus)
+      this.$emit('response-list', this.responseList)
+    },
 
-    if (hours.length === 0) {
-      await this.hoursRepository.createHours(Project, this.totalHours , this.userId)
-    }
-        this.popupStatus = false
-        this.$emit('close-popup', this.popupStatus)
-        this.$emit('response-list', this.responseList)
-      },
-
-    cancel(){
+    cancel() {
       this.popupStatus = false
       this.$emit('close-popup', this.popupStatus)
     },
@@ -154,13 +161,13 @@ export default {
       const getDaysArray = function (start, end) {
 
         let dt = new Date(start);
-        for (var arr=[]; dt <= new Date(end); dt.setDate(dt.getDate() + 1)) {
+        for (var arr = []; dt <= new Date(end); dt.setDate(dt.getDate() + 1)) {
           arr.push(new Date(dt));
         }
         return arr;
       };
       const daylist = getDaysArray(new Date(from), new Date(to));
-      daylist.map((v)=>v.toISOString().slice(0,10)).join("")
+      daylist.map((v) => v.toISOString().slice(0, 10)).join("")
       return daylist
     },
   }
@@ -168,12 +175,13 @@ export default {
 </script>
 <style src="vue-multiselect/dist/vue-multiselect.min.css"></style>
 <style scoped>
-.close{
+.close {
   display: flex;
   justify-content: right;
   width: 100%;
   cursor: pointer;
 }
+
 .popup {
   position: fixed;
   top: 0;
@@ -181,13 +189,14 @@ export default {
   right: 0;
   bottom: 0;
   z-index: 99;
-  background-color: rgba(0,0,0 ,0.2);
+  background-color: rgba(0, 0, 0, 0.2);
 
   display: flex;
   align-items: center;
   justify-content: center;
 }
-.popup-inner{
+
+.popup-inner {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -196,14 +205,17 @@ export default {
   padding: 3em;
   border-radius: 20px;
 }
+
 .code-icon {
   height: 2em;
   margin: 2em;
 }
-.projectsList{
+
+.projectsList {
   width: 8.5vw;
-  background: none!important;
+  background: none !important;
 }
+
 .CardText {
   display: flex;
   flex-direction: column;
@@ -211,6 +223,7 @@ export default {
   justify-content: center;
   align-items: center;
 }
+
 .cardInput {
   background: none;
   border-width: 0 0 1px 0;
@@ -219,15 +232,18 @@ export default {
   width: 10vw;
   text-align: center;
 }
+
 .SkillLevel {
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
 }
+
 input:focus {
   outline: none;
 }
+
 .addSkill {
   width: 5vw;
   height: 5vh;
@@ -235,7 +251,8 @@ input:focus {
   padding: .3em !important;
   font-size: .8em;
 }
-.buttons{
+
+.buttons {
   margin-top: 2em;
   display: flex;
   flex-direction: row;
