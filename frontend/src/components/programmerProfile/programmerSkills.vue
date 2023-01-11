@@ -20,7 +20,7 @@
 
     <div class="card-body p-11">
       <div class="card"
-           v-for="skill in this.skills"
+           v-for="skill in this.allSkills"
            v-bind:key="skill.skillId">
         <div class="modal-dialog mw-650px m-2">
           <!--begin::Modal content-->
@@ -67,14 +67,18 @@ export default {
   components: {EditIcon, DeleteIcon, addSkill},
   props: ['skills'],
   emits: ['edit-profile', 'add-skill', 'edit-skill', 'deleteSkill'],
-
+ async created() {
+    this.allSkills = await this.repository.findSkillsById(this.user.id);
+  },
 
   data() {
     return {
       selectedSkill: null,
+      allSkills: [],
       editingProfile: null,
       programSkill: null,
       popupStatus: null,
+      user: JSON.parse(sessionStorage.user),
       repository: new SkillRepository(),
       addCheck: true,
     }
@@ -85,7 +89,9 @@ export default {
       this.$emit('edit-profile', this.editingProfile)
     },
 
-    closePopup() {
+   async closePopup() {
+     this.allSkills = await this.repository.findSkillsById(this.user.id);
+
       this.popupStatus = false
       this.addCheck = true;
       this.$emit('addCheck', this.addCheck)
@@ -99,7 +105,7 @@ export default {
 
     async deleteSkill(skill) {
       await this.repository.deleteSkillById(skill.id);
-      location.reload();
+      this.allSkills = await this.repository.findSkillsById(this.user.id);
     },
 
     editSkill(skill) {

@@ -117,7 +117,7 @@ export default {
         await this.repository.updateSkill(this.editSkill)
       } else {
         await this.repository.createSkill(this.editSkill)
-        location.reload();
+
       }
 
       this.closePopup();

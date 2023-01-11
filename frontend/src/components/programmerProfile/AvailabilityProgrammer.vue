@@ -176,7 +176,6 @@ export default {
      })
 
     this.totalHours =totalHours
-
     }
   }
 }
