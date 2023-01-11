@@ -68,14 +68,9 @@ export default {
       }
     },
     async changePassword(){
-      const queryString = window.location.search;
+      const queryString = this.$route.query.token
 
-      const urlParams = new URLSearchParams(queryString);
-
-      const token = urlParams.get('token')
-
-
-      await this.userRepository.resetPassword(this.password, token);
+      await this.userRepository.resetPassword(this.password, queryString);
     }
   }
 

@@ -179,7 +179,7 @@ public class UserController {
             passwordResetTokens.setToken(tokenRegisterReset);
             passwordResetTokens.setUser_id(user);
 
-            String resetPasswordLink = "http://localhost:8080/users/resetPassword?token=" + tokenRegisterReset;
+            String resetPasswordLink = "http://localhost:8080/#/users/resetPassword?token=" + tokenRegisterReset;
 
             passwordResetRepository.save(passwordResetTokens);
 
@@ -363,7 +363,7 @@ public class UserController {
         passwordResetTokens.setUser_id(user);
 
 
-        String resetPasswordLink = "http://localhost:8080/users/resetPassword?token=" + token;
+        String resetPasswordLink = "http://localhost:8080/#/users/resetPassword?token=" + token;
 
         passwordResetRepository.save(passwordResetTokens);
 
@@ -409,7 +409,6 @@ public class UserController {
         User userByToken = userRepository.findUserByToken(resetRequest.token);
 
         userService.updatePassword(userByToken, resetRequest.password);
-
 
         return new ResetResponse(userByToken.getId(), userByToken.getEmail());
     }
