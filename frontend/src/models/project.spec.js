@@ -18,5 +18,17 @@ beforeEach(function () {
 });
 
 it('should check if the title is correct', function () {
-    expect(project.title).toBe("EWA")
+    // Check if the created project is an actual project.
+    expect(project).toBeInstanceOf(Project);
+
+    //Check if all attributes are set correctly from creating a new project.
+    expect(project.id).toBe(8);
+    expect(project.title).toBe("EWA");
+    expect(project.description).toBe("Big project");
+    expect(project.company).toBe("HVA");
+    expect(project.startDate).toBe("14-01-2023");
+    expect(project.endDate).toBe("18-01-2023");
+    expect(project.endDate).toBe("18-01-2023");
+    expect(project.users).toBe("FLORIJN");
+    expect(project.hoursWorked).toBe(40);
 });
