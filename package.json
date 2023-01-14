@@ -16,6 +16,7 @@
     "@iconify/vue": "^4.0.0",
     "core-js": "^3.6.4",
     "http-server": "^14.1.1",
+    "jest": "^29.3.1",
     "session": "^0.1.0",
     "vue": "^2.6.11",
     "vue-multi-select": "^4.6.0",

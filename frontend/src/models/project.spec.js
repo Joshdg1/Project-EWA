@@ -1,7 +1,5 @@
 import {Project} from "./project.js"
 
-title, description, company, startDate, endDate, users, hoursWorked
-
 const PROJECT_ID = 8;
 const PROJECT_TITLE = "EWA";
 const PROJECT_DESCRIPTION = "Big project";
