@@ -9,7 +9,7 @@ import java.util.List;
 @Repository
 public class ProjectInMemoryRepository implements EntityRepository<Project> {
 
-    private List<Project> projects;
+    private final List<Project> projects;
 
     public ProjectInMemoryRepository(List<Project> projects) {
         this.projects = new ArrayList<>();
@@ -22,7 +22,7 @@ public class ProjectInMemoryRepository implements EntityRepository<Project> {
 
     @Override
     public Project findById(int id) {
-        return projects.stream().filter(p -> p.getId() == id).findFirst().orElse(null);
+        return this.projects.stream().filter(p -> p.getId() == id).findFirst().orElse(null);
     }
 
     @Override

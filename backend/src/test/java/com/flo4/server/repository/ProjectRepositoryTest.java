@@ -11,10 +11,7 @@ import org.springframework.context.annotation.FilterType;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.Entity;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
-import java.util.function.BooleanSupplier;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -49,8 +46,8 @@ class ProjectRepositoryTest {
 
     @Test
     void findByIdTest() {
-        Project project = projectEntityRepository.findById(1);
-        assertEquals(project, project1);
+        Project projectFound = projectEntityRepository.findById(1);
+        assertEquals(this.project1, projectFound);
     }
 
     @Test
@@ -63,6 +60,8 @@ class ProjectRepositoryTest {
 
     @Test
     void deleteByIdTest() {
+        Project project = projectEntityRepository.deleteById(2);
+        assertEquals(project.getTitle(), "Truly removed");
     }
 
     @Test
