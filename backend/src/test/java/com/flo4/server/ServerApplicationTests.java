@@ -1,13 +1,20 @@
 package com.flo4.server;
 
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @SpringBootTest
 class ServerApplicationTests {
 
-	@Test
-	void contextLoads() {
-	}
+    @Autowired
+    ServerApplication application = null;
+    @Test
+    void contextLoads() {
+        assertNotNull(application);
+        System.out.println("Succeeded");
+    }
 
 }
