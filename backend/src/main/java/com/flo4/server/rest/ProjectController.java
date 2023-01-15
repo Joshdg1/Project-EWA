@@ -7,6 +7,7 @@ import com.flo4.server.models.Project;
 import com.flo4.server.models.User;
 import com.flo4.server.repository.EntityRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,6 +23,7 @@ import java.util.List;
 @RequestMapping("projects")
 public class ProjectController {
 
+    @Qualifier("PROJECT.JPA")
     @Autowired
     EntityRepository<Project> projectRepository;
 
@@ -49,7 +51,7 @@ public class ProjectController {
     @PostMapping(path = "add", produces = "application/json")
     public ResponseEntity<Project> addNewProject(@RequestBody CreateProject createProject) {
         User client = this.userRepository.findById(createProject.getClient_id());
-        Project newProject = new Project(client, createProject.getName(), createProject.getDescription(), createProject.getStart_date(), createProject.getEnd_date());
+        Project newProject = new Project(createProject.getId(), client, createProject.getName(), createProject.getDescription(), createProject.getStart_date(), createProject.getEnd_date());
 
         for (Integer programmer_id : createProject.getProgrammer_ids()) {
             User programmer = this.userRepository.findById(programmer_id);

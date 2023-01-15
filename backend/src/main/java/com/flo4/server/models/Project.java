@@ -52,7 +52,8 @@ public class Project {
         this.id = id;
     }
 
-    public Project(User client, String title, String description, Date startDate, Date endDate) {
+    public Project(int id, User client, String title, String description, Date startDate, Date endDate) {
+        this.setId(id);
         this.setClient(client);
         this.setTitle(title);
         this.setDescription(description);
