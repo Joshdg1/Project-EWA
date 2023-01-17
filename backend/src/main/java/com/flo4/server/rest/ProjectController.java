@@ -23,7 +23,7 @@ import java.util.List;
 @RequestMapping("projects")
 public class ProjectController {
 
-    @Qualifier("PROJECT.JPA")
+    @Qualifier("ProjectInMemory")
     @Autowired
     EntityRepository<Project> projectRepository;
 
@@ -47,19 +47,18 @@ public class ProjectController {
         return ResponseEntity.ok().body(project);
     }
 
-    @Transactional
     @PostMapping(path = "add", produces = "application/json")
-    public ResponseEntity<Project> addNewProject(@RequestBody CreateProject createProject) {
-        User client = this.userRepository.findById(createProject.getClient_id());
-        Project newProject = new Project(createProject.getId(), client, createProject.getName(), createProject.getDescription(), createProject.getStart_date(), createProject.getEnd_date());
-
-        for (Integer programmer_id : createProject.getProgrammer_ids()) {
-            User programmer = this.userRepository.findById(programmer_id);
-            newProject.addUser(programmer);
-        }
+    public ResponseEntity<Project> addNewProject(@RequestBody Project createProject) {
+//        User client = this.userRepository.findById(createProject.getClient_id());
+//        Project newProject = new Project(createProject.getId(), client, createProject.getName(), createProject.getDescription(), createProject.getStart_date(), createProject.getEnd_date());
+//
+//        for (Integer programmer_id : createProject.getProgrammer_ids()) {
+//            User programmer = this.userRepository.findById(programmer_id);
+//            newProject.addUser(programmer);
+//        }
 
         //Save the new project into the repository.
-        Project savedProject = this.projectRepository.save(newProject);
+        Project savedProject = this.projectRepository.save(createProject);
 
         return ResponseEntity.ok().body(savedProject);
     }
@@ -102,7 +101,5 @@ public class ProjectController {
         return ResponseEntity.ok().body(updatedProject);
 
     }
-
-
 }
 
