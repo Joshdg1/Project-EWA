@@ -6,6 +6,7 @@
     "start": "npx http-server -p ${PORT} ./dist",
     "serve": "vue-cli-service serve --mode development",
     "build": "vue-cli-service build",
+    "unit": "jest",
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
@@ -15,6 +16,7 @@
     "@fullcalendar/vue": "^5.11.3",
     "@iconify/vue": "^4.0.0",
     "axios": "^1.2.2",
+    "cli": "^1.0.1",
     "core-js": "^3.6.4",
     "http-server": "^14.1.1",
     "jest": "^29.3.1",
@@ -42,6 +44,22 @@
     "eslint-plugin-n": "^15.3.0",
     "eslint-plugin-promise": "^6.0.1",
     "eslint-plugin-vue": "^9.6.0",
+    "vue-jest": "^3.0.7",
     "vue-template-compiler": "^2.6.11"
+  },
+
+
+  "jest":{
+    "moduleFileExtensions":[
+      "js",
+      "json",
+      "vue"
+    ],
+    "transform":{
+      "^.+\\.js$":"babel-jest",
+      "^.+\\.vue$":"vue-jest"
+    }
   }
 }
+
+
