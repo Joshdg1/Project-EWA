@@ -122,7 +122,7 @@ export default {
       this.$emit('edit-profile', this.editingProfile)
     },
     checkForApproved(project) {
-
+      // updating the frontend with the correct status
       let content = null
       if (project.isApproved === null) {
         content = '<span class="badge badge-light-warning">Lopend</span>'

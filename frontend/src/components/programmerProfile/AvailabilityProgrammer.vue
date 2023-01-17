@@ -62,8 +62,10 @@ export default {
   },
 
   async created() {
+    // setting the userId
      this.userId = sessionStorage.getItem("id")
 
+    //getting all availabilities from a user
     const availability = await this.availabilityRepository.getAvailabilityById(this.userId)
     let currentProject = null
     for (const element of availability) {
@@ -73,8 +75,6 @@ export default {
 
       // calculating time between dates
       currentProject = element.project
-
-
       let start = new Date(element.startDate).getTime()
       let end = new Date(element.endDate).getTime()
 
@@ -83,16 +83,15 @@ export default {
       this.totalHours += time
 
 
-
+      // adding the dates to the calendar
       calendarApi.addEvent({
         title: element.project.title,
         start: element.startDate,
         end: element.endDate,
       })
     }
-
+    //updating the total hours hours
     const hours = await this.hoursRepository.getHoursByProject(currentProject)
-    console.log(this.totalHours)
     await  this.hoursRepository.updateHoursById(hours[0].id,currentProject, this.totalHours,this.userId,hours[0].isApproved)
   },
 
@@ -144,7 +143,7 @@ export default {
       this.popupStatusEdit = true
     },
    async addDates(){
-
+    // cleaning all calendar events
      let calendarApi = this.$refs.calendar.getApi();
      let eventSources = calendarApi.getEventSources();
      let len = eventSources.length;
@@ -152,7 +151,7 @@ export default {
        eventSources[i].remove();
      }
 
-
+    // getting all availabilities
       const dates = await this.availabilityRepository.getAllAvials()
      let ourDates = []
      const ourUser =  JSON.parse(sessionStorage.user)
@@ -163,6 +162,7 @@ export default {
        }
      })
       let totalHours = 0
+     // adding our dates to the calendar
      ourDates.forEach( function (responseDate){
        let start = new Date(responseDate.startDate).getTime()
        let end = new Date(responseDate.endDate).getTime()

@@ -150,10 +150,11 @@ export default {
   name: "ProjectAdmin.vue",
   emits: ['selecting-project'],
  async created() {
+    // getting the user id from the session and converting to an Integer so its comparable with database data
    this.userID = parseInt(sessionStorage.getItem("id"))
 
    const data = await this.repository.getAllProjects();
-   console.log(typeof this.userID)
+   // getting all the data and filtering for projects that the cliebt is attached to.
    for (const element of data) {
      if (element.client.id === this.userID){
        const ProjectHours  = await this.hourRepository.getHoursByProject(element)
@@ -163,6 +164,7 @@ export default {
        this.programmerProjects.push(newProject)
        continue
      }
+     // getting all the data and filtering for projects that the user is attached to.
      for (let j = 0; j < element.users.length; j++) {
        if ((element.users[j].id) === this.userID) {
          const ProjectHours  = await this.hourRepository.getHoursByProject(element)

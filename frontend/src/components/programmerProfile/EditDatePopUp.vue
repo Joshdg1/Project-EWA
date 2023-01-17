@@ -85,9 +85,8 @@ export default {
       return new Date(numberOfMlSeconds + addMlSeconds);
     },
     async updateDate() {
-
+      // getting all availabilities by userId and getting the id from a specific availability
       const allAvailabilitys = await this.repository.getAvailabilityById(this.userID)
-
       for (const element of allAvailabilitys) {
         if ((element.startDate).toString().substring(0, 10) === (this.selectedEvent.start)) {
           if ((element.endDate).toString().substring(0, 10) === (this.selectedEvent.end)) {
@@ -96,6 +95,8 @@ export default {
           }
         }
       }
+
+      // creating dates and setting hours, minutes and seconds to zero
       const newStartDate = new Date(this.newDate.start)
       const newEndDate = new Date(this.newDate.end)
       newStartDate.setHours(0)
@@ -106,6 +107,7 @@ export default {
       newEndDate.setMinutes(0)
       newEndDate.setMilliseconds(0)
 
+      // calculating the right hours for the date
       const startHours = ((this.newDate.hoursPerDayStart.substring(0, 2) * 1) + (this.newDate.hoursPerDayStart.substring(3, 5) / 60) + 1)
       const endHours = ((this.newDate.hoursPerDayEnd.substring(0, 2) * 1) + (this.newDate.hoursPerDayEnd.substring(3, 5) / 60) + 1)
 
@@ -122,7 +124,7 @@ export default {
           selectedProject = entry;
       }
       })
-      console.log(this.currentId, selectedProject, starting, ending, this.userID)
+
       await this.repository.updateAvailabilityById(this.currentId, selectedProject, starting, ending, this.userID)
 
 
@@ -134,6 +136,7 @@ export default {
       this.$emit('close-popup', this.popupStatus)
     },
     betweenDates(from, to) {
+      //calculating all the days between two dates
       const getDaysArray = function (start, end) {
 
         let dt = new Date(start);
@@ -153,7 +156,7 @@ export default {
 
         const start = new Date(this.selectedEvent.start).toLocaleDateString()
         const end = new Date(this.selectedEvent.end).toLocaleDateString()
-
+        // checking for the id of the specific event object
         for (const element of allAvailabilitys) {
           if (new Date((element.startDate)).toLocaleDateString() === (start)) {
             if (new Date((element.endDate)).toLocaleDateString() === (end)) {
@@ -164,7 +167,6 @@ export default {
         }
         await this.repository.deleteAvailability(this.currentId)
       }
-      location.reload()
     },
 
   }
