@@ -10,7 +10,7 @@
         <input type="button" @click="startUpload()" name="Upload" value="Upload">
       </form>
       <!--end::Card title-->
-      <!--begin::Action-->
+
       <div class="d-flex ms-3">
         <div style="margin-top: 20px">
         <a @click="setEditProfile()" class="mb-2 btn btn-sm bg-primary btn-active-info">Wijzigen</a>

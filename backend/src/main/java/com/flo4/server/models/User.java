@@ -48,6 +48,8 @@ public class User {
         this.id = id;
     }
 
+
+
     public static User of(int id, String email, String firstName, String lastName, String phoneNumber, String companyName, String userType) {
         return new User(id, email, firstName, lastName, phoneNumber, companyName, userType);
     }
