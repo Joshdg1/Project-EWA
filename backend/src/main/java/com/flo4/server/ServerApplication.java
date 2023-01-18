@@ -17,7 +17,7 @@ public class ServerApplication {
     public WebMvcConfigurer corsConfigurer() {
         return new WebMvcConfigurer() {
             @Override
-            public void addCorsMappings(CorsRegistry registry){
+            public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/**").allowedOriginPatterns("*").allowCredentials(true).exposedHeaders("Authorization").allowedMethods("*");
             }
         };

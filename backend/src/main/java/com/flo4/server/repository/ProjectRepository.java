@@ -1,9 +1,6 @@
 package com.flo4.server.repository;
 
-import com.flo4.server.models.CreateProject;
 import com.flo4.server.models.Project;
-//import com.flo4.server.models.UserProject;
-import org.hibernate.Hibernate;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
@@ -20,6 +17,9 @@ public class ProjectRepository implements EntityRepository<Project> {
     @PersistenceContext
     protected EntityManager entityManager;
 
+    /**
+     * @return All projects from the database.
+     */
     public List<Project> findAll() {
         TypedQuery<Project> query = this.entityManager.createQuery("select p from Project p", Project.class);
         List<Project> projects = query.getResultList();
@@ -27,16 +27,29 @@ public class ProjectRepository implements EntityRepository<Project> {
         return projects;
     }
 
+    /**
+     * @param id
+     * @return The project found by the given id.
+     */
     @Override
     public Project findById(int id) {
         return this.entityManager.find(Project.class, id);
     }
 
+    /**
+     * @param project
+     * @return The project saved in the database.
+     */
     @Override
     public Project save(Project project) {
         return this.entityManager.merge(project);
     }
 
+    /**
+     * @param project
+     * @param id
+     * @return The project updated in the database.
+     */
     @Override
     public Project update(Project project, int id) {
         Project updatedProject = findById(id);
@@ -50,11 +63,14 @@ public class ProjectRepository implements EntityRepository<Project> {
         updatedProject.setStartDate(project.getStartDate());
         updatedProject.setEndDate(project.getEndDate());
         updatedProject.setUsers(project.getUsers());
-//        updatedProject.setHoursWorked(project.getHoursWorked());
 
         return updatedProject;
     }
 
+    /**
+     * @param id
+     * @return Deleted the project in the database.
+     */
     @Override
     public Project deleteById(int id) {
         Project project = this.findById(id);
@@ -62,6 +78,11 @@ public class ProjectRepository implements EntityRepository<Project> {
         return project;
     }
 
+    /**
+     * @param jpqlName
+     * @param params
+     * @return All results from the database from the given query with parameters.
+     */
     @Override
     public List<Project> findByQuery(String jpqlName, Object... params) {
         TypedQuery<Project> query = this.entityManager.createNamedQuery(jpqlName, Project.class);
