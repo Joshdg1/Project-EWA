@@ -20,7 +20,7 @@
       <div class="fv-plugins-message-container invalid-feedback"></div>
     </div>
     <div class="text-center">
-      <button type="submit" @click="sendEmailFunction()" class="btn btn-lg btn-primary w-100 mb-5">
+      <button id="send" type="submit" @click="sendEmailFunction()" class="btn btn-lg btn-primary w-100 mb-5">
         <span class="indicator-label">Stuur email</span>
         <span class="indicator-progress">Wacht alsjeblieft...
 									<span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>

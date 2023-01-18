@@ -16,7 +16,7 @@
             <button @click="submit" v-if="canSubmit" type="button" class="btn btn-lg btn-primary me-3">
               Opslaan<next-icon></next-icon>
             </button>
-            <button @click="next" v-if="canNext" type="button" class="btn btn-lg btn-primary">
+            <button @click="next" v-if="canNext" id="next" type="button" class="btn btn-lg btn-primary">
               Volgende<next-icon></next-icon>
             </button>
           </div>
