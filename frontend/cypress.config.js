@@ -7,4 +7,11 @@ module.exports = defineConfig({
       bundler: "webpack",
     },
   },
+
+  component: {
+    devServer: {
+      framework: "vue-cli",
+      bundler: "webpack",
+    },
+  },
 });

@@ -3,37 +3,39 @@ package com.flo4.server.rest;
 import com.flo4.server.Exceptions.NotFoundException;
 import com.flo4.server.models.CreateProject;
 import com.flo4.server.models.Project;
-//import com.flo4.server.models.UserProject;
 import com.flo4.server.models.User;
 import com.flo4.server.repository.EntityRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.transaction.Transactional;
-import java.time.Instant;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 @RestController
 @RequestMapping("projects")
 public class ProjectController {
 
+    @Qualifier("ProjectInMemory")
     @Autowired
     EntityRepository<Project> projectRepository;
 
     @Autowired
     EntityRepository<User> userRepository;
 
+    /**
+     * @return all projects found in the database.
+     */
     @GetMapping(path = "", produces = "application/json")
     public List<Project> getAllProjects() {
 
         return this.projectRepository.findAll();
     }
 
+    /**
+     * @param id
+     * @return RepsoneEntity with the found project in its body.
+     */
     @GetMapping(path = "{id}", produces = "application/json")
     public ResponseEntity<Project> getOneProject(@PathVariable() int id) {
         Project project = this.projectRepository.findById(id);
@@ -45,23 +47,23 @@ public class ProjectController {
         return ResponseEntity.ok().body(project);
     }
 
-    @Transactional
+    /**
+     * @param createProject
+     * @return ResponseEntity with the new project in its body.
+     */
     @PostMapping(path = "add", produces = "application/json")
-    public ResponseEntity<Project> addNewProject(@RequestBody CreateProject createProject) {
-        User client = this.userRepository.findById(createProject.getClient_id());
-        Project newProject = new Project(client, createProject.getName(), createProject.getDescription(), createProject.getStart_date(), createProject.getEnd_date());
-
-        for (Integer programmer_id : createProject.getProgrammer_ids()) {
-            User programmer = this.userRepository.findById(programmer_id);
-            newProject.addUser(programmer);
-        }
+    public ResponseEntity<Project> addNewProject(@RequestBody Project createProject) {
 
         //Save the new project into the repository.
-        Project savedProject = this.projectRepository.save(newProject);
+        Project savedProject = this.projectRepository.save(createProject);
 
         return ResponseEntity.ok().body(savedProject);
     }
 
+    /**
+     * @param id
+     * @return ResponseEntity with the deleted projects in its body.
+     */
     @DeleteMapping(path = "{id}", produces = "application/json")
     public ResponseEntity<Project> deleteProject(@PathVariable() int id) {
         Project project = this.projectRepository.findById(id);
@@ -75,6 +77,12 @@ public class ProjectController {
         return ResponseEntity.ok().body(project);
     }
 
+    /**
+     *
+     * @param id
+     * @param createProject
+     * @return ResponseEntity with the updated project in its body.
+     */
     @PutMapping(path = "{id}", produces = "application/json")
     public ResponseEntity<Project> updateProject(@PathVariable() int id, @RequestBody CreateProject createProject) {
         Project project = this.projectRepository.findById(id);
@@ -85,12 +93,7 @@ public class ProjectController {
         project.setStartDate(createProject.getStart_date());
         project.setEndDate(createProject.getEnd_date());
 
-        project.setUsers(new ArrayList<>());
-        for (Integer programmer_id : createProject.getProgrammer_ids()) {
-            User programmer = this.userRepository.findById(programmer_id);
-            project.addUser(programmer);
-        }
-
+        //Call the update from the repository to update the given project in the database.
         Project updatedProject = this.projectRepository.update(project, id);
 
         if (updatedProject == null) {
@@ -100,7 +103,5 @@ public class ProjectController {
         return ResponseEntity.ok().body(updatedProject);
 
     }
-
-
 }
 

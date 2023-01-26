@@ -1,8 +1,5 @@
 package com.flo4.server.models;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import old.Client;
-
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Date;
@@ -44,15 +41,32 @@ public class Project {
         this.users.add(user);
     }
 
+    /**
+     * Constructor
+     */
     public Project() {
 
     }
 
+    /**
+     * Constructor
+     * @param id
+     */
     public Project(int id) {
         this.id = id;
     }
 
-    public Project(User client, String title, String description, Date startDate, Date endDate) {
+    /**
+     * Constructor
+     * @param id
+     * @param client
+     * @param title
+     * @param description
+     * @param startDate
+     * @param endDate
+     */
+    public Project(int id, User client, String title, String description, Date startDate, Date endDate) {
+        this.setId(id);
         this.setClient(client);
         this.setTitle(title);
         this.setDescription(description);
